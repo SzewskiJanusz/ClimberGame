@@ -2,7 +2,10 @@ package com.janusz.climbergame.screens;
 
 
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.entities.Liana;
+import com.janusz.climbergame.entities.LianaTile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -12,7 +15,7 @@ import com.janusz.climbergame.entities.Liana;
 public class GameScreen extends AbstractScreen
 {
 
-    private Liana liana;
+    public List<LianaTile> lianas;
 
     public GameScreen(ClimberGame game)
     {
@@ -26,8 +29,8 @@ public class GameScreen extends AbstractScreen
 
     private void initLiana()
     {
-        liana = new Liana();
-        stage.addActor(liana);
+        lianas = new ArrayList<LianaTile>();
+        createLianaTile();
     }
 
     @Override
@@ -35,12 +38,20 @@ public class GameScreen extends AbstractScreen
     {
         super.render(delta);
         update();
-        liana.moveLianaDown(delta);
+        moveWholeLianaDown(delta);
+
+        if (lianas.get(lianas.size() - 1).getY() + LianaTile.HEIGHT <= LianaTile.STARTING_Y )
+        {
+            createLianaTile();
+        }
+
+        if (lianas.get(0).getY() + LianaTile.HEIGHT <= 0)
+        {
+            disposeLastLianaTile();
+        }
 
         spriteBatch.begin();
-
         stage.draw();
-
         spriteBatch.end();
     }
 
@@ -49,6 +60,26 @@ public class GameScreen extends AbstractScreen
         stage.act();
     }
 
+    public void moveWholeLianaDown(float delta)
+    {
+        for(LianaTile l : lianas)
+        {
+            l.moveLianaTile(delta);
+        }
+    }
+
+    public void createLianaTile()
+    {
+        LianaTile l = new LianaTile();
+        lianas.add(l);
+        stage.addActor(l);
+    }
+
+    public void disposeLastLianaTile()
+    {
+        lianas.get(0).remove();
+        lianas.remove(0);
+    }
 
 }
 
