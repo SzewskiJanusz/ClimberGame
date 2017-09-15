@@ -2,7 +2,7 @@ package com.janusz.climbergame.screens;
 
 
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.entities.Player;
+import com.janusz.climbergame.entities.Liana;
 
 
 /**
@@ -12,22 +12,22 @@ import com.janusz.climbergame.entities.Player;
 public class GameScreen extends AbstractScreen
 {
 
-    private Player player;
+    private Liana liana;
 
-    public GameScreen (ClimberGame game)
+    public GameScreen(ClimberGame game)
     {
         super(game);
     }
 
     protected void init()
     {
-        initPlayer();
+        initLiana();
     }
 
-    private void initPlayer()
+    private void initLiana()
     {
-        player = new Player();
-        stage.addActor(player);
+        liana = new Liana();
+        stage.addActor(liana);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class GameScreen extends AbstractScreen
     {
         super.render(delta);
         update();
-
+        liana.moveLianaDown(delta);
 
         spriteBatch.begin();
 
@@ -48,5 +48,9 @@ public class GameScreen extends AbstractScreen
     {
         stage.act();
     }
+
+
 }
+
+
 
