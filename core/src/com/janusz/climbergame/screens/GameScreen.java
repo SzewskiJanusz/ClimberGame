@@ -3,6 +3,7 @@ package com.janusz.climbergame.screens;
 
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.entities.LianaTile;
+import com.janusz.climbergame.entities.Wall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,8 @@ public class GameScreen extends AbstractScreen
     private final int second_liana_x = 700;
     private final int third_liana_x = 1000;
 
+    private Wall wall;
+
     public GameScreen(ClimberGame game)
     {
         super(game);
@@ -31,6 +34,7 @@ public class GameScreen extends AbstractScreen
     protected void init()
     {
         initLiana();
+        initWall();
     }
 
     private void initLiana()
@@ -39,6 +43,12 @@ public class GameScreen extends AbstractScreen
         second_wholeLiana = new ArrayList<LianaTile>();
         third_wholeLiana = new ArrayList<LianaTile>();
         createLianaTile();
+    }
+
+    private void initWall()
+    {
+        wall = new Wall();
+        stage.addActor(wall);
     }
 
     @Override
