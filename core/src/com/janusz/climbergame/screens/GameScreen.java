@@ -16,13 +16,17 @@ import java.util.List;
 public class GameScreen extends AbstractScreen
 {
 
+    // Lists for moving effect
     public List<LianaTile> first_wholeLiana;
     public List<LianaTile> second_wholeLiana;
     public List<LianaTile> third_wholeLiana;
 
-    private final int first_liana_x = 400;
-    private final int second_liana_x = 700;
-    private final int third_liana_x = 1000;
+    // Walls for moving effect
+    public List<Wall> walls;
+
+    private final int first_liana_x = 450;
+    private final int second_liana_x = 750;
+    private final int third_liana_x = 1050;
 
     private Wall wall;
 
@@ -42,13 +46,18 @@ public class GameScreen extends AbstractScreen
         first_wholeLiana = new ArrayList<LianaTile>();
         second_wholeLiana = new ArrayList<LianaTile>();
         third_wholeLiana = new ArrayList<LianaTile>();
+
         createLianaTile();
     }
 
     private void initWall()
     {
-        wall = new Wall();
-        stage.addActor(wall);
+        walls = new ArrayList<Wall>();
+
+        // Starter wall. Spawns on entire height of screen
+        Wall w = new Wall(true);
+        walls.add(w);
+        stage.addActor(w);
     }
 
     @Override
@@ -56,16 +65,59 @@ public class GameScreen extends AbstractScreen
     {
         super.render(delta);
         update();
+
+        moveWallDown(delta);
         moveWholeLianaDown(delta);
 
-        checkIfNeedCreateTile();
-        checkIfNeedDisposeTile();
 
         spriteBatch.begin();
         stage.draw();
         spriteBatch.end();
     }
 
+    private void moveWallDown(float delta)
+    {
+        for (int i = 0 ; i < walls.size() ; i++)
+        {
+            walls.get(i).moveWall(delta);
+        }
+
+        checkIfNeedCreateWall();
+        checkIfNeedDisposeWall();
+    }
+
+    private void checkIfNeedDisposeWall()
+    {
+        if (walls.get(0).getY() + Wall.HEIGHT <= Wall.STARTING_Y)
+        {
+            disposeLastWall();
+        }
+    }
+
+    private void disposeLastWall()
+    {
+        walls.get(0).remove();
+        walls.remove(0);
+
+    }
+
+    private void checkIfNeedCreateWall()
+    {
+        int lastWall = walls.size() - 1;
+
+        if (walls.get(lastWall).getY() <= Wall.STARTING_Y )
+        {
+            createNewWall();
+        }
+
+    }
+
+    private void createNewWall()
+    {
+        Wall w = new Wall(false);
+        walls.add(w);
+        stage.addActor(w);
+    }
 
 
     private void update()
@@ -81,6 +133,9 @@ public class GameScreen extends AbstractScreen
             second_wholeLiana.get(i).moveLianaTile(delta);
             third_wholeLiana.get(i).moveLianaTile(delta);
         }
+
+        checkIfNeedCreateTile();
+        checkIfNeedDisposeLastTile();
     }
 
     private void checkIfNeedCreateTile()
@@ -93,7 +148,7 @@ public class GameScreen extends AbstractScreen
         }
     }
 
-    private void checkIfNeedDisposeTile()
+    private void checkIfNeedDisposeLastTile()
     {
         if (first_wholeLiana.get(0).getY() + LianaTile.HEIGHT <= 0)
         {
