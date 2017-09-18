@@ -28,12 +28,10 @@ public class GameScreen extends AbstractScreen
     // Walls for moving effect
     public List<Wall> walls;
 
-    private final int first_liana_x = 575;
-    private final int second_liana_x = 950;
-    private final int third_liana_x = 1325;
+    public static final int first_liana_x = 575;
+    public static final int second_liana_x = 950;
+    public static final int third_liana_x = 1325;
 
-    private Button leftButton;
-    private Button rightButton;
 
     public static Player player;
 
@@ -44,31 +42,9 @@ public class GameScreen extends AbstractScreen
 
     protected void init()
     {
-        initButtons();
         initPlayer();
         initLiana();
         initWall();
-
-    }
-
-    private void initButtons()
-    {
-        leftButton = new Button(new ButtonStyle());
-        leftButton.setWidth(175);
-        leftButton.setHeight(175);
-        leftButton.setX(100);
-        leftButton.setY(100);
-        leftButton.setDebug(true);
-
-        rightButton = new Button(new ButtonStyle());
-        rightButton.setWidth(175);
-        rightButton.setHeight(175);
-        rightButton.setX(ClimberGame.WIDTH - 275);
-        rightButton.setY(100);
-        rightButton.setDebug(true);
-
-        stage.addActor(leftButton);
-        stage.addActor(rightButton);
 
     }
 
@@ -103,10 +79,9 @@ public class GameScreen extends AbstractScreen
         super.render(delta);
         update();
 
-        leftButton.toFront();
-        rightButton.toFront();
         player.toFront();
 
+        movePlayer();
         moveWallDown(delta);
         moveWholeLianaDown(delta);
 
@@ -114,6 +89,19 @@ public class GameScreen extends AbstractScreen
         spriteBatch.begin();
         stage.draw();
         spriteBatch.end();
+    }
+
+    private void movePlayer()
+    {
+        switch(player.place)
+        {
+            case 0: player.setX(Wall.WIDTH); break;
+            case 1: player.setX(first_liana_x); break;
+            case 2: player.setX(second_liana_x); break;
+            case 3: player.setX(third_liana_x); break;
+            default: throw new IllegalArgumentException("Error in player place. (" + player.place +")");
+        }
+
     }
 
     private void moveWallDown(float delta)
