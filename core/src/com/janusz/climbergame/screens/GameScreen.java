@@ -1,12 +1,15 @@
 package com.janusz.climbergame.screens;
 
 
+import com.badlogic.gdx.graphics.Texture;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.entities.LianaTile;
+import com.janusz.climbergame.entities.Player;
 import com.janusz.climbergame.entities.Wall;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 /**
@@ -28,7 +31,7 @@ public class GameScreen extends AbstractScreen
     private final int second_liana_x = 750;
     private final int third_liana_x = 1050;
 
-    private Wall wall;
+    private Player player;
 
     public GameScreen(ClimberGame game)
     {
@@ -37,8 +40,16 @@ public class GameScreen extends AbstractScreen
 
     protected void init()
     {
+        initPlayer();
         initLiana();
         initWall();
+
+    }
+
+    private void initPlayer()
+    {
+        player = new Player();
+        stage.addActor(player);
     }
 
     private void initLiana()
@@ -65,6 +76,8 @@ public class GameScreen extends AbstractScreen
     {
         super.render(delta);
         update();
+        
+        player.toFront();
 
         moveWallDown(delta);
         moveWholeLianaDown(delta);
