@@ -16,7 +16,9 @@ import com.janusz.climbergame.ClimberGame;
 public abstract class AbstractScreen implements Screen {
 
     protected ClimberGame game;
-    protected Stage stage;
+
+    public static Stage stage;
+
     protected SpriteBatch spriteBatch;
 
     private OrthographicCamera camera;
