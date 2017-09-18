@@ -12,15 +12,22 @@ public class EventHandler extends InputAdapter
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
 
-        if (GameScreen.player.getX() > screenX)
+        if (isFingerOnLeft(screenX))
         {
-
+            GameScreen.player.jumpLeft();
         }
         else
         {
-            
+            GameScreen.player.jumpRight();
         }
 
         return true;
     }
+
+    private boolean isFingerOnLeft(int screenX)
+    {
+        return GameScreen.player.getX() > screenX;
+    }
+
+
 }
