@@ -11,10 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public class Player extends Image
 {
 
-    public static final int WIDTH = 100;
-    public static final int HEIGHT = 166;
+    public static final int WIDTH = 130;
+    public static final int HEIGHT = 210;
 
-    public static final int STARTING_X = 750;
+    public static final int STARTING_X = 1100;
     public static final int STARTING_Y = 100;
 
     public Player()

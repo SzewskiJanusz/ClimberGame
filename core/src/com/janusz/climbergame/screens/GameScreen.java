@@ -27,9 +27,9 @@ public class GameScreen extends AbstractScreen
     // Walls for moving effect
     public List<Wall> walls;
 
-    private final int first_liana_x = 450;
-    private final int second_liana_x = 750;
-    private final int third_liana_x = 1050;
+    private final int first_liana_x = 725;
+    private final int second_liana_x = 1100;
+    private final int third_liana_x = 1475;
 
     private Player player;
 

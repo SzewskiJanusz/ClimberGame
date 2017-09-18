@@ -13,7 +13,7 @@ import java.util.List;
 
 public class LianaTile extends Image
 {
-    public static final int WIDTH = 100;
+    public static final int WIDTH = 150;
     public static final int HEIGHT = 300;
 
     public static int STARTING_X = 200;

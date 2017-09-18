@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public class Wall extends Image
 {
 
-    public static final int WIDTH = 150;
+    public static final int WIDTH = 350;
     public static final int HEIGHT = Gdx.graphics.getHeight();
 
     public static final int STARTING_X = 0;
