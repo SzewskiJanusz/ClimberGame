@@ -14,7 +14,7 @@ public class Player extends Image
     public static final int WIDTH = 130;
     public static final int HEIGHT = 210;
 
-    public static final int STARTING_X = 1100;
+    public static final int STARTING_X = 950;
     public static final int STARTING_Y = 100;
 
     public Player()
