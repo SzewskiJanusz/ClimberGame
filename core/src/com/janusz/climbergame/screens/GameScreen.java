@@ -1,7 +1,8 @@
 package com.janusz.climbergame.screens;
 
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.entities.LianaTile;
 import com.janusz.climbergame.entities.Player;
@@ -27,11 +28,14 @@ public class GameScreen extends AbstractScreen
     // Walls for moving effect
     public List<Wall> walls;
 
-    private final int first_liana_x = 725;
-    private final int second_liana_x = 1100;
-    private final int third_liana_x = 1475;
+    private final int first_liana_x = 575;
+    private final int second_liana_x = 950;
+    private final int third_liana_x = 1325;
 
-    private Player player;
+    private Button leftButton;
+    private Button rightButton;
+
+    public static Player player;
 
     public GameScreen(ClimberGame game)
     {
@@ -40,9 +44,31 @@ public class GameScreen extends AbstractScreen
 
     protected void init()
     {
+        initButtons();
         initPlayer();
         initLiana();
         initWall();
+
+    }
+
+    private void initButtons()
+    {
+        leftButton = new Button(new ButtonStyle());
+        leftButton.setWidth(175);
+        leftButton.setHeight(175);
+        leftButton.setX(100);
+        leftButton.setY(100);
+        leftButton.setDebug(true);
+
+        rightButton = new Button(new ButtonStyle());
+        rightButton.setWidth(175);
+        rightButton.setHeight(175);
+        rightButton.setX(ClimberGame.WIDTH - 275);
+        rightButton.setY(100);
+        rightButton.setDebug(true);
+
+        stage.addActor(leftButton);
+        stage.addActor(rightButton);
 
     }
 
@@ -76,7 +102,9 @@ public class GameScreen extends AbstractScreen
     {
         super.render(delta);
         update();
-        
+
+        leftButton.toFront();
+        rightButton.toFront();
         player.toFront();
 
         moveWallDown(delta);

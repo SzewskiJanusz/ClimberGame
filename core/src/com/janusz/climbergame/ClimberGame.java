@@ -2,6 +2,7 @@ package com.janusz.climbergame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.janusz.climbergame.screens.EventHandler;
 import com.janusz.climbergame.screens.GameScreen;
 
 public class ClimberGame extends Game {
@@ -16,6 +17,7 @@ public class ClimberGame extends Game {
 	{
 		WIDTH = Gdx.graphics.getWidth();
 		HEIGHT = Gdx.graphics.getHeight();
+        Gdx.input.setInputProcessor(new EventHandler());
 		setScreen(new GameScreen(this));
 
 	}
