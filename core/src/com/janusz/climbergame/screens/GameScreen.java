@@ -22,7 +22,7 @@ public class GameScreen extends AbstractScreen
     private EntireWall ew;
 
     public static Player player;
-    Banana b;
+    private Banana banana;
 
     public GameScreen(ClimberGame game)
     {
@@ -34,8 +34,8 @@ public class GameScreen extends AbstractScreen
         initPlayer();
         el = new EntireLiana();
         ew = new EntireWall();
-        b = new Banana(new Texture("banana.png"), 500);
-        stage.addActor(b);
+        banana = new Banana(new Texture("banana.png"), EntireLiana.first_liana_x);
+        stage.addActor(banana);
     }
 
     private void initPlayer()
@@ -48,10 +48,7 @@ public class GameScreen extends AbstractScreen
     public void render(float delta)
     {
         super.render(delta);
-        update();
-
-        ew.moveWallDown(delta);
-        el.moveAllLianasDown(delta);
+        update(delta);
 
         spriteBatch.begin();
         stage.draw();
@@ -70,11 +67,16 @@ public class GameScreen extends AbstractScreen
         }
     }
 
-    private void update()
+    private void update(float delta)
     {
         stage.act();
         player.toFront();
         movePlayer();
+
+        ew.moveWallDown(delta);
+        el.moveAllLianasDown(delta);
+
+        banana.update(delta);
     }
 
 }
