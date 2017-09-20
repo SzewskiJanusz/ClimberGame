@@ -1,7 +1,9 @@
 package com.janusz.climbergame.screens;
 
 
+import com.badlogic.gdx.graphics.Texture;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.entities.Banana;
 import com.janusz.climbergame.entities.Player;
 import com.janusz.climbergame.entities.Wall;
 import com.janusz.climbergame.environment.EntireLiana;
@@ -20,6 +22,7 @@ public class GameScreen extends AbstractScreen
     private EntireWall ew;
 
     public static Player player;
+    Banana b;
 
     public GameScreen(ClimberGame game)
     {
@@ -31,6 +34,8 @@ public class GameScreen extends AbstractScreen
         initPlayer();
         el = new EntireLiana();
         ew = new EntireWall();
+        b = new Banana(new Texture("banana.png"), 500);
+        stage.addActor(b);
     }
 
     private void initPlayer()
