@@ -54,13 +54,23 @@ public class GameScreen extends AbstractScreen
     {
         super.render(delta);
         update(delta);
-
+        checkCollision();
 
         spriteBatch.begin();
         stage.draw();
         spriteBatch.end();
     }
 
+    private void checkCollision()
+    {
+        boolean playerEatBanana = Intersector.overlaps(banana.getBounds(), player.getBounds());
+
+        if (playerEatBanana)
+        {
+            banana.remove();
+        }
+
+    }
 
 
     private void movePlayer()
