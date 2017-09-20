@@ -39,8 +39,10 @@ public class Banana extends Image
 
     public void update(float delta)
     {
+        checkIfNeedDispose();
         moveDown(delta);
         doMovement(delta);
+
     }
 
     private void moveDown(float delta)
@@ -57,5 +59,13 @@ public class Banana extends Image
     public Rectangle getBounds()
     {
         return bounds;
+    }
+
+    public void checkIfNeedDispose()
+    {
+        if (getY() < 0)
+        {
+            addAction(Actions.removeActor());
+        }
     }
 }
