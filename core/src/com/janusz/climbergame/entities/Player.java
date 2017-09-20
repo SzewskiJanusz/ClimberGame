@@ -1,9 +1,8 @@
 package com.janusz.climbergame.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.janusz.climbergame.screens.GameScreen;
 
 /**
  * Created by Janusz on 2017-09-18.
@@ -20,6 +19,9 @@ public class Player extends Image
 
     public int place;
 
+    // Rectangle for collision
+    private Rectangle bounds;
+
     public Player()
     {
         super(new Texture("badlogic.jpg"));
@@ -28,8 +30,24 @@ public class Player extends Image
         this.setSize(WIDTH,HEIGHT);
 
         this.setPosition(STARTING_X ,STARTING_Y);
+        bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
 
         place = 2;
+    }
+
+    // Override for easier changing coordinates of actor and bounds
+    @Override
+    public void setX(float x)
+    {
+        this.setPosition(x, getY());
+        getBounds().x = x;
+    }
+
+    @Override
+    public void setY(float y)
+    {
+        this.setPosition(getX(), y);
+        getBounds().y = y;
     }
 
 
@@ -47,5 +65,10 @@ public class Player extends Image
         {
             place++;
         }
+    }
+
+    public Rectangle getBounds()
+    {
+        return bounds;
     }
 }
