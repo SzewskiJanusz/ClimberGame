@@ -22,6 +22,7 @@ public class Anvil extends Image
 
     public void update(float delta)
     {
+        checkIfNeedDispose();
         moveDown(delta);
         doMovement(delta);
     }
@@ -36,10 +37,8 @@ public class Anvil extends Image
         this.rotateBy(20 * delta);
     }
 
-    
 
-
-    public void checkIfNeedDispose()
+    private void checkIfNeedDispose()
     {
         if (getY() < 0)
         {

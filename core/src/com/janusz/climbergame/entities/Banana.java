@@ -61,7 +61,7 @@ public class Banana extends Image
         return bounds;
     }
 
-    public void checkIfNeedDispose()
+    private void checkIfNeedDispose()
     {
         if (getY() < 0)
         {
