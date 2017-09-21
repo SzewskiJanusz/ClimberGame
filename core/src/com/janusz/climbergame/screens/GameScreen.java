@@ -29,27 +29,56 @@ public class GameScreen extends AbstractScreen
 
     private List<Banana> bananas;
 
-    private Anvil anvil;
+    private List<Anvil> anvils;
 
-    private float spawnTime;
+    private float bananaSpawnTime;
+
+    private float anvilSpawnTime;
 
 
     public GameScreen(ClimberGame game)
     {
         super(game);
 
-        randomizeSpawnTime();
+        randomizeBananaSpawnTime();
+
+        randomizeAnvilSpawnTime();
+        Timer.schedule(new Timer.Task(){
+                           @Override
+                           public void run()
+                           {
+                               spawnBanana();
+                           }
+                       }
+                , 3       //    (delay)
+                , bananaSpawnTime
+        );
 
         Timer.schedule(new Timer.Task(){
                            @Override
-                           public void run() {
-                               spawnBanana();
-
+                           public void run()
+                           {
+                               spawnAnvil();
                            }
                        }
-                , spawnTime       //    (delay)
-                , 1
+                , 5       //    (delay)
+                , anvilSpawnTime
         );
+
+    }
+
+    private void spawnAnvil()
+    {
+        int x = selectPlace(MathUtils.random(2,4));
+        Anvil a = new Anvil(new Texture("anvil.png"), x);
+        anvils.add(a);
+        stage.addActor(a);
+        randomizeAnvilSpawnTime();
+    }
+
+    private void randomizeAnvilSpawnTime()
+    {
+        anvilSpawnTime = MathUtils.random(6,12);
     }
 
     private void spawnBanana()
@@ -58,6 +87,7 @@ public class GameScreen extends AbstractScreen
         Banana b = new Banana(new Texture("banana.png"), x);
         bananas.add(b);
         stage.addActor(b);
+        randomizeBananaSpawnTime();
     }
 
     private int selectPlace(int place)
@@ -74,9 +104,9 @@ public class GameScreen extends AbstractScreen
 
 
 
-    private void randomizeSpawnTime()
+    private void randomizeBananaSpawnTime()
     {
-        spawnTime = MathUtils.random(3,7);
+        bananaSpawnTime = MathUtils.random(3,7);
     }
 
     protected void init()
@@ -85,8 +115,8 @@ public class GameScreen extends AbstractScreen
         el = new EntireLiana();
         ew = new EntireWall();
         bananas = new ArrayList<Banana>();
-        anvil = new Anvil(new Texture("anvil.png"), EntireLiana.second_liana_x);
-        stage.addActor(anvil);
+        anvils = new ArrayList<Anvil>();
+
     }
 
     private void initPlayer()
@@ -107,12 +137,14 @@ public class GameScreen extends AbstractScreen
         spriteBatch.end();
     }
 
-    private boolean checkCollision(int i)
+    private boolean checkCollisionWithBanana(int i)
     {
         boolean playerEatBanana = Intersector.overlaps(bananas.get(i).getBounds(), player.getBounds());
 
         return playerEatBanana;
     }
+
+
 
     private void movePlayer()
     {
@@ -136,8 +168,35 @@ public class GameScreen extends AbstractScreen
         el.moveAllLianasDown(delta);
 
         updateAllBananas(delta);
+        updateAllAnvils(delta);
 
-        anvil.update(delta);
+    }
+
+    private void updateAllAnvils(float delta)
+    {
+
+        for (int i = 0 ; i < anvils.size() ; i++)
+        {
+            if (checkCollisionwithAnvil(i))
+            {
+                anvils.get(i).remove();
+                anvils.remove(i);
+                break;
+            }
+        }
+
+        for(Anvil a : anvils)
+        {
+            a.update(delta);
+        }
+    }
+
+    private boolean checkCollisionwithAnvil(int i)
+    {
+        boolean playerHitAnvil = Intersector.overlaps(anvils.get(i).getBounds(), player.getBounds());
+
+        return playerHitAnvil;
+
     }
 
     private void updateAllBananas(float delta)
@@ -145,7 +204,7 @@ public class GameScreen extends AbstractScreen
 
         for (int i = 0 ; i < bananas.size() ; i++)
         {
-            if (checkCollision(i))
+            if (checkCollisionWithBanana(i))
             {
                 bananas.get(i).remove();
                 bananas.remove(i);

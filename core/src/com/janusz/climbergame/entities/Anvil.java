@@ -15,8 +15,8 @@ public class Anvil extends Image
 
     private Rectangle bounds;
 
-    private final int width = 100;
-    private final int height = 75;
+    private final int width = 175;
+    private final int height = 125;
 
     private final int velocity = 500;
 
@@ -24,7 +24,7 @@ public class Anvil extends Image
     {
         super(text);
         this.setPosition(starting_x, ClimberGame.HEIGHT);
-        setSize(175,125);
+        setSize(width,height);
         setOrigin(getWidth() / 2, getHeight() / 2);
 
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT, width, height);
