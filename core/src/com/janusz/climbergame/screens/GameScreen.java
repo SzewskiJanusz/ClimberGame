@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.entities.Anvil;
 import com.janusz.climbergame.entities.Banana;
+import com.janusz.climbergame.entities.Heart;
 import com.janusz.climbergame.entities.Player;
 import com.janusz.climbergame.entities.Wall;
 import com.janusz.climbergame.environment.EntireLiana;
@@ -34,6 +35,8 @@ public class GameScreen extends AbstractScreen
     private float bananaSpawnTime;
 
     private float anvilSpawnTime;
+
+    private Heart heart;
 
 
     public GameScreen(ClimberGame game)
@@ -116,6 +119,8 @@ public class GameScreen extends AbstractScreen
         ew = new EntireWall();
         bananas = new ArrayList<Banana>();
         anvils = new ArrayList<Anvil>();
+        heart = new Heart(new Texture("heart.png"));
+        stage.addActor(heart);
 
     }
 
