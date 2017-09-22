@@ -11,61 +11,22 @@ import com.janusz.climbergame.ClimberGame;
  * Created by Janusz on 2017-09-20.
  */
 
-public class Banana extends Image
+public class Banana extends AbstractItem
 {
 
-    private Rectangle bounds;
-
-    private final int width = 100;
-    private final int height = 75;
-
-    private final int velocity = 215;
-
-    public Banana(Texture text, int starting_x)
+    public Banana(Texture text,int starting_x, int starting_y, int width, int height,int velocity)
     {
-        super(text);
-        this.setPosition(starting_x, ClimberGame.HEIGHT);
-        setSize(width,height);
-        setOrigin(getWidth() / 2, getHeight() / 2);
-        bounds = new Rectangle(starting_x, ClimberGame.HEIGHT, width, height);
+        super(text, starting_x, starting_y, width, height, velocity);
     }
 
-    @Override
-    public void setY(float y)
-    {
-        this.setPosition(getX(), y);
-        bounds.y = y;
-    }
-
-    public void update(float delta)
-    {
-        checkIfNeedDispose();
-        moveDown(delta);
-        doMovement(delta);
-
-    }
-
-    private void moveDown(float delta)
+    protected void moveDown(float delta)
     {
         this.setY(this.getY() - velocity * delta);
     }
 
-    private void doMovement(float delta)
+    protected void doMovement(float delta)
     {
         this.rotateBy(360 * delta);
     }
 
-
-    public Rectangle getBounds()
-    {
-        return bounds;
-    }
-
-    private void checkIfNeedDispose()
-    {
-        if (getY() < 0)
-        {
-            addAction(Actions.removeActor());
-        }
-    }
 }
