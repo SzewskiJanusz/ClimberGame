@@ -70,7 +70,7 @@ public class GameScreen extends AbstractScreen
         spriteBatch.end();
     }
 
-    
+
     private void movePlayer()
     {
         switch(player.place)
