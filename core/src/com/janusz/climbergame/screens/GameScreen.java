@@ -1,10 +1,14 @@
 package com.janusz.climbergame.screens;
 
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.entities.Anvil;
@@ -37,6 +41,22 @@ public class GameScreen extends AbstractScreen
     private float anvilSpawnTime;
 
     private Heart heart;
+
+    private Label gameOverLabel;
+
+    private Label yourFinalScoreTextLabel;
+
+    private Label yourBestScoreTextLabel;
+
+    private Label yourBestScoreLabel;
+
+    private Label yourFinalScoreLabel;
+
+    private Button mainMenu;
+
+    private Button tryAgain;
+
+    private boolean gameOver;
 
 
     public GameScreen(ClimberGame game)
@@ -121,6 +141,7 @@ public class GameScreen extends AbstractScreen
         anvils = new ArrayList<Anvil>();
         heart = new Heart(new Texture("heart.png"));
         stage.addActor(heart);
+        createGameOverLabels();
 
     }
 
@@ -175,7 +196,63 @@ public class GameScreen extends AbstractScreen
         updateAllBananas(delta);
         updateAllAnvils(delta);
 
+        checkIfGameOver();
+
     }
+
+    private void checkIfGameOver()
+    {
+        if (gameOver)
+        {
+            stage.addActor(gameOverLabel);
+            stage.addActor(yourFinalScoreTextLabel);
+            stage.addActor(yourFinalScoreLabel);
+            stage.addActor(yourBestScoreTextLabel);
+            stage.addActor(yourBestScoreLabel);
+        }
+    }
+
+    private void createGameOverLabels()
+    {
+        Label.LabelStyle ls = new Label.LabelStyle();
+        ls.font = new BitmapFont();
+        ls.fontColor = Color.WHITE;
+
+        gameOverLabel = new Label("GAME OVER", ls);
+        gameOverLabel.setFontScale(5);
+        gameOverLabel.setPosition(ClimberGame.WIDTH / 2 - gameOverLabel.getWidth(),
+                ClimberGame.HEIGHT / 2 + 3 * gameOverLabel.getHeight() , 1);
+
+
+        yourFinalScoreTextLabel = new Label("SCORE ", ls);
+        yourFinalScoreTextLabel.setFontScale(3);
+        yourFinalScoreTextLabel.setPosition(ClimberGame.WIDTH / 2 - gameOverLabel.getWidth() +
+                yourFinalScoreTextLabel.getWidth(),
+                ClimberGame.HEIGHT / 2 , 1);
+
+        yourFinalScoreLabel = new Label("0", ls);
+        yourFinalScoreLabel.setFontScale(4);
+        yourFinalScoreLabel.setPosition(ClimberGame.WIDTH / 2 - gameOverLabel.getWidth() +
+                        yourFinalScoreLabel.getWidth(),
+                ClimberGame.HEIGHT / 2  - 2 * gameOverLabel.getHeight(), 1);
+
+        yourBestScoreTextLabel = new Label("BEST ", ls);
+        yourBestScoreTextLabel.setFontScale(3);
+        yourBestScoreTextLabel.setPosition(ClimberGame.WIDTH / 2 - gameOverLabel.getWidth() +
+                        yourBestScoreTextLabel.getWidth(),
+                ClimberGame.HEIGHT / 2 - 4 * gameOverLabel.getHeight()
+                , 1);
+
+        yourBestScoreLabel = new Label("1000", ls);
+        yourBestScoreLabel.setFontScale(4);
+        yourBestScoreLabel.setPosition(ClimberGame.WIDTH / 2 - gameOverLabel.getWidth() +
+                        yourBestScoreLabel.getWidth(),
+                ClimberGame.HEIGHT / 2 - 6 * gameOverLabel.getHeight(), 1);
+
+
+
+    }
+    
 
     private void updateAllAnvils(float delta)
     {
@@ -186,6 +263,7 @@ public class GameScreen extends AbstractScreen
             {
                 anvils.get(i).remove();
                 anvils.remove(i);
+                gameOver = true;
                 break;
             }
         }
