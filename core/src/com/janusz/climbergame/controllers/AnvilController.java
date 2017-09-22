@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Timer;
+import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.entities.Anvil;
 import com.janusz.climbergame.screens.GameScreen;
 
@@ -39,7 +40,7 @@ public class AnvilController
     private void spawnAnvil()
     {
         int x = GameScreen.selectPlace(MathUtils.random(2,4));
-        Anvil a = new Anvil(new Texture("anvil.png"), x);
+        Anvil a = new Anvil(new Texture("anvil.png"), x, ClimberGame.HEIGHT, 175, 125, 500);
         anvils.add(a);
         GameScreen.stage.addActor(a);
         randomizeAnvilSpawnTime();

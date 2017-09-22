@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Timer;
+import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.entities.Banana;
 import com.janusz.climbergame.screens.GameScreen;
 
@@ -70,7 +71,7 @@ public class BananaController
     private void spawnBanana()
     {
         int x = GameScreen.selectPlace(MathUtils.random(1,4));
-        Banana b = new Banana(new Texture("banana.png"), x);
+        Banana b = new Banana(new Texture("banana.png"), x, ClimberGame.HEIGHT, 100, 75, 215);
         bananas.add(b);
         GameScreen.stage.addActor(b);
         randomizeBananaSpawnTime();

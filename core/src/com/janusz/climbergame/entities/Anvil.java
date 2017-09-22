@@ -27,5 +27,5 @@ public class Anvil extends AbstractItem
     {
         this.rotateBy(20 * delta);
     }
-    
+
 }
