@@ -61,13 +61,16 @@ public class GameScreen extends AbstractScreen
     @Override
     public void render(float delta)
     {
-        super.render(delta);
-        update(delta);
+        if (!gameOver)
+        {
+            super.render(delta);
+            update(delta);
 
 
-        spriteBatch.begin();
-        stage.draw();
-        spriteBatch.end();
+            spriteBatch.begin();
+            stage.draw();
+            spriteBatch.end();
+        }
     }
 
 
