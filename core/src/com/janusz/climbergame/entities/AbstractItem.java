@@ -49,7 +49,7 @@ public abstract class AbstractItem extends Image
     {
         if (getY() < 0)
         {
-            addAction(Actions.removeActor());
+            this.remove();
         }
     }
 

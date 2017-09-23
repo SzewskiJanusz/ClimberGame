@@ -111,6 +111,13 @@ public class GameScreen extends AbstractScreen
         }
     }
 
+    @Override
+    public void dispose()
+    {
+        super.dispose();
+        spriteBatch.dispose();
+        stage.dispose();
+    }
 }
 
 

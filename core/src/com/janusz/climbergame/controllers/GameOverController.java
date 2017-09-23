@@ -58,6 +58,8 @@ public class GameOverController
         getYourBestScoreLabel().setPosition(ClimberGame.WIDTH / 2 - getGameOverLabel().getWidth() +
                         getYourBestScoreLabel().getWidth(),
                 ClimberGame.HEIGHT / 2 - 6 * getGameOverLabel().getHeight(), 1);
+
+
     }
 
     /*
