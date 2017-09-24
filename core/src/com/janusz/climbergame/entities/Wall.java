@@ -27,7 +27,7 @@ public class Wall extends Image
         // starting position
         if (spawnOnEntireScreen)
         {
-            this.setPosition(STARTING_X, STARTING_Y);
+            this.setPosition(STARTING_X, STARTING_Y + 100);
         }
         else
         {
