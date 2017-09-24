@@ -17,7 +17,7 @@ public class LianaTile extends Image
     public static final int HEIGHT = 300;
 
     public static int STARTING_X = 200;
-    public static final int STARTING_Y = Gdx.graphics.getHeight();
+    public static int STARTING_Y = Gdx.graphics.getHeight();
 
 
     public LianaTile(int starting_x)
@@ -25,6 +25,20 @@ public class LianaTile extends Image
         super(new Texture("liana.png"));
 
         this.STARTING_X = starting_x;
+
+        this.setOrigin(WIDTH, HEIGHT);
+        this.setSize(WIDTH, HEIGHT);
+
+        // starting position
+        this.setPosition(STARTING_X, STARTING_Y);
+    }
+
+    public LianaTile(int starting_x,int starting_y)
+    {
+        super(new Texture("liana.png"));
+
+        this.STARTING_X = starting_x;
+        this.STARTING_Y = starting_y;
 
         this.setOrigin(WIDTH, HEIGHT);
         this.setSize(WIDTH, HEIGHT);
