@@ -29,7 +29,26 @@ public class EntireLiana
         second_wholeLiana = new ArrayList<LianaTile>();
         third_wholeLiana = new ArrayList<LianaTile>();
 
+        createStartingLianas();
         createLianaTile();
+    }
+
+    private void createStartingLianas()
+    {
+        for (int i = 0 ; i < 5 ; i++)
+        {
+            LianaTile a = new LianaTile(first_liana_x, LianaTile.HEIGHT * i);
+            LianaTile b = new LianaTile(second_liana_x, LianaTile.HEIGHT * i);
+            LianaTile c = new LianaTile(third_liana_x, LianaTile.HEIGHT * i);
+
+            first_wholeLiana.add(a);
+            second_wholeLiana.add(b);
+            third_wholeLiana.add(c);
+
+            GameScreen.stage.addActor(first_wholeLiana.get(i));
+            GameScreen.stage.addActor(second_wholeLiana.get(i));
+            GameScreen.stage.addActor(third_wholeLiana.get(i));
+        }
     }
 
     private void createLianaTile()
