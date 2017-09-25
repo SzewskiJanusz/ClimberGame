@@ -4,6 +4,7 @@ package com.janusz.climbergame.screens;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.controllers.AnvilController;
 import com.janusz.climbergame.controllers.BananaController;
+import com.janusz.climbergame.controllers.EnergyBar;
 import com.janusz.climbergame.controllers.GameOverController;
 import com.janusz.climbergame.entities.Player;
 import com.janusz.climbergame.entities.Wall;
@@ -22,6 +23,7 @@ public class GameScreen extends AbstractScreen
     private EntireWall ew;
     private AnvilController ac;
     private GameOverController goc;
+    private EnergyBar eb;
 
 
 
@@ -50,6 +52,9 @@ public class GameScreen extends AbstractScreen
         bc = new BananaController();
         ac = new AnvilController();
         goc = new GameOverController();
+        eb = new EnergyBar();
+        stage.addActor(eb);
+
     }
 
     private void initPlayer()
@@ -90,6 +95,7 @@ public class GameScreen extends AbstractScreen
     {
         stage.act();
         player.toFront();
+        eb.toFront();
         movePlayer();
 
         ew.moveWallDown(delta);
