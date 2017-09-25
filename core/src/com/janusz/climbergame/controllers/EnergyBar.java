@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.entities.Player;
 
 /**
  * Created by Janusz on 2017-09-25.
@@ -16,27 +17,29 @@ import com.janusz.climbergame.ClimberGame;
 public class EnergyBar extends Image
 {
 
-    private final int width = ClimberGame.WIDTH / 2 - 2*22;
-    private final int height = 65 - 24;
+    private final int starting_width = ClimberGame.WIDTH / 2 - 2*22;
+    private final int starting_height = 65 - 24;
 
-    private final int x = ClimberGame.WIDTH / 3 + 22;
-    private final int y = ClimberGame.HEIGHT - height - 10 - 5;
+    private final int starting_x = ClimberGame.WIDTH / 3 + 22;
+    private final int starting_y = ClimberGame.HEIGHT - starting_height - 10 - 5;
+
+    public static int actualEnergy;
 
     private Texture texture;
 
     public EnergyBar()
     {
-        this.setSize(width, height);
-        this.setOrigin(width / 2 , height / 2);
-        this.setPosition(x , y );
-
+        this.setSize(starting_width, starting_height);
+        this.setOrigin(starting_width / 2 , starting_height / 2);
+        this.setPosition(starting_x , starting_y );
+        actualEnergy = starting_width;
         createTexture();
     }
 
     private void createTexture() {
-        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        Pixmap pixmap = new Pixmap(starting_width, starting_height, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.BLUE);
-        pixmap.fillRectangle(0, 0, width, height);
+        pixmap.fillRectangle(0, 0, actualEnergy, starting_height);
         texture = new Texture(pixmap);
         pixmap.dispose();
     }
@@ -45,7 +48,30 @@ public class EnergyBar extends Image
     public void draw(Batch batch, float parentAlpha) {
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
+
+        if (Player.place == 0)
+        {
+            actualEnergy -= 2;
+        }
+
+        if (actualEnergy <= 0)
+        {
+            Player.place = 1;
+            actualEnergy += 1;
+        }
+
+
+        batch.draw(texture, getX(), getY(), actualEnergy, getHeight());
     }
 
+
+    public void addEnergy()
+    {
+        actualEnergy += 100;
+
+        if (actualEnergy > starting_width)
+        {
+            actualEnergy = starting_width;
+        }
+    }
 }
