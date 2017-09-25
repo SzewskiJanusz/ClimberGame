@@ -40,7 +40,7 @@ public class BananaController
         bananaSpawnTime = MathUtils.random(3,7);
     }
 
-    public void updateAllBananas(float delta)
+    public void updateAllBananas(float delta, EnergyBar eb)
     {
 
         for (int i = 0 ; i < bananas.size() ; i++)
@@ -49,6 +49,7 @@ public class BananaController
             {
                 bananas.get(i).remove();
                 bananas.remove(i);
+                eb.addEnergy();
                 break;
             }
         }
