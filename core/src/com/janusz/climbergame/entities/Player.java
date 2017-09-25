@@ -17,7 +17,7 @@ public class Player extends Image
     public static final int STARTING_X = 950;
     public static final int STARTING_Y = 100;
 
-    public int place;
+    public static int place;
 
     // Rectangle for collision
     private Rectangle bounds;
