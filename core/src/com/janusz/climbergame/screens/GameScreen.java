@@ -5,6 +5,7 @@ import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.controllers.AnvilController;
 import com.janusz.climbergame.controllers.BananaController;
 import com.janusz.climbergame.controllers.EnergyBar;
+import com.janusz.climbergame.controllers.FrameEnergyBar;
 import com.janusz.climbergame.controllers.GameOverController;
 import com.janusz.climbergame.entities.Player;
 import com.janusz.climbergame.entities.Wall;
@@ -24,6 +25,7 @@ public class GameScreen extends AbstractScreen
     private AnvilController ac;
     private GameOverController goc;
     private EnergyBar eb;
+    private FrameEnergyBar feb;
 
 
 
@@ -53,6 +55,9 @@ public class GameScreen extends AbstractScreen
         ac = new AnvilController();
         goc = new GameOverController();
         eb = new EnergyBar();
+        feb = new FrameEnergyBar();
+
+        stage.addActor(feb);
         stage.addActor(eb);
 
     }
@@ -95,6 +100,7 @@ public class GameScreen extends AbstractScreen
     {
         stage.act();
         player.toFront();
+        feb.toFront();
         eb.toFront();
         movePlayer();
 

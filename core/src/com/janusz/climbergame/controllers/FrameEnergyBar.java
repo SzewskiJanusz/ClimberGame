@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.ClimberGame;
 
@@ -13,18 +12,17 @@ import com.janusz.climbergame.ClimberGame;
  * Created by Janusz on 2017-09-25.
  */
 
-public class EnergyBar extends Image
+public class FrameEnergyBar extends Image
 {
+    private final int width = ClimberGame.WIDTH / 2;
+    private final int height = 65;
 
-    private final int width = ClimberGame.WIDTH / 2 - 2*22;
-    private final int height = 65 - 24;
-
-    private final int x = ClimberGame.WIDTH / 3 + 22;
-    private final int y = ClimberGame.HEIGHT - height - 10 - 5;
+    private final int x = ClimberGame.WIDTH / 3 ;
+    private final int y = ClimberGame.HEIGHT - height;
 
     private Texture texture;
 
-    public EnergyBar()
+    public FrameEnergyBar()
     {
         this.setSize(width, height);
         this.setOrigin(width / 2 , height / 2);
@@ -35,7 +33,7 @@ public class EnergyBar extends Image
 
     private void createTexture() {
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.BLUE);
+        pixmap.setColor(Color.GOLD);
         pixmap.fillRectangle(0, 0, width, height);
         texture = new Texture(pixmap);
         pixmap.dispose();
