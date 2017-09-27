@@ -52,6 +52,11 @@ public class LianaTile extends Image
         this.setY(this.getY() - delta * 250);
     }
 
+    public void stickLianaToAnother(LianaTile destination)
+    {
+        this.setY(destination.getY() + HEIGHT);
+    }
+
 }
 
 

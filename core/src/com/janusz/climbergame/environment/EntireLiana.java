@@ -69,11 +69,15 @@ public class EntireLiana
 
     public void moveAllLianasDown(float delta)
     {
-        for (int i = 0 ; i < first_wholeLiana.size() ;i ++)
+        first_wholeLiana.get(0).moveLianaTile(delta);
+        second_wholeLiana.get(0).moveLianaTile(delta);
+        third_wholeLiana.get(0).moveLianaTile(delta);
+
+        for (int i = 1 ; i < first_wholeLiana.size() ;i ++)
         {
-            first_wholeLiana.get(i).moveLianaTile(delta);
-            second_wholeLiana.get(i).moveLianaTile(delta);
-            third_wholeLiana.get(i).moveLianaTile(delta);
+            first_wholeLiana.get(i).stickLianaToAnother(first_wholeLiana.get(i-1));
+            second_wholeLiana.get(i).stickLianaToAnother(second_wholeLiana.get(i-1));
+            third_wholeLiana.get(i).stickLianaToAnother(third_wholeLiana.get(i-1));
         }
 
         checkIfNeedCreateTile();
