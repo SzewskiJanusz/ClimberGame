@@ -32,9 +32,11 @@ public class EntireWall
 
     public void moveWallDown(float delta)
     {
-        for (int i = 0 ; i < walls.size() ; i++)
+        walls.get(0).moveWall(delta);
+
+        for (int i = 1 ; i < walls.size() ; i++)
         {
-            walls.get(i).moveWall(delta);
+            walls.get(i).stickToWall(walls.get(i-1));
         }
 
         checkIfNeedCreateWall();
