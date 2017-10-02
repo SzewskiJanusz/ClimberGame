@@ -16,9 +16,8 @@ public class ClimberGame extends Game {
 	{
 		WIDTH = Gdx.graphics.getWidth();
 		HEIGHT = Gdx.graphics.getHeight();
-        //Gdx.input.setInputProcessor(MenuScreen.stage);
 		setScreen(new MenuScreen(this));
-
+		Gdx.input.setInputProcessor(MenuScreen.stage);
 	}
 
 	/**

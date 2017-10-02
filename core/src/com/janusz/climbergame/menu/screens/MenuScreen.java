@@ -3,17 +3,22 @@ package com.janusz.climbergame.menu.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.EventHandler;
 import com.janusz.climbergame.menu.buttons.ExitButton;
 import com.janusz.climbergame.menu.buttons.OptionsButton;
 import com.janusz.climbergame.menu.buttons.StartGameButton;
 import com.janusz.climbergame.menu.buttons.TopScoresButton;
 import com.janusz.climbergame.screens.AbstractScreen;
+import com.janusz.climbergame.screens.GameScreen;
 
 /**
  * Created by Janusz on 2017-09-27.
@@ -95,6 +100,15 @@ public class MenuScreen extends AbstractScreen
     private void initStartGame()
     {
         startGame = new StartGameButton("START", bs, 650 );
+        startGame.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("CLICKED");
+                Gdx.input.setInputProcessor(new EventHandler());
+                game.setScreen(new GameScreen(game));
+            }
+        });
         stage.addActor(startGame);
     }
 
