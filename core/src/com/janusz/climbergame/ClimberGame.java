@@ -2,8 +2,7 @@ package com.janusz.climbergame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.janusz.climbergame.screens.GameScreen;
-import com.janusz.climbergame.screens.MenuScreen;
+import com.janusz.climbergame.menu.screens.MenuScreen;
 
 public class ClimberGame extends Game {
 
