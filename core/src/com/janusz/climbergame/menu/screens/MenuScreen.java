@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.EventHandler;
+import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.ExitButton;
 import com.janusz.climbergame.menu.buttons.OptionsButton;
 import com.janusz.climbergame.menu.buttons.StartGameButton;
@@ -27,7 +28,7 @@ import com.janusz.climbergame.screens.GameScreen;
 public class MenuScreen extends AbstractScreen
 {
 
-    private Label title;
+    private Title title;
 
     private TextButton.TextButtonStyle bs;
 
@@ -46,7 +47,7 @@ public class MenuScreen extends AbstractScreen
     @Override
     protected void init()
     {
-        initLabel();
+        initTitle();
 
         initButtonStyle();
 
@@ -56,15 +57,9 @@ public class MenuScreen extends AbstractScreen
         initExit();
     }
 
-    private void initLabel()
+    private void initTitle()
     {
-        Label.LabelStyle ls = new Label.LabelStyle();
-        ls.font = new BitmapFont();
-        ls.fontColor = Color.WHITE;
-
-        title = new Label("FAST CLIMBER", ls);
-        title.setFontScale(12, 10);
-        title.setPosition(500 , 950 ,1);
+        title = new Title();
         stage.addActor(title);
     }
 
