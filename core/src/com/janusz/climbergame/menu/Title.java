@@ -13,8 +13,8 @@ public class Title extends Image
     public Title()
     {
         super(new Texture("title.png"));
-        setPosition(600 , 900 ,1);
-        setSize(1400,250);
+        setPosition(365 , 420 ,1);
+        setSize(520,110);
     }
 
 }

@@ -6,16 +6,14 @@ import com.janusz.climbergame.menu.screens.MenuScreen;
 
 public class ClimberGame extends Game {
 
-	public static int WIDTH;
-	public static int HEIGHT;
+	public static int WIDTH = 700;
+	public static int HEIGHT = 480;
 
 	private boolean paused;
 
 	@Override
 	public void create()
 	{
-		WIDTH = Gdx.graphics.getWidth();
-		HEIGHT = Gdx.graphics.getHeight();
 		setScreen(new MenuScreen(this));
 		Gdx.input.setInputProcessor(MenuScreen.stage);
 	}

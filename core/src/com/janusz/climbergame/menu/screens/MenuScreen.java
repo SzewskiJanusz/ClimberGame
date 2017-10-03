@@ -73,25 +73,25 @@ public class MenuScreen extends AbstractScreen
 
     private void initExit()
     {
-        exit = new ExitButton("EXIT", bs, 50);
+        exit = new ExitButton("EXIT", bs, 10);
         stage.addActor(exit);
     }
 
     private void initTopScores()
     {
-        topScores = new TopScoresButton("TOP SCORES", bs, 250);
+        topScores = new TopScoresButton("TOP SCORES", bs, 110);
         stage.addActor(topScores);
     }
 
     private void initOptions()
     {
-        options = new OptionsButton("OPTIONS", bs, 450);
+        options = new OptionsButton("OPTIONS", bs, 210);
         stage.addActor(options);
     }
 
     private void initStartGame()
     {
-        startGame = new StartGameButton("START", bs, 650 );
+        startGame = new StartGameButton("START", bs, 310 );
         startGame.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)

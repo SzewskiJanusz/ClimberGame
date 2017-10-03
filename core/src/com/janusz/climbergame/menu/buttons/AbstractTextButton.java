@@ -21,14 +21,14 @@ public abstract class AbstractTextButton extends TextButton
         setPosition(startingX, startingY);
         setSize(width, height);
         setText(title);
-        getLabel().setFontScale(5);
+        getLabel().setFontScale(3);
     }
 
     protected void init()
     {
-        width = 900;
-        height = 150;
-        startingX = 600;
+        width = 350;
+        height = 65;
+        startingX = 175;
     }
 
 }
