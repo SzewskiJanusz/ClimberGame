@@ -1,12 +1,12 @@
-package com.janusz.climbergame.controllers;
+package com.janusz.climbergame.game.controllers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.entities.Banana;
-import com.janusz.climbergame.screens.GameScreen;
+import com.janusz.climbergame.game.entities.Banana;
+import com.janusz.climbergame.game.screens.GameScreen;
 
 import java.util.ArrayList;
 import java.util.List;

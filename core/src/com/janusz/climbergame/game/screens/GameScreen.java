@@ -1,16 +1,16 @@
-package com.janusz.climbergame.screens;
+package com.janusz.climbergame.game.screens;
 
 
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.controllers.AnvilController;
-import com.janusz.climbergame.controllers.BananaController;
-import com.janusz.climbergame.controllers.EnergyBar;
-import com.janusz.climbergame.controllers.FrameEnergyBar;
-import com.janusz.climbergame.controllers.GameOverController;
-import com.janusz.climbergame.entities.Player;
-import com.janusz.climbergame.entities.Wall;
-import com.janusz.climbergame.environment.EntireLiana;
-import com.janusz.climbergame.environment.EntireWall;
+import com.janusz.climbergame.game.controllers.AnvilController;
+import com.janusz.climbergame.game.controllers.BananaController;
+import com.janusz.climbergame.game.controllers.EnergyBar;
+import com.janusz.climbergame.game.controllers.FrameEnergyBar;
+import com.janusz.climbergame.game.controllers.GameOverController;
+import com.janusz.climbergame.game.entities.Player;
+import com.janusz.climbergame.game.entities.Wall;
+import com.janusz.climbergame.game.environment.EntireLiana;
+import com.janusz.climbergame.game.environment.EntireWall;
 
 
 public class GameScreen extends AbstractScreen

@@ -1,4 +1,4 @@
-package com.janusz.climbergame.screens;
+package com.janusz.climbergame.game.screens;
 
 import com.janusz.climbergame.ClimberGame;
 

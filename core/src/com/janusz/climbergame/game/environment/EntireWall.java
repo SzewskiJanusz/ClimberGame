@@ -1,7 +1,7 @@
-package com.janusz.climbergame.environment;
+package com.janusz.climbergame.game.environment;
 
-import com.janusz.climbergame.entities.Wall;
-import com.janusz.climbergame.screens.GameScreen;
+import com.janusz.climbergame.game.entities.Wall;
+import com.janusz.climbergame.game.screens.GameScreen;
 
 import java.util.ArrayList;
 import java.util.List;

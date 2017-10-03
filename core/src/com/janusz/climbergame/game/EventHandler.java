@@ -1,7 +1,7 @@
-package com.janusz.climbergame;
+package com.janusz.climbergame.game;
 
 import com.badlogic.gdx.InputAdapter;
-import com.janusz.climbergame.screens.GameScreen;
+import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
  * Created by Janusz on 2017-09-18.

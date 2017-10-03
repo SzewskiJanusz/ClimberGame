@@ -1,14 +1,12 @@
-package com.janusz.climbergame.controllers;
+package com.janusz.climbergame.game.controllers;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.entities.Player;
+import com.janusz.climbergame.game.entities.Player;
 
 /**
  * Created by Janusz on 2017-09-25.

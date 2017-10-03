@@ -1,11 +1,8 @@
-package com.janusz.climbergame.entities;
+package com.janusz.climbergame.game.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Janusz on 2017-09-12.
