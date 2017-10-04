@@ -5,17 +5,17 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 /**
- * Created by Janusz on 2017-09-18.
+ * Player class.
  */
 
 public class Player extends Image
 {
 
-    public static final int WIDTH = 130;
-    public static final int HEIGHT = 210;
+    public static final int WIDTH = 65;
+    public static final int HEIGHT = 90;
 
-    public static final int STARTING_X = 950;
-    public static final int STARTING_Y = 100;
+    public static final int STARTING_X = 380;
+    public static final int STARTING_Y = 50;
 
     public static int place;
 
@@ -26,8 +26,8 @@ public class Player extends Image
     {
         super(new Texture("badlogic.jpg"));
 
-        this.setOrigin(0,0);
-        this.setSize(WIDTH,HEIGHT);
+        this.setOrigin(WIDTH / 2,HEIGHT / 2);
+        this.setSize(WIDTH, HEIGHT);
 
         this.setPosition(STARTING_X ,STARTING_Y);
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);

@@ -11,7 +11,7 @@ import com.janusz.climbergame.ClimberGame;
 public class Wall extends Image
 {
 
-    public static final int WIDTH = 300;
+    public static final int WIDTH = 120;
     public static final int HEIGHT = ClimberGame.HEIGHT;
 
     public static final int STARTING_X = 0;
