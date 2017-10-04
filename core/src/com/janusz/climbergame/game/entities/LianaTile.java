@@ -3,6 +3,7 @@ package com.janusz.climbergame.game.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.janusz.climbergame.ClimberGame;
 
 /**
  * Created by Janusz on 2017-09-12.
@@ -10,11 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class LianaTile extends Image
 {
-    public static final int WIDTH = 150;
-    public static final int HEIGHT = 300;
+    public static final int WIDTH = 60;
+    public static final int HEIGHT = 120;
 
-    public static int STARTING_X = 200;
-    public static int STARTING_Y = Gdx.graphics.getHeight();
+    public static int STARTING_X;
+    public static int STARTING_Y = ClimberGame.HEIGHT;
 
 
     public LianaTile(int starting_x)
