@@ -40,7 +40,7 @@ public class AnvilController
     private void spawnAnvil()
     {
         int x = GameScreen.selectPlace(MathUtils.random(2,4));
-        Anvil a = new Anvil(new Texture("anvil.png"), x, ClimberGame.HEIGHT, 175, 125, 500);
+        Anvil a = new Anvil(new Texture("anvil.png"), x, ClimberGame.HEIGHT, 80, 55, 500);
         anvils.add(a);
         GameScreen.stage.addActor(a);
         randomizeAnvilSpawnTime();
