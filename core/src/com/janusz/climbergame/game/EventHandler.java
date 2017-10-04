@@ -1,6 +1,8 @@
 package com.janusz.climbergame.game;
 
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.math.Vector2;
+import com.janusz.climbergame.game.entities.Player;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
@@ -13,7 +15,15 @@ public class EventHandler extends InputAdapter
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
 
-        if (isFingerOnLeft(screenX))
+
+        Vector2 actorStagePos = GameScreen.player.localToStageCoordinates(new Vector2(0,0));
+        Vector2 actorScreenPos = GameScreen.player.getStage().
+                stageToScreenCoordinates(actorStagePos);
+
+        System.out.println(screenX +" "+ screenY + "PlayerX = "+
+               actorScreenPos.x);
+
+        if (isFingerOnLeft(screenX, actorScreenPos.x))
         {
             GameScreen.player.jumpLeft();
         }
@@ -25,9 +35,9 @@ public class EventHandler extends InputAdapter
         return true;
     }
 
-    private boolean isFingerOnLeft(int screenX)
+    private boolean isFingerOnLeft(int screenX,float playerOnScreenX)
     {
-        return GameScreen.player.getX() > screenX;
+        return playerOnScreenX > screenX;
     }
 
 
