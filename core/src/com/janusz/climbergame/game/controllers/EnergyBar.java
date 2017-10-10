@@ -49,13 +49,13 @@ public class EnergyBar extends Image
 
         if (Player.place == 0)
         {
-            actualEnergy -= 2;
+            actualEnergy -= (int)(starting_width * 0.005);
         }
 
-        if (actualEnergy <= 0)
+        if (actualEnergy <= 0 && Player.place == 0)
         {
             Player.place = 1;
-            actualEnergy += 1;
+            actualEnergy = 0;
         }
 
 
