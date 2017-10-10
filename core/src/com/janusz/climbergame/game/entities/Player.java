@@ -3,6 +3,7 @@ package com.janusz.climbergame.game.entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.janusz.climbergame.game.controllers.EnergyBar;
 
 /**
  * Player class.
@@ -55,6 +56,9 @@ public class Player extends Image
     {
         if (place > 0)
         {
+            if (place == 1 && EnergyBar.actualEnergy <= 0)
+                return;
+
             place--;
         }
     }
