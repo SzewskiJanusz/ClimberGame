@@ -8,7 +8,7 @@ import com.janusz.climbergame.menu.screens.MenuScreen;
 
 
 /**
- * Created by Janusz on 2017-09-27.
+ * First screen of the game. After 2 seconds is switched to MenuScreen.
  */
 
 public class SplashScreen extends AbstractScreen
@@ -45,5 +45,13 @@ public class SplashScreen extends AbstractScreen
     {
         super.render(delta);
         stage.draw();
+    }
+
+    @Override
+    public void hide()
+    {
+        super.hide();
+        title.remove();
+        stage.dispose();
     }
 }
