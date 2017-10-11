@@ -31,7 +31,7 @@ public class EventHandler extends InputAdapter
 
     private Vector2 translateLocalToStageCoordinates()
     {
-        Vector2 actorStagePos = GameScreen.player.localToStageCoordinates(new Vector2(0,0));
+        Vector2 actorStagePos = GameScreen.player.localToStageCoordinates(new Vector2(GameScreen.player.getWidth() / 2,0));
         return GameScreen.player.getStage().stageToScreenCoordinates(actorStagePos);
     }
 
