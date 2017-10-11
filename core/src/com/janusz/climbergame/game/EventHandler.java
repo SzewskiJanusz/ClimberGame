@@ -15,13 +15,7 @@ public class EventHandler extends InputAdapter
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
 
-
-        Vector2 actorStagePos = GameScreen.player.localToStageCoordinates(new Vector2(0,0));
-        Vector2 actorScreenPos = GameScreen.player.getStage().
-                stageToScreenCoordinates(actorStagePos);
-
-        System.out.println(screenX +" "+ screenY + "PlayerX = "+
-               actorScreenPos.x);
+        Vector2 actorScreenPos = translateLocalToStageCoordinates();
 
         if (isFingerOnLeft(screenX, actorScreenPos.x))
         {
@@ -35,7 +29,13 @@ public class EventHandler extends InputAdapter
         return true;
     }
 
-    private boolean isFingerOnLeft(int screenX,float playerOnScreenX)
+    private Vector2 translateLocalToStageCoordinates()
+    {
+        Vector2 actorStagePos = GameScreen.player.localToStageCoordinates(new Vector2(0,0));
+        return GameScreen.player.getStage().stageToScreenCoordinates(actorStagePos);
+    }
+
+    private boolean isFingerOnLeft(int screenX, float playerOnScreenX)
     {
         return playerOnScreenX > screenX;
     }
