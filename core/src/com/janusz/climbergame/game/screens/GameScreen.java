@@ -2,6 +2,7 @@ package com.janusz.climbergame.game.screens;
 
 
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.controllers.AnvilController;
 import com.janusz.climbergame.game.controllers.BananaController;
 import com.janusz.climbergame.game.controllers.EnergyBar;
@@ -26,6 +27,8 @@ public class GameScreen extends AbstractScreen
     private GameOverController goc;
     private EnergyBar eb;
     private FrameEnergyBar feb;
+
+    private JungleBackground background;
 
 
 
@@ -56,9 +59,14 @@ public class GameScreen extends AbstractScreen
         goc = new GameOverController();
         eb = new EnergyBar();
         feb = new FrameEnergyBar();
+        background = new JungleBackground();
 
         stage.addActor(feb);
         stage.addActor(eb);
+        stage.addActor(background);
+
+        // Set background to back
+        background.toBack();
 
     }
 
