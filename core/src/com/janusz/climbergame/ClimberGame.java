@@ -2,6 +2,7 @@ package com.janusz.climbergame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.janusz.climbergame.game.screens.SplashScreen;
 import com.janusz.climbergame.menu.screens.MenuScreen;
 
 public class ClimberGame extends Game {
@@ -14,8 +15,8 @@ public class ClimberGame extends Game {
 	@Override
 	public void create()
 	{
-		setScreen(new MenuScreen(this));
-		Gdx.input.setInputProcessor(MenuScreen.stage);
+
+		setScreen(new SplashScreen(this));
 	}
 
 	/**

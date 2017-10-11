@@ -38,7 +38,8 @@ public class MenuScreen extends AbstractScreen
     public MenuScreen(ClimberGame game)
     {
         super(game);
-
+        // Set input processor here because stage is initialized
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -96,7 +97,6 @@ public class MenuScreen extends AbstractScreen
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                System.out.println("CLICKED");
                 Gdx.input.setInputProcessor(new EventHandler());
                 game.setScreen(new GameScreen(game));
             }
