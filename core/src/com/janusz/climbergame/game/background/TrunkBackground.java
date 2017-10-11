@@ -11,11 +11,24 @@ import com.janusz.climbergame.ClimberGame;
 public class TrunkBackground extends Image
 {
 
+    private float timer;
+
     public TrunkBackground()
     {
         super(new Texture("trunk.png"));
         this.setPosition(200, 0);
         setSize(450, ClimberGame.HEIGHT);
+    }
+
+    public void moveDown(float delta)
+    {
+        if (timer >= 1)
+        {
+            this.setY(getY() - 1);
+            timer = 0;
+        }
+
+        timer += delta;
     }
 
 }

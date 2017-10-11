@@ -122,6 +122,7 @@ public class GameScreen extends AbstractScreen
 
         bc.updateAllBananas(delta,eb);
         ac.updateAllAnvils(delta);
+        trunk.moveDown(delta);
 
         checkIfGameOver();
 
