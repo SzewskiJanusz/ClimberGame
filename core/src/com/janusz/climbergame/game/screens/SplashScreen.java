@@ -29,7 +29,7 @@ public class SplashScreen extends AbstractScreen
                                game.setScreen(new MenuScreen(game));
                            }
                        }
-                , 2
+                , 1
         );
     }
 
