@@ -35,7 +35,7 @@ public class MenuScreen extends AbstractScreen
     private ExitButton exit;
 
 
-    public MenuScreen(ClimberGame game)
+    public MenuScreen(final ClimberGame game)
     {
         super(game);
         // Set input processor here because stage is initialized
