@@ -1,6 +1,7 @@
 package com.janusz.climbergame.game.screens;
 
 
+import com.badlogic.gdx.Gdx;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
@@ -31,7 +32,6 @@ public class GameScreen extends AbstractScreen
 
     private JungleBackground background;
     private TrunkBackground trunk;
-
 
 
     public GameScreen(ClimberGame game)

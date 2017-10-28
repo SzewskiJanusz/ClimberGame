@@ -1,7 +1,12 @@
 package com.janusz.climbergame.game.entities;
 
+import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.game.controllers.EnergyBar;
 
@@ -9,7 +14,7 @@ import com.janusz.climbergame.game.controllers.EnergyBar;
  * Player class.
  */
 
-public class Player extends Image
+public class Player extends Actor
 {
 
     public static final int WIDTH = 65;
@@ -20,20 +25,49 @@ public class Player extends Image
 
     public static int place;
 
+    public Animation animation;
+
+    private Texture text;
+    private TextureRegion[] frames;
     // Rectangle for collision
     private Rectangle bounds;
+    private float time;
+    private TextureRegion currentFrame;
+
 
     public Player()
     {
-        super(new Texture("badlogic.jpg"));
+        text = new Texture("climbing-strip.png");
+        this.setOrigin(STARTING_X / 2, STARTING_Y / 2);
+        this.setSize(WIDTH,HEIGHT);
+        TextureRegion[][] tmpFrames = TextureRegion.split(text,260,260);
+        frames = new TextureRegion[14];
+        int index = 0;
 
-        this.setOrigin(WIDTH / 2,HEIGHT / 2);
-        this.setSize(WIDTH, HEIGHT);
+        for(int i = 0 ; i < 14 ; i++)
+        {
+            frames[index++] = tmpFrames[0][i];
+        }
 
-        this.setPosition(STARTING_X ,STARTING_Y);
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
 
+        animation = new Animation(1f/14,frames);
+
         place = 2;
+    }
+
+    @Override
+    public void act(float delta)
+    {
+        time += delta;
+        currentFrame = animation.getKeyFrame(time, true);
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha)
+    {
+        super.draw(batch, parentAlpha);
+        batch.draw(currentFrame,getX(), getY(), WIDTH, HEIGHT);
     }
 
     // Override for easier changing coordinates of actor and bounds
