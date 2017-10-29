@@ -13,9 +13,9 @@ import java.util.List;
 public class EntireLiana
 {
 
-    public static final int first_liana_x = 230;
-    public static final int second_liana_x = 380;
-    public static final int third_liana_x = 530;
+    public static final int first_liana_x = 235;
+    public static final int second_liana_x = 385;
+    public static final int third_liana_x = 535;
 
     // Lists for moving effect
     private List<LianaTile> first_wholeLiana;
