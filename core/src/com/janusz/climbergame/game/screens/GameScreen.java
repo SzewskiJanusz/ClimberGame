@@ -102,9 +102,9 @@ public class GameScreen extends AbstractScreen
         switch(player.place)
         {
             case 0: player.setX(Wall.WIDTH); break;
-            case 1: player.setX(EntireLiana.first_liana_x); break;
-            case 2: player.setX(EntireLiana.second_liana_x); break;
-            case 3: player.setX(EntireLiana.third_liana_x); break;
+            case 1: player.setX(EntireLiana.first_liana_x - 16); break;
+            case 2: player.setX(EntireLiana.second_liana_x - 16); break;
+            case 3: player.setX(EntireLiana.third_liana_x - 16); break;
             default: throw new IllegalArgumentException("Error in player place. (" + player.place +")");
         }
     }
