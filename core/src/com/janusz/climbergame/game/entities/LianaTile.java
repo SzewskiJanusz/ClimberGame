@@ -11,7 +11,7 @@ import com.janusz.climbergame.ClimberGame;
 
 public class LianaTile extends Image
 {
-    public static final int WIDTH = 60;
+    public static final int WIDTH = 50;
     public static final int HEIGHT = 120;
 
     public static int STARTING_X;
