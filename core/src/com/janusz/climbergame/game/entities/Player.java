@@ -17,8 +17,8 @@ import com.janusz.climbergame.game.controllers.EnergyBar;
 public class Player extends Actor
 {
 
-    public static final int WIDTH = 65;
-    public static final int HEIGHT = 90;
+    public static final int WIDTH = 80;
+    public static final int HEIGHT = 110;
 
     public static final int STARTING_X = 380;
     public static final int STARTING_Y = 50;
@@ -38,19 +38,18 @@ public class Player extends Actor
     public Player()
     {
         text = new Texture("climbing-strip.png");
-        this.setOrigin(STARTING_X / 2, STARTING_Y / 2);
         this.setSize(WIDTH,HEIGHT);
-        TextureRegion[][] tmpFrames = TextureRegion.split(text,260,260);
-        frames = new TextureRegion[14];
-        int index = 0;
+        TextureRegion[][] tmpFrames = TextureRegion.split(text,260,240);
 
+        frames = new TextureRegion[14];
+        this.setDebug(true);
         for(int i = 0 ; i < 14 ; i++)
         {
-            frames[index++] = tmpFrames[0][i];
+            frames[i] = tmpFrames[0][i];
         }
 
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
-
+        this.setPosition(STARTING_X, STARTING_Y);
         animation = new Animation(1f/14,frames);
 
         place = 2;
