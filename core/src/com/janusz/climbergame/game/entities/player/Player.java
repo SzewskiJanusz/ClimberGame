@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.entities;
+package com.janusz.climbergame.game.entities.player;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
