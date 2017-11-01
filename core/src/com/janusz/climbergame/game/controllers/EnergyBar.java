@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.game.entities.Player;
+import com.janusz.climbergame.game.entities.player.Player;
 
 /**
  * Created by Janusz on 2017-09-25.

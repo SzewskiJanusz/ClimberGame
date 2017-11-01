@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.game.controllers.EnergyBar;
+import com.janusz.climbergame.game.entities.animations.PlayerAnimation;
 
 /**
  * Player class.
@@ -16,7 +17,6 @@ import com.janusz.climbergame.game.controllers.EnergyBar;
 
 public class Player extends Actor
 {
-
     public static final int WIDTH = 80;
     public static final int HEIGHT = 110;
 
@@ -25,10 +25,7 @@ public class Player extends Actor
 
     public static int place;
 
-    public Animation animation;
-
-    private Texture text;
-    private TextureRegion[] frames;
+    private PlayerAnimation playerAnimation;
     // Rectangle for collision
     private Rectangle bounds;
     private float time;
@@ -37,20 +34,11 @@ public class Player extends Actor
 
     public Player()
     {
-        text = new Texture("climbing-strip.png");
+        playerAnimation = new PlayerAnimation();
+
         this.setSize(WIDTH,HEIGHT);
-        TextureRegion[][] tmpFrames = TextureRegion.split(text,260,240);
-
-        frames = new TextureRegion[14];
-        this.setDebug(true);
-        for(int i = 0 ; i < 14 ; i++)
-        {
-            frames[i] = tmpFrames[0][i];
-        }
-
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
         this.setPosition(STARTING_X, STARTING_Y);
-        animation = new Animation(1f/14,frames);
 
         place = 2;
     }
@@ -59,7 +47,7 @@ public class Player extends Actor
     public void act(float delta)
     {
         time += delta;
-        currentFrame = animation.getKeyFrame(time, true);
+        currentFrame = playerAnimation.getActualFrame(time);
     }
 
     @Override

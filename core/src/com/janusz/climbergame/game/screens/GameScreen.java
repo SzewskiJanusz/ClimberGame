@@ -1,7 +1,6 @@
 package com.janusz.climbergame.game.screens;
 
 
-import com.badlogic.gdx.Gdx;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
@@ -10,8 +9,9 @@ import com.janusz.climbergame.game.controllers.BananaController;
 import com.janusz.climbergame.game.controllers.EnergyBar;
 import com.janusz.climbergame.game.controllers.FrameEnergyBar;
 import com.janusz.climbergame.game.controllers.GameOverController;
-import com.janusz.climbergame.game.entities.Player;
+import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.Wall;
+import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.environment.EntireWall;
 
@@ -21,6 +21,7 @@ public class GameScreen extends AbstractScreen
 
     public static Player player;
     public static boolean gameOver;
+    public static PlayerState playerState = PlayerState.CLIMBING_LIANA;
 
     private BananaController bc;
     private EntireLiana el;

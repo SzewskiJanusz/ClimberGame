@@ -2,7 +2,6 @@ package com.janusz.climbergame.game;
 
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
-import com.janusz.climbergame.game.entities.Player;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
