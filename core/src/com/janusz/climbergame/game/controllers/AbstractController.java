@@ -25,6 +25,7 @@ public abstract class AbstractController<T extends AbstractItem>
 
     protected abstract void randomizeSpawnTime();
     protected abstract void spawnEntity();
+    protected abstract void triggerEffect();
 
     /**
      * Initialize List and timer
@@ -56,7 +57,8 @@ public abstract class AbstractController<T extends AbstractItem>
             {
                 entities.get(i).remove();
                 entities.remove(i);
-                GameScreen.gameOver = true;
+                triggerEffect();
+
                 break;
             }
         }
