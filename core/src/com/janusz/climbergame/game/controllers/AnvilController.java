@@ -30,4 +30,10 @@ public class AnvilController extends AbstractController<Anvil>
         GameScreen.stage.addActor(a);
         randomizeSpawnTime();
     }
+
+    @Override
+    protected void triggerEffect()
+    {
+        GameScreen.gameOver = true;
+    }
 }
