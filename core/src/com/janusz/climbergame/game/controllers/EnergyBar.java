@@ -14,7 +14,7 @@ import com.janusz.climbergame.game.entities.player.Player;
 
 public class EnergyBar extends Image
 {
-
+    private static EnergyBar eb = null;
     private final int starting_width = ClimberGame.WIDTH / 2 - 2*22;
     private final int starting_height = 65 - 24;
 
@@ -25,7 +25,14 @@ public class EnergyBar extends Image
 
     private Texture texture;
 
-    public EnergyBar()
+    public static EnergyBar get() {
+        if(eb == null) {
+            eb = new EnergyBar();
+        }
+        return eb;
+    }
+
+    private EnergyBar()
     {
         this.setSize(starting_width, starting_height);
         this.setOrigin(starting_width / 2 , starting_height / 2);
