@@ -12,71 +12,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AnvilController
+public class AnvilController extends AbstractController<Anvil>
 {
-
-    private List<Anvil> anvils;
-    private float anvilSpawnTime;
-
 
     public AnvilController()
     {
-        anvils = new ArrayList<Anvil>();
-        randomizeAnvilSpawnTime();
-
-
-        Timer.schedule(new Timer.Task(){
-                           @Override
-                           public void run()
-                           {
-                               spawnAnvil();
-                           }
-                       }
-                , 5       //    (delay)
-                , anvilSpawnTime
-        );
+        super(5);
     }
 
-    private void spawnAnvil()
+    @Override
+    protected void randomizeSpawnTime()
+    {
+        entitySpawnTime = MathUtils.random(4,6);
+    }
+
+    @Override
+    protected void spawnEntity()
     {
         int x = GameScreen.selectPlace(MathUtils.random(2,4));
         Anvil a = new Anvil(new Texture("anvil.png"), x, ClimberGame.HEIGHT, 80, 55, 500);
-        anvils.add(a);
+        entities.add(a);
         GameScreen.stage.addActor(a);
-        randomizeAnvilSpawnTime();
+        randomizeSpawnTime();
     }
-
-    private void randomizeAnvilSpawnTime()
-    {
-        anvilSpawnTime = MathUtils.random(6,12);
-    }
-
-    public void updateAllAnvils(float delta)
-    {
-
-        for (int i = 0 ; i < anvils.size() ; i++)
-        {
-            if (checkCollisionWithAnvil(i))
-            {
-                anvils.get(i).remove();
-                anvils.remove(i);
-                GameScreen.gameOver = true;
-                break;
-            }
-        }
-
-        for(Anvil a : anvils)
-        {
-            a.update(delta);
-        }
-    }
-
-    private boolean checkCollisionWithAnvil(int i)
-    {
-        return Intersector.overlaps(
-                anvils.get(i).getBounds(),
-                GameScreen.player.getBounds()
-        );
-    }
-
 }
