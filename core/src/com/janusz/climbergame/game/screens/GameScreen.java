@@ -28,7 +28,6 @@ public class GameScreen extends AbstractScreen
     private EntireWall ew;
     private AnvilController ac;
     private GameOverController goc;
-    private EnergyBar eb;
     private FrameEnergyBar feb;
 
     private JungleBackground background;
@@ -60,13 +59,12 @@ public class GameScreen extends AbstractScreen
         bc = new BananaController();
         ac = new AnvilController();
         goc = new GameOverController();
-        eb = new EnergyBar();
         feb = new FrameEnergyBar();
         background = new JungleBackground();
         trunk = new TrunkBackground();
 
         stage.addActor(feb);
-        stage.addActor(eb);
+        stage.addActor(EnergyBar.get());
         stage.addActor(background);
         stage.addActor(trunk);
 
@@ -115,13 +113,13 @@ public class GameScreen extends AbstractScreen
         stage.act();
         player.toFront();
         feb.toFront();
-        eb.toFront();
+        EnergyBar.get().toFront();
         movePlayer();
 
         ew.moveWallDown(delta);
         el.moveAllLianasDown(delta);
 
-        bc.updateAllBananas(delta,eb);
+        bc.updateEntities(delta);
         ac.updateEntities(delta);
         trunk.moveDown(delta);
 
