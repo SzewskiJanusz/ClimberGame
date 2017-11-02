@@ -3,8 +3,10 @@ package com.janusz.climbergame.game.controllers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Banana;
 import com.janusz.climbergame.game.screens.GameScreen;
 
@@ -12,72 +14,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BananaController
+public class BananaController extends AbstractController<Banana>
 {
-
-    private List<Banana> bananas;
-    private float bananaSpawnTime;
-
     public BananaController()
     {
-        bananas = new ArrayList<Banana>();
-        randomizeBananaSpawnTime();
-        Timer.schedule(new Timer.Task(){
-                           @Override
-                           public void run()
-                           {
-                               spawnBanana();
-                           }
-                       }
-                , 3       //    (delay)
-                , bananaSpawnTime
-        );
-
+        super(3);
     }
 
-    private void randomizeBananaSpawnTime()
+    @Override
+    protected void randomizeSpawnTime()
     {
-        bananaSpawnTime = MathUtils.random(3,7);
+        entitySpawnTime = MathUtils.random(3,7);
     }
 
-    public void updateAllBananas(float delta, EnergyBar eb)
-    {
-
-        for (int i = 0 ; i < bananas.size() ; i++)
-        {
-            if (checkCollisionWithBanana(i))
-            {
-                bananas.get(i).remove();
-                bananas.remove(i);
-                eb.addEnergy();
-                break;
-            }
-        }
-
-        for(Banana b : bananas)
-        {
-            b.update(delta);
-        }
-
-    }
-
-    private boolean checkCollisionWithBanana(int i)
-    {
-        boolean playerEatBanana = Intersector.overlaps(bananas.get(i).getBounds(),
-                GameScreen.player.getBounds());
-
-        return playerEatBanana;
-    }
-
-    private void spawnBanana()
+    @Override
+    protected void spawnEntity()
     {
         int x = GameScreen.selectPlace(MathUtils.random(1,4));
         Banana b = new Banana(new Texture("banana.png"), x, ClimberGame.HEIGHT, 45, 30, 215);
-        bananas.add(b);
+        entities.add(b);
         GameScreen.stage.addActor(b);
-        randomizeBananaSpawnTime();
+        randomizeSpawnTime();
     }
 
-
-
+    @Override
+    protected void triggerEffect()
+    {
+        EnergyBar.get().addEnergy();
+    }
 }
