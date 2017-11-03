@@ -14,7 +14,7 @@ public class Anvil extends AbstractItem
         super(text, starting_x, starting_y, width, height, velocity);
     }
 
-    protected void moveDown(float delta)
+    public void moveDown(float delta)
     {
         this.setY(this.getY() - velocity * delta);
     }

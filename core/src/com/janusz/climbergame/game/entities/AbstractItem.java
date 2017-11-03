@@ -16,7 +16,7 @@ public abstract class AbstractItem extends Image
     protected Rectangle bounds;
     protected int velocity;
 
-    protected abstract void moveDown(float delta);
+    public abstract void moveDown(float delta);
     protected abstract void doMovement(float delta);
 
     public AbstractItem(Texture text,int starting_x, int starting_y, int width, int height,int velocity)
