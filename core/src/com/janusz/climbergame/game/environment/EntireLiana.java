@@ -22,7 +22,18 @@ public class EntireLiana
     private List<LianaTile> second_wholeLiana;
     private List<LianaTile> third_wholeLiana;
 
-    public EntireLiana()
+    private static EntireLiana el;
+
+    public static EntireLiana get()
+    {
+        if (el == null)
+        {
+            el = new EntireLiana();
+        }
+        return el;
+    }
+
+    private EntireLiana()
     {
         first_wholeLiana = new ArrayList<LianaTile>();
         second_wholeLiana = new ArrayList<LianaTile>();
@@ -68,9 +79,9 @@ public class EntireLiana
 
     public void moveAllLianasDown(float delta)
     {
-        first_wholeLiana.get(0).moveLianaTile(delta);
-        second_wholeLiana.get(0).moveLianaTile(delta);
-        third_wholeLiana.get(0).moveLianaTile(delta);
+        first_wholeLiana.get(0).moveDown(delta);
+        second_wholeLiana.get(0).moveDown(delta);
+        third_wholeLiana.get(0).moveDown(delta);
 
         for (int i = 1 ; i < first_wholeLiana.size() ;i ++)
         {
@@ -112,6 +123,26 @@ public class EntireLiana
 
         third_wholeLiana.get(0).remove();
         third_wholeLiana.remove(0);
+    }
+
+    public LianaTile getLianaTileFromFirst(int i)
+    {
+        return first_wholeLiana.get(i);
+    }
+
+    public LianaTile getLianaTileFromSecond(int i)
+    {
+        return second_wholeLiana.get(i);
+    }
+
+    public LianaTile getLianaTileFromThird(int i)
+    {
+        return third_wholeLiana.get(i);
+    }
+
+    public int getSize()
+    {
+        return first_wholeLiana.size();
     }
 
 }
