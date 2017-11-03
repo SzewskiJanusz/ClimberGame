@@ -24,6 +24,7 @@ public class Player extends Actor
     public static final int STARTING_Y = 50;
 
     public static int place;
+    public static PlayerState playerState;
 
     private PlayerAnimation playerAnimation;
     // Rectangle for collision
@@ -35,7 +36,7 @@ public class Player extends Actor
     public Player()
     {
         playerAnimation = new PlayerAnimation();
-
+        playerState = PlayerState.CLIMBING_LIANA;
         this.setSize(WIDTH,HEIGHT);
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
         this.setPosition(STARTING_X, STARTING_Y);
@@ -80,6 +81,7 @@ public class Player extends Actor
             if (place == 1 && EnergyBar.actualEnergy <= 0)
                 return;
 
+            playerState = PlayerState.FLYING_LEFT;
             place--;
         }
     }
@@ -89,6 +91,7 @@ public class Player extends Actor
         if (place < 3)
         {
             place++;
+            playerState = PlayerState.FLYING_RIGHT;
         }
     }
 

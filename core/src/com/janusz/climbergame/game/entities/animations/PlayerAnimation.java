@@ -3,6 +3,7 @@ package com.janusz.climbergame.game.entities.animations;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
@@ -60,7 +61,7 @@ public class PlayerAnimation
 
     public TextureRegion getActualFrame(float time)
     {
-        switch (GameScreen.playerState)
+        switch (Player.playerState)
         {
             case CLIMBING_LIANA: return animation.getKeyFrame(time, true);
             case FLYING_LEFT: return flyingLeft;
