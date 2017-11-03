@@ -1,6 +1,8 @@
 package com.janusz.climbergame.game.screens;
 
 
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Vector2;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
@@ -21,10 +23,8 @@ public class GameScreen extends AbstractScreen
 
     public static Player player;
     public static boolean gameOver;
-    public static PlayerState playerState = PlayerState.CLIMBING_LIANA;
 
     private BananaController bc;
-    private EntireLiana el;
     private EntireWall ew;
     private AnvilController ac;
     private GameOverController goc;
@@ -32,6 +32,8 @@ public class GameScreen extends AbstractScreen
 
     private JungleBackground background;
     private TrunkBackground trunk;
+
+    private Vector2 velocity;
 
 
     public GameScreen(ClimberGame game)
@@ -53,8 +55,8 @@ public class GameScreen extends AbstractScreen
 
     protected void init()
     {
+        velocity = new Vector2(4, -4);
         initPlayer();
-        el = new EntireLiana();
         ew = new EntireWall();
         bc = new BananaController();
         ac = new AnvilController();
@@ -96,7 +98,43 @@ public class GameScreen extends AbstractScreen
     }
 
 
-    private void movePlayer()
+    private void movePlayer(float delta)
+    {
+        if (Player.playerState == PlayerState.FLYING_LEFT)
+        {
+            if (player.catchLiana())
+            {
+                Player.playerState = PlayerState.CLIMBING_LIANA;
+                setPlayerOnLiana();
+            }
+            else
+            {
+                velocity.y += delta * 10;
+
+                player.setX(player.getX() - velocity.x);
+                player.setY(player.getY() - velocity.y);
+            }
+
+        }
+        else if (Player.playerState == PlayerState.FLYING_RIGHT)
+        {
+            if (player.catchLiana())
+            {
+                Player.playerState = PlayerState.CLIMBING_LIANA;
+                setPlayerOnLiana();
+            }
+            else
+            {
+                velocity.y += delta * 10;
+
+                player.setX(player.getX() + velocity.x);
+                player.setY(player.getY() - velocity.y);
+            }
+
+        }
+    }
+
+    private void setPlayerOnLiana()
     {
         switch(player.place)
         {
@@ -106,6 +144,8 @@ public class GameScreen extends AbstractScreen
             case 3: player.setX(EntireLiana.third_liana_x - 16); break;
             default: throw new IllegalArgumentException("Error in player place. (" + player.place +")");
         }
+        player.setY(Player.STARTING_Y);
+        velocity.y = -4;
     }
 
     private void update(float delta)
@@ -114,10 +154,10 @@ public class GameScreen extends AbstractScreen
         player.toFront();
         feb.toFront();
         EnergyBar.get().toFront();
-        movePlayer();
+        movePlayer(delta);
 
         ew.moveWallDown(delta);
-        el.moveAllLianasDown(delta);
+        EntireLiana.get().moveAllLianasDown(delta);
 
         bc.updateEntities(delta);
         ac.updateEntities(delta);
