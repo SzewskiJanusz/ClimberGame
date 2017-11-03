@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.game.controllers.EnergyBar;
 import com.janusz.climbergame.game.entities.animations.PlayerAnimation;
+import com.janusz.climbergame.game.environment.EntireLiana;
 
 /**
  * Player class.
@@ -98,5 +100,38 @@ public class Player extends Actor
     public Rectangle getBounds()
     {
         return bounds;
+    }
+
+    public boolean catchLiana()
+    {
+        int lianaSize = EntireLiana.get().getSize();
+        for (int i = 0 ; i < lianaSize ; i++)
+        {
+            if (place == 1)
+            {
+                if (Intersector.overlaps(EntireLiana.get().getLianaTileFromFirst(i).getBounds(),bounds))
+                {
+                    return true;
+                }
+            }
+            else
+            if (place == 2)
+            {
+                if (Intersector.overlaps(EntireLiana.get().getLianaTileFromSecond(i).getBounds(),bounds))
+                {
+                    return true;
+                }
+            }
+            else
+            if (place == 3)
+            {
+                if (Intersector.overlaps(EntireLiana.get().getLianaTileFromThird(i).getBounds(),bounds))
+                {
+                    return true;
+                }
+            }
+
+        }
+        return false;
     }
 }
