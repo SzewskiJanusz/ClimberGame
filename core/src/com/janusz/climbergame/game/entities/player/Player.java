@@ -83,7 +83,15 @@ public class Player extends Actor
             if (place == 1 && EnergyBar.actualEnergy <= 0)
                 return;
 
-            playerState = PlayerState.FLYING_LEFT;
+            if (place == 1)
+            {
+                playerState = PlayerState.FLYING_WALL;
+            }
+            else
+            {
+                playerState = PlayerState.FLYING_LEFT;
+            }
+
             place--;
         }
     }
