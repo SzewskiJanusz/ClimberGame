@@ -132,6 +132,13 @@ public class GameScreen extends AbstractScreen
             }
 
         }
+        else if (Player.playerState == PlayerState.FLYING_WALL)
+        {
+            velocity.y += delta * 10;
+
+            player.setX(player.getX() - velocity.x);
+            player.setY(player.getY() - velocity.y);
+        }
     }
 
     private void setPlayerOnLiana()
