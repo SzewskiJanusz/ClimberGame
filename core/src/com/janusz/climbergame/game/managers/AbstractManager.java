@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.controllers;
+package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Janusz on 2017-11-02.
  */
 
-public abstract class AbstractController<T extends AbstractItem>
+public abstract class AbstractManager<T extends AbstractItem>
 {
 
     protected List<T> entities;
@@ -31,7 +31,7 @@ public abstract class AbstractController<T extends AbstractItem>
      * Initialize List and timer
      * @param delay - starting delay
      */
-    public AbstractController(int delay)
+    public AbstractManager(int delay)
     {
         entities = new ArrayList<T>();
         randomizeSpawnTime();

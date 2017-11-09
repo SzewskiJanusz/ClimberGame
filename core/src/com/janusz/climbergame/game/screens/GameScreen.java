@@ -1,16 +1,15 @@
 package com.janusz.climbergame.game.screens;
 
 
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
-import com.janusz.climbergame.game.controllers.AnvilController;
-import com.janusz.climbergame.game.controllers.BananaController;
-import com.janusz.climbergame.game.controllers.EnergyBar;
-import com.janusz.climbergame.game.controllers.FrameEnergyBar;
-import com.janusz.climbergame.game.controllers.GameOverController;
+import com.janusz.climbergame.game.managers.AnvilManager;
+import com.janusz.climbergame.game.managers.BananaManager;
+import com.janusz.climbergame.game.managers.EnergyBar;
+import com.janusz.climbergame.game.managers.FrameEnergyBar;
+import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.Wall;
 import com.janusz.climbergame.game.entities.player.PlayerState;
@@ -24,10 +23,10 @@ public class GameScreen extends AbstractScreen
     public static Player player;
     public static boolean gameOver;
 
-    private BananaController bc;
+    private BananaManager bc;
     private EntireWall ew;
-    private AnvilController ac;
-    private GameOverController goc;
+    private AnvilManager ac;
+    private GameOverManager goc;
     private FrameEnergyBar feb;
 
     private JungleBackground background;
@@ -58,9 +57,9 @@ public class GameScreen extends AbstractScreen
         velocity = new Vector2(4, -4);
         initPlayer();
         ew = new EntireWall();
-        bc = new BananaController();
-        ac = new AnvilController();
-        goc = new GameOverController();
+        bc = new BananaManager();
+        ac = new AnvilManager();
+        goc = new GameOverManager();
         feb = new FrameEnergyBar();
         background = new JungleBackground();
         trunk = new TrunkBackground();

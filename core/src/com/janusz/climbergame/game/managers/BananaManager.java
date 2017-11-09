@@ -1,22 +1,15 @@
-package com.janusz.climbergame.game.controllers;
+package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Banana;
 import com.janusz.climbergame.game.screens.GameScreen;
 
-import java.util.ArrayList;
-import java.util.List;
 
-
-public class BananaController extends AbstractController<Banana>
+public class BananaManager extends AbstractManager<Banana>
 {
-    public BananaController()
+    public BananaManager()
     {
         super(3);
     }

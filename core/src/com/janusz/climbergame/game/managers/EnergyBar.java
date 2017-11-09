@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.controllers;
+package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;

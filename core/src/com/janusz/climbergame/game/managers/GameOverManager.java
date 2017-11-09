@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.controllers;
+package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.janusz.climbergame.ClimberGame;
 
 
-public class GameOverController
+public class GameOverManager
 {
     private Label gameOverLabel;
     private Label yourFinalScoreTextLabel;
@@ -17,7 +17,7 @@ public class GameOverController
     private Button mainMenu;
     private Button tryAgain;
 
-    public GameOverController()
+    public GameOverManager()
     {
         createGameOverLabels();
     }

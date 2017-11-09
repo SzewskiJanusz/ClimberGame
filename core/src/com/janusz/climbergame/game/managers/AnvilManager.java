@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.controllers;
+package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
@@ -7,10 +7,10 @@ import com.janusz.climbergame.game.entities.Anvil;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 
-public class AnvilController extends AbstractController<Anvil>
+public class AnvilManager extends AbstractManager<Anvil>
 {
 
-    public AnvilController()
+    public AnvilManager()
     {
         super(5);
     }

@@ -56,37 +56,29 @@ public abstract class AbstractScreen implements Screen {
     }
 
     @Override
-    public void show()
-    {
+    public void show() {
 
     }
-
     @Override
     public void resume()
     {
         game.setPaused(false);
     }
-
     @Override
     public void pause()
     {
         game.setPaused(true);
     }
-
     @Override
     public void dispose()
     {
         game.dispose();
     }
-
-
-
     @Override
     public void resize(int width, int height)
     {
 
     }
-
     @Override
     public void hide()
     {
