@@ -13,6 +13,14 @@ import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.BackToMenuButton;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by Janusz on 2017-11-22.
@@ -27,43 +35,81 @@ public class TopScoreScreen extends AbstractScreen
 
     private BackToMenuButton btnBackToMenu;
 
+    private Table scoreTable;
+
+    private Label playerHeader;
+    private Label scoreHeader;
+
+    private Label[] lblPlayers;
+    private Label[] lblScores;
+
+    private Label.LabelStyle ls;
+
     public TopScoreScreen(ClimberGame game)
     {
         super(game);
+        fillTableWithHeaders();
+        List<String> scores = getScoresFromServer();
+        fillTableWithScores(scores);
     }
 
+    private void fillTableWithHeaders()
+    {
+        scoreTable.add(playerHeader);
+        scoreTable.add(scoreHeader).width(100);
+        scoreTable.row();
+    }
+
+    private void fillTableWithScores(List<String> scores)
+    {
+        for (int i = 0 ; i < scores.size() ; i++)
+        {
+            lblPlayers[i] = new Label(scores.get(i).split(":")[0], ls);
+            lblScores[i] = new Label(scores.get(i).split(":")[1], ls);
+            scoreTable.add(lblPlayers[i]);
+            scoreTable.add(lblScores[i]).width(100);
+            scoreTable.row();
+        }
+    }
 
     @Override
     protected void init()
     {
         initTitle();
-
+        initLabelStyle();
         initButtonStyle();
         initBackButton();
+        initTable();
 
-        Label.LabelStyle ls = new Label.LabelStyle();
+        initHeaderLabels();
+        initDataLabels();
+
+    }
+
+    private void initLabelStyle()
+    {
+        ls = new Label.LabelStyle();
         ls.font = new BitmapFont();
         ls.fontColor = Color.WHITE;
-        Label l = new Label("janusz", ls);
-        Label l1 = new Label("janusz1", ls);
-        Label l2 = new Label("janusz2", ls);
-        Label l3 = new Label("janusz3", ls);
+    }
 
-        l.setFontScale(2);
-        l1.setFontScale(2);
-        l2.setFontScale(2);
-        l3.setFontScale(2);
+    private void initDataLabels()
+    {
+        lblPlayers = new Label[10];
+        lblScores = new Label[10];
+    }
 
+    private void initHeaderLabels()
+    {
+        playerHeader = new Label("Player", ls);
+        scoreHeader = new Label("Score", ls);
+    }
 
-        Table table = new Table();
-        table.setFillParent(true);
-        table.add(l);
-        table.add(l1).width(100);
-        table.row();
-        table.add(l2);
-        table.add(l3).width(100);
-
-        stage.addActor(table);
+    private void initTable()
+    {
+        scoreTable = new Table();
+        scoreTable.setFillParent(true);
+        stage.addActor(scoreTable);
     }
 
     private void initTitle()
@@ -98,5 +144,60 @@ public class TopScoreScreen extends AbstractScreen
         stage.draw();
 
         spriteBatch.end();
+    }
+
+    public List<String> getScoresFromServer()
+    {
+        try {
+            final List<String> list = new ArrayList<String>();
+            final Socket s = createSocket("192.168.1.19");
+            PrintWriter out = new PrintWriter(s.getOutputStream());
+            out.println("getScore");
+            Thread readThr = new Thread(new Runnable() {
+                BufferedReader bufReader =
+                        new BufferedReader(new InputStreamReader(s.getInputStream()));
+                @Override
+                public void run() {
+                    String msg;
+                    try {
+                        for(int i=0; i<10; i++)
+                        {
+                            msg = bufReader.readLine();
+                            list.add(msg);
+                        }
+                        bufReader.close();
+                    } catch (IOException e) {
+
+                    }
+                }
+            });
+            readThr.start();
+            out.println("getScore");
+            out.flush();
+
+
+            while(readThr.isAlive())
+            {;}
+            out.close();
+            return list;
+        }
+        catch (IOException e) {
+        // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private Socket createSocket(String host){
+        Socket s;
+        try {
+            s = new Socket(host, 6940);
+
+            return s;
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
     }
 }
