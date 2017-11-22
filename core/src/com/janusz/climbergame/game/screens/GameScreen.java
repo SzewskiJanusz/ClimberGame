@@ -17,7 +17,7 @@ import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.environment.EntireWall;
 
 
-public class GameScreen extends AbstractScreen
+public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 {
 
     public static Player player;

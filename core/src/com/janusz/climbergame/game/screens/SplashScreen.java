@@ -1,6 +1,5 @@
 package com.janusz.climbergame.game.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.menu.Title;
@@ -11,7 +10,7 @@ import com.janusz.climbergame.menu.screens.MenuScreen;
  * First screen of the game. After 2 seconds is switched to MenuScreen.
  */
 
-public class SplashScreen extends AbstractScreen
+public class SplashScreen extends com.janusz.climbergame.shared.AbstractScreen
 {
 
     private Title title;

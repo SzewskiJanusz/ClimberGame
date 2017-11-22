@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.screens;
+package com.janusz.climbergame.shared;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;

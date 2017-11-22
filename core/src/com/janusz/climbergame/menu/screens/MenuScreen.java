@@ -15,7 +15,7 @@ import com.janusz.climbergame.menu.buttons.ExitButton;
 import com.janusz.climbergame.menu.buttons.OptionsButton;
 import com.janusz.climbergame.menu.buttons.StartGameButton;
 import com.janusz.climbergame.menu.buttons.TopScoresButton;
-import com.janusz.climbergame.game.screens.AbstractScreen;
+import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
