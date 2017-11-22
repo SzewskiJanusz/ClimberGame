@@ -81,6 +81,14 @@ public class MenuScreen extends AbstractScreen
     private void initTopScores()
     {
         topScores = new TopScoresButton("TOP SCORES", bs, 110);
+        topScores.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                Gdx.input.setInputProcessor(new EventHandler());
+                game.setScreen(new TopScoreScreen(game));
+            }
+        });
         stage.addActor(topScores);
     }
 
