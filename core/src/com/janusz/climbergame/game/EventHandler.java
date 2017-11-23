@@ -2,6 +2,7 @@ package com.janusz.climbergame.game;
 
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
+import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
@@ -13,18 +14,19 @@ public class EventHandler extends InputAdapter
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-
-        Vector2 actorScreenPos = translateLocalToStageCoordinates();
-
-        if (isFingerOnLeft(screenX, actorScreenPos.x))
+        if (GameScreen.player.playerState == PlayerState.CLIMBING_LIANA ||
+                GameScreen.player.playerState == PlayerState.CLIMBING_WALL)
         {
-            GameScreen.player.jumpLeft();
-        }
-        else
-        {
-            GameScreen.player.jumpRight();
-        }
+            Vector2 actorScreenPos = translateLocalToStageCoordinates();
 
+            if (isFingerOnLeft(screenX, actorScreenPos.x))
+            {
+                GameScreen.player.jumpLeft();
+            } else
+            {
+                GameScreen.player.jumpRight();
+            }
+        }
         return true;
     }
 
