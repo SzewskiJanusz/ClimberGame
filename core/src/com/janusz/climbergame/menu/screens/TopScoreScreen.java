@@ -11,18 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.game.EventHandler;
-import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.BackToMenuButton;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.util.ArrayList;
+import com.janusz.climbergame.shared.scoreclient.ServerConnection;
 import java.util.List;
 
 
@@ -58,7 +50,8 @@ public class TopScoreScreen extends AbstractScreen
         Gdx.input.setInputProcessor(stage);
 
         fillTableWithHeaders();
-        List<String> scores = getScoresFromServer();
+        ServerConnection sc = new ServerConnection();
+        List<String> scores = sc.getScoresFromServer();
         fillTableWithScores(scores);
     }
 
@@ -171,60 +164,5 @@ public class TopScoreScreen extends AbstractScreen
         stage.draw();
 
         spriteBatch.end();
-    }
-
-    public List<String> getScoresFromServer()
-    {
-        try {
-            final List<String> list = new ArrayList<String>();
-            final Socket s = createSocket("192.168.1.19");
-            PrintWriter out = new PrintWriter(s.getOutputStream());
-            out.println("getScore");
-            Thread readThr = new Thread(new Runnable() {
-                BufferedReader bufReader =
-                        new BufferedReader(new InputStreamReader(s.getInputStream()));
-                @Override
-                public void run() {
-                    String msg;
-                    try {
-                        for(int i=0; i<10; i++)
-                        {
-                            msg = bufReader.readLine();
-                            list.add(msg);
-                        }
-                        bufReader.close();
-                    } catch (IOException e) {
-
-                    }
-                }
-            });
-            readThr.start();
-            out.println("getScore");
-            out.flush();
-
-
-            while(readThr.isAlive())
-            {;}
-            out.close();
-            return list;
-        }
-        catch (IOException e) {
-        // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private Socket createSocket(String host){
-        Socket s;
-        try {
-            s = new Socket(host, 6940);
-
-            return s;
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
     }
 }
