@@ -25,7 +25,7 @@ public class Player extends Actor
     public static PlayerState playerState;
 
     private PlayerAnimation playerAnimation;
-    // Rectangle for collision
+
     private Rectangle bounds;
     private float time;
     private TextureRegion currentFrame;
@@ -111,30 +111,16 @@ public class Player extends Actor
         int lianaSize = EntireLiana.get().getSize();
         for (int i = 0 ; i < lianaSize ; i++)
         {
-            if (place == 1)
+            switch(place)
             {
-                if (Intersector.overlaps(EntireLiana.get().getLianaTileFromFirst(i).getBounds(),bounds))
-                {
-                    return true;
-                }
+                case 1: return Intersector.overlaps(EntireLiana.get().
+                        getLianaTileFromFirst(i).getBounds(),bounds);
+                case 2: return Intersector.overlaps(EntireLiana.get().
+                        getLianaTileFromSecond(i).getBounds(),bounds);
+                case 3: return Intersector.overlaps(EntireLiana.get().
+                        getLianaTileFromThird(i).getBounds(),bounds);
+                default: return false;
             }
-            else
-            if (place == 2)
-            {
-                if (Intersector.overlaps(EntireLiana.get().getLianaTileFromSecond(i).getBounds(),bounds))
-                {
-                    return true;
-                }
-            }
-            else
-            if (place == 3)
-            {
-                if (Intersector.overlaps(EntireLiana.get().getLianaTileFromThird(i).getBounds(),bounds))
-                {
-                    return true;
-                }
-            }
-
         }
         return false;
     }
