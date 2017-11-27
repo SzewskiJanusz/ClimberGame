@@ -13,7 +13,7 @@ import com.janusz.climbergame.game.environment.EntireLiana;
  * Player class.
  */
 
-public class Player extends Actor
+public class Player extends Actor implements IPlayer
 {
     public static final int WIDTH = 80;
     public static final int HEIGHT = 110;
@@ -79,15 +79,7 @@ public class Player extends Actor
             if (place == 1 && EnergyBar.actualEnergy <= 0)
                 return;
 
-            if (place == 1)
-            {
-                playerState = PlayerState.FLYING_WALL;
-            }
-            else
-            {
-                playerState = PlayerState.FLYING_LEFT;
-            }
-
+            playerState = place == 1 ? PlayerState.FLYING_WALL : PlayerState.FLYING_LEFT;
             place--;
         }
     }
