@@ -40,18 +40,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         super(game);
     }
 
-    public static int selectPlace(int place)
-    {
-        switch (place)
-        {
-            case 1: return Wall.WIDTH;
-            case 2: return EntireLiana.first_liana_x;
-            case 3: return EntireLiana.second_liana_x;
-            case 4: return EntireLiana.third_liana_x;
-            default: return 0;
-        }
-    }
-
     protected void init()
     {
         velocity = new Vector2(4, -4);

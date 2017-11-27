@@ -24,7 +24,7 @@ public class AnvilManager extends AbstractManager<Anvil>
     @Override
     protected void spawnEntity()
     {
-        int x = GameScreen.selectPlace(MathUtils.random(2,4));
+        int x = selectPlace(MathUtils.random(2,4));
         Anvil a = new Anvil(new Texture("anvil.png"), x, ClimberGame.HEIGHT, 80, 55, 500);
         entities.add(a);
         GameScreen.stage.addActor(a);

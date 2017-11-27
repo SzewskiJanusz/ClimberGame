@@ -23,7 +23,7 @@ public class BananaManager extends AbstractManager<Banana>
     @Override
     protected void spawnEntity()
     {
-        int x = GameScreen.selectPlace(MathUtils.random(1,4));
+        int x = selectPlace(MathUtils.random(1,4));
         Banana b = new Banana(new Texture("banana.png"), x, ClimberGame.HEIGHT, 45, 30, 215);
         entities.add(b);
         GameScreen.stage.addActor(b);

@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Anvil;
+import com.janusz.climbergame.game.entities.Wall;
+import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 import java.util.ArrayList;
@@ -75,6 +77,18 @@ public abstract class AbstractManager<T extends AbstractItem>
                 entities.get(i).getBounds(),
                 GameScreen.player.getBounds()
         );
+    }
+
+    protected int selectPlace(int place)
+    {
+        switch (place)
+        {
+            case 1: return Wall.WIDTH;
+            case 2: return EntireLiana.first_liana_x;
+            case 3: return EntireLiana.second_liana_x;
+            case 4: return EntireLiana.third_liana_x;
+            default: return 0;
+        }
     }
 
 }
