@@ -16,21 +16,11 @@ public class ScoreLabel extends Label
     private final int STARTING_X = 450;
     private final int STARTING_Y = ClimberGame.HEIGHT - 65;
 
-
     public ScoreLabel(CharSequence text, LabelStyle style)
     {
         super(text, style);
-        this.setStyle(getDefaultLabelStyle());
         this.setFontScale(1);
         this.setX(STARTING_X);
         this.setY(STARTING_Y);
-    }
-
-    private Label.LabelStyle getDefaultLabelStyle()
-    {
-        Label.LabelStyle ls = new Label.LabelStyle();
-        ls.font = new BitmapFont();
-        ls.fontColor = Color.WHITE;
-        return ls;
     }
 }
