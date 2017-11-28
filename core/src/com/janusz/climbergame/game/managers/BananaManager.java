@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.entities.Banana;
 import com.janusz.climbergame.game.managers.energy.EnergyManager;
+import com.janusz.climbergame.game.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 
@@ -35,5 +36,6 @@ public class BananaManager extends AbstractManager<Banana>
     protected void triggerEffect()
     {
         EnergyManager.getInstance().energyBar.addEnergy();
+        ScoreManager.getInstance().ScoreLogic.addToScore(500);
     }
 }
