@@ -14,7 +14,8 @@ public class EnergyManager
 
     public static EnergyManager getInstance()
     {
-        if(energyManager == null) {
+        if (energyManager == null)
+        {
             energyManager = new EnergyManager();
         }
         return energyManager;

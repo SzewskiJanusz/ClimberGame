@@ -27,7 +27,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private EntireWall entireWall;
     private AnvilManager anvilMgr;
     private GameOverManager gameOverMgr;
-    private ScoreManager scoreManager;
     private JungleBackground background;
     private TrunkBackground trunk;
 
@@ -49,13 +48,12 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         gameOverMgr = new GameOverManager();
         background = new JungleBackground();
         trunk = new TrunkBackground();
-        scoreManager = new ScoreManager();
 
         stage.addActor(EnergyManager.getInstance().frameEnergyBar);
         stage.addActor(EnergyManager.getInstance().energyBar);
         stage.addActor(background);
         stage.addActor(trunk);
-        stage.addActor(scoreManager.ScoreLabel);
+        stage.addActor(ScoreManager.getInstance().ScoreLabel);
 
         // Set background to back
         trunk.toBack();
@@ -145,6 +143,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private void update(float delta)
     {
         stage.act();
+        ScoreManager.getInstance().update();
         player.toFront();
         EnergyManager.getInstance().frameEnergyBar.toFront();
         EnergyManager.getInstance().energyBar.toFront();
