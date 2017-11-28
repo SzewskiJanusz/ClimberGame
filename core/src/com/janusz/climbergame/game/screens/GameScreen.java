@@ -15,6 +15,7 @@ import com.janusz.climbergame.game.entities.Wall;
 import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.environment.EntireWall;
+import com.janusz.climbergame.game.score.ScoreManager;
 
 
 public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
@@ -23,11 +24,11 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public static Player player;
     public static boolean gameOver;
 
-    private BananaManager bc;
-    private EntireWall ew;
-    private AnvilManager ac;
-    private GameOverManager goc;
-    private FrameEnergyBar feb;
+    private BananaManager bananaMgr;
+    private EntireWall entireWall;
+    private AnvilManager anvilMgr;
+    private GameOverManager gameOverMgr;
+    private FrameEnergyBar frameEnergyBar;
 
     private JungleBackground background;
     private TrunkBackground trunk;
@@ -44,15 +45,15 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         velocity = new Vector2(4, -4);
         initPlayer();
-        ew = new EntireWall();
-        bc = new BananaManager();
-        ac = new AnvilManager();
-        goc = new GameOverManager();
-        feb = new FrameEnergyBar();
+        entireWall = new EntireWall();
+        bananaMgr = new BananaManager();
+        anvilMgr = new AnvilManager();
+        gameOverMgr = new GameOverManager();
+        frameEnergyBar = new FrameEnergyBar();
         background = new JungleBackground();
         trunk = new TrunkBackground();
 
-        stage.addActor(feb);
+        stage.addActor(frameEnergyBar);
         stage.addActor(EnergyBar.get());
         stage.addActor(background);
         stage.addActor(trunk);
@@ -146,15 +147,15 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         stage.act();
         player.toFront();
-        feb.toFront();
+        frameEnergyBar.toFront();
         EnergyBar.get().toFront();
         movePlayer(delta);
 
-        ew.moveWallDown(delta);
+        entireWall.moveWallDown(delta);
         EntireLiana.get().moveAllLianasDown(delta);
 
-        bc.updateEntities(delta);
-        ac.updateEntities(delta);
+        bananaMgr.updateEntities(delta);
+        anvilMgr.updateEntities(delta);
         trunk.moveDown(delta);
 
         checkIfGameOver();
@@ -165,11 +166,11 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         if (gameOver)
         {
-            stage.addActor(goc.getGameOverLabel());
-            stage.addActor(goc.getYourFinalScoreTextLabel());
-            stage.addActor(goc.getYourFinalScoreLabel());
-            stage.addActor(goc.getYourBestScoreTextLabel());
-            stage.addActor(goc.getYourBestScoreLabel());
+            stage.addActor(gameOverMgr.getGameOverLabel());
+            stage.addActor(gameOverMgr.getYourFinalScoreTextLabel());
+            stage.addActor(gameOverMgr.getYourFinalScoreLabel());
+            stage.addActor(gameOverMgr.getYourBestScoreTextLabel());
+            stage.addActor(gameOverMgr.getYourBestScoreLabel());
         }
     }
 
