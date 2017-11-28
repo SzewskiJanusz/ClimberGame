@@ -7,8 +7,7 @@ import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
 import com.janusz.climbergame.game.managers.AnvilManager;
 import com.janusz.climbergame.game.managers.BananaManager;
-import com.janusz.climbergame.game.managers.EnergyBar;
-import com.janusz.climbergame.game.managers.FrameEnergyBar;
+import com.janusz.climbergame.game.managers.energy.EnergyManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.Wall;
@@ -28,8 +27,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private EntireWall entireWall;
     private AnvilManager anvilMgr;
     private GameOverManager gameOverMgr;
-    private FrameEnergyBar frameEnergyBar;
-
+    private ScoreManager scoreManager;
     private JungleBackground background;
     private TrunkBackground trunk;
 
@@ -49,14 +47,15 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         bananaMgr = new BananaManager();
         anvilMgr = new AnvilManager();
         gameOverMgr = new GameOverManager();
-        frameEnergyBar = new FrameEnergyBar();
         background = new JungleBackground();
         trunk = new TrunkBackground();
+        scoreManager = new ScoreManager();
 
-        stage.addActor(frameEnergyBar);
-        stage.addActor(EnergyBar.get());
+        stage.addActor(EnergyManager.getInstance().frameEnergyBar);
+        stage.addActor(EnergyManager.getInstance().energyBar);
         stage.addActor(background);
         stage.addActor(trunk);
+        stage.addActor(scoreManager.ScoreLabel);
 
         // Set background to back
         trunk.toBack();
@@ -147,8 +146,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         stage.act();
         player.toFront();
-        frameEnergyBar.toFront();
-        EnergyBar.get().toFront();
+        EnergyManager.getInstance().frameEnergyBar.toFront();
+        EnergyManager.getInstance().energyBar.toFront();
         movePlayer(delta);
 
         entireWall.moveWallDown(delta);
