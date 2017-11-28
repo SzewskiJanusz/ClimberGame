@@ -23,6 +23,9 @@ public abstract class AbstractScreen implements Screen {
 
     private OrthographicCamera camera;
 
+    /**
+     * Initialization of every object in screen
+     */
     protected abstract void init();
 
     public AbstractScreen(ClimberGame game)
@@ -78,8 +81,7 @@ public abstract class AbstractScreen implements Screen {
     public void resize(int width, int height)
     {
 
-    }
-    @Override
+    }@Override
     public void hide()
     {
 

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.janusz.climbergame.game.managers.EnergyBar;
+import com.janusz.climbergame.game.managers.energy.EnergyBar;
 import com.janusz.climbergame.game.entities.animations.PlayerAnimation;
 import com.janusz.climbergame.game.environment.EntireLiana;
 
