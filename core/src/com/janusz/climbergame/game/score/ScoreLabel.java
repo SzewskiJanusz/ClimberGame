@@ -16,11 +16,25 @@ public class ScoreLabel extends Label
     private final int STARTING_X = 450;
     private final int STARTING_Y = ClimberGame.HEIGHT - 65;
 
+    private int points;
+
     public ScoreLabel(CharSequence text, LabelStyle style)
     {
         super(text, style);
-        this.setFontScale(1);
+        this.setFontScale(3,4);
         this.setX(STARTING_X);
         this.setY(STARTING_Y);
+    }
+
+    public void setPoints(int points)
+    {
+        this.points = points;
+    }
+
+    @Override
+    public void act(float delta)
+    {
+        super.act(delta);
+        this.setText(String.valueOf(points));
     }
 }
