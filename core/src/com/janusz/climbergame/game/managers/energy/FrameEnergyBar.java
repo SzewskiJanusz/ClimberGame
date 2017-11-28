@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.managers;
+package com.janusz.climbergame.game.managers.energy;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -14,10 +14,10 @@ import com.janusz.climbergame.ClimberGame;
 
 public class FrameEnergyBar extends Image
 {
-    private final int width = ClimberGame.WIDTH / 2;
+    private final int width = ClimberGame.WIDTH / 3;
     private final int height = 65;
 
-    private final int x = ClimberGame.WIDTH / 3 ;
+    private final int x = 0 ;
     private final int y = ClimberGame.HEIGHT - height;
 
     private Texture texture;

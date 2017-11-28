@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.managers;
+package com.janusz.climbergame.game.managers.energy;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -14,25 +14,18 @@ import com.janusz.climbergame.game.entities.player.Player;
 
 public class EnergyBar extends Image
 {
-    private static EnergyBar eb = null;
-    private final int starting_width = ClimberGame.WIDTH / 2 - 2*22;
-    private final int starting_height = 65 - 24;
+    private final int starting_width = ClimberGame.WIDTH / 3 - 2*22;
+    private final int starting_height = 41;
 
-    private final int starting_x = ClimberGame.WIDTH / 3 + 22;
-    private final int starting_y = ClimberGame.HEIGHT - starting_height - 10 - 5;
+    private final int starting_x = 22;
+    private final int starting_y = ClimberGame.HEIGHT - starting_height - 15;
 
     public static int actualEnergy;
 
     private Texture texture;
 
-    public static EnergyBar get() {
-        if(eb == null) {
-            eb = new EnergyBar();
-        }
-        return eb;
-    }
 
-    private EnergyBar()
+    public EnergyBar()
     {
         this.setSize(starting_width, starting_height);
         this.setOrigin(starting_width / 2 , starting_height / 2);
@@ -56,7 +49,7 @@ public class EnergyBar extends Image
 
         if (Player.place == 0)
         {
-            actualEnergy -= (int)(starting_width * 0.005);
+            actualEnergy -= (int)(starting_width * 0.01);
         }
 
         if (actualEnergy <= 0 && Player.place == 0)
