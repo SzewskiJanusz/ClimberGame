@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.score;
+package com.janusz.climbergame.game.managers.score;
 
 /**
  * Created by Janusz on 2017-11-28.

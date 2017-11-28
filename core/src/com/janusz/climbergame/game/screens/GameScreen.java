@@ -14,7 +14,7 @@ import com.janusz.climbergame.game.entities.Wall;
 import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.environment.EntireWall;
-import com.janusz.climbergame.game.score.ScoreManager;
+import com.janusz.climbergame.game.managers.score.ScoreManager;
 
 
 public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen

@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.score;
+package com.janusz.climbergame.game.managers.score;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

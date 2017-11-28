@@ -1,9 +1,8 @@
-package com.janusz.climbergame.game.score;
+package com.janusz.climbergame.game.managers.score;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.janusz.climbergame.game.managers.energy.EnergyManager;
 
 /**
  * Created by Janusz on 2017-11-28.
@@ -11,7 +10,7 @@ import com.janusz.climbergame.game.managers.energy.EnergyManager;
 
 public class ScoreManager
 {
-    public ScoreLabel ScoreLabel;
+    public com.janusz.climbergame.game.managers.score.ScoreLabel ScoreLabel;
     public ScoreLogic ScoreLogic;
 
     // Singleton

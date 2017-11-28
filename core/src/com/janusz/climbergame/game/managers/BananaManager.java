@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.entities.Banana;
 import com.janusz.climbergame.game.managers.energy.EnergyManager;
-import com.janusz.climbergame.game.score.ScoreManager;
+import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 
