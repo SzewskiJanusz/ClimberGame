@@ -16,7 +16,6 @@ public abstract class AbstractItem extends Image
     protected Rectangle bounds;
     protected int velocity;
 
-    public abstract void moveDown(float delta);
     protected abstract void doMovement(float delta);
 
     public AbstractItem(Texture text,int starting_x, int starting_y, int width, int height,int velocity)
@@ -35,6 +34,11 @@ public abstract class AbstractItem extends Image
     {
         this.setPosition(getX(), y);
         bounds.y = y;
+    }
+
+    public void moveDown(float delta)
+    {
+        this.setY(this.getY() - velocity * delta);
     }
 
     public void update(float delta)

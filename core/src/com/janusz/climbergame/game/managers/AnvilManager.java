@@ -25,7 +25,7 @@ public class AnvilManager extends AbstractManager<Anvil>
     protected void spawnEntity()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Anvil a = new Anvil(new Texture("anvil.png"), x, ClimberGame.HEIGHT, 80, 55, 500);
+        Anvil a = new Anvil(new Texture("anvil.png"), x, ClimberGame.HEIGHT, 80, 55, 300);
         entities.add(a);
         GameScreen.stage.addActor(a);
         randomizeSpawnTime();
