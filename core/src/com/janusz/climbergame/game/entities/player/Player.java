@@ -26,6 +26,7 @@ public class Player extends Actor implements IPlayer
     public static int place;
     // PlayerState ENUM. Used for determine actual activity of player
     public static PlayerState playerState;
+    public static boolean drunk;
 
     // Animation class
     private PlayerAnimation playerAnimation;
@@ -33,6 +34,7 @@ public class Player extends Actor implements IPlayer
     private Rectangle bounds;
     // Animation counter
     private float time;
+    private float drunkTime;
     private TextureRegion currentFrame;
     private Vector2 velocity;
 
@@ -53,6 +55,16 @@ public class Player extends Actor implements IPlayer
     {
         time += delta;
         currentFrame = playerAnimation.getActualFrame(time);
+
+        if (drunk)
+        {
+            if (drunkTime >= 5)
+            {
+                drunkTime = 0;
+                drunk = false;
+            }
+            drunkTime += delta;
+        }
     }
 
     @Override
@@ -154,6 +166,7 @@ public class Player extends Actor implements IPlayer
         }
         return false;
     }
+
     private void setPlayerOnLiana()
     {
         switch(Player.place)

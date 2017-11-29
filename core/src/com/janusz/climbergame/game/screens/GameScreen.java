@@ -3,8 +3,10 @@ package com.janusz.climbergame.game.screens;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
+import com.janusz.climbergame.game.entities.Tequila;
 import com.janusz.climbergame.game.managers.AnvilManager;
 import com.janusz.climbergame.game.managers.BananaManager;
+import com.janusz.climbergame.game.managers.TequilaManager;
 import com.janusz.climbergame.game.managers.energy.EnergyManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.entities.player.Player;
@@ -22,6 +24,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private BananaManager bananaMgr;
     private EntireWall entireWall;
     private AnvilManager anvilMgr;
+    private TequilaManager tequilaMgr;
     private GameOverManager gameOverMgr;
     private JungleBackground background;
     private TrunkBackground trunk;
@@ -50,6 +53,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         gameOverMgr = new GameOverManager();
         background = new JungleBackground();
         trunk = new TrunkBackground();
+        tequilaMgr = new TequilaManager();
 
         stage.addActor(ScoreManager.getInstance().ScoreLabel);
         stage.addActor(EnergyManager.getInstance().frameEnergyBar);
@@ -88,6 +92,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
         bananaMgr.updateEntities(delta);
         anvilMgr.updateEntities(delta);
+        tequilaMgr.updateEntities(delta);
         trunk.moveDown(delta);
 
         checkIfGameOver();
