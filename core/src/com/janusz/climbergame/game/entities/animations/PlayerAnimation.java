@@ -61,6 +61,11 @@ public class PlayerAnimation
         flyingWall = new TextureRegion(new Texture("wall_flying.png"));
     }
 
+    /**
+     * Gets current frame based on time
+     * @param time -
+     * @return
+     */
     public TextureRegion getActualFrame(float time)
     {
         switch (Player.playerState)

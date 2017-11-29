@@ -24,11 +24,14 @@ public class Player extends Actor implements IPlayer
     public static final int STARTING_Y = 50;
 
     public static int place;
+    // PlayerState ENUM. Used for determine actual activity of player
     public static PlayerState playerState;
 
+    // Animation class
     private PlayerAnimation playerAnimation;
 
     private Rectangle bounds;
+    // Animation counter
     private float time;
     private TextureRegion currentFrame;
     private Vector2 velocity;
@@ -56,7 +59,7 @@ public class Player extends Actor implements IPlayer
     public void draw(Batch batch, float parentAlpha)
     {
         super.draw(batch, parentAlpha);
-        batch.draw(currentFrame,getX(), getY(), WIDTH, HEIGHT);
+        batch.draw(currentFrame, getX(), getY(), WIDTH, HEIGHT);
     }
 
     // Override for easier changing coordinates of actor and bounds
