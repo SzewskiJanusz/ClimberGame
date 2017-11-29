@@ -1,7 +1,5 @@
 package com.janusz.climbergame.game.screens;
 
-
-import com.badlogic.gdx.math.Vector2;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
@@ -10,8 +8,6 @@ import com.janusz.climbergame.game.managers.BananaManager;
 import com.janusz.climbergame.game.managers.energy.EnergyManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.entities.player.Player;
-import com.janusz.climbergame.game.entities.Wall;
-import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.environment.EntireWall;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
@@ -30,7 +26,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private JungleBackground background;
     private TrunkBackground trunk;
 
-    private Vector2 velocity;
+
 
 
     public GameScreen(ClimberGame game)
@@ -40,7 +36,13 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
     protected void init()
     {
-        velocity = new Vector2(4, -4);
+        background = new JungleBackground();
+        trunk = new TrunkBackground();
+
+        stage.addActor(background);
+        stage.addActor(trunk);
+
+
         initPlayer();
         entireWall = new EntireWall();
         bananaMgr = new BananaManager();
@@ -49,16 +51,9 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         background = new JungleBackground();
         trunk = new TrunkBackground();
 
+        stage.addActor(ScoreManager.getInstance().ScoreLabel);
         stage.addActor(EnergyManager.getInstance().frameEnergyBar);
         stage.addActor(EnergyManager.getInstance().energyBar);
-        stage.addActor(background);
-        stage.addActor(trunk);
-        stage.addActor(ScoreManager.getInstance().ScoreLabel);
-
-        // Set background to back
-        trunk.toBack();
-        background.toBack();
-
     }
 
     private void initPlayer()
@@ -75,69 +70,10 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             super.render(delta);
             update(delta);
 
-
             spriteBatch.begin();
             stage.draw();
             spriteBatch.end();
         }
-    }
-
-
-    private void movePlayer(float delta)
-    {
-        if (Player.playerState == PlayerState.FLYING_LEFT)
-        {
-            if (player.catchLiana())
-            {
-                Player.playerState = PlayerState.CLIMBING_LIANA;
-                setPlayerOnLiana();
-            }
-            else
-            {
-                velocity.y += delta * 10;
-
-                player.setX(player.getX() - velocity.x);
-                player.setY(player.getY() - velocity.y);
-            }
-
-        }
-        else if (Player.playerState == PlayerState.FLYING_RIGHT)
-        {
-            if (player.catchLiana())
-            {
-                Player.playerState = PlayerState.CLIMBING_LIANA;
-                setPlayerOnLiana();
-            }
-            else
-            {
-                velocity.y += delta * 10;
-
-                player.setX(player.getX() + velocity.x);
-                player.setY(player.getY() - velocity.y);
-            }
-
-        }
-        else if (Player.playerState == PlayerState.FLYING_WALL)
-        {
-            velocity.y += delta * 10;
-
-            player.setX(player.getX() - velocity.x);
-            player.setY(player.getY() - velocity.y);
-        }
-    }
-
-    private void setPlayerOnLiana()
-    {
-        switch(player.place)
-        {
-            case 0: player.setX(Wall.WIDTH); break;
-            case 1: player.setX(EntireLiana.first_liana_x - 16); break;
-            case 2: player.setX(EntireLiana.second_liana_x - 16); break;
-            case 3: player.setX(EntireLiana.third_liana_x - 16); break;
-            default: throw new IllegalArgumentException("Error in player place. (" + player.place +")");
-        }
-        player.setY(Player.STARTING_Y);
-        velocity.y = -4;
     }
 
     private void update(float delta)
@@ -145,9 +81,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stage.act();
         ScoreManager.getInstance().update();
         player.toFront();
-        EnergyManager.getInstance().frameEnergyBar.toFront();
-        EnergyManager.getInstance().energyBar.toFront();
-        movePlayer(delta);
+        player.movePlayer(delta);
 
         entireWall.moveWallDown(delta);
         EntireLiana.get().moveAllLianasDown(delta);

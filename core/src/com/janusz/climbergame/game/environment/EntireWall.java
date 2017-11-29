@@ -1,6 +1,7 @@
 package com.janusz.climbergame.game.environment;
 
 import com.janusz.climbergame.game.entities.Wall;
+import com.janusz.climbergame.game.managers.energy.EnergyManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class EntireWall
         // Starter wall. Spawns on entire height of screen
         Wall w = new Wall(true);
         walls.add(w);
-        GameScreen.stage.addActor(w);
+        GameScreen.stage.addActor(walls.get(0));
     }
 
     public void moveWallDown(float delta)
@@ -50,6 +51,8 @@ public class EntireWall
         if (walls.get(lastWall).getY() <= Wall.STARTING_Y )
         {
             createNewWall();
+            EnergyManager.getInstance().frameEnergyBar.toFront();
+            EnergyManager.getInstance().energyBar.toFront();
         }
     }
 

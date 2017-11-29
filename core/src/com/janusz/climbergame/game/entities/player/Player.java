@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.janusz.climbergame.game.entities.Wall;
 import com.janusz.climbergame.game.managers.energy.EnergyBar;
 import com.janusz.climbergame.game.entities.animations.PlayerAnimation;
 import com.janusz.climbergame.game.environment.EntireLiana;
@@ -29,6 +31,7 @@ public class Player extends Actor implements IPlayer
     private Rectangle bounds;
     private float time;
     private TextureRegion currentFrame;
+    private Vector2 velocity;
 
 
     public Player()
@@ -38,7 +41,7 @@ public class Player extends Actor implements IPlayer
         this.setSize(WIDTH,HEIGHT);
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
         this.setPosition(STARTING_X, STARTING_Y);
-
+        velocity = new Vector2(10, -4);
         place = 2;
     }
 
@@ -93,6 +96,37 @@ public class Player extends Actor implements IPlayer
         }
     }
 
+    public void movePlayer(float delta)
+    {
+        if (playerState != PlayerState.CLIMBING_LIANA)
+            setState(delta);
+
+        if (Player.playerState == PlayerState.FLYING_WALL)
+        {
+            velocity.y += delta * 10;
+
+            setX(getX() - velocity.x);
+            setY(getY() - velocity.y);
+        }
+    }
+
+    private void setState(float delta)
+    {
+        if (catchLiana())
+        {
+            playerState = PlayerState.CLIMBING_LIANA;
+            setPlayerOnLiana();
+        }
+        else
+        {
+            velocity.y += delta * 10;
+            int sign = (playerState == PlayerState.FLYING_RIGHT ? 1 : -1);
+
+            setX(getX() + sign*velocity.x);
+            setY(getY() - velocity.y);
+        }
+    }
+
     public Rectangle getBounds()
     {
         return bounds;
@@ -101,7 +135,8 @@ public class Player extends Actor implements IPlayer
     public boolean catchLiana()
     {
         int lianaSize = EntireLiana.get().getSize();
-        for (int i = 0 ; i < lianaSize ; i++)
+        // Check only 3 last liana tiles
+        for (int i = lianaSize - 3 ; i < lianaSize ; i++)
         {
             switch(place)
             {
@@ -116,4 +151,18 @@ public class Player extends Actor implements IPlayer
         }
         return false;
     }
+    private void setPlayerOnLiana()
+    {
+        switch(Player.place)
+        {
+            case 0: setX(Wall.WIDTH); break;
+            case 1: setX(EntireLiana.first_liana_x - 16); break;
+            case 2: setX(EntireLiana.second_liana_x - 16); break;
+            case 3: setX(EntireLiana.third_liana_x - 16); break;
+            default: throw new IllegalArgumentException("Error in player place. (" + place +")");
+        }
+        setY(Player.STARTING_Y);
+        velocity.y = -4;
+    }
+
 }
