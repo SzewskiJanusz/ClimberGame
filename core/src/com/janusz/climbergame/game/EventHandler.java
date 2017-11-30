@@ -23,16 +23,16 @@ public class EventHandler extends InputAdapter
             if (isFingerOnLeft(screenX, actorScreenPos.x))
             {
                 if (!Player.drunk)
-                    GameScreen.player.jumpLeft();
+                    Player.instance().jumpLeft();
                 else
-                    GameScreen.player.jumpRight();
+                    Player.instance().jumpRight();
             }
             else
             {
                 if (!Player.drunk)
-                    GameScreen.player.jumpRight();
+                    Player.instance().jumpRight();
                 else
-                    GameScreen.player.jumpLeft();
+                    Player.instance().jumpLeft();
             }
         }
         return true;
@@ -40,8 +40,8 @@ public class EventHandler extends InputAdapter
 
     private Vector2 translateLocalToStageCoordinates()
     {
-        Vector2 actorStagePos = GameScreen.player.localToStageCoordinates(new Vector2(GameScreen.player.getWidth() / 2,0));
-        return GameScreen.player.getStage().stageToScreenCoordinates(actorStagePos);
+        Vector2 actorStagePos = Player.instance().localToStageCoordinates(new Vector2(Player.instance().getWidth() / 2,0));
+        return Player.instance().getStage().stageToScreenCoordinates(actorStagePos);
     }
 
     private boolean isFingerOnLeft(int screenX, float playerOnScreenX)

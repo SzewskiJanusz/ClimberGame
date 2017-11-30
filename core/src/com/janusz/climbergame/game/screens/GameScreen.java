@@ -17,8 +17,6 @@ import com.janusz.climbergame.game.managers.score.ScoreManager;
 
 public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 {
-
-    public static Player player;
     public static boolean gameOver;
 
     private BananaManager bananaMgr;
@@ -46,7 +44,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stage.addActor(trunk);
 
 
-        initPlayer();
+        stage.addActor(Player.instance());
         entireWall = new EntireWall();
         bananaMgr = new BananaManager();
         anvilMgr = new AnvilManager();
@@ -58,12 +56,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stage.addActor(ScoreManager.getInstance().ScoreLabel);
         stage.addActor(EnergyManager.getInstance().frameEnergyBar);
         stage.addActor(EnergyManager.getInstance().energyBar);
-    }
-
-    private void initPlayer()
-    {
-        player = new Player();
-        stage.addActor(player);
     }
 
     @Override
@@ -84,8 +76,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         stage.act();
         ScoreManager.getInstance().update();
-        player.toFront();
-        player.movePlayer(delta);
+        Player.instance().toFront();
+        Player.instance().movePlayer(delta);
 
         entireWall.moveWallDown(delta);
         EntireLiana.get().moveAllLianasDown(delta);
