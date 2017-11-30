@@ -38,8 +38,9 @@ public class Player extends Actor implements IPlayer
     private TextureRegion currentFrame;
     private Vector2 velocity;
 
+    private static Player player;
 
-    public Player()
+    private Player()
     {
         playerAnimation = new PlayerAnimation();
         playerState = PlayerState.CLIMBING_LIANA;
@@ -48,6 +49,14 @@ public class Player extends Actor implements IPlayer
         this.setPosition(STARTING_X, STARTING_Y);
         velocity = new Vector2(10, -4);
         place = 2;
+    }
+
+    public static Player instance()
+    {
+        if (player == null)
+            player = new Player();
+
+        return player;
     }
 
     @Override
