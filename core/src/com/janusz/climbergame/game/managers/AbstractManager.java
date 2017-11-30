@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Anvil;
 import com.janusz.climbergame.game.entities.Wall;
+import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.screens.GameScreen;
 
@@ -75,7 +76,7 @@ public abstract class AbstractManager<T extends AbstractItem>
     {
         return Intersector.overlaps(
                 entities.get(i).getBounds(),
-                GameScreen.player.getBounds()
+                Player.instance().getBounds()
         );
     }
 

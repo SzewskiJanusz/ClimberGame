@@ -2,11 +2,15 @@ package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.entities.Banana;
+import com.janusz.climbergame.game.environment.BouncingText;
+import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.managers.energy.EnergyManager;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.shared.DefLabel;
 
 
 public class BananaManager extends AbstractManager<Banana>
@@ -37,5 +41,7 @@ public class BananaManager extends AbstractManager<Banana>
     {
         EnergyManager.getInstance().energyBar.addEnergy();
         ScoreManager.getInstance().ScoreLogic.addToScore(500);
+        GameScreen.stage.addActor(new BouncingText("+500", DefLabel.getDefaultLabelStyle(),
+                Effect.GOOD));
     }
 }

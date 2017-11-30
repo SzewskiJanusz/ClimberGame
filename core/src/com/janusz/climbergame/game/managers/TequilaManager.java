@@ -7,7 +7,10 @@ import com.janusz.climbergame.game.EventHandler;
 import com.janusz.climbergame.game.entities.Banana;
 import com.janusz.climbergame.game.entities.Tequila;
 import com.janusz.climbergame.game.entities.player.Player;
+import com.janusz.climbergame.game.environment.BouncingText;
+import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.shared.DefLabel;
 
 /**
  * Created by Janusz on 2017-11-29.
@@ -42,6 +45,8 @@ public class TequilaManager extends AbstractManager<Tequila>
     @Override
     protected void triggerEffect()
     {
+        GameScreen.stage.addActor(new BouncingText("DRUNK", DefLabel.getDefaultLabelStyle(),
+                Effect.BAD));
         Player.drunk = true;
     }
 }
