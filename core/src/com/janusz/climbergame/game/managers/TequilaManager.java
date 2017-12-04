@@ -3,8 +3,6 @@ package com.janusz.climbergame.game.managers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.game.EventHandler;
-import com.janusz.climbergame.game.entities.Banana;
 import com.janusz.climbergame.game.entities.Tequila;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
@@ -23,7 +21,7 @@ public class TequilaManager extends AbstractManager<Tequila>
      */
     public TequilaManager()
     {
-        super(3);
+        super(5);
     }
 
     @Override
@@ -36,7 +34,8 @@ public class TequilaManager extends AbstractManager<Tequila>
     protected void spawnEntity()
     {
         int x = selectPlace(MathUtils.random(1,4));
-        Tequila t = new Tequila(new Texture("tequila.png"), x, ClimberGame.HEIGHT, 45, 107, 250);
+        Tequila t = new Tequila(new Texture("tequila.png"), x, ClimberGame.HEIGHT, 45, 107,
+                250 + (int)(GameScreen.difficultyTimer)*2);
         entities.add(t);
         GameScreen.stage.addActor(t);
         randomizeSpawnTime();
