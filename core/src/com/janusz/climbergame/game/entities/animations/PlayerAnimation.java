@@ -68,7 +68,7 @@ public class PlayerAnimation
      */
     public TextureRegion getActualFrame(float time)
     {
-        switch (Player.playerState)
+        switch (Player.instance().playerState)
         {
             case CLIMBING_LIANA: return animation.getKeyFrame(time, true);
             case FLYING_LEFT: return flyingLeft;

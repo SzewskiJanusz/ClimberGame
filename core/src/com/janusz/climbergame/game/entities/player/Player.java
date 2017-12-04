@@ -25,7 +25,7 @@ public class Player extends Actor implements IPlayer
 
     public static int place;
     // PlayerState ENUM. Used for determine actual activity of player
-    public static PlayerState playerState;
+    public PlayerState playerState;
     public static boolean drunk;
 
     // Animation class
@@ -35,10 +35,12 @@ public class Player extends Actor implements IPlayer
     // Animation counter
     private float time;
     private float drunkTime;
+    private float coffeeTime;
     private TextureRegion currentFrame;
     private Vector2 velocity;
 
     private static Player player;
+    private boolean caffeinated;
 
     private Player()
     {
@@ -47,7 +49,7 @@ public class Player extends Actor implements IPlayer
         this.setSize(WIDTH,HEIGHT);
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
         this.setPosition(STARTING_X, STARTING_Y);
-        velocity = new Vector2(10, -4);
+        velocity = new Vector2(6.5f, -4);
         place = 2;
     }
 
@@ -74,7 +76,19 @@ public class Player extends Actor implements IPlayer
             }
             drunkTime += delta;
         }
+
+        if (caffeinated)
+        {
+            if (coffeeTime >= 15)
+            {
+                coffeeTime = 0;
+                caffeinated = false;
+                velocity.x = 6.5f;
+            }
+            coffeeTime += delta;
+        }
     }
+
 
     @Override
     public void draw(Batch batch, float parentAlpha)
@@ -125,7 +139,7 @@ public class Player extends Actor implements IPlayer
         if (playerState != PlayerState.CLIMBING_LIANA)
             setState(delta);
 
-        if (Player.playerState == PlayerState.FLYING_WALL)
+        if (Player.instance().playerState == PlayerState.FLYING_WALL)
         {
             velocity.y += delta * 10;
 
@@ -190,4 +204,10 @@ public class Player extends Actor implements IPlayer
         velocity.y = -4;
     }
 
+    public void coffeeBoost()
+    {
+        velocity.x = 10;
+        coffeeTime = 0;
+        caffeinated = true;
+    }
 }
