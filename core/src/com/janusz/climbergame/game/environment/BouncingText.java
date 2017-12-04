@@ -19,7 +19,7 @@ public class BouncingText extends Label
     {
         super(text, style);
 
-        setFontScale(1);
+        setFontScale(2);
         this.setX(Player.instance().getX());
         this.setY(Player.instance().getY());
 
