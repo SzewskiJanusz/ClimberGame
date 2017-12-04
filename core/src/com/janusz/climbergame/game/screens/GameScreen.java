@@ -6,6 +6,7 @@ import com.janusz.climbergame.game.background.TrunkBackground;
 import com.janusz.climbergame.game.entities.Tequila;
 import com.janusz.climbergame.game.managers.AnvilManager;
 import com.janusz.climbergame.game.managers.BananaManager;
+import com.janusz.climbergame.game.managers.CoffeeManager;
 import com.janusz.climbergame.game.managers.TequilaManager;
 import com.janusz.climbergame.game.managers.energy.EnergyManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
@@ -18,6 +19,7 @@ import com.janusz.climbergame.game.managers.score.ScoreManager;
 public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 {
     public static boolean gameOver;
+    public static float difficultyTimer;
 
     private BananaManager bananaMgr;
     private EntireWall entireWall;
@@ -26,6 +28,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private GameOverManager gameOverMgr;
     private JungleBackground background;
     private TrunkBackground trunk;
+    private CoffeeManager coffeeMgr;
 
 
 
@@ -37,6 +40,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
     protected void init()
     {
+        difficultyTimer = 0;
         background = new JungleBackground();
         trunk = new TrunkBackground();
 
@@ -52,6 +56,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         background = new JungleBackground();
         trunk = new TrunkBackground();
         tequilaMgr = new TequilaManager();
+        coffeeMgr = new CoffeeManager();
 
         stage.addActor(ScoreManager.getInstance().ScoreLabel);
         stage.addActor(EnergyManager.getInstance().frameEnergyBar);
@@ -85,10 +90,12 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         bananaMgr.updateEntities(delta);
         anvilMgr.updateEntities(delta);
         tequilaMgr.updateEntities(delta);
+        coffeeMgr.updateEntities(delta);
         trunk.moveDown(delta);
 
-        checkIfGameOver();
 
+        checkIfGameOver();
+        difficultyTimer += delta;
     }
 
     private void checkIfGameOver()
