@@ -9,6 +9,7 @@ import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Anvil;
 import com.janusz.climbergame.game.entities.Wall;
 import com.janusz.climbergame.game.entities.player.Player;
+import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.screens.GameScreen;
 
@@ -74,10 +75,17 @@ public abstract class AbstractManager<T extends AbstractItem>
 
     private boolean checkCollision(int i)
     {
-        return Intersector.overlaps(
-                entities.get(i).getBounds(),
-                Player.instance().getBounds()
-        );
+        if (Player.instance().playerState == PlayerState.CLIMBING_LIANA ||
+                Player.instance().playerState == PlayerState.CLIMBING_WALL)
+        {
+            return Intersector.overlaps(
+                    entities.get(i).getBounds(),
+                    Player.instance().getBounds()
+            );
+        }
+        else
+            return false;
+
     }
 
     protected int selectPlace(int place)
