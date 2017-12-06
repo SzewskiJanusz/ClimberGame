@@ -1,10 +1,21 @@
 package com.janusz.climbergame.game.managers;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.game.managers.score.ScoreManager;
+import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.menu.screens.MenuScreen;
 
 
 public class GameOverManager
@@ -14,12 +25,17 @@ public class GameOverManager
     private Label yourBestScoreTextLabel;
     private Label yourBestScoreLabel;
     private Label yourFinalScoreLabel;
-    private Button mainMenu;
-    private Button tryAgain;
+    private TextButton mainMenu;
+    private TextButton uploadScore;
+
+    private TextButton.TextButtonStyle bs;
+    private Table table;
+    //private ClimberGame game;
+
 
     public GameOverManager()
     {
-        createGameOverLabels();
+       // this.game = game;
     }
 
     private void createGameOverLabels()
@@ -28,38 +44,61 @@ public class GameOverManager
         ls.font = new BitmapFont();
         ls.fontColor = Color.WHITE;
 
-        gameOverLabel = new Label("GAME OVER", ls);
-        getGameOverLabel().setFontScale(5);
-        getGameOverLabel().setPosition(ClimberGame.WIDTH / 2 - getGameOverLabel().getWidth(),
-                ClimberGame.HEIGHT / 2 + 3 * getGameOverLabel().getHeight() , 1);
+        initTable();
 
+        gameOverLabel = new Label("GAME OVER", ls);
+        gameOverLabel.setFontScale(5f);
 
         yourFinalScoreTextLabel = new Label("SCORE ", ls);
-        getYourFinalScoreTextLabel().setFontScale(3);
-        getYourFinalScoreTextLabel().setPosition(ClimberGame.WIDTH / 2 - getGameOverLabel().getWidth() +
-                        getYourFinalScoreTextLabel().getWidth(),
-                ClimberGame.HEIGHT / 2 , 1);
+        yourFinalScoreTextLabel.setFontScale(2.5f);
 
-        yourFinalScoreLabel = new Label("0", ls);
-        getYourFinalScoreLabel().setFontScale(4);
-        getYourFinalScoreLabel().setPosition(ClimberGame.WIDTH / 2 - getGameOverLabel().getWidth() +
-                        getYourFinalScoreLabel().getWidth(),
-                ClimberGame.HEIGHT / 2  - 2 * getGameOverLabel().getHeight(), 1);
+
+        yourFinalScoreLabel = new Label(
+                String.valueOf(ScoreManager.getInstance().ScoreLogic.getScore()) , ls);
+        yourFinalScoreLabel.setFontScale(2.5f);
+
 
         yourBestScoreTextLabel = new Label("BEST ", ls);
-        getYourBestScoreTextLabel().setFontScale(3);
-        getYourBestScoreTextLabel().setPosition(ClimberGame.WIDTH / 2 - getGameOverLabel().getWidth() +
-                        getYourBestScoreTextLabel().getWidth(),
-                ClimberGame.HEIGHT / 2 - 4 * getGameOverLabel().getHeight()
-                , 1);
+        yourBestScoreTextLabel.setFontScale(2.5f);
 
         yourBestScoreLabel = new Label("1000", ls);
-        getYourBestScoreLabel().setFontScale(4);
-        getYourBestScoreLabel().setPosition(ClimberGame.WIDTH / 2 - getGameOverLabel().getWidth() +
-                        getYourBestScoreLabel().getWidth(),
-                ClimberGame.HEIGHT / 2 - 6 * getGameOverLabel().getHeight(), 1);
+        yourBestScoreLabel.setFontScale(2.5f);
 
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("ui-green.atlas"));
+        Skin skin = new Skin(atlas);
+        bs = new TextButton.TextButtonStyle();
+        bs.font = new BitmapFont();
+        bs.up = skin.getDrawable("button_02");
+        bs.down = skin.getDrawable("button_06");
 
+        mainMenu = new TextButton("OK",bs);
+
+        mainMenu.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+      //          game.setScreen(new MenuScreen(game));
+            }
+        });
+
+        uploadScore = new TextButton("SCORE",bs);
+
+        table.add(gameOverLabel).width(150).row();
+        table.add(yourFinalScoreTextLabel).width(150);
+        table.add(yourFinalScoreLabel).width(100);
+        table.add(yourBestScoreTextLabel).width(100);
+        table.add(yourBestScoreLabel).width(100).row();
+        table.add(mainMenu).width(150);
+        table.add(new Label("", ls)).width(150);
+        table.add(uploadScore).width(150);
+    }
+
+    private void initTable()
+    {
+        table = new Table();
+        table.setFillParent(true);
+        table.setY(50);
+        GameScreen.stage.addActor(table);
     }
 
     /*
@@ -68,38 +107,10 @@ public class GameOverManager
                     v
     */
 
-    public Label getGameOverLabel()
+    public Table getTable()
     {
-        return gameOverLabel;
-    }
-
-    public Label getYourFinalScoreTextLabel()
-    {
-        return yourFinalScoreTextLabel;
-    }
-
-    public Label getYourBestScoreTextLabel()
-    {
-        return yourBestScoreTextLabel;
-    }
-
-    public Label getYourBestScoreLabel()
-    {
-        return yourBestScoreLabel;
-    }
-
-    public Label getYourFinalScoreLabel()
-    {
-        return yourFinalScoreLabel;
-    }
-
-    public Button getMainMenu()
-    {
-        return mainMenu;
-    }
-
-    public Button getTryAgain()
-    {
-        return tryAgain;
+        createGameOverLabels();
+        Gdx.input.setInputProcessor(GameScreen.stage);
+        return table;
     }
 }
