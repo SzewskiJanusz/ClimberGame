@@ -3,7 +3,6 @@ package com.janusz.climbergame.game.managers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.game.entities.Banana;
 import com.janusz.climbergame.game.entities.Coffee;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;

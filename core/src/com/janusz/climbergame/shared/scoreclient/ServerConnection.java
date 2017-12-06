@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ServerConnection
 {
-    private String hostIP = "31.25.250.150";
+    private String hostIP = "192.168.1.19";
     private int port = 6940;
     private int timeout = 3500; // ms
     private Socket socket;
@@ -39,14 +39,14 @@ public class ServerConnection
                 public void run() {
                     String msg;
                     try {
-                        for(int i=0; i<10; i++)
+                        for(int i=0; i<5; i++)
                         {
                             msg = bufReader.readLine();
                             list.add(msg);
                         }
                         bufReader.close();
                     } catch (IOException e) {
-
+                        e.printStackTrace();
                     }
                 }
             });
