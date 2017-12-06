@@ -3,7 +3,6 @@ package com.janusz.climbergame.game.screens;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
-import com.janusz.climbergame.game.entities.Tequila;
 import com.janusz.climbergame.game.managers.AnvilManager;
 import com.janusz.climbergame.game.managers.BananaManager;
 import com.janusz.climbergame.game.managers.CoffeeManager;
@@ -102,11 +101,14 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         if (gameOver)
         {
+            /*
             stage.addActor(gameOverMgr.getGameOverLabel());
             stage.addActor(gameOverMgr.getYourFinalScoreTextLabel());
             stage.addActor(gameOverMgr.getYourFinalScoreLabel());
             stage.addActor(gameOverMgr.getYourBestScoreTextLabel());
             stage.addActor(gameOverMgr.getYourBestScoreLabel());
+            */
+            stage.addActor(gameOverMgr.getTable());
         }
     }
 
