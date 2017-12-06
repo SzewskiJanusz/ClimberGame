@@ -94,6 +94,13 @@ public class MenuScreen extends AbstractScreen
     private void initOptions()
     {
         options = new OptionsButton("OPTIONS", bs, 210);
+        options.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                game.setScreen(new OptionsScreen(game));
+            }
+        });
         stage.addActor(options);
     }
 
