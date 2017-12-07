@@ -23,7 +23,7 @@ public class Player extends Actor implements IPlayer
     public static final int STARTING_X = 380;
     public static final int STARTING_Y = 50;
 
-    public static int place;
+    public int place;
     // PlayerState ENUM. Used for determine actual activity of player
     public PlayerState playerState;
     public static boolean drunk;
@@ -192,7 +192,7 @@ public class Player extends Actor implements IPlayer
 
     private void setPlayerOnLiana()
     {
-        switch(Player.place)
+        switch(place)
         {
             case 0: setX(Wall.WIDTH); break;
             case 1: setX(EntireLiana.first_liana_x - 16); break;

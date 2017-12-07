@@ -47,14 +47,14 @@ public class EnergyBar extends Image
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 
-        if (Player.place == 0)
+        if (Player.instance().place == 0)
         {
             actualEnergy -= (int)(starting_width * 0.01);
         }
 
-        if (actualEnergy <= 0 && Player.place == 0)
+        if (actualEnergy <= 0 && Player.instance().place == 0)
         {
-            Player.place = 1;
+            Player.instance().place = 1;
             actualEnergy = 0;
         }
 
