@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
@@ -39,7 +40,12 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
     protected void init()
     {
+        gameOver = false;
+        ScoreManager.getInstance().ScoreLogic.setScore(0);
+        Player.instance().place = 2;
         difficultyTimer = 0;
+        EntireLiana.get().reset();
+
         background = new JungleBackground();
         trunk = new TrunkBackground();
 
@@ -51,7 +57,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         entireWall = new EntireWall();
         bananaMgr = new BananaManager();
         anvilMgr = new AnvilManager();
-        gameOverMgr = new GameOverManager();
+        gameOverMgr = new GameOverManager(game);
         background = new JungleBackground();
         trunk = new TrunkBackground();
         tequilaMgr = new TequilaManager();
@@ -101,13 +107,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         if (gameOver)
         {
-            /*
-            stage.addActor(gameOverMgr.getGameOverLabel());
-            stage.addActor(gameOverMgr.getYourFinalScoreTextLabel());
-            stage.addActor(gameOverMgr.getYourFinalScoreLabel());
-            stage.addActor(gameOverMgr.getYourBestScoreTextLabel());
-            stage.addActor(gameOverMgr.getYourBestScoreLabel());
-            */
             stage.addActor(gameOverMgr.getTable());
         }
     }
