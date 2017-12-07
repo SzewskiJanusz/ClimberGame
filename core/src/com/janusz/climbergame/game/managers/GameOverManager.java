@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.game.screens.SaveScoreScreen;
 import com.janusz.climbergame.menu.screens.MenuScreen;
 import com.janusz.climbergame.shared.scoreclient.ServerConnection;
 import com.sun.corba.se.spi.activation.Server;
@@ -90,8 +91,7 @@ public class GameOverManager
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                new ServerConnection().sendScoreToServer(
-                        ScoreManager.getInstance().ScoreLogic.getScore());
+                game.setScreen(new SaveScoreScreen(game));
             }
         });
 

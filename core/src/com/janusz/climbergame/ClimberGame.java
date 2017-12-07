@@ -2,6 +2,7 @@ package com.janusz.climbergame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.janusz.climbergame.game.screens.SaveScoreScreen;
 import com.janusz.climbergame.game.screens.SplashScreen;
 import com.janusz.climbergame.menu.screens.MenuScreen;
 
