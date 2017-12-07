@@ -16,6 +16,8 @@ import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.menu.screens.MenuScreen;
+import com.janusz.climbergame.shared.scoreclient.ServerConnection;
+import com.sun.corba.se.spi.activation.Server;
 
 
 public class GameOverManager
@@ -30,12 +32,12 @@ public class GameOverManager
 
     private TextButton.TextButtonStyle bs;
     private Table table;
-    //private ClimberGame game;
+    private ClimberGame game;
 
 
-    public GameOverManager()
+    public GameOverManager(ClimberGame game)
     {
-       // this.game = game;
+        this.game = game;
     }
 
     private void createGameOverLabels()
@@ -77,11 +79,21 @@ public class GameOverManager
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-      //          game.setScreen(new MenuScreen(game));
+                GameScreen.stage.dispose();
+                game.setScreen(new MenuScreen(game));
             }
         });
 
         uploadScore = new TextButton("SCORE",bs);
+
+        uploadScore.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                new ServerConnection().sendScoreToServer(
+                        ScoreManager.getInstance().ScoreLogic.getScore());
+            }
+        });
 
         table.add(gameOverLabel).width(150).row();
         table.add(yourFinalScoreTextLabel).width(150);
