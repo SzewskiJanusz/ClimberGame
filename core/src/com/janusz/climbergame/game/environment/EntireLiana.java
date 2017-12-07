@@ -33,6 +33,12 @@ public class EntireLiana
         return el;
     }
 
+    public void reset()
+    {
+        el = null;
+    }
+
+
     private EntireLiana()
     {
         first_wholeLiana = new ArrayList<LianaTile>();
