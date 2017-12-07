@@ -64,6 +64,22 @@ public class ServerConnection
         }
     }
 
+
+    public void sendScoreToServer(String nick, int score){
+        try {
+            createSocket(hostIP);
+            PrintWriter out = new PrintWriter(socket.getOutputStream());
+            out.println("sendScore "+ nick + ":" + String.valueOf(score));
+            out.close();
+            socket.close();
+        } catch (IOException e) {
+            System.err.println("Can't send score. Check connection to server. " +
+                    e.getMessage());
+        }
+    }
+
+
+
     private void createSocket(String host){
         try {
             socket = new Socket();
@@ -72,5 +88,7 @@ public class ServerConnection
             e.printStackTrace();
         }
     }
+
+
 
 }
