@@ -8,7 +8,7 @@ import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.screens.GameScreen;
-import com.janusz.climbergame.shared.DefLabel;
+import com.janusz.climbergame.shared.DefComponents;
 
 /**
  * Created by Janusz on 2017-12-04.
@@ -41,7 +41,7 @@ public class CoffeeManager extends AbstractManager<Coffee>
     protected void triggerEffect()
     {
         Player.instance().coffeeBoost();
-        GameScreen.stage.addActor(new BouncingText("ENERGIZED", DefLabel.getDefaultLabelStyle(),
+        GameScreen.stage.addActor(new BouncingText("ENERGIZED", DefComponents.getDefaultLabelStyle(),
                 Effect.DEFAULT));
     }
 }
