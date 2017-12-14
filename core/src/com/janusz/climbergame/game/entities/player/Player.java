@@ -48,6 +48,11 @@ public class Player extends Actor implements IPlayer
         playerState = PlayerState.CLIMBING_LIANA;
         this.setSize(WIDTH,HEIGHT);
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
+        reset();
+    }
+
+    public void reset()
+    {
         this.setPosition(STARTING_X, STARTING_Y);
         velocity = new Vector2(6.5f, -4);
         place = 2;
@@ -115,7 +120,7 @@ public class Player extends Actor implements IPlayer
 
     public void jumpLeft()
     {
-        if (place > 0)
+        if (place > 1)
         {
             if (place == 1 && EnergyBar.actualEnergy <= 0)
                 return;
