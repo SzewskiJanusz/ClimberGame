@@ -18,7 +18,7 @@ public class AnvilManager extends AbstractManager<Anvil>
     @Override
     protected void randomizeSpawnTime()
     {
-        entitySpawnTime = MathUtils.random(4,6);
+        entitySpawnTime = MathUtils.random(1,7);
     }
 
     @Override

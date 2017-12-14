@@ -7,6 +7,7 @@ import com.janusz.climbergame.game.background.TrunkBackground;
 import com.janusz.climbergame.game.managers.AnvilManager;
 import com.janusz.climbergame.game.managers.BananaManager;
 import com.janusz.climbergame.game.managers.CoffeeManager;
+import com.janusz.climbergame.game.managers.StoneManager;
 import com.janusz.climbergame.game.managers.TequilaManager;
 import com.janusz.climbergame.game.managers.energy.EnergyManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
@@ -18,9 +19,11 @@ import com.janusz.climbergame.game.managers.score.ScoreManager;
 
 public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 {
+    // Flaga gameOver, czy gra się skończyła
     public static boolean gameOver;
     public static float difficultyTimer;
 
+    /* Prywatne pola menadżerów */
     private BananaManager bananaMgr;
     private EntireWall entireWall;
     private AnvilManager anvilMgr;
@@ -29,30 +32,28 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private JungleBackground background;
     private TrunkBackground trunk;
     private CoffeeManager coffeeMgr;
+    private StoneManager stoneMgr;
 
-
-
-
+    // Konstruktor
     public GameScreen(ClimberGame game)
     {
         super(game);
     }
 
+    // W metodzie init inicjalizacja wszystkich menadżerów potrzebnych do gry
+    // oraz dodanie ich do sceny
     protected void init()
     {
         gameOver = false;
         ScoreManager.getInstance().ScoreLogic.setScore(0);
-        Player.instance().place = 2;
+        Player.instance().reset();
         difficultyTimer = 0;
         EntireLiana.get().reset();
 
         background = new JungleBackground();
         trunk = new TrunkBackground();
-
         stage.addActor(background);
         stage.addActor(trunk);
-
-
         stage.addActor(Player.instance());
         entireWall = new EntireWall();
         bananaMgr = new BananaManager();
@@ -62,6 +63,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         trunk = new TrunkBackground();
         tequilaMgr = new TequilaManager();
         coffeeMgr = new CoffeeManager();
+        stoneMgr = new StoneManager();
 
         stage.addActor(ScoreManager.getInstance().ScoreLabel);
         stage.addActor(EnergyManager.getInstance().frameEnergyBar);
@@ -96,6 +98,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         anvilMgr.updateEntities(delta);
         tequilaMgr.updateEntities(delta);
         coffeeMgr.updateEntities(delta);
+        stoneMgr.updateEntities(delta);
         trunk.moveDown(delta);
 
 
