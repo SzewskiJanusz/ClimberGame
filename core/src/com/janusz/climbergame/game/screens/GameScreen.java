@@ -25,7 +25,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
     /* Prywatne pola menadżerów */
     private BananaManager bananaMgr;
-    private EntireWall entireWall;
     private AnvilManager anvilMgr;
     private TequilaManager tequilaMgr;
     private GameOverManager gameOverMgr;
@@ -55,7 +54,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stage.addActor(background);
         stage.addActor(trunk);
         stage.addActor(Player.instance());
-        entireWall = new EntireWall();
         bananaMgr = new BananaManager();
         anvilMgr = new AnvilManager();
         gameOverMgr = new GameOverManager(game);
@@ -91,7 +89,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         Player.instance().toFront();
         Player.instance().movePlayer(delta);
 
-        entireWall.moveWallDown(delta);
         EntireLiana.get().moveAllLianasDown(delta);
 
         bananaMgr.updateEntities(delta);

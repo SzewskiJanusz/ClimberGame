@@ -20,7 +20,7 @@ public class Player extends Actor implements IPlayer
     public static final int WIDTH = 80;
     public static final int HEIGHT = 110;
 
-    public static final int STARTING_X = 380;
+    public static final int STARTING_X = EntireLiana.second_liana_x;
     public static final int STARTING_Y = 50;
 
     public int place;
