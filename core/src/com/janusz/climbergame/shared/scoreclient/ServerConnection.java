@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ServerConnection
 {
-    private String hostIP = "192.168.1.19";
+    private String hostIP = "31.25.250.150";
     private int port = 6940;
     private int timeout = 3500; // ms
     private Socket socket;
