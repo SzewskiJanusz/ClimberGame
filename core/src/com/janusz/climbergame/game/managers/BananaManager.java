@@ -11,7 +11,11 @@ import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
-
+/**
+ * Created by Bartek on 2017-11-04
+ *
+ * Menadżer bananów
+ */
 public class BananaManager extends AbstractManager<Banana>
 {
     public BananaManager()
@@ -28,19 +32,22 @@ public class BananaManager extends AbstractManager<Banana>
     @Override
     protected void spawnEntity()
     {
+        // zwrócenie X na widoku wylosowanego miejsca
         int x = selectPlace(MathUtils.random(1,4));
+        // stworzenie banana
         Banana b = new Banana(new Texture("banana.png"), x, ClimberGame.HEIGHT, 45, 30, 215);
-        entities.add(b);
-        GameScreen.stage.addActor(b);
+        entities.add(b);                // dodanie banana do listy
+        GameScreen.stage.addActor(b);   // dodanie banana do sceny
         randomizeSpawnTime();
     }
 
     @Override
     protected void triggerEffect()
     {
-        EnergyManager.getInstance().energyBar.addEnergy();
-        ScoreManager.getInstance().ScoreLogic.addToScore(500);
+        EnergyManager.getInstance().energyBar.addEnergy();      // efekt dodania energii
+        ScoreManager.getInstance().ScoreLogic.addToScore(500);  // efekt dodanie punktów
         GameScreen.stage.addActor(new BouncingText("+500", DefComponents.getDefaultLabelStyle(),
-                Effect.GOOD));
+                Effect.GOOD));                                  // skaczący napis oznaczający
+                                                                //          'zjedzenie' banana
     }
 }

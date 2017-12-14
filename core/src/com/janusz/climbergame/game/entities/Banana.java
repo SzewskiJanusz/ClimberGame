@@ -3,9 +3,10 @@ package com.janusz.climbergame.game.entities;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Created by Janusz on 2017-09-20.
+ * Created by Bartek on 2017-10-20.
+ *
+ * Banan
  */
-
 public class Banana extends AbstractItem
 {
 
@@ -16,6 +17,6 @@ public class Banana extends AbstractItem
 
     protected void doMovement(float delta)
     {
-        this.rotateBy(360 * delta);
+        this.rotateBy(360 * delta); // obracanie z każdą klatką
     }
 }

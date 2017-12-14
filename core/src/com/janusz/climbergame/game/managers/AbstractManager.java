@@ -18,17 +18,37 @@ import java.util.List;
 
 /**
  * Created by Janusz on 2017-11-02.
+ *
+ * Abstrakcyjny klasa menadżera. Posiada niezbędne metody do zarządzania obiektami:
+ *
+ * Konstruktor: inicjalizacja timer'a i listy obiektów
+ * void updateEntities(float delta): odświeża wszystkie obiekty
+ * boolean checkCollision(int i): sprawdza czy nastąpiła kolizja
+ * int selectPlace(int place): zwraca X danego miejsca na widoku
  */
-
 public abstract class AbstractManager<T extends AbstractItem>
 {
-
+    // Lista obiektów
     protected List<T> entities;
     protected float entitySpawnTime;
 
+    /*
+     * Metody abstrakacyjne do poprawnego zarządzania obiektami
+     */
 
+    /**
+     * Losuje liczbę entitySpawnTime
+     */
     protected abstract void randomizeSpawnTime();
+
+    /**
+     * Tworzy ustalony obiekt
+     */
     protected abstract void spawnEntity();
+
+    /**
+     * Wywołanie efektu po kolizji
+     */
     protected abstract void triggerEffect();
 
     /**
@@ -53,6 +73,10 @@ public abstract class AbstractManager<T extends AbstractItem>
         );
     }
 
+    /**
+     * Odświeża wszystkie obiekty menadżera
+     * @param delta - czas w jednej klatce
+     */
     public void updateEntities(float delta)
     {
         for (int i = 0 ; i < entities.size() ; i++)
@@ -73,6 +97,11 @@ public abstract class AbstractManager<T extends AbstractItem>
         }
     }
 
+    /**
+     * Sprawdza czy obiekt ma kolizje z graczem
+     * @param i - indeks poszczególnego obiektu
+     * @return
+     */
     private boolean checkCollision(int i)
     {
         if (Player.instance().playerState == PlayerState.CLIMBING_LIANA ||
@@ -88,6 +117,11 @@ public abstract class AbstractManager<T extends AbstractItem>
 
     }
 
+    /**
+     * Zwraca X danego miejsca w widoku
+     * @param place - miejsce (od 0 do 3)
+     * @return
+     */
     protected int selectPlace(int place)
     {
         switch (place)
