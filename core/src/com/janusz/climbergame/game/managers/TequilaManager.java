@@ -7,6 +7,8 @@ import com.janusz.climbergame.game.entities.Tequila;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
+import com.janusz.climbergame.game.indicators.graphics.DrunkIndicator;
+import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
@@ -16,12 +18,14 @@ import com.janusz.climbergame.shared.DefComponents;
 
 public class TequilaManager extends AbstractManager<Tequila>
 {
+    private DrunkIndicator drunkInd;
     /**
      * Initialize List and timer
      */
     public TequilaManager()
     {
         super(5);
+        drunkInd = new DrunkIndicator();
     }
 
     @Override
@@ -47,5 +51,7 @@ public class TequilaManager extends AbstractManager<Tequila>
         GameScreen.stage.addActor(new BouncingText("DRUNK", DefComponents.getDefaultLabelStyle(),
                 Effect.BAD));
         Player.drunk = true;
+        IndicatorController.instance().add(drunkInd);
+        IndicatorController.instance().placeIndicators();
     }
 }
