@@ -3,6 +3,7 @@ package com.janusz.climbergame.game.managers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.Coffee;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
@@ -18,20 +19,28 @@ public class CoffeeManager extends AbstractManager<Coffee>
 {
     public CoffeeManager()
     {
-        super(8);
+        super(Const.COFFEE_DELAY_SPAWN);
     }
 
     @Override
     protected void randomizeSpawnTime()
     {
-        entitySpawnTime = MathUtils.random(7,14);
+        entitySpawnTime = MathUtils.random(Const.COFFEE_BOTTOM_RANGE ,Const.COFFEE_UPPER_RANGE );
     }
 
     @Override
     protected void spawnEntity()
     {
-        int x = selectPlace(MathUtils.random(1,4));
-        Coffee c = new Coffee(new Texture("coffee.png"), x, ClimberGame.HEIGHT, 30, 75, 250);
+        int x = selectPlace(MathUtils.random(2,4));
+        Coffee c = new Coffee
+        (
+                Const.COFFEE_TEXTURE,
+                x,
+                ClimberGame.HEIGHT,
+                Const.COFFEE_WIDTH,
+                Const.COFFEE_HEIGHT,
+                Const.COFFEE_BASE_VELOCITY
+        );
         entities.add(c);
         GameScreen.stage.addActor(c);
         randomizeSpawnTime();

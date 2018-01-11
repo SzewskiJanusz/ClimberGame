@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.janusz.climbergame.game.entities.Wall;
+import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.managers.energy.EnergyBar;
 import com.janusz.climbergame.game.entities.animations.PlayerAnimation;
 import com.janusz.climbergame.game.environment.EntireLiana;
@@ -54,6 +54,8 @@ public class Player extends Actor implements IPlayer
     public void reset()
     {
         this.setPosition(STARTING_X, STARTING_Y);
+        this.setX(STARTING_X);
+        this.setY(STARTING_Y);
         velocity = new Vector2(6.5f, -4);
         place = 2;
     }
@@ -74,7 +76,7 @@ public class Player extends Actor implements IPlayer
 
         if (drunk)
         {
-            if (drunkTime >= 5)
+            if (drunkTime >= Const.TEQUILA_EFFECT_TIME)
             {
                 drunkTime = 0;
                 drunk = false;
@@ -84,7 +86,7 @@ public class Player extends Actor implements IPlayer
 
         if (caffeinated)
         {
-            if (coffeeTime >= 15)
+            if (coffeeTime >= Const.COFFEE_EFFECT_TIME)
             {
                 coffeeTime = 0;
                 caffeinated = false;
@@ -92,6 +94,8 @@ public class Player extends Actor implements IPlayer
             }
             coffeeTime += delta;
         }
+        movePlayer(delta);
+        toFront();
     }
 
 
@@ -199,7 +203,6 @@ public class Player extends Actor implements IPlayer
     {
         switch(place)
         {
-            case 0: setX(Wall.WIDTH); break;
             case 1: setX(EntireLiana.first_liana_x - 16); break;
             case 2: setX(EntireLiana.second_liana_x - 16); break;
             case 3: setX(EntireLiana.third_liana_x - 16); break;

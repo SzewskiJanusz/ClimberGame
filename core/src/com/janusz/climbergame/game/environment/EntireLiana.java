@@ -24,6 +24,7 @@ public class EntireLiana
 
     private static EntireLiana el;
 
+    // Singleton
     public static EntireLiana get()
     {
         if (el == null)

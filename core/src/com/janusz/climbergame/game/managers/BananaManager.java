@@ -3,6 +3,7 @@ package com.janusz.climbergame.game.managers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.Banana;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
@@ -20,22 +21,30 @@ public class BananaManager extends AbstractManager<Banana>
 {
     public BananaManager()
     {
-        super(3);
+        super(Const.BANANA_DELAY_SPAWN);
     }
 
     @Override
     protected void randomizeSpawnTime()
     {
-        entitySpawnTime = MathUtils.random(3,7);
+        entitySpawnTime = MathUtils.random(Const.BANANA_BOTTOM_RANGE,Const.BANANA_UPPER_RANGE);
     }
 
     @Override
     protected void spawnEntity()
     {
         // zwrócenie X na widoku wylosowanego miejsca
-        int x = selectPlace(MathUtils.random(1,4));
+        int x = selectPlace(MathUtils.random(2,4));
         // stworzenie banana
-        Banana b = new Banana(new Texture("banana.png"), x, ClimberGame.HEIGHT, 45, 30, 215);
+        Banana b = new Banana
+        (
+            Const.BANANA_TEXTURE,
+            x,
+            ClimberGame.HEIGHT,
+            Const.BANANA_WIDTH,
+            Const.BANANA_HEIGHT,
+            Const.BANANA_BASE_VELOCITY
+        );
         entities.add(b);                // dodanie banana do listy
         GameScreen.stage.addActor(b);   // dodanie banana do sceny
         randomizeSpawnTime();
