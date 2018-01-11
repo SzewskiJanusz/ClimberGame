@@ -11,7 +11,9 @@ public class DrunkIndicator extends AbstractIndicator
 {
     public DrunkIndicator()
     {
-        super(new Texture("drop.png"));
+        super(new Texture("drop.png"), 5);
     }
+
+
 
 }
