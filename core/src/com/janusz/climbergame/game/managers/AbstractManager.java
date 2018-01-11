@@ -1,17 +1,11 @@
 package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.game.entities.AbstractItem;
-import com.janusz.climbergame.game.entities.Anvil;
-import com.janusz.climbergame.game.entities.Wall;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
-import com.janusz.climbergame.game.screens.GameScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,7 +120,6 @@ public abstract class AbstractManager<T extends AbstractItem>
     {
         switch (place)
         {
-            case 1: return Wall.WIDTH;
             case 2: return EntireLiana.first_liana_x;
             case 3: return EntireLiana.second_liana_x;
             case 4: return EntireLiana.third_liana_x;

@@ -1,6 +1,5 @@
 package com.janusz.climbergame.game.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
@@ -9,14 +8,14 @@ import com.janusz.climbergame.game.managers.BananaManager;
 import com.janusz.climbergame.game.managers.CoffeeManager;
 import com.janusz.climbergame.game.managers.StoneManager;
 import com.janusz.climbergame.game.managers.TequilaManager;
-import com.janusz.climbergame.game.managers.energy.EnergyManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.EntireLiana;
-import com.janusz.climbergame.game.environment.EntireWall;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 
-
+/**
+ * Main game screen
+ */
 public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 {
     // Flaga gameOver, czy gra się skończyła
@@ -64,8 +63,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stoneMgr = new StoneManager();
 
         stage.addActor(ScoreManager.getInstance().ScoreLabel);
-        stage.addActor(EnergyManager.getInstance().frameEnergyBar);
-        stage.addActor(EnergyManager.getInstance().energyBar);
     }
 
     @Override
@@ -86,8 +83,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         stage.act();
         ScoreManager.getInstance().update();
-        Player.instance().toFront();
-        Player.instance().movePlayer(delta);
 
         EntireLiana.get().moveAllLianasDown(delta);
 
