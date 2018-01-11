@@ -23,8 +23,8 @@ public abstract class Const
     public final static int COFFEE_DELAY_SPAWN = 8;
     public final static int COFFEE_BOTTOM_RANGE = 7;
     public final static int COFFEE_UPPER_RANGE = 14;
-    public final static int COFFEE_WIDTH = 45;
-    public final static int COFFEE_HEIGHT = 107;
+    public final static int COFFEE_WIDTH = 30;
+    public final static int COFFEE_HEIGHT = 75;
     public final static int COFFEE_BASE_VELOCITY = 250;
     public final static Texture COFFEE_TEXTURE = new Texture("coffee.png");
 

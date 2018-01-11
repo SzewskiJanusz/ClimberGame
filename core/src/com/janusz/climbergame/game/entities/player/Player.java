@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.janusz.climbergame.Const;
-import com.janusz.climbergame.game.managers.energy.EnergyBar;
 import com.janusz.climbergame.game.entities.animations.PlayerAnimation;
 import com.janusz.climbergame.game.environment.EntireLiana;
 
@@ -126,10 +125,7 @@ public class Player extends Actor implements IPlayer
     {
         if (place > 1)
         {
-            if (place == 1 && EnergyBar.actualEnergy <= 0)
-                return;
-
-            playerState = place == 1 ? PlayerState.FLYING_WALL : PlayerState.FLYING_LEFT;
+            playerState = PlayerState.FLYING_LEFT;
             place--;
         }
     }
@@ -143,18 +139,10 @@ public class Player extends Actor implements IPlayer
         }
     }
 
-    public void movePlayer(float delta)
+    private void movePlayer(float delta)
     {
         if (playerState != PlayerState.CLIMBING_LIANA)
             setState(delta);
-
-        if (Player.instance().playerState == PlayerState.FLYING_WALL)
-        {
-            velocity.y += delta * 10;
-
-            setX(getX() - velocity.x);
-            setY(getY() - velocity.y);
-        }
     }
 
     private void setState(float delta)

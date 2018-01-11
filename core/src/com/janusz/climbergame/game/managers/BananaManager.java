@@ -1,13 +1,11 @@
 package com.janusz.climbergame.game.managers;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.Banana;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
-import com.janusz.climbergame.game.managers.energy.EnergyManager;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
@@ -53,7 +51,6 @@ public class BananaManager extends AbstractManager<Banana>
     @Override
     protected void triggerEffect()
     {
-        EnergyManager.getInstance().energyBar.addEnergy();      // efekt dodania energii
         ScoreManager.getInstance().ScoreLogic.addToScore(500);  // efekt dodanie punktów
         GameScreen.stage.addActor(new BouncingText("+500", DefComponents.getDefaultLabelStyle(),
                 Effect.GOOD));                                  // skaczący napis oznaczający
