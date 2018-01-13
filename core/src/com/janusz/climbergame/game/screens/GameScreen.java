@@ -3,6 +3,7 @@ package com.janusz.climbergame.game.screens;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.background.TrunkBackground;
+import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.managers.AnvilManager;
 import com.janusz.climbergame.game.managers.BananaManager;
 import com.janusz.climbergame.game.managers.CoffeeManager;
@@ -85,6 +86,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         ScoreManager.getInstance().update();
 
         EntireLiana.get().moveAllLianasDown(delta);
+        IndicatorController.instance().update();
 
         bananaMgr.updateEntities(delta);
         anvilMgr.updateEntities(delta);
@@ -96,6 +98,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
         checkIfGameOver();
         difficultyTimer += delta;
+
     }
 
     private void checkIfGameOver()

@@ -13,7 +13,7 @@ import com.janusz.climbergame.ClimberGame;
 public class ScoreLabel extends Label
 {
 
-    private final int STARTING_X = 450;
+    private final int STARTING_X = 550;
     private final int STARTING_Y = ClimberGame.HEIGHT - 65;
 
     private int points;
