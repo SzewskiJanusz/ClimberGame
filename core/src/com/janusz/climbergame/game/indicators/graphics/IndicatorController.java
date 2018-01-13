@@ -1,6 +1,8 @@
 package com.janusz.climbergame.game.indicators.graphics;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.janusz.climbergame.Const;
+import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
@@ -14,14 +16,15 @@ import java.util.List;
  */
 public class IndicatorController
 {
-    private List<AbstractIndicator> indicators;
-    private List<Label> labels;
+    private DrunkIndicator drunkIndicator;
+    private CoffeeIndicator coffeeIndicator;
+
     private static IndicatorController indControl;
 
     private IndicatorController()
     {
-        indicators = new ArrayList<AbstractIndicator>();
-        labels = new ArrayList<Label>();
+        drunkIndicator = new DrunkIndicator();
+        coffeeIndicator = new CoffeeIndicator();
     }
 
     public static IndicatorController instance()
@@ -32,23 +35,22 @@ public class IndicatorController
         return indControl;
     }
 
-    public void placeIndicators()
+    public void addDrunkIndicator()
     {
-        for (int i = 0 ; i < indicators.size() ; i++)
-        {
-            indicators.get(i).setPosition(550,(i+1) * 150);
-            labels.get(i).setPosition(600,(i+1) * 170);
-        }
+        GameScreen.stage.addActor(drunkIndicator);
+        GameScreen.stage.addActor(drunkIndicator.label);
     }
 
-    public void add(AbstractIndicator ai,int time)
+    public void addCoffeeIndicator()
     {
-        indicators.add(ai);
-        Label l = new Label(String.valueOf(time), DefComponents.getDefaultLabelStyle());
-        l.setFontScale(3.7f);
-        labels.add(l);
-        GameScreen.stage.addActor(ai);
-        GameScreen.stage.addActor(l);
+        GameScreen.stage.addActor(coffeeIndicator);
+        GameScreen.stage.addActor(coffeeIndicator.label);
+    }
+
+    public void update()
+    {
+        drunkIndicator.toFront();
+        coffeeIndicator.toFront();
     }
 
 }
