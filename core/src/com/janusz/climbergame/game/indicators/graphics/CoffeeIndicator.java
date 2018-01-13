@@ -10,24 +10,23 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * Created by Janusz on 2017-12-14.
- *
- * Indicator of drop when drunk
+ * Created by Janusz on 2018-01-13.
  */
-public class DrunkIndicator extends Image
+
+public class CoffeeIndicator extends Image
 {
     Label label;
 
-    public DrunkIndicator()
+    public CoffeeIndicator()
     {
-        super(Const.DRUNKINDICATOR_TEXTURE);
-        this.setSize(Const.DRUNKINDICATOR_WIDTH,Const.DRUNKINDICATOR_HEIGHT);
-        this.setPosition(Const.DRUNKINDICATOR_X, Const.DRUNKINDICATOR_Y);
+        super(Const.COFFEEINDICATOR_TEXTURE);
+        this.setSize(Const.COFFEEINDICATOR_WIDTH,Const.COFFEEINDICATOR_HEIGHT);
+        this.setPosition(Const.COFFEEINDICATOR_X, Const.COFFEEINDICATOR_Y);
 
         label = new Label("", DefComponents.getDefaultLabelStyle());
         label.setFontScale(3.7f);
-        label.setPosition(Const.DRUNKINDICATOR_X,
-                Const.DRUNKINDICATOR_Y - Const.SPACE_BETWEEN_INDICATOR_AND_LABEL);
+        label.setPosition(Const.COFFEEINDICATOR_X,
+                Const.COFFEEINDICATOR_Y - Const.SPACE_BETWEEN_INDICATOR_AND_LABEL);
     }
 
     @Override
@@ -35,16 +34,16 @@ public class DrunkIndicator extends Image
     {
         super.act(delta);
 
-        if (Player.drunk)
+        if (Player.caffeinated)
         {
             double displayedTime = BigDecimal.valueOf
                     (
-                            Const.TEQUILA_EFFECT_TIME - Player.instance().drunkTime)
+                            Const.COFFEE_EFFECT_TIME - Player.instance().coffeeTime)
                     .setScale(1, RoundingMode.HALF_UP
                     )
                     .doubleValue();
             label.setText(String.valueOf(displayedTime));
-            if (Player.instance().drunkTime >= Const.TEQUILA_EFFECT_TIME)
+            if (Player.instance().coffeeTime >= Const.COFFEE_EFFECT_TIME)
             {
                 this.remove();
                 label.remove();
