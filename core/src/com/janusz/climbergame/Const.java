@@ -55,5 +55,23 @@ public abstract class Const
     public final static int STONE_BASE_VELOCITY = 300;
     public final static Texture STONE_TEXTURE = new Texture("stone.png");
 
+    /** DISTANCE BETWEEN INDICATOR AND LABEl */
+    public final static int SPACE_BETWEEN_INDICATOR_AND_LABEL = 30;
 
+    /** DISTANCE BETWEEN INDICATORS */
+    public final static int SPACE_BETWEEN_INDICATORS = 70;
+
+    /** DRUNK INDICATOR CONSTS */
+    public final static int DRUNKINDICATOR_X = 550;
+    public final static int DRUNKINDICATOR_Y = 120;
+    public final static int DRUNKINDICATOR_WIDTH = 75;
+    public final static int DRUNKINDICATOR_HEIGHT = 100;
+    public final static Texture DRUNKINDICATOR_TEXTURE = new Texture("drop.png");
+
+    /** COFFEE INDICATOR CONSTS */
+    public final static int COFFEEINDICATOR_X = 550;
+    public final static int COFFEEINDICATOR_Y = DRUNKINDICATOR_Y + DRUNKINDICATOR_WIDTH + SPACE_BETWEEN_INDICATORS;
+    public final static int COFFEEINDICATOR_WIDTH = 75;
+    public final static int COFFEEINDICATOR_HEIGHT = 100;
+    public final static Texture COFFEEINDICATOR_TEXTURE = new Texture("coffeeindicator.png");
 }
