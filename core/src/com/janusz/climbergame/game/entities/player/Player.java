@@ -19,13 +19,14 @@ public class Player extends Actor implements IPlayer
     public static final int WIDTH = 80;
     public static final int HEIGHT = 110;
 
-    public static final int STARTING_X = EntireLiana.second_liana_x;
+    public static final int STARTING_X = EntireLiana.second_liana_x - 16;
     public static final int STARTING_Y = 50;
 
     public int place;
     // PlayerState ENUM. Used for determine actual activity of player
     public PlayerState playerState;
     public static boolean drunk;
+    public static boolean caffeinated;
 
     // Animation class
     private PlayerAnimation playerAnimation;
@@ -33,13 +34,13 @@ public class Player extends Actor implements IPlayer
     private Rectangle bounds;
     // Animation counter
     private float time;
-    private float drunkTime;
-    private float coffeeTime;
+    public float drunkTime;
+    public float coffeeTime;
     private TextureRegion currentFrame;
     private Vector2 velocity;
 
     private static Player player;
-    private boolean caffeinated;
+
 
     private Player()
     {
@@ -57,6 +58,10 @@ public class Player extends Actor implements IPlayer
         this.setY(STARTING_Y);
         velocity = new Vector2(6.5f, -4);
         place = 2;
+        drunk = false;
+        drunkTime = 0;
+        caffeinated = false;
+        coffeeTime = 0;
     }
 
     public static Player instance()
