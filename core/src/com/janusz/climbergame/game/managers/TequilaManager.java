@@ -19,14 +19,12 @@ import com.janusz.climbergame.shared.DefComponents;
 
 public class TequilaManager extends AbstractManager<Tequila>
 {
-    private DrunkIndicator drunkInd;
     /**
      * Initialize List and timer
      */
     public TequilaManager()
     {
         super(Const.TEQUILA_DELAY_SPAWN);
-        drunkInd = new DrunkIndicator();
     }
 
     @Override
@@ -59,7 +57,6 @@ public class TequilaManager extends AbstractManager<Tequila>
         GameScreen.stage.addActor(new BouncingText("DRUNK", DefComponents.getDefaultLabelStyle(),
                 Effect.BAD));
         Player.drunk = true;
-        IndicatorController.instance().add(drunkInd,Const.TEQUILA_EFFECT_TIME);
-        IndicatorController.instance().placeIndicators();
+        IndicatorController.instance().addDrunkIndicator();
     }
 }

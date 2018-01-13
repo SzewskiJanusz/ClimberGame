@@ -8,6 +8,7 @@ import com.janusz.climbergame.game.entities.Coffee;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
+import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
@@ -52,5 +53,6 @@ public class CoffeeManager extends AbstractManager<Coffee>
         Player.instance().coffeeBoost();
         GameScreen.stage.addActor(new BouncingText("ENERGIZED", DefComponents.getDefaultLabelStyle(),
                 Effect.DEFAULT));
+        IndicatorController.instance().addCoffeeIndicator();
     }
 }
