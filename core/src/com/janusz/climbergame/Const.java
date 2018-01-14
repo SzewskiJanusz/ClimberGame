@@ -74,4 +74,21 @@ public abstract class Const
     public final static int COFFEEINDICATOR_WIDTH = 75;
     public final static int COFFEEINDICATOR_HEIGHT = 100;
     public final static Texture COFFEEINDICATOR_TEXTURE = new Texture("coffeeindicator.png");
+
+    /** LIANATILE ENTITY CONSTS */
+    public final static int LIANATILE_WIDTH = 50;
+    public final static int LIANATILE_HEIGHT = 120;
+    public final static int LIANATILE_VELOCITY = 250;
+    public final static Texture LIANATILE_TEXTURE = new Texture("liana.png");
+
+    /** LIANAMANAGER CONSTS */
+    public static final int LIANAMANAGER_FIRST_X = 150;
+    public static final int LIANAMANAGER_SECOND_X = 300;
+    public static final int LIANAMANAGER_THIRD_X = 450;
+
+    /** PLAYER ANIMATION CONSTS */
+    public static final int FRAME_WIDTH = 260;
+    public static final int FRAME_HEIGHT= 240;
+    public static final Texture FRAME_STRIP_TEXTURE = new Texture("climbing-strip.png");
+
 }
