@@ -17,7 +17,7 @@ import com.janusz.climbergame.shared.DefComponents;
  * Created by Janusz on 2017-11-29.
  */
 
-public class TequilaManager extends AbstractManager<Tequila>
+public class TequilaManager extends GoodManager<Tequila>
 {
     /**
      * Initialize List and timer

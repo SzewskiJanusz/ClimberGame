@@ -15,7 +15,7 @@ import com.janusz.climbergame.shared.DefComponents;
  *
  * Menadżer bananów
  */
-public class BananaManager extends AbstractManager<Banana>
+public class BananaManager extends GoodManager<Banana>
 {
     public BananaManager()
     {

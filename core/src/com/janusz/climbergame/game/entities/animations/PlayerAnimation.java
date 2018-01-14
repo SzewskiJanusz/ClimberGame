@@ -3,6 +3,7 @@ package com.janusz.climbergame.game.entities.animations;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.screens.GameScreen;
 
@@ -18,8 +19,8 @@ public class PlayerAnimation
     private TextureRegion flyingLeft;
     private TextureRegion flyingRight;
 
-    private int singleFrameWidth = 260;
-    private int singleFrameHeight = 240;
+    private int singleFrameWidth = Const.FRAME_WIDTH;
+    private int singleFrameHeight = Const.FRAME_HEIGHT;
 
 
     public PlayerAnimation()
@@ -29,7 +30,7 @@ public class PlayerAnimation
 
     private void init()
     {
-        climbingStrip = new Texture("climbing-strip.png");
+        climbingStrip = Const.FRAME_STRIP_TEXTURE;
         int imageAmount = climbingStrip.getWidth() / singleFrameWidth ;
 
         initFrames(imageAmount);

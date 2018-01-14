@@ -8,7 +8,7 @@ import com.janusz.climbergame.game.entities.Anvil;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 
-public class AnvilManager extends AbstractManager<Anvil>
+public class AnvilManager extends BadManager<Anvil>
 {
 
     public AnvilManager()

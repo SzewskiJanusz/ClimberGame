@@ -10,6 +10,8 @@ import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.animations.PlayerAnimation;
 import com.janusz.climbergame.game.environment.EntireLiana;
 
+import org.w3c.dom.css.Rect;
+
 /**
  * Player class.
  */
@@ -32,6 +34,7 @@ public class Player extends Actor implements IPlayer
     private PlayerAnimation playerAnimation;
 
     private Rectangle bounds;
+    private Rectangle badCollisionBounds;
     // Animation counter
     private float time;
     public float drunkTime;
@@ -48,6 +51,7 @@ public class Player extends Actor implements IPlayer
         playerState = PlayerState.CLIMBING_LIANA;
         this.setSize(WIDTH,HEIGHT);
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
+        badCollisionBounds = new Rectangle(STARTING_X, STARTING_Y + HEIGHT/2, WIDTH, HEIGHT/2);
         reset();
     }
 
@@ -116,6 +120,7 @@ public class Player extends Actor implements IPlayer
     {
         this.setPosition(x, getY());
         getBounds().x = x;
+        badCollisionBounds.x = x;
     }
 
     @Override
@@ -123,6 +128,7 @@ public class Player extends Actor implements IPlayer
     {
         this.setPosition(getX(), y);
         getBounds().y = y;
+        badCollisionBounds.y = y + HEIGHT/2;
     }
 
 
@@ -210,5 +216,10 @@ public class Player extends Actor implements IPlayer
         velocity.x = 10;
         coffeeTime = 0;
         caffeinated = true;
+    }
+
+    public Rectangle getBadCollisionBounds()
+    {
+        return badCollisionBounds;
     }
 }

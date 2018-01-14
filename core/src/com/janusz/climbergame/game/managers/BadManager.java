@@ -11,16 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Janusz on 2017-11-02.
- *
- * Abstrakcyjny klasa menadżera. Posiada niezbędne metody do zarządzania obiektami:
- *
- * Konstruktor: inicjalizacja timer'a i listy obiektów
- * void updateEntities(float delta): odświeża wszystkie obiekty
- * boolean checkCollision(int i): sprawdza czy nastąpiła kolizja
- * int selectPlace(int place): zwraca X danego miejsca na widoku
+ * Created by Janusz on 2018-01-14.
  */
-public abstract class AbstractManager<T extends AbstractItem>
+
+public abstract class BadManager<T extends AbstractItem>
 {
     // Lista obiektów
     protected List<T> entities;
@@ -49,7 +43,7 @@ public abstract class AbstractManager<T extends AbstractItem>
      * Initialize List and timer
      * @param delay - starting delay
      */
-    public AbstractManager(int delay)
+    public BadManager(int delay)
     {
         entities = new ArrayList<T>();
         randomizeSpawnTime();
@@ -98,12 +92,11 @@ public abstract class AbstractManager<T extends AbstractItem>
      */
     private boolean checkCollision(int i)
     {
-        if (Player.instance().playerState == PlayerState.CLIMBING_LIANA ||
-                Player.instance().playerState == PlayerState.CLIMBING_WALL)
+        if (Player.instance().playerState == PlayerState.CLIMBING_LIANA)
         {
             return Intersector.overlaps(
                     entities.get(i).getBounds(),
-                    Player.instance().getBounds()
+                    Player.instance().getBadCollisionBounds()
             );
         }
         else
@@ -116,7 +109,7 @@ public abstract class AbstractManager<T extends AbstractItem>
      * @param place - miejsce (od 0 do 3)
      * @return
      */
-    public int selectPlace(int place)
+    protected int selectPlace(int place)
     {
         switch (place)
         {
@@ -126,5 +119,4 @@ public abstract class AbstractManager<T extends AbstractItem>
             default: return 0;
         }
     }
-
 }

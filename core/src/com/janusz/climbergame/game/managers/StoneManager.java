@@ -11,7 +11,7 @@ import com.janusz.climbergame.game.screens.GameScreen;
  * Created by Janusz on 2017-12-14.
  */
 
-public class StoneManager extends AbstractManager<Stone>
+public class StoneManager extends BadManager<Stone>
 {
     /**
      * Initialize List and timer

@@ -88,7 +88,7 @@ public abstract class Const
 
     /** PLAYER ANIMATION CONSTS */
     public static final int FRAME_WIDTH = 260;
-    public static final int FRAME_HEIGHT= 240;
+    public static final int FRAME_HEIGHT = 240;
     public static final Texture FRAME_STRIP_TEXTURE = new Texture("climbing-strip.png");
 
 }

@@ -16,7 +16,7 @@ import com.janusz.climbergame.shared.DefComponents;
  * Created by Janusz on 2017-12-04.
  */
 
-public class CoffeeManager extends AbstractManager<Coffee>
+public class CoffeeManager extends GoodManager<Coffee>
 {
     public CoffeeManager()
     {
