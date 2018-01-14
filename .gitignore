@@ -123,3 +123,5 @@ Thumbs.db
 !/ios-moe/xcode/*.xcodeproj/xcshareddata
 !/ios-moe/xcode/*.xcodeproj/project.pbxproj
 /ios-moe/xcode/native/
+captures/com.janusz.climbergame_2018.01.09_20.03.hprof
+captures/com.janusz.climbergame_2018.01.09_20.08.hprof

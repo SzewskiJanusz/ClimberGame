@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.environment;
 
+import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.LianaTile;
 import com.janusz.climbergame.game.screens.GameScreen;
 
@@ -13,9 +14,9 @@ import java.util.List;
 public class EntireLiana
 {
 
-    public static final int first_liana_x = 150;
-    public static final int second_liana_x = 300;
-    public static final int third_liana_x = 450;
+    public static final int first_liana_x = Const.LIANAMANAGER_FIRST_X;
+    public static final int second_liana_x = Const.LIANAMANAGER_SECOND_X;
+    public static final int third_liana_x = Const.LIANAMANAGER_THIRD_X;
 
     // Lists for moving effect
     private List<LianaTile> first_wholeLiana;

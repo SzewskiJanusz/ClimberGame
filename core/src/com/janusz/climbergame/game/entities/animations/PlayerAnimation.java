@@ -17,7 +17,6 @@ public class PlayerAnimation
     private Texture climbingStrip;
     private TextureRegion flyingLeft;
     private TextureRegion flyingRight;
-    private TextureRegion flyingWall;
 
     private int singleFrameWidth = 260;
     private int singleFrameHeight = 240;
@@ -58,7 +57,6 @@ public class PlayerAnimation
     {
         flyingLeft = new TextureRegion(new Texture("Ljump.png"));
         flyingRight = new TextureRegion(new Texture("Rjump.png"));
-        flyingWall = new TextureRegion(new Texture("wall_flying.png"));
     }
 
     /**
@@ -73,7 +71,6 @@ public class PlayerAnimation
             case CLIMBING_LIANA: return animation.getKeyFrame(time, true);
             case FLYING_LEFT: return flyingLeft;
             case FLYING_RIGHT: return flyingRight;
-            case FLYING_WALL: return flyingWall;
         }
         return null;
     }
