@@ -40,7 +40,7 @@ public class CoffeeManager extends GoodManager<Coffee>
                 ClimberGame.HEIGHT,
                 Const.COFFEE_WIDTH,
                 Const.COFFEE_HEIGHT,
-                Const.COFFEE_BASE_VELOCITY
+                Const.COFFEE_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.GOOD_TIMER_RATIO)
         );
         entities.add(c);
         GameScreen.stage.addActor(c);

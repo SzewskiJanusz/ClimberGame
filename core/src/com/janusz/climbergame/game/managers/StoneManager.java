@@ -38,7 +38,7 @@ public class StoneManager extends BadManager<Stone>
             ClimberGame.HEIGHT,
             Const.STONE_WIDTH,
             Const.STONE_HEIGHT,
-            Const.STONE_BASE_VELOCITY
+            Const.STONE_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.BAD_TIMER_RATIO)
         );
         entities.add(a);
         GameScreen.stage.addActor(a);

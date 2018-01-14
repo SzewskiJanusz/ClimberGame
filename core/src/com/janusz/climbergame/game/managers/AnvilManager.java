@@ -33,7 +33,7 @@ public class AnvilManager extends BadManager<Anvil>
             ClimberGame.HEIGHT,
             Const.ANVIL_WIDTH,
             Const.ANVIL_HEIGHT,
-            Const.ANVIL_BASE_VELOCITY
+            Const.ANVIL_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.BAD_TIMER_RATIO)
         );
         entities.add(a);
         GameScreen.stage.addActor(a);

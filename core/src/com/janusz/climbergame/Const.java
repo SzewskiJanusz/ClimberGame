@@ -91,4 +91,10 @@ public abstract class Const
     public static final int FRAME_HEIGHT = 240;
     public static final Texture FRAME_STRIP_TEXTURE = new Texture("climbing-strip.png");
 
+    /** „BAD” TIMER CONSTS */
+    public static final double BAD_TIMER_RATIO = 2;
+
+    /** „GOOD” TIMER CONSTS */
+    public static final double GOOD_TIMER_RATIO = 1.5;
+
 }

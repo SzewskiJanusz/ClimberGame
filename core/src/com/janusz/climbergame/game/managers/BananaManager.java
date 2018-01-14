@@ -41,7 +41,7 @@ public class BananaManager extends GoodManager<Banana>
             ClimberGame.HEIGHT,
             Const.BANANA_WIDTH,
             Const.BANANA_HEIGHT,
-            Const.BANANA_BASE_VELOCITY
+            Const.BANANA_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.GOOD_TIMER_RATIO)
         );
         entities.add(b);                // dodanie banana do listy
         GameScreen.stage.addActor(b);   // dodanie banana do sceny

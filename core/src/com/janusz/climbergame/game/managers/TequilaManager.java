@@ -44,7 +44,7 @@ public class TequilaManager extends GoodManager<Tequila>
             ClimberGame.HEIGHT,
             Const.TEQUILA_WIDTH,
             Const.TEQUILA_HEIGHT,
-            Const.TEQUILA_BASE_VELOCITY + (int)(GameScreen.difficultyTimer)*2
+            Const.TEQUILA_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.BAD_TIMER_RATIO)
         );
         entities.add(t);
         GameScreen.stage.addActor(t);
