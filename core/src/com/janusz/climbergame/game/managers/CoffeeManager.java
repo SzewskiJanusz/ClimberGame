@@ -51,7 +51,7 @@ public class CoffeeManager extends GoodManager<Coffee>
     protected void triggerEffect()
     {
         Player.instance().coffeeBoost();
-        GameScreen.stage.addActor(new BouncingText("ENERGIZED", DefComponents.getDefaultLabelStyle(),
+        GameScreen.stage.addActor(new BouncingText("ENERGIZED", DefComponents.LABEL_STYLE,
                 Effect.DEFAULT));
         IndicatorController.instance().addCoffeeIndicator();
     }

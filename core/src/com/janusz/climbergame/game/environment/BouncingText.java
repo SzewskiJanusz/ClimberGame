@@ -48,7 +48,6 @@ public class BouncingText extends Label
         {
             this.remove();
             timeElapsed = 0;
-
         }
         else
         {

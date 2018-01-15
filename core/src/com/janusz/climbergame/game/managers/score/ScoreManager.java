@@ -3,6 +3,7 @@ package com.janusz.climbergame.game.managers.score;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.janusz.climbergame.shared.DefComponents;
 
 /**
  * Created by Janusz on 2017-11-28.
@@ -27,16 +28,9 @@ public class ScoreManager
     private ScoreManager()
     {
         ScoreLogic = new ScoreLogic();
-        ScoreLabel = new ScoreLabel(String.valueOf(ScoreLogic.getScore()), getDefaultLabelStyle());
+        ScoreLabel = new ScoreLabel(String.valueOf(ScoreLogic.getScore()), DefComponents.LABEL_STYLE);
     }
 
-    private Label.LabelStyle getDefaultLabelStyle()
-    {
-        Label.LabelStyle ls = new Label.LabelStyle();
-        ls.font = new BitmapFont();
-        ls.fontColor = Color.WHITE;
-        return ls;
-    }
 
     public void update()
     {

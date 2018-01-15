@@ -52,7 +52,7 @@ public class BananaManager extends GoodManager<Banana>
     protected void triggerEffect()
     {
         ScoreManager.getInstance().ScoreLogic.addToScore(500);  // efekt dodanie punktów
-        GameScreen.stage.addActor(new BouncingText("+500", DefComponents.getDefaultLabelStyle(),
+        GameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
                 Effect.GOOD));                                  // skaczący napis oznaczający
                                                                 //          'zjedzenie' banana
     }

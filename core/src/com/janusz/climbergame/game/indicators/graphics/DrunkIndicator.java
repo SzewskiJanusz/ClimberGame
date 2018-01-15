@@ -24,7 +24,7 @@ public class DrunkIndicator extends Image
         this.setSize(Const.DRUNKINDICATOR_WIDTH,Const.DRUNKINDICATOR_HEIGHT);
         this.setPosition(Const.DRUNKINDICATOR_X, Const.DRUNKINDICATOR_Y);
 
-        label = new Label("", DefComponents.getDefaultLabelStyle());
+        label = new Label("", DefComponents.LABEL_STYLE);
         label.setFontScale(3.7f);
         label.setPosition(Const.DRUNKINDICATOR_X,
                 Const.DRUNKINDICATOR_Y - Const.SPACE_BETWEEN_INDICATOR_AND_LABEL);

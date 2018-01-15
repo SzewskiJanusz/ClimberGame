@@ -40,7 +40,7 @@ public class SaveScoreScreen extends AbstractScreen
 
     private void initLabel()
     {
-        Label l = new Label("ENTER NICKNAME", DefComponents.getDefaultLabelStyle());
+        Label l = new Label("ENTER NICKNAME", DefComponents.LABEL_STYLE);
         l.setFontScale(4f);
         l.setPosition(125,300);
         stage.addActor(l);
@@ -48,7 +48,7 @@ public class SaveScoreScreen extends AbstractScreen
 
     private void initTextfield()
     {
-        tf = new TextField("", DefComponents.getDefaultTextfieldStyle());
+        tf = new TextField("", DefComponents.TEXTFIELD_STYLE);
         tf.setPosition(250,200);
         tf.setSize(200,50);
         tf.debug();
@@ -57,7 +57,7 @@ public class SaveScoreScreen extends AbstractScreen
 
     private void initButton()
     {
-        TextButton tb = new TextButton("OK",DefComponents.getTextButtonStyle());
+        TextButton tb = new TextButton("OK",DefComponents.TEXTBUTTON_STYLE);
         tb.setPosition(310,100);
         tb.setSize(100,50);
         tb.addListener(new ClickListener(){

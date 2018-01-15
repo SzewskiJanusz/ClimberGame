@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -21,7 +20,18 @@ public abstract class DefComponents
 {
     private static BitmapFont textFont;
 
-    public static Label.LabelStyle getDefaultLabelStyle()
+    public static Label.LabelStyle LABEL_STYLE;
+    public static TextField.TextFieldStyle TEXTFIELD_STYLE;
+    public static TextButton.TextButtonStyle TEXTBUTTON_STYLE;
+
+    public static void prepareStyles()
+    {
+        LABEL_STYLE = getDefaultLabelStyle();
+        TEXTFIELD_STYLE = getDefaultTextfieldStyle();
+        TEXTBUTTON_STYLE = getTextButtonStyle();
+    }
+
+    private static Label.LabelStyle getDefaultLabelStyle()
     {
         Label.LabelStyle ls = new Label.LabelStyle();
         ls.font = textFont;
@@ -31,7 +41,7 @@ public abstract class DefComponents
         return ls;
     }
 
-    public static TextField.TextFieldStyle getDefaultTextfieldStyle()
+    private static TextField.TextFieldStyle getDefaultTextfieldStyle()
     {
         TextField.TextFieldStyle tStyle = new TextField.TextFieldStyle();
         tStyle.font = textFont;
@@ -40,15 +50,13 @@ public abstract class DefComponents
         return tStyle;
     }
 
-    public static TextButton.TextButtonStyle getTextButtonStyle()
+    private static TextButton.TextButtonStyle getTextButtonStyle()
     {
         TextButton.TextButtonStyle bs;
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("uiskin.atlas"));
         Skin skin = new Skin(atlas);
         bs = new TextButton.TextButtonStyle();
         bs.font = textFont;
-       // bs.up = skin.getDrawable("button_02");
-       // bs.down = skin.getDrawable("button_06");
         bs.up = skin.getDrawable("button-orange");
         bs.down = skin.getDrawable("button-orange-down");
         return bs;

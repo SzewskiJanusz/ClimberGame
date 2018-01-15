@@ -18,6 +18,7 @@ public class ClimberGame extends Game {
 	public void create()
 	{
 		DefComponents.createFonts();
+        DefComponents.prepareStyles();
 		setScreen(new MenuScreen(this));
 	}
 

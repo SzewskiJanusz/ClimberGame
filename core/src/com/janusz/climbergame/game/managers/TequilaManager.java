@@ -54,7 +54,7 @@ public class TequilaManager extends GoodManager<Tequila>
     @Override
     protected void triggerEffect()
     {
-        GameScreen.stage.addActor(new BouncingText("DRUNK", DefComponents.getDefaultLabelStyle(),
+        GameScreen.stage.addActor(new BouncingText("DRUNK", DefComponents.LABEL_STYLE,
                 Effect.BAD));
         Player.drunk = true;
         IndicatorController.instance().addDrunkIndicator();

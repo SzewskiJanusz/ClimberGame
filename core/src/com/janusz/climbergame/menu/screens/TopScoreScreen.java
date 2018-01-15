@@ -14,6 +14,7 @@ import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.BackToMenuButton;
+import com.janusz.climbergame.shared.DefComponents;
 import com.janusz.climbergame.shared.scoreclient.ServerConnection;
 import java.util.List;
 
@@ -27,8 +28,6 @@ public class TopScoreScreen extends AbstractScreen
 
     private Title title;
 
-    private TextButton.TextButtonStyle bs;
-
     private BackToMenuButton btnBackToMenu;
 
     private Table scoreTable;
@@ -41,7 +40,6 @@ public class TopScoreScreen extends AbstractScreen
     private Label[] lblPlayers;
     private Label[] lblScores;
 
-    private Label.LabelStyle ls;
 
     public TopScoreScreen(ClimberGame game)
     {
@@ -67,11 +65,11 @@ public class TopScoreScreen extends AbstractScreen
     {
         for (int i = 0 ; i < scores.size() ; i++)
         {
-            lblLp[i] = new Label(String.valueOf(i + 1), ls);
+            lblLp[i] = new Label(String.valueOf(i + 1), DefComponents.LABEL_STYLE);
             lblLp[i].setFontScale(1.2f);
-            lblPlayers[i] = new Label(scores.get(i).split(":")[0], ls);
+            lblPlayers[i] = new Label(scores.get(i).split(":")[0], DefComponents.LABEL_STYLE);
             lblPlayers[i].setFontScale(1.2f);
-            lblScores[i] = new Label(scores.get(i).split(":")[1], ls);
+            lblScores[i] = new Label(scores.get(i).split(":")[1], DefComponents.LABEL_STYLE);
             lblScores[i].setFontScale(1.2f);
             scoreTable.add(lblLp[i]).width(120);
             scoreTable.add(lblPlayers[i]).width(120);
@@ -84,21 +82,12 @@ public class TopScoreScreen extends AbstractScreen
     protected void init()
     {
         initTitle();
-        initLabelStyle();
-        initButtonStyle();
         initBackButton();
         initTable();
 
         initHeaderLabels();
         initDataLabels();
 
-    }
-
-    private void initLabelStyle()
-    {
-        ls = new Label.LabelStyle();
-        ls.font = new BitmapFont();
-        ls.fontColor = Color.WHITE;
     }
 
     private void initDataLabels()
@@ -110,11 +99,11 @@ public class TopScoreScreen extends AbstractScreen
 
     private void initHeaderLabels()
     {
-        playerHeader = new Label("Player", ls);
+        playerHeader = new Label("Player", DefComponents.LABEL_STYLE);
         playerHeader.setFontScale(3);
-        scoreHeader = new Label("Score", ls);
+        scoreHeader = new Label("Score", DefComponents.LABEL_STYLE);
         scoreHeader.setFontScale(3);
-        lpHeader = new Label("Lp.", ls);
+        lpHeader = new Label("Lp.", DefComponents.LABEL_STYLE);
         lpHeader.setFontScale(3);
     }
 
@@ -131,20 +120,9 @@ public class TopScoreScreen extends AbstractScreen
         stage.addActor(title);
     }
 
-
-    private void initButtonStyle()
-    {
-        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("ui-green.atlas"));
-        Skin skin = new Skin(atlas);
-        bs = new TextButton.TextButtonStyle();
-        bs.font = new BitmapFont();
-        bs.up = skin.getDrawable("button_02");
-        bs.down = skin.getDrawable("button_06");
-    }
-
     private void initBackButton()
     {
-        btnBackToMenu = new BackToMenuButton("BACK TO MENU", bs, 30);
+        btnBackToMenu = new BackToMenuButton("BACK TO MENU", DefComponents.TEXTBUTTON_STYLE, 30);
         btnBackToMenu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
