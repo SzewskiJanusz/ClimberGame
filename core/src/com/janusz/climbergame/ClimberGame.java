@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.janusz.climbergame.game.screens.SaveScoreScreen;
 import com.janusz.climbergame.game.screens.SplashScreen;
 import com.janusz.climbergame.menu.screens.MenuScreen;
+import com.janusz.climbergame.shared.DefComponents;
 
 public class ClimberGame extends Game {
 
@@ -16,6 +17,7 @@ public class ClimberGame extends Game {
 	@Override
 	public void create()
 	{
+		DefComponents.createFonts();
 		setScreen(new MenuScreen(this));
 	}
 

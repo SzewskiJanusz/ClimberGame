@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.EventHandler;
+import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.ExitButton;
 import com.janusz.climbergame.menu.buttons.OptionsButton;
@@ -17,6 +18,7 @@ import com.janusz.climbergame.menu.buttons.StartGameButton;
 import com.janusz.climbergame.menu.buttons.TopScoresButton;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.shared.DefComponents;
 
 /**
  * Created by Janusz on 2017-09-27.
@@ -27,12 +29,12 @@ public class MenuScreen extends AbstractScreen
 
     private Title title;
 
-    private TextButton.TextButtonStyle bs;
-
     private StartGameButton startGame;
     private OptionsButton options;
     private TopScoresButton topScores;
     private ExitButton exit;
+
+    private JungleBackground gameBackground;
 
 
     public MenuScreen(final ClimberGame game)
@@ -40,6 +42,9 @@ public class MenuScreen extends AbstractScreen
         super(game);
         // Set input processor here because stage is initialized
         Gdx.input.setInputProcessor(stage);
+        gameBackground = new JungleBackground();
+        stage.addActor(gameBackground);
+        gameBackground.toBack();
     }
 
     @Override
@@ -47,7 +52,6 @@ public class MenuScreen extends AbstractScreen
     {
         initTitle();
 
-        initButtonStyle();
 
         initStartGame();
         initOptions();
@@ -61,26 +65,15 @@ public class MenuScreen extends AbstractScreen
         stage.addActor(title);
     }
 
-
-    private void initButtonStyle()
-    {
-        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("ui-green.atlas"));
-        Skin skin = new Skin(atlas);
-        bs = new TextButton.TextButtonStyle();
-        bs.font = new BitmapFont();
-        bs.up = skin.getDrawable("button_02");
-        bs.down = skin.getDrawable("button_06");
-    }
-
     private void initExit()
     {
-        exit = new ExitButton("EXIT", bs, 10);
+        exit = new ExitButton("EXIT", DefComponents.getTextButtonStyle(), 10);
         stage.addActor(exit);
     }
 
     private void initTopScores()
     {
-        topScores = new TopScoresButton("TOP SCORES", bs, 110);
+        topScores = new TopScoresButton("TOP SCORES", DefComponents.getTextButtonStyle(), 110);
         topScores.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -93,7 +86,7 @@ public class MenuScreen extends AbstractScreen
 
     private void initOptions()
     {
-        options = new OptionsButton("OPTIONS", bs, 210);
+        options = new OptionsButton("OPTIONS", DefComponents.getTextButtonStyle(), 210);
         options.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -106,7 +99,7 @@ public class MenuScreen extends AbstractScreen
 
     private void initStartGame()
     {
-        startGame = new StartGameButton("START", bs, 310 );
+        startGame = new StartGameButton("START", DefComponents.getTextButtonStyle(), 310 );
         startGame.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
