@@ -15,8 +15,7 @@ public class EventHandler extends InputAdapter
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        if (Player.instance().playerState == PlayerState.CLIMBING_LIANA ||
-                Player.instance().playerState == PlayerState.CLIMBING_WALL)
+        if (Player.instance().playerState == PlayerState.CLIMBING_LIANA)
         {
             Vector2 actorScreenPos = translateLocalToStageCoordinates();
 

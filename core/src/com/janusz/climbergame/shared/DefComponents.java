@@ -60,7 +60,18 @@ public abstract class DefComponents
         bs.up = skin.getDrawable("button-orange");
         bs.down = skin.getDrawable("button-orange-down");
         return bs;
+
     }
+    private static Label.LabelStyle getBeginLabelStyle()
+    {
+        Label.LabelStyle ls = new Label.LabelStyle();
+        ls.font = textFont;
+        ls.font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear,
+            Texture.TextureFilter.Linear);
+
+        return ls;
+    }
+
 
     public static void createFonts() {
         FileHandle fontFile = Gdx.files.internal("gomarice_no_continue.ttf");

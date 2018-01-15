@@ -13,6 +13,8 @@ import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
+import com.janusz.climbergame.game.texts.TapToStartLabel;
+import com.janusz.climbergame.shared.DefComponents;
 
 /**
  * Main game screen
@@ -21,6 +23,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 {
     // Flaga gameOver, czy gra się skończyła
     public static boolean gameOver;
+    public static boolean onBeginning;
     public static float difficultyTimer;
 
     /* Prywatne pola menadżerów */
@@ -32,6 +35,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private TrunkBackground trunk;
     private CoffeeManager coffeeMgr;
     private StoneManager stoneMgr;
+    private TapToStartLabel ttsLabel;
 
     // Konstruktor
     public GameScreen(ClimberGame game)
@@ -43,7 +47,9 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     // oraz dodanie ich do sceny
     protected void init()
     {
-        gameOver = false;
+        onBeginning = true;
+        gameOver = true;
+        ttsLabel = new TapToStartLabel("TAP TO START GAME", DefComponents.LABEL_STYLE);
         ScoreManager.getInstance().ScoreLogic.setScore(0);
         Player.instance().reset();
         difficultyTimer = 0;
@@ -64,6 +70,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stoneMgr = new StoneManager();
 
         stage.addActor(ScoreManager.getInstance().ScoreLabel);
+        stage.addActor(ttsLabel);
     }
 
     @Override
@@ -78,6 +85,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             stage.draw();
             spriteBatch.end();
         }
+
     }
 
     private void update(float delta)
