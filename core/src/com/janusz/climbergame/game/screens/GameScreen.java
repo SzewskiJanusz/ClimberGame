@@ -50,9 +50,9 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         EntireLiana.get().reset();
 
         background = new JungleBackground();
-        trunk = new TrunkBackground();
+       // trunk = new TrunkBackground();
         stage.addActor(background);
-        stage.addActor(trunk);
+//        stage.addActor(trunk);
         stage.addActor(Player.instance());
         bananaMgr = new BananaManager();
         anvilMgr = new AnvilManager();

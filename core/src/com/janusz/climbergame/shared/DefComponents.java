@@ -2,6 +2,7 @@ package com.janusz.climbergame.shared;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -21,6 +22,8 @@ public abstract class DefComponents
         Label.LabelStyle ls = new Label.LabelStyle();
         ls.font = new BitmapFont();
         ls.fontColor = Color.WHITE;
+        ls.font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear,
+                Texture.TextureFilter.Linear);
         return ls;
     }
 
@@ -28,6 +31,8 @@ public abstract class DefComponents
     {
         TextField.TextFieldStyle tStyle = new TextField.TextFieldStyle();
         tStyle.font = new BitmapFont();
+        tStyle.font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear,
+                Texture.TextureFilter.Linear);
         tStyle.fontColor = Color.WHITE;
         return tStyle;
     }
@@ -39,6 +44,8 @@ public abstract class DefComponents
         Skin skin = new Skin(atlas);
         bs = new TextButton.TextButtonStyle();
         bs.font = new BitmapFont();
+        bs.font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear,
+                Texture.TextureFilter.Linear);
         bs.up = skin.getDrawable("button_02");
         bs.down = skin.getDrawable("button_06");
         return bs;
