@@ -2,7 +2,6 @@ package com.janusz.climbergame.game.screens;
 
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
-import com.janusz.climbergame.game.background.TrunkBackground;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.managers.AnvilManager;
 import com.janusz.climbergame.game.managers.BananaManager;
@@ -32,10 +31,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private TequilaManager tequilaMgr;
     private GameOverManager gameOverMgr;
     private JungleBackground background;
-    private TrunkBackground trunk;
     private CoffeeManager coffeeMgr;
     private StoneManager stoneMgr;
-    private TapToStartLabel ttsLabel;
 
     // Konstruktor
     public GameScreen(ClimberGame game)
@@ -48,29 +45,24 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     protected void init()
     {
         onBeginning = true;
-        gameOver = true;
-        ttsLabel = new TapToStartLabel("TAP TO START GAME", DefComponents.LABEL_STYLE);
+        gameOver = false;
+        stage.addActor(TapToStartLabel.instance());
         ScoreManager.getInstance().ScoreLogic.setScore(0);
         Player.instance().reset();
         difficultyTimer = 0;
         EntireLiana.get().reset();
-
         background = new JungleBackground();
-       // trunk = new TrunkBackground();
         stage.addActor(background);
-//        stage.addActor(trunk);
         stage.addActor(Player.instance());
         bananaMgr = new BananaManager();
         anvilMgr = new AnvilManager();
         gameOverMgr = new GameOverManager(game);
         background = new JungleBackground();
-        trunk = new TrunkBackground();
         tequilaMgr = new TequilaManager();
         coffeeMgr = new CoffeeManager();
         stoneMgr = new StoneManager();
 
         stage.addActor(ScoreManager.getInstance().ScoreLabel);
-        stage.addActor(ttsLabel);
     }
 
     @Override
@@ -79,8 +71,11 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         if (!gameOver)
         {
             super.render(delta);
-            update(delta);
-
+            if (!onBeginning)
+            {
+                update(delta);
+            }
+            
             spriteBatch.begin();
             stage.draw();
             spriteBatch.end();
@@ -101,8 +96,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         tequilaMgr.updateEntities(delta);
         coffeeMgr.updateEntities(delta);
         stoneMgr.updateEntities(delta);
-        trunk.moveDown(delta);
-
 
         checkIfGameOver();
         difficultyTimer += delta;

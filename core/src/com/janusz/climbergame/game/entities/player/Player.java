@@ -52,6 +52,7 @@ public class Player extends Actor implements IPlayer
         this.setSize(WIDTH,HEIGHT);
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
         badCollisionBounds = new Rectangle(STARTING_X, STARTING_Y + HEIGHT/2, WIDTH, HEIGHT/2);
+        currentFrame = playerAnimation.getStartingFrame();
         reset();
     }
 

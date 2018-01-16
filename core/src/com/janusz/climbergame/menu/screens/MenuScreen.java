@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.game.BeginningHandler;
 import com.janusz.climbergame.game.EventHandler;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.menu.Title;
@@ -104,7 +105,7 @@ public class MenuScreen extends AbstractScreen
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                Gdx.input.setInputProcessor(new EventHandler());
+                Gdx.input.setInputProcessor(new BeginningHandler());
                 game.setScreen(new GameScreen(game));
             }
         });

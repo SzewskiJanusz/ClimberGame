@@ -75,4 +75,9 @@ public class PlayerAnimation
         }
         return null;
     }
+
+    public TextureRegion getStartingFrame()
+    {
+        return animation.getKeyFrame(0, true);
+    }
 }
