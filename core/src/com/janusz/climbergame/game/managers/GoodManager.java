@@ -19,6 +19,7 @@ public abstract class GoodManager<T extends AbstractItem>
     // Lista obiektów
     protected List<T> entities;
     protected float entitySpawnTime;
+    private int delay ;
 
     /*
      * Metody abstrakacyjne do poprawnego zarządzania obiektami
@@ -45,20 +46,9 @@ public abstract class GoodManager<T extends AbstractItem>
      */
     public GoodManager(int delay)
     {
+        this.delay = delay;
         entities = new ArrayList<T>();
         randomizeSpawnTime();
-
-
-        Timer.schedule(new Timer.Task(){
-                           @Override
-                           public void run()
-                           {
-                               spawnEntity();
-                           }
-                       }
-                , delay       //    (delay)
-                , entitySpawnTime
-        );
     }
 
     /**
@@ -119,5 +109,19 @@ public abstract class GoodManager<T extends AbstractItem>
             case 4: return EntireLiana.third_liana_x;
             default: return 0;
         }
+    }
+
+    public void startTimer()
+    {
+        Timer.schedule(new Timer.Task(){
+                           @Override
+                           public void run()
+                           {
+                               spawnEntity();
+                           }
+                       }
+                , delay       //    (delay)
+                , entitySpawnTime
+        );
     }
 }

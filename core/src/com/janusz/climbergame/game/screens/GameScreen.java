@@ -26,13 +26,13 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public static float difficultyTimer;
 
     /* Prywatne pola menadżerów */
-    private BananaManager bananaMgr;
-    private AnvilManager anvilMgr;
-    private TequilaManager tequilaMgr;
-    private GameOverManager gameOverMgr;
-    private JungleBackground background;
-    private CoffeeManager coffeeMgr;
-    private StoneManager stoneMgr;
+    public static BananaManager bananaMgr;
+    public static AnvilManager anvilMgr;
+    public static TequilaManager tequilaMgr;
+    public GameOverManager gameOverMgr;
+    public JungleBackground background;
+    public static CoffeeManager coffeeMgr;
+    public static StoneManager stoneMgr;
 
     // Konstruktor
     public GameScreen(ClimberGame game)
@@ -62,7 +62,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         coffeeMgr = new CoffeeManager();
         stoneMgr = new StoneManager();
 
-        stage.addActor(ScoreManager.getInstance().ScoreLabel);
     }
 
     @Override
@@ -75,7 +74,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             {
                 update(delta);
             }
-            
+
             spriteBatch.begin();
             stage.draw();
             spriteBatch.end();
@@ -117,6 +116,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         spriteBatch.dispose();
         stage.dispose();
     }
+
 }
 
 

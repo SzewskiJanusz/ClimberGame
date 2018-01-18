@@ -2,6 +2,7 @@ package com.janusz.climbergame.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
+import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.texts.TapToStartLabel;
 
@@ -16,7 +17,15 @@ public class BeginningHandler extends InputAdapter
     {
         Gdx.input.setInputProcessor(new EventHandler());
         GameScreen.onBeginning = false;
+
+        GameScreen.bananaMgr.startTimer();
+        GameScreen.anvilMgr.startTimer();
+        GameScreen.stoneMgr.startTimer();
+        GameScreen.coffeeMgr.startTimer();
+        GameScreen.tequilaMgr.startTimer();
+
         TapToStartLabel.instance().remove();
+        GameScreen.stage.addActor(ScoreManager.getInstance().ScoreLabel);
         return true;
     }
 }
