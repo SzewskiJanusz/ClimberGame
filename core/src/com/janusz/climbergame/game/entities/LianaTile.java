@@ -15,19 +15,18 @@ public class LianaTile extends AbstractItem
     public static final int WIDTH = Const.LIANATILE_WIDTH;
     public static final int HEIGHT = Const.LIANATILE_HEIGHT;
 
-
     public static int STARTING_Y = ClimberGame.HEIGHT;
 
 
     public LianaTile(int starting_x)
     {
-        super(Const.LIANATILE_TEXTURE, starting_x, STARTING_Y, WIDTH , HEIGHT ,
+        super(new Texture("liana.png"), starting_x, STARTING_Y, WIDTH , HEIGHT ,
                 Const.LIANATILE_VELOCITY);
     }
 
     public LianaTile(int starting_x,int starting_y)
     {
-        super(Const.LIANATILE_TEXTURE, starting_x, starting_y, WIDTH , HEIGHT ,
+        super(new Texture("liana.png"), starting_x, starting_y, WIDTH , HEIGHT ,
                 Const.LIANATILE_VELOCITY);
     }
 

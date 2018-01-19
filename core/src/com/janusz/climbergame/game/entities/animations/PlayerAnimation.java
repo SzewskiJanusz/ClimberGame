@@ -22,7 +22,6 @@ public class PlayerAnimation
     private int singleFrameWidth = Const.FRAME_WIDTH;
     private int singleFrameHeight = Const.FRAME_HEIGHT;
 
-
     public PlayerAnimation()
     {
         init();
@@ -30,7 +29,7 @@ public class PlayerAnimation
 
     private void init()
     {
-        climbingStrip = Const.FRAME_STRIP_TEXTURE;
+        climbingStrip = new Texture("climbing-strip.png");
         int imageAmount = climbingStrip.getWidth() / singleFrameWidth ;
 
         initFrames(imageAmount);

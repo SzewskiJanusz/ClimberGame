@@ -10,7 +10,7 @@ import com.janusz.climbergame.game.screens.GameScreen;
 
 public class AnvilManager extends BadManager<Anvil>
 {
-
+    private final Texture texture = new Texture("anvil.png");
     public AnvilManager()
     {
         super(Const.ANVIL_DELAY_SPAWN);
@@ -28,7 +28,7 @@ public class AnvilManager extends BadManager<Anvil>
         int x = selectPlace(MathUtils.random(2,4));
         Anvil a = new Anvil
         (
-            Const.ANVIL_TEXTURE,
+            texture,
             x,
             ClimberGame.HEIGHT,
             Const.ANVIL_WIDTH,

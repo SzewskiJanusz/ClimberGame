@@ -22,6 +22,8 @@ public class TequilaManager extends GoodManager<Tequila>
     /**
      * Initialize List and timer
      */
+    private final Texture texture = new Texture("tequila.png");
+
     public TequilaManager()
     {
         super(Const.TEQUILA_DELAY_SPAWN);
@@ -39,7 +41,7 @@ public class TequilaManager extends GoodManager<Tequila>
         int x = selectPlace(MathUtils.random(2,4));
         Tequila t = new Tequila
         (
-            Const.TEQUILA_TEXTURE,
+            texture,
             x,
             ClimberGame.HEIGHT,
             Const.TEQUILA_WIDTH,

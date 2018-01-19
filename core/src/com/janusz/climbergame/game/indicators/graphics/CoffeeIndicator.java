@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.indicators.graphics;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.janusz.climbergame.Const;
@@ -19,7 +20,7 @@ public class CoffeeIndicator extends Image
 
     public CoffeeIndicator()
     {
-        super(Const.COFFEEINDICATOR_TEXTURE);
+        super(new Texture("coffeeindicator.png"));
         this.setSize(Const.COFFEEINDICATOR_WIDTH,Const.COFFEEINDICATOR_HEIGHT);
         this.setPosition(Const.COFFEEINDICATOR_X, Const.COFFEEINDICATOR_Y);
 

@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.indicators.graphics;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.janusz.climbergame.Const;
@@ -17,10 +18,10 @@ import java.math.RoundingMode;
 public class DrunkIndicator extends Image
 {
     Label label;
-
+    
     public DrunkIndicator()
     {
-        super(Const.DRUNKINDICATOR_TEXTURE);
+        super(new Texture("drop.png"));
         this.setSize(Const.DRUNKINDICATOR_WIDTH,Const.DRUNKINDICATOR_HEIGHT);
         this.setPosition(Const.DRUNKINDICATOR_X, Const.DRUNKINDICATOR_Y);
 

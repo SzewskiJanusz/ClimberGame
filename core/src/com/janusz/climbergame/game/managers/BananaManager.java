@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.managers;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
@@ -17,6 +18,8 @@ import com.janusz.climbergame.shared.DefComponents;
  */
 public class BananaManager extends GoodManager<Banana>
 {
+    private final Texture texture = new Texture("banana.png");
+
     public BananaManager()
     {
         super(Const.BANANA_DELAY_SPAWN);
@@ -36,7 +39,7 @@ public class BananaManager extends GoodManager<Banana>
         // stworzenie banana
         Banana b = new Banana
         (
-            Const.BANANA_TEXTURE,
+            texture,
             x,
             ClimberGame.HEIGHT,
             Const.BANANA_WIDTH,

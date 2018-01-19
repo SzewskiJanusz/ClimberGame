@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.texts;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.shared.DefComponents;
@@ -24,7 +25,7 @@ public class TapImage extends Image
 
     private TapImage()
     {
-        super(Const.TAP_TEXTURE);
+        super(new Texture("tap.png"));
         this.setSize(Const.TAP_WIDTH, Const.TAP_HEIGHT);
         this.setPosition(Const.TAP_STARTING_X, Const.TAP_STARTING_Y);
     }

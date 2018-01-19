@@ -12,6 +12,7 @@ import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.BeginningHandler;
 import com.janusz.climbergame.game.EventHandler;
 import com.janusz.climbergame.game.background.JungleBackground;
+import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.ExitButton;
 import com.janusz.climbergame.menu.buttons.OptionsButton;
@@ -69,6 +70,13 @@ public class MenuScreen extends AbstractScreen
     private void initExit()
     {
         exit = new ExitButton("EXIT", DefComponents.TEXTBUTTON_STYLE, 10);
+        exit.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                Gdx.app.exit();
+            }
+        });
         stage.addActor(exit);
     }
 

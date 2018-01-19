@@ -18,6 +18,8 @@ import com.janusz.climbergame.shared.DefComponents;
 
 public class CoffeeManager extends GoodManager<Coffee>
 {
+    private final Texture texture = new Texture("coffee.png");
+
     public CoffeeManager()
     {
         super(Const.COFFEE_DELAY_SPAWN);
@@ -35,7 +37,7 @@ public class CoffeeManager extends GoodManager<Coffee>
         int x = selectPlace(MathUtils.random(2,4));
         Coffee c = new Coffee
         (
-                Const.COFFEE_TEXTURE,
+                texture,
                 x,
                 ClimberGame.HEIGHT,
                 Const.COFFEE_WIDTH,

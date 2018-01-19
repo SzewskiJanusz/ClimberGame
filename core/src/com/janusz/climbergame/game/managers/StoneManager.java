@@ -13,6 +13,7 @@ import com.janusz.climbergame.game.screens.GameScreen;
 
 public class StoneManager extends BadManager<Stone>
 {
+    private final Texture texture = new Texture("stone.png");
     /**
      * Initialize List and timer
      */
@@ -33,7 +34,7 @@ public class StoneManager extends BadManager<Stone>
         int x = selectPlace(MathUtils.random(2,4));
         Stone a = new Stone
         (
-            Const.STONE_TEXTURE,
+            texture,
             x,
             ClimberGame.HEIGHT,
             Const.STONE_WIDTH,

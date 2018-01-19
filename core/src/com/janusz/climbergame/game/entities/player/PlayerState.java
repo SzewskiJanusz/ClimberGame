@@ -10,6 +10,5 @@ public enum PlayerState
     CLIMBING_WALL,
     FLYING_LEFT,
     FLYING_RIGHT,
-    FLYING_WALL,
     DYING
 }
