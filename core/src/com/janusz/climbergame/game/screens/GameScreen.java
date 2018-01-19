@@ -56,7 +56,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         EntireLiana.get().reset();
         background = new JungleBackground();
         stage.addActor(background);
-        stage.addActor(Player.instance());
         bananaMgr = new BananaManager();
         anvilMgr = new AnvilManager();
         gameOverMgr = new GameOverManager(game);
@@ -66,7 +65,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stoneMgr = new StoneManager();
         TapToStartLabel.instance().toFront();
         TapImage.instance().toFront();
-
     }
 
     @Override
@@ -80,7 +78,13 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             {
                 update(delta);
             }
-            
+            else
+            {
+                EntireLiana.get().moveAllLianasDown(delta);
+                TapImage.instance().toFront();
+                TapToStartLabel.instance().toFront();
+            }
+
             spriteBatch.begin();
             stage.draw();
             spriteBatch.end();
