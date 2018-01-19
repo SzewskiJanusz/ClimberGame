@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.screens;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
@@ -12,6 +13,7 @@ import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
+import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.game.texts.TapToStartLabel;
 import com.janusz.climbergame.shared.DefComponents;
 
@@ -47,6 +49,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         onBeginning = true;
         gameOver = false;
         stage.addActor(TapToStartLabel.instance());
+        stage.addActor(TapImage.instance());
         ScoreManager.getInstance().ScoreLogic.setScore(0);
         Player.instance().reset();
         difficultyTimer = 0;
@@ -61,6 +64,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         tequilaMgr = new TequilaManager();
         coffeeMgr = new CoffeeManager();
         stoneMgr = new StoneManager();
+        TapToStartLabel.instance().toFront();
+        TapImage.instance().toFront();
 
     }
 
@@ -70,11 +75,12 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         if (!gameOver)
         {
             super.render(delta);
+
             if (!onBeginning)
             {
                 update(delta);
             }
-
+            
             spriteBatch.begin();
             stage.draw();
             spriteBatch.end();

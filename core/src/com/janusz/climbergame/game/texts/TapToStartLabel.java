@@ -1,7 +1,9 @@
 package com.janusz.climbergame.game.texts;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.Const;
 import com.janusz.climbergame.shared.DefComponents;
 
 /**
@@ -10,9 +12,6 @@ import com.janusz.climbergame.shared.DefComponents;
 
 public class TapToStartLabel extends Label
 {
-    private final int STARTING_X = ClimberGame.WIDTH/3;
-    private final int STARTING_Y = ClimberGame.HEIGHT/2;
-
     private static TapToStartLabel ins;
 
     public static TapToStartLabel instance()
@@ -31,10 +30,9 @@ public class TapToStartLabel extends Label
     {
         super(text, style);
         this.setFontScale(3,4);
-        this.setX(STARTING_X);
-        this.setY(STARTING_Y);
+        this.setX(Const.TAPLABEL_STARTING_X);
+        this.setY(Const.TAPLABEL_STARTING_Y);
     }
-
 
 
 

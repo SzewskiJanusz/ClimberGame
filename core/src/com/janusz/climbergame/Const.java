@@ -97,4 +97,15 @@ public abstract class Const
     /** „GOOD” TIMER CONSTS */
     public static final double GOOD_TIMER_RATIO = 1.5;
 
+    /** TAP IMAGE */
+    public static final Texture TAP_TEXTURE = new Texture("tap.png");
+    public static final int TAP_STARTING_X = 300;
+    public static final int TAP_STARTING_Y = 200;
+    public static final int TAP_WIDTH = 60;
+    public static final int TAP_HEIGHT = 85;
+
+    /** TAP LABEL */
+    public static final int TAPLABEL_STARTING_X = 100;
+    public static final int TAPLABEL_STARTING_Y = 350;
+
 }
