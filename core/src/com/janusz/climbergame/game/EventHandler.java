@@ -1,10 +1,18 @@
 package com.janusz.climbergame.game;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
+import com.janusz.climbergame.game.pause.PauseButton;
 import com.janusz.climbergame.game.screens.GameScreen;
+import com.sun.org.apache.xpath.internal.operations.String;
 
 /**
  * Created by Janusz on 2017-09-18.
@@ -34,6 +42,7 @@ public class EventHandler extends InputAdapter
                     Player.instance().jumpLeft();
             }
         }
+
         return true;
     }
 
@@ -47,6 +56,4 @@ public class EventHandler extends InputAdapter
     {
         return playerOnScreenX > screenX;
     }
-
-
 }

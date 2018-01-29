@@ -11,7 +11,7 @@ import com.janusz.climbergame.shared.DefComponents;
 
 public class TapImage extends Image
 {
-    private static TapImage ins;
+    public static TapImage ins;
 
     public static TapImage instance()
     {

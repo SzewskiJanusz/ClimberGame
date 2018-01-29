@@ -1,6 +1,11 @@
 package com.janusz.climbergame.game.screens;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
@@ -13,9 +18,9 @@ import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
+import com.janusz.climbergame.game.pause.PauseButton;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.game.texts.TapToStartLabel;
-import com.janusz.climbergame.shared.DefComponents;
 
 /**
  * Main game screen
@@ -35,6 +40,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public JungleBackground background;
     public static CoffeeManager coffeeMgr;
     public static StoneManager stoneMgr;
+    public PauseButton pauseBtn;
 
     // Konstruktor
     public GameScreen(ClimberGame game)
@@ -48,6 +54,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         onBeginning = true;
         gameOver = false;
+
         stage.addActor(TapToStartLabel.instance());
         stage.addActor(TapImage.instance());
         ScoreManager.getInstance().ScoreLogic.setScore(0);
@@ -65,6 +72,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stoneMgr = new StoneManager();
         TapToStartLabel.instance().toFront();
         TapImage.instance().toFront();
+        stage.addActor(PauseButton.instance());
     }
 
     @Override
@@ -118,6 +126,9 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             stage.addActor(gameOverMgr.getTable());
         }
     }
+
+
+
 
     @Override
     public void dispose()

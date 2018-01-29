@@ -32,7 +32,7 @@ public class Player extends Actor implements IPlayer
     public static boolean caffeinated;
 
     // Animation class
-    private PlayerAnimation playerAnimation;
+    public PlayerAnimation playerAnimation;
 
     private Rectangle bounds;
     private Rectangle badCollisionBounds;
@@ -43,7 +43,7 @@ public class Player extends Actor implements IPlayer
     private TextureRegion currentFrame;
     private Vector2 velocity;
 
-    private static Player player;
+    public static Player player;
 
 
     private Player()

@@ -19,7 +19,7 @@ public class IndicatorController
     private DrunkIndicator drunkIndicator;
     private CoffeeIndicator coffeeIndicator;
 
-    private static IndicatorController indControl;
+    public static IndicatorController indControl;
 
     private IndicatorController()
     {
