@@ -13,6 +13,9 @@ import com.janusz.climbergame.game.BeginningHandler;
 import com.janusz.climbergame.game.EventHandler;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.entities.player.Player;
+import com.janusz.climbergame.game.indicators.graphics.CoffeeIndicator;
+import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
+import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.ExitButton;
 import com.janusz.climbergame.menu.buttons.OptionsButton;
@@ -74,6 +77,10 @@ public class MenuScreen extends AbstractScreen
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
+                TapImage.ins = null;
+                Player.player = null;
+                IndicatorController.indControl = null;
+                dispose();
                 Gdx.app.exit();
             }
         });
@@ -131,5 +138,13 @@ public class MenuScreen extends AbstractScreen
         stage.draw();
 
         spriteBatch.end();
+    }
+
+    @Override
+    public void dispose()
+    {
+        super.dispose();
+        stage.dispose();
+        spriteBatch.dispose();
     }
 }
