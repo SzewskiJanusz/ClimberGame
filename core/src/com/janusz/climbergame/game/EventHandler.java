@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.pause.PauseButton;
@@ -40,6 +41,22 @@ public class EventHandler extends InputAdapter
                     Player.instance().jumpRight();
                 else
                     Player.instance().jumpLeft();
+            }
+        }
+
+        if (screenX > PauseButton.instance().stageX && screenX < PauseButton.instance().stageX +
+                PauseButton.instance().stageWidth &&
+                screenY > PauseButton.instance().stageY && screenY < PauseButton.instance().stageY +
+                PauseButton.instance().stageHeight)
+        {
+            if ( GameScreen.paused )
+            {
+                GameScreen.paused  = false;
+                Timer.instance().start();
+            }
+            else{
+                GameScreen.paused  = true;
+                Timer.instance().stop();
             }
         }
 

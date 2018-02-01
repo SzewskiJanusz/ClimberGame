@@ -6,6 +6,7 @@ import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
+import com.janusz.climbergame.game.screens.GameScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,15 +113,16 @@ public abstract class BadManager<T extends AbstractItem>
 
     public void startTimer()
     {
-        Timer.schedule(new Timer.Task(){
-                           @Override
-                           public void run()
+            Timer.schedule(new Timer.Task()
                            {
-                               spawnEntity();
+                               @Override
+                               public void run()
+                               {
+                                   spawnEntity();
+                               }
                            }
-                       }
-                , delay       //    (delay)
-                , entitySpawnTime
-        );
+                    , delay       //    (delay)
+                    , entitySpawnTime
+            );
     }
 }

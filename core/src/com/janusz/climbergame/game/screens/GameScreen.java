@@ -40,7 +40,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public JungleBackground background;
     public static CoffeeManager coffeeMgr;
     public static StoneManager stoneMgr;
-    public PauseButton pauseBtn;
+    public static boolean paused;
 
     // Konstruktor
     public GameScreen(ClimberGame game)
@@ -54,7 +54,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         onBeginning = true;
         gameOver = false;
-
+        paused = false;
         stage.addActor(TapToStartLabel.instance());
         stage.addActor(TapImage.instance());
         ScoreManager.getInstance().ScoreLogic.setScore(0);
@@ -80,22 +80,25 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         if (!gameOver)
         {
-            super.render(delta);
+            if (!paused){
 
-            if (!onBeginning)
-            {
-                update(delta);
-            }
-            else
-            {
-                EntireLiana.get().moveAllLianasDown(delta);
-                TapImage.instance().toFront();
-                TapToStartLabel.instance().toFront();
-            }
+                super.render(delta);
 
-            spriteBatch.begin();
-            stage.draw();
-            spriteBatch.end();
+                if (!onBeginning)
+                {
+                    update(delta);
+                }
+                else
+                {
+                    EntireLiana.get().moveAllLianasDown(delta);
+                    TapImage.instance().toFront();
+                    TapToStartLabel.instance().toFront();
+                }
+
+                spriteBatch.begin();
+                stage.draw();
+                spriteBatch.end();
+            }
         }
 
     }
@@ -126,9 +129,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             stage.addActor(gameOverMgr.getTable());
         }
     }
-
-
-
 
     @Override
     public void dispose()

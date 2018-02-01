@@ -1,11 +1,13 @@
 package com.janusz.climbergame.game.managers;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
+import com.janusz.climbergame.game.screens.GameScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,15 +115,18 @@ public abstract class GoodManager<T extends AbstractItem>
 
     public void startTimer()
     {
-        Timer.schedule(new Timer.Task(){
-                           @Override
-                           public void run()
-                           {
-                               spawnEntity();
+        if (!GameScreen.paused){
+            Timer.schedule(new Timer.Task(){
+                               @Override
+                               public void run()
+                               {
+                                   spawnEntity();
+                               }
                            }
-                       }
-                , delay       //    (delay)
-                , entitySpawnTime
-        );
+                    , delay       //    (delay)
+                    , entitySpawnTime
+            );
+        }
+
     }
 }
