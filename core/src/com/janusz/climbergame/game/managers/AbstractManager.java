@@ -1,13 +1,8 @@
 package com.janusz.climbergame.game.managers;
 
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.utils.Timer;
-import com.janusz.climbergame.game.entities.player.Player;
-import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
  * Created by Janusz on 2018-02-03.
@@ -85,7 +80,8 @@ abstract class AbstractManager
                            @Override
                            public void run()
                            {
-                               spawnEntity();
+                               if (!GameScreen.paused)
+                                    spawnEntity();
                            }
                        }
                 , delay       //    (delay)

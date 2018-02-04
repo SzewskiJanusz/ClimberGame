@@ -17,7 +17,7 @@ public class BeginningHandler extends InputAdapter
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        Gdx.input.setInputProcessor(new EventHandler());
+        Gdx.input.setInputProcessor(GameScreen.stage);
         GameScreen.onBeginning = false;
 
         GameScreen.bananaMgr.startTimer();

@@ -3,11 +3,16 @@ package com.janusz.climbergame.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
+import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.managers.AnvilManager;
 import com.janusz.climbergame.game.managers.BananaManager;
@@ -73,6 +78,36 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         TapToStartLabel.instance().toFront();
         TapImage.instance().toFront();
         stage.addActor(PauseButton.instance());
+        stage.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
+                if (Player.instance().playerState == PlayerState.CLIMBING_LIANA && !GameScreen.paused)
+                {
+                    if (isFingerOnLeft(x, Player.instance().getX() + Player.instance().getWidth() / 2))
+                    {
+                        if (!Player.drunk)
+                            Player.instance().jumpLeft();
+                        else
+                            Player.instance().jumpRight();
+                    }
+                    else
+                    {
+                        if (!Player.drunk)
+                            Player.instance().jumpRight();
+                        else
+                            Player.instance().jumpLeft();
+                    }
+                }
+              return true;
+            }
+        });
+    }
+
+
+    private boolean isFingerOnLeft(float screenX, float playerOnScreenX)
+    {
+        return playerOnScreenX > screenX;
     }
 
     @Override

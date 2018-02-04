@@ -44,10 +44,8 @@ public class EventHandler extends InputAdapter
             }
         }
 
-        if (screenX > PauseButton.instance().stageX && screenX < PauseButton.instance().stageX +
-                PauseButton.instance().stageWidth &&
-                screenY > PauseButton.instance().stageY && screenY < PauseButton.instance().stageY +
-                PauseButton.instance().stageHeight)
+        if (screenX > PauseButton.instance().stageX && screenX < PauseButton.instance().stageXAndWidth
+              &&  screenY > PauseButton.instance().stageX && screenY < PauseButton.instance().stageXAndWidth )
         {
             if ( GameScreen.paused )
             {
@@ -59,7 +57,10 @@ public class EventHandler extends InputAdapter
                 Timer.instance().stop();
             }
         }
-
+        float a = PauseButton.instance().stageX;
+        float b = PauseButton.instance().stageXAndWidth;
+        float c = PauseButton.instance().stageY;
+        float d = PauseButton.instance().stageYAndHeight;
         return true;
     }
 
@@ -73,4 +74,5 @@ public class EventHandler extends InputAdapter
     {
         return playerOnScreenX > screenX;
     }
+
 }
