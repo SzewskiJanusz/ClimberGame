@@ -2,18 +2,12 @@ package com.janusz.climbergame.menu.screens;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.BeginningHandler;
-import com.janusz.climbergame.game.EventHandler;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.entities.player.Player;
-import com.janusz.climbergame.game.indicators.graphics.CoffeeIndicator;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.menu.Title;

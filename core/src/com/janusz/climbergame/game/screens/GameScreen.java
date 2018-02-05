@@ -24,8 +24,11 @@ import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.pause.PauseButton;
+import com.janusz.climbergame.game.pause.PauseController;
+import com.janusz.climbergame.game.pause.PauseLabel;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.game.texts.TapToStartLabel;
+import com.janusz.climbergame.shared.DefComponents;
 
 /**
  * Main game screen
@@ -75,9 +78,11 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         tequilaMgr = new TequilaManager();
         coffeeMgr = new CoffeeManager();
         stoneMgr = new StoneManager();
+        stage.addActor(PauseController.instance().pauseButton);
+        stage.addActor(PauseController.instance().pauseLabel);
         TapToStartLabel.instance().toFront();
         TapImage.instance().toFront();
-        stage.addActor(PauseButton.instance());
+        PauseController.instance().hideLabel();
         stage.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
@@ -115,25 +120,25 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         if (!gameOver)
         {
-            if (!paused){
+            if (!paused)
+            {
 
                 super.render(delta);
 
                 if (!onBeginning)
                 {
                     update(delta);
-                }
-                else
+                } else
                 {
                     EntireLiana.get().moveAllLianasDown(delta);
                     TapImage.instance().toFront();
                     TapToStartLabel.instance().toFront();
                 }
-
+            }
                 spriteBatch.begin();
                 stage.draw();
                 spriteBatch.end();
-            }
+
         }
 
     }
