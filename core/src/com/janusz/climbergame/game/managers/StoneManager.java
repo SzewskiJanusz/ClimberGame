@@ -2,9 +2,12 @@ package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.Stone;
+import com.janusz.climbergame.game.entities.player.Player;
+import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
@@ -49,6 +52,6 @@ public class StoneManager extends BadManager<Stone>
     @Override
     protected void triggerEffect()
     {
-        GameScreen.gameOver = true;
+        GameScreen.deathAnimation = true;
     }
 }

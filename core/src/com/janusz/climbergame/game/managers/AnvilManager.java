@@ -43,6 +43,6 @@ public class AnvilManager extends BadManager<Anvil>
     @Override
     protected void triggerEffect()
     {
-        GameScreen.gameOver = true;
+        GameScreen.deathAnimation = true;
     }
 }

@@ -18,6 +18,7 @@ public class PlayerAnimation
     private Texture climbingStrip;
     private TextureRegion flyingLeft;
     private TextureRegion flyingRight;
+    private TextureRegion dying;
 
     private int singleFrameWidth = Const.FRAME_WIDTH;
     private int singleFrameHeight = Const.FRAME_HEIGHT;
@@ -57,10 +58,11 @@ public class PlayerAnimation
     {
         flyingLeft = new TextureRegion(new Texture("Ljump.png"));
         flyingRight = new TextureRegion(new Texture("Rjump.png"));
+        dying = new TextureRegion(new Texture("death.png"));
     }
 
     /**
-     * Gets current frame based on time
+     * Gets current frame based on time and state of player
      * @param time -
      * @return
      */
@@ -71,6 +73,7 @@ public class PlayerAnimation
             case CLIMBING_LIANA: return animation.getKeyFrame(time, true);
             case FLYING_LEFT: return flyingLeft;
             case FLYING_RIGHT: return flyingRight;
+            case DYING: return dying;
         }
         return null;
     }

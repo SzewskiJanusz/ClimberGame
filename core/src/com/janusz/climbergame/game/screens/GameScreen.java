@@ -2,6 +2,7 @@ package com.janusz.climbergame.game.screens;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.entities.player.Player;
@@ -28,6 +29,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public static boolean gameOver;
     public static boolean onBeginning;
     public static float difficultyTimer;
+    public static boolean deathAnimation;
 
     /* Prywatne pola menadżerów */
     public BananaManager bananaMgr;
@@ -54,6 +56,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         onBeginning = true;
         gameOver = false;
         paused = false;
+        deathAnimation = false;
         stage.addActor(TapToStartLabel.instance());
         stage.addActor(TapImage.instance());
         ScoreManager.getInstance().ScoreLogic.setScore(0);
@@ -126,11 +129,12 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                     TapToStartLabel.instance().toFront();
                 }
             }
-                spriteBatch.begin();
-                stage.draw();
-                spriteBatch.end();
-
         }
+
+        spriteBatch.begin();
+        stage.draw();
+        spriteBatch.end();
+
         sleep(60);
     }
 
@@ -155,9 +159,23 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
     private void checkIfGameOver()
     {
-        if (gameOver)
+        if (deathAnimation)
         {
-            stage.addActor(gameOverMgr.getTable());
+            Player.instance().playerState = PlayerState.DYING;
+            Timer.schedule(new Timer.Task(){
+                               @Override
+                               public void run()
+                               {
+                                   if (deathAnimation)
+                                   {
+                                       gameOver = true;
+                                       stage.addActor(gameOverMgr.getTable());
+                                       Player.instance().remove();
+                                   }
+                               }
+                           }
+                    , 1       //    (delay)
+            );
         }
     }
 
