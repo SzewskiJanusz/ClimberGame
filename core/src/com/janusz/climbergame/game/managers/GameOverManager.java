@@ -5,21 +5,27 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.screens.SaveScoreScreen;
 import com.janusz.climbergame.menu.screens.MenuScreen;
+import com.janusz.climbergame.shared.DefComponents;
 import com.janusz.climbergame.shared.scoreclient.ServerConnection;
 import com.sun.corba.se.spi.activation.Server;
 
@@ -48,25 +54,22 @@ public class GameOverManager
 
     private void createGameOverLabels()
     {
-        Label.LabelStyle ls = new Label.LabelStyle();
-        ls.font = new BitmapFont();
-        ls.fontColor = Color.WHITE;
-
         initTable();
 
-        gameOverLabel = new Label("GAME OVER", ls);
-        gameOverLabel.setFontScale(5f);
+        gameOverLabel = new Label("GAME OVER", DefComponents.LABEL_STYLE);
+        gameOverLabel.setColor(Color.BLACK);
+        gameOverLabel.setFontScale(5f,5f);
 
-        yourFinalScoreTextLabel = new Label("SCORE ", ls);
+        yourFinalScoreTextLabel = new Label("SCORE ", DefComponents.LABEL_STYLE);
         yourFinalScoreTextLabel.setFontScale(2.5f);
 
 
         yourFinalScoreLabel = new Label(
-                String.valueOf(ScoreManager.getInstance().ScoreLogic.getScore()) , ls);
+                String.valueOf(ScoreManager.getInstance().ScoreLogic.getScore()) , DefComponents.LABEL_STYLE);
         yourFinalScoreLabel.setFontScale(2.5f);
 
 
-        yourBestScoreTextLabel = new Label("BEST ", ls);
+        yourBestScoreTextLabel = new Label("BEST ", DefComponents.LABEL_STYLE);
         yourBestScoreTextLabel.setFontScale(2.5f);
 
         String actualScoreText = ScoreManager.getInstance().ScoreLabel.getText().toString();
@@ -85,55 +88,64 @@ public class GameOverManager
         }
 
         String textToShow;
+        Label newRecordText = null;
         if (actualScore > bestInt)
         {
             prefs.putString("highscore",actualScoreText);
             prefs.flush();
             textToShow = actualScoreText;
+            newRecordText = new Label("NEW RECORD!", DefComponents.LABEL_STYLE);
         }
         else
         {
             textToShow = bestText;
         }
 
-        yourBestScoreLabel = new Label(textToShow, ls);
+
+        yourBestScoreLabel = new Label(textToShow, DefComponents.LABEL_STYLE);
         yourBestScoreLabel.setFontScale(2.5f);
 
-        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("ui-green.atlas"));
-        Skin skin = new Skin(atlas);
-        bs = new TextButton.TextButtonStyle();
-        bs.font = new BitmapFont();
-        bs.up = skin.getDrawable("button_02");
-        bs.down = skin.getDrawable("button_06");
-
-        mainMenu = new TextButton("OK",bs);
+        mainMenu = new TextButton("OK",DefComponents.TEXTBUTTON_STYLE);
 
         mainMenu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
                 GameScreen.stage.dispose();
+                GameScreen.deathAnimation = false;
                 game.setScreen(new MenuScreen(game));
             }
         });
 
-        uploadScore = new TextButton("SCORE",bs);
+        uploadScore = new TextButton("SCORE",DefComponents.TEXTBUTTON_STYLE);
 
         uploadScore.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
+                GameScreen.stage.dispose();
+                GameScreen.deathAnimation = false;
                 game.setScreen(new SaveScoreScreen(game));
             }
         });
 
-        table.add(gameOverLabel).width(150).row();
-        table.add(yourFinalScoreTextLabel).width(150);
-        table.add(yourFinalScoreLabel).width(100);
-        table.add(yourBestScoreTextLabel).width(100);
-        table.add(yourBestScoreLabel).width(100).row();
+        Label separator = new Label("", DefComponents.LABEL_STYLE);
+        separator.setFontScale(5f);
+
+
+        table.add(gameOverLabel).width(250).row();
+        table.add(yourFinalScoreTextLabel).width(250);
+        table.add(yourBestScoreTextLabel).width(50).padLeft(70).row();
+        table.add(yourFinalScoreLabel).width(150).padLeft(30);
+        table.add(yourBestScoreLabel).width(100).padLeft(70).row();
+        if (newRecordText == null)
+            table.add(separator).row();
+        else
+            table.add(newRecordText).width(50).row();
         table.add(mainMenu).width(150);
-        table.add(new Label("", ls)).width(150);
+        table.add(uploadScore).width(150);
+        table.add(new Label("", DefComponents.LABEL_STYLE)).width(150);
+
     }
 
     private void initTable()

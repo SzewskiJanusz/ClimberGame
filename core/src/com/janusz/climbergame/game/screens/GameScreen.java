@@ -40,6 +40,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public CoffeeManager coffeeMgr;
     public StoneManager stoneMgr;
     public static boolean paused;
+    private boolean added;
 
     private long diff, start = System.currentTimeMillis();
 
@@ -122,7 +123,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                 if (!onBeginning)
                 {
                     update(delta);
-                } else
+                }
+                else
                 {
                     EntireLiana.get().moveAllLianasDown(delta);
                     TapImage.instance().toFront();
@@ -161,6 +163,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     {
         if (deathAnimation)
         {
+            added = false;
             Player.instance().playerState = PlayerState.DYING;
             Timer.schedule(new Timer.Task(){
                                @Override
@@ -169,7 +172,14 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                                    if (deathAnimation)
                                    {
                                        gameOver = true;
-                                       stage.addActor(gameOverMgr.getTable());
+                                       if (!added)
+                                       {
+                                           stage.addActor(gameOverMgr.getTable());
+                                           PauseController.instance().pauseButton.remove();
+                                           ScoreManager.getInstance().ScoreLabel.remove();
+                                           added = true;
+                                       }
+
                                        Player.instance().remove();
                                    }
                                }
