@@ -1,34 +1,23 @@
 package com.janusz.climbergame.game.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
+import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
+import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.managers.AnvilManager;
 import com.janusz.climbergame.game.managers.BananaManager;
 import com.janusz.climbergame.game.managers.CoffeeManager;
+import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.managers.StoneManager;
 import com.janusz.climbergame.game.managers.TequilaManager;
-import com.janusz.climbergame.game.managers.GameOverManager;
-import com.janusz.climbergame.game.entities.player.Player;
-import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
-import com.janusz.climbergame.game.pause.PauseButton;
 import com.janusz.climbergame.game.pause.PauseController;
-import com.janusz.climbergame.game.pause.PauseLabel;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.game.texts.TapToStartLabel;
-import com.janusz.climbergame.shared.DefComponents;
 
 /**
  * Main game screen
@@ -41,14 +30,16 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public static float difficultyTimer;
 
     /* Prywatne pola menadżerów */
-    public static BananaManager bananaMgr;
-    public static AnvilManager anvilMgr;
-    public static TequilaManager tequilaMgr;
-    public GameOverManager gameOverMgr;
-    public JungleBackground background;
-    public static CoffeeManager coffeeMgr;
-    public static StoneManager stoneMgr;
+    public BananaManager bananaMgr;
+    public AnvilManager anvilMgr;
+    public TequilaManager tequilaMgr;
+    private GameOverManager gameOverMgr;
+    private JungleBackground background;
+    public CoffeeManager coffeeMgr;
+    public StoneManager stoneMgr;
     public static boolean paused;
+
+    private long diff, start = System.currentTimeMillis();
 
     // Konstruktor
     public GameScreen(ClimberGame game)
@@ -140,7 +131,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                 spriteBatch.end();
 
         }
-
+        sleep(60);
     }
 
     private void update(float delta)
@@ -176,6 +167,19 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         super.dispose();
         spriteBatch.dispose();
         stage.dispose();
+    }
+
+    private void sleep(int fps) {
+        if(fps>0){
+            diff = System.currentTimeMillis() - start;
+            long targetDelay = 1000/fps;
+            if (diff < targetDelay) {
+                try{
+                    Thread.sleep(targetDelay - diff);
+                } catch (InterruptedException e) {}
+            }
+            start = System.currentTimeMillis();
+        }
     }
 
 }
