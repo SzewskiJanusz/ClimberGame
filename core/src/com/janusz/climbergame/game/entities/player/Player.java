@@ -68,6 +68,7 @@ public class Player extends Actor implements IPlayer
         drunkTime = 0;
         caffeinated = false;
         coffeeTime = 0;
+        playerState = PlayerState.CLIMBING_LIANA;
     }
 
     public static Player instance()
@@ -170,7 +171,7 @@ public class Player extends Actor implements IPlayer
             velocity.y += delta * 10;
             int sign = (playerState == PlayerState.FLYING_RIGHT ? 1 : -1);
 
-            setX(getX() + sign*velocity.x);
+            setX(getX() + sign*50*velocity.x*delta);
             setY(getY() - velocity.y);
         }
     }

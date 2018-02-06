@@ -60,7 +60,6 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void show() {
-
     }
     @Override
     public void resume()

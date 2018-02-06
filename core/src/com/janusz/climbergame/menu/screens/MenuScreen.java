@@ -114,8 +114,9 @@ public class MenuScreen extends AbstractScreen
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                Gdx.input.setInputProcessor(new BeginningHandler());
-                game.setScreen(new GameScreen(game));
+                GameScreen gs = new GameScreen(game);
+                Gdx.input.setInputProcessor(new BeginningHandler(gs));
+                game.setScreen(gs);
             }
         });
         stage.addActor(startGame);
