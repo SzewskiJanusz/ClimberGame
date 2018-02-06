@@ -2,6 +2,8 @@ package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -13,12 +15,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.screens.SaveScoreScreen;
 import com.janusz.climbergame.menu.screens.MenuScreen;
 import com.janusz.climbergame.shared.scoreclient.ServerConnection;
 import com.sun.corba.se.spi.activation.Server;
+
+import java.io.FileOutputStream;
 
 
 public class GameOverManager
@@ -64,7 +69,34 @@ public class GameOverManager
         yourBestScoreTextLabel = new Label("BEST ", ls);
         yourBestScoreTextLabel.setFontScale(2.5f);
 
-        yourBestScoreLabel = new Label("1000", ls);
+        String actualScoreText = ScoreManager.getInstance().ScoreLabel.getText().toString();
+        int actualScore = Integer.parseInt(actualScoreText);
+
+        Preferences prefs = Gdx.app.getPreferences("My Preferences");
+        String bestText = prefs.getString("highscore");
+        int bestInt;
+        if (bestText.isEmpty())
+        {
+            bestInt = 0;
+        }
+        else
+        {
+            bestInt = Integer.parseInt(bestText);
+        }
+
+        String textToShow;
+        if (actualScore > bestInt)
+        {
+            prefs.putString("highscore",actualScoreText);
+            prefs.flush();
+            textToShow = actualScoreText;
+        }
+        else
+        {
+            textToShow = bestText;
+        }
+
+        yourBestScoreLabel = new Label(textToShow, ls);
         yourBestScoreLabel.setFontScale(2.5f);
 
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("ui-green.atlas"));
@@ -102,7 +134,6 @@ public class GameOverManager
         table.add(yourBestScoreLabel).width(100).row();
         table.add(mainMenu).width(150);
         table.add(new Label("", ls)).width(150);
-        table.add(uploadScore).width(150);
     }
 
     private void initTable()
