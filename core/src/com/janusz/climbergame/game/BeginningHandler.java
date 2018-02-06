@@ -14,17 +14,24 @@ import com.janusz.climbergame.game.texts.TapToStartLabel;
 
 public class BeginningHandler extends InputAdapter
 {
+    private GameScreen screen;
+
+    public BeginningHandler(GameScreen scr)
+    {
+        this.screen = scr;
+    }
+
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
         Gdx.input.setInputProcessor(GameScreen.stage);
         GameScreen.onBeginning = false;
 
-        GameScreen.bananaMgr.startTimer();
-        GameScreen.anvilMgr.startTimer();
-        GameScreen.stoneMgr.startTimer();
-        GameScreen.coffeeMgr.startTimer();
-        GameScreen.tequilaMgr.startTimer();
+        screen.bananaMgr.startTimer();
+        screen.anvilMgr.startTimer();
+        screen.stoneMgr.startTimer();
+        screen.coffeeMgr.startTimer();
+        screen.tequilaMgr.startTimer();
 
         TapToStartLabel.instance().remove();
         TapImage.instance().remove();
