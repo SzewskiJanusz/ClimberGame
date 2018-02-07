@@ -10,6 +10,7 @@ import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.managers.AnvilManager;
+import com.janusz.climbergame.game.managers.AppleManager;
 import com.janusz.climbergame.game.managers.BananaManager;
 import com.janusz.climbergame.game.managers.CoffeeManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
@@ -39,6 +40,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private JungleBackground background;
     public CoffeeManager coffeeMgr;
     public StoneManager stoneMgr;
+    public AppleManager appleMgr;
     public static boolean paused;
     private boolean added;
 
@@ -73,6 +75,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         tequilaMgr = new TequilaManager();
         coffeeMgr = new CoffeeManager();
         stoneMgr = new StoneManager();
+        appleMgr = new AppleManager();
         stage.addActor(PauseController.instance().pauseButton);
         stage.addActor(PauseController.instance().pauseLabel);
         TapToStartLabel.instance().toFront();
@@ -153,6 +156,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         tequilaMgr.updateEntities(delta);
         coffeeMgr.updateEntities(delta);
         stoneMgr.updateEntities(delta);
+        appleMgr.updateEntities(delta);
 
         checkIfGameOver();
         difficultyTimer += delta;

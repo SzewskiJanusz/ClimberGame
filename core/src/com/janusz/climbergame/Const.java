@@ -29,7 +29,7 @@ public abstract class Const
     /** ANVIL CONSTS */
     public final static int ANVIL_DELAY_SPAWN = 5;
     public final static int ANVIL_BOTTOM_RANGE = 1;
-    public final static int ANVIL_UPPER_RANGE = 7;
+    public final static int ANVIL_UPPER_RANGE = 5;
     public final static int ANVIL_WIDTH = 80;
     public final static int ANVIL_HEIGHT = 55;
     public final static int ANVIL_BASE_VELOCITY = 300;
@@ -40,12 +40,20 @@ public abstract class Const
     public final static int BANANA_UPPER_RANGE = 7;
     public final static int BANANA_WIDTH = 45;
     public final static int BANANA_HEIGHT = 30;
-    public final static int BANANA_BASE_VELOCITY = 215;
+    public final static int BANANA_BASE_VELOCITY = 210;
+
+    /** APPLE CONSTS */
+    public final static int APPLE_DELAY_SPAWN = 3;
+    public final static int APPLE_BOTTOM_RANGE = 4;
+    public final static int APPLE_UPPER_RANGE = 5;
+    public final static int APPLE_WIDTH = 45;
+    public final static int APPLE_HEIGHT = 47;
+    public final static int APPLE_BASE_VELOCITY = 215;
 
     /** STONE CONSTS */
     public final static int STONE_DELAY_SPAWN = 3;
-    public final static int STONE_BOTTOM_RANGE = 1;
-    public final static int STONE_UPPER_RANGE = 7;
+    public final static int STONE_BOTTOM_RANGE = 2;
+    public final static int STONE_UPPER_RANGE = 6;
     public final static int STONE_WIDTH = 55;
     public final static int STONE_HEIGHT = 80;
     public final static int STONE_BASE_VELOCITY = 300;
@@ -60,7 +68,7 @@ public abstract class Const
     public final static int DRUNKINDICATOR_X = 550;
     public final static int DRUNKINDICATOR_Y = 120;
     public final static int DRUNKINDICATOR_WIDTH = 75;
-    public final static int DRUNKINDICATOR_HEIGHT = 100;;
+    public final static int DRUNKINDICATOR_HEIGHT = 100;
 
     /** COFFEE INDICATOR CONSTS */
     public final static int COFFEEINDICATOR_X = 550;

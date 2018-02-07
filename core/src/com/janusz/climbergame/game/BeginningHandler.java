@@ -32,6 +32,7 @@ public class BeginningHandler extends InputAdapter
         screen.stoneMgr.startTimer();
         screen.coffeeMgr.startTimer();
         screen.tequilaMgr.startTimer();
+        screen.appleMgr.startTimer();
 
         TapToStartLabel.instance().remove();
         TapImage.instance().remove();
