@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
  * Created by Janusz on 2017-09-22.
@@ -86,10 +87,11 @@ public abstract class AbstractItem extends Image
     /**
      * Sprawdzenie czy obiekt jest poza widokiem i usunięcie go
      */
-    protected void checkIfNeedDispose()
+    private void checkIfNeedDispose()
     {
         if (getY() < 0)
         {
+            GameScreen.entities.remove(this);
             this.remove();
         }
     }

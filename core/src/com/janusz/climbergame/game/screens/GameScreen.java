@@ -57,7 +57,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private double queueTimer;
 
     /* All entities on stage */
-    private List<AbstractItem> entities;
+    public static List<AbstractItem> entities;
 
     private long diff, start = System.currentTimeMillis();
 
@@ -79,6 +79,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         badFreq = 0;
         QueueManager.instance().reset();
         entities = new ArrayList<AbstractItem>();
+        entities.clear();
         stage.addActor(TapToStartLabel.instance());
         stage.addActor(TapImage.instance());
         ScoreManager.getInstance().ScoreLogic.setScore(0);
