@@ -26,6 +26,7 @@ public abstract class AbstractItem extends Image
     // Prędkość obiektu
     protected int velocity;
 
+    public abstract void triggerEffect();
     /**
      * Poruszenie obiektem podczas opadania
      * @param delta - czas jednej klatki
@@ -72,17 +73,15 @@ public abstract class AbstractItem extends Image
     }
 
 
-    /**
-     * Odświeżenie obiektu
-     * @param delta - czas jednej klatki
-     */
-    public void update(float delta)
+    @Override
+    public void act(float delta)
     {
+        super.act(delta);
         checkIfNeedDispose();
         moveDown(delta);
         doMovement(delta);
-
     }
+
 
     /**
      * Sprawdzenie czy obiekt jest poza widokiem i usunięcie go
@@ -103,5 +102,4 @@ public abstract class AbstractItem extends Image
     {
         return bounds;
     }
-
 }

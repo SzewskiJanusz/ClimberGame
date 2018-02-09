@@ -1,6 +1,7 @@
 package com.janusz.climbergame.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
  * Created by Janusz on 2017-12-14.
@@ -27,5 +28,11 @@ public class Stone extends AbstractItem
     protected void doMovement(float delta)
     {
         this.rotateBy(5 * delta);
+    }
+
+    @Override
+    public void triggerEffect()
+    {
+        GameScreen.deathAnimation = true;
     }
 }

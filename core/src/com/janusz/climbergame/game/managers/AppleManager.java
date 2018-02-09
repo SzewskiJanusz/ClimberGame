@@ -4,9 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
+import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Apple;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
+import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
@@ -15,10 +17,9 @@ import com.janusz.climbergame.shared.DefComponents;
  * Created by Janusz on 2018-02-07.
  */
 
-public class AppleManager extends GoodManager<Apple>
+public class AppleManager extends AbstractManager
 {
     private final Texture texture = new Texture("apple.png");
-
 
     public AppleManager()
     {
@@ -32,11 +33,9 @@ public class AppleManager extends GoodManager<Apple>
     }
 
     @Override
-    protected void spawnEntity()
+    protected void createEntity()
     {
-        // zwrócenie X na widoku wylosowanego miejsca
         int x = selectPlace(MathUtils.random(2,4));
-        // stworzenie banana
         Apple a = new Apple
                 (
                         texture,
@@ -46,17 +45,10 @@ public class AppleManager extends GoodManager<Apple>
                         Const.APPLE_HEIGHT,
                         Const.APPLE_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.GOOD_TIMER_RATIO)
                 );
-        entities.add(a);                // dodanie jabłka do listy
-        GameScreen.stage.addActor(a);   // dodanie jabłka do sceny
+        a.setName("good");
         randomizeSpawnTime();
+        QueueManager.instance().addToQueue(a);
     }
 
-    @Override
-    protected void triggerEffect()
-    {
-        ScoreManager.getInstance().ScoreLogic.addToScore(500);  // efekt dodanie punktów
-        GameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
-                Effect.GOOD));                                  // skaczący napis oznaczający
-        //          'zjedzenie' jabłka
-    }
+
 }

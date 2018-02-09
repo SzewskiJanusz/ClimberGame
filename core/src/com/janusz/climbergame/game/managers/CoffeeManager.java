@@ -4,11 +4,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
+import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Coffee;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
+import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
@@ -16,7 +18,7 @@ import com.janusz.climbergame.shared.DefComponents;
  * Created by Janusz on 2017-12-04.
  */
 
-public class CoffeeManager extends GoodManager<Coffee>
+public class CoffeeManager extends AbstractManager
 {
     private final Texture texture = new Texture("coffee.png");
 
@@ -32,7 +34,7 @@ public class CoffeeManager extends GoodManager<Coffee>
     }
 
     @Override
-    protected void spawnEntity()
+    protected void createEntity()
     {
         int x = selectPlace(MathUtils.random(2,4));
         Coffee c = new Coffee
@@ -44,17 +46,10 @@ public class CoffeeManager extends GoodManager<Coffee>
                 Const.COFFEE_HEIGHT,
                 Const.COFFEE_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.GOOD_TIMER_RATIO)
         );
-        entities.add(c);
-        GameScreen.stage.addActor(c);
+        c.setName("good");
         randomizeSpawnTime();
+        QueueManager.instance().addToQueue(c);
     }
 
-    @Override
-    protected void triggerEffect()
-    {
-        Player.instance().coffeeBoost();
-        GameScreen.stage.addActor(new BouncingText("ENERGIZED", DefComponents.LABEL_STYLE,
-                Effect.DEFAULT));
-        IndicatorController.instance().addCoffeeIndicator();
-    }
+
 }

@@ -1,10 +1,12 @@
 package com.janusz.climbergame.game.screens;
 
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
+import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.EntireLiana;
@@ -16,23 +18,32 @@ import com.janusz.climbergame.game.managers.CoffeeManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.managers.StoneManager;
 import com.janusz.climbergame.game.managers.TequilaManager;
+import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.pause.PauseController;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.game.texts.TapToStartLabel;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Main game screen
  */
 public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 {
-    // Flaga gameOver, czy gra się skończyła
+    /* Flags */
     public static boolean gameOver;
     public static boolean onBeginning;
     public static float difficultyTimer;
     public static boolean deathAnimation;
+    public static double goodFreq;
+    public static double badFreq;
+    public static boolean paused;
+    private boolean added;
 
-    /* Prywatne pola menadżerów */
+    /* Managers */
     public BananaManager bananaMgr;
     public AnvilManager anvilMgr;
     public TequilaManager tequilaMgr;
@@ -41,8 +52,12 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public CoffeeManager coffeeMgr;
     public StoneManager stoneMgr;
     public AppleManager appleMgr;
-    public static boolean paused;
-    private boolean added;
+
+    /* Queue to avoid stacking items */
+    private double queueTimer;
+
+    /* All entities on stage */
+    private List<AbstractItem> entities;
 
     private long diff, start = System.currentTimeMillis();
 
@@ -60,6 +75,10 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         gameOver = false;
         paused = false;
         deathAnimation = false;
+        goodFreq = 0;
+        badFreq = 0;
+        QueueManager.instance().reset();
+        entities = new ArrayList<AbstractItem>();
         stage.addActor(TapToStartLabel.instance());
         stage.addActor(TapImage.instance());
         ScoreManager.getInstance().ScoreLogic.setScore(0);
@@ -151,16 +170,21 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         EntireLiana.get().moveAllLianasDown(delta);
         IndicatorController.instance().update();
 
-        bananaMgr.updateEntities(delta);
-        anvilMgr.updateEntities(delta);
-        tequilaMgr.updateEntities(delta);
-        coffeeMgr.updateEntities(delta);
-        stoneMgr.updateEntities(delta);
-        appleMgr.updateEntities(delta);
+        updateEntities();
 
         checkIfGameOver();
         difficultyTimer += delta;
-
+        if (queueTimer <= 0)
+        {
+            AbstractItem j;
+            if ((j = QueueManager.instance().getFirst()) != null)
+            {
+                entities.add(j);
+                stage.addActor(j);
+                queueTimer = 0.5;
+            }
+        }
+        queueTimer -= delta;
     }
 
     private void checkIfGameOver()
@@ -214,6 +238,42 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         }
     }
 
+    private void updateEntities()
+    {
+
+        for (int i = 0 ; i < entities.size() ; i++)
+        {
+            if (checkCollision(entities.get(i)))
+            {
+                entities.get(i).triggerEffect();
+                entities.get(i).remove();
+                entities.remove(i);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Check collision with player
+     * @param a - entity on stage to check with player
+     * @return if collision happened
+     */
+    private boolean checkCollision(AbstractItem a)
+    {
+        if (a.getName().equals("good"))
+        {
+            return Player.instance().playerState == PlayerState.CLIMBING_LIANA &&
+                    Intersector.overlaps(a.getBounds(),
+                            Player.instance().getBounds());
+        }
+        else
+        {
+            return Player.instance().playerState == PlayerState.CLIMBING_LIANA &&
+                    Intersector.overlaps(
+                    a.getBounds(),
+                    Player.instance().getBadCollisionBounds());
+        }
+    }
 }
 
 

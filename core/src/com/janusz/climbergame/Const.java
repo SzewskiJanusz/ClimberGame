@@ -8,7 +8,7 @@ package com.janusz.climbergame;
 public abstract class Const
 {
     /** TEQUILA CONSTS */
-    public final static int TEQUILA_DELAY_SPAWN = 5;
+    public final static int TEQUILA_DELAY_SPAWN = 6;
     public final static int TEQUILA_EFFECT_TIME = 5;
     public final static int TEQUILA_BOTTOM_RANGE = 9;
     public final static int TEQUILA_UPPER_RANGE = 18;
@@ -27,7 +27,7 @@ public abstract class Const
 
 
     /** ANVIL CONSTS */
-    public final static int ANVIL_DELAY_SPAWN = 5;
+    public final static int ANVIL_DELAY_SPAWN = 4;
     public final static int ANVIL_BOTTOM_RANGE = 1;
     public final static int ANVIL_UPPER_RANGE = 5;
     public final static int ANVIL_WIDTH = 80;
@@ -35,7 +35,7 @@ public abstract class Const
     public final static int ANVIL_BASE_VELOCITY = 300;
 
     /** BANANA CONSTS */
-    public final static int BANANA_DELAY_SPAWN = 3;
+    public final static int BANANA_DELAY_SPAWN = 2;
     public final static int BANANA_BOTTOM_RANGE = 3;
     public final static int BANANA_UPPER_RANGE = 7;
     public final static int BANANA_WIDTH = 45;
@@ -92,10 +92,10 @@ public abstract class Const
 
 
     /** „BAD” TIMER CONSTS */
-    public static final double BAD_TIMER_RATIO = 2;
+    public static final double BAD_TIMER_RATIO = 2.3;
 
     /** „GOOD” TIMER CONSTS */
-    public static final double GOOD_TIMER_RATIO = 1.5;
+    public static final double GOOD_TIMER_RATIO = 2;
 
     /** TAP IMAGE */
 

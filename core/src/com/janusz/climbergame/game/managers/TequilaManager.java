@@ -4,12 +4,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
+import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Tequila;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.indicators.graphics.DrunkIndicator;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
+import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
@@ -17,11 +19,8 @@ import com.janusz.climbergame.shared.DefComponents;
  * Created by Janusz on 2017-11-29.
  */
 
-public class TequilaManager extends GoodManager<Tequila>
+public class TequilaManager extends AbstractManager
 {
-    /**
-     * Initialize List and timer
-     */
     private final Texture texture = new Texture("tequila.png");
 
     public TequilaManager()
@@ -36,7 +35,7 @@ public class TequilaManager extends GoodManager<Tequila>
     }
 
     @Override
-    protected void spawnEntity()
+    protected void createEntity()
     {
         int x = selectPlace(MathUtils.random(2,4));
         Tequila t = new Tequila
@@ -48,17 +47,10 @@ public class TequilaManager extends GoodManager<Tequila>
             Const.TEQUILA_HEIGHT,
             Const.TEQUILA_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.BAD_TIMER_RATIO)
         );
-        entities.add(t);
-        GameScreen.stage.addActor(t);
+        t.setName("good");
         randomizeSpawnTime();
+        QueueManager.instance().addToQueue(t);
     }
 
-    @Override
-    protected void triggerEffect()
-    {
-        GameScreen.stage.addActor(new BouncingText("DRUNK", DefComponents.LABEL_STYLE,
-                Effect.BAD));
-        Player.drunk = true;
-        IndicatorController.instance().addDrunkIndicator();
-    }
+
 }
