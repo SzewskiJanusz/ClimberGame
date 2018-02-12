@@ -42,7 +42,7 @@ public class BananaManager extends AbstractManager
             ClimberGame.HEIGHT,
             Const.BANANA_WIDTH,
             Const.BANANA_HEIGHT,
-            Const.BANANA_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.GOOD_TIMER_RATIO)
+            Const.BANANA_BASE_VELOCITY + GameScreen.levelVelocity
         );
         b.setName("good");
         randomizeSpawnTime();

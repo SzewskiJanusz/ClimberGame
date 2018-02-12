@@ -44,7 +44,7 @@ public class CoffeeManager extends AbstractManager
                 ClimberGame.HEIGHT,
                 Const.COFFEE_WIDTH,
                 Const.COFFEE_HEIGHT,
-                Const.COFFEE_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.GOOD_TIMER_RATIO)
+                Const.COFFEE_BASE_VELOCITY + GameScreen.levelVelocity
         );
         c.setName("good");
         randomizeSpawnTime();

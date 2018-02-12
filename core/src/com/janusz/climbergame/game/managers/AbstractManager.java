@@ -1,7 +1,6 @@
 package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.utils.Timer;
-import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.environment.EntireLiana;
 
 /**

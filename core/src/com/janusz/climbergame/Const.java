@@ -32,7 +32,7 @@ public abstract class Const
     public final static int ANVIL_UPPER_RANGE = 5;
     public final static int ANVIL_WIDTH = 80;
     public final static int ANVIL_HEIGHT = 55;
-    public final static int ANVIL_BASE_VELOCITY = 300;
+    public final static int ANVIL_BASE_VELOCITY = 320;
 
     /** BANANA CONSTS */
     public final static int BANANA_DELAY_SPAWN = 2;
@@ -44,11 +44,19 @@ public abstract class Const
 
     /** APPLE CONSTS */
     public final static int APPLE_DELAY_SPAWN = 3;
-    public final static int APPLE_BOTTOM_RANGE = 4;
     public final static int APPLE_UPPER_RANGE = 5;
     public final static int APPLE_WIDTH = 45;
+    public final static int APPLE_BOTTOM_RANGE = 4;
     public final static int APPLE_HEIGHT = 47;
     public final static int APPLE_BASE_VELOCITY = 215;
+
+    /** APPLE CONSTS */
+    public final static int WATERMELON_DELAY_SPAWN = 3;
+    public final static int WATERMELON_BOTTOM_RANGE = 4;
+    public final static int WATERMELON_UPPER_RANGE = 5;
+    public final static int WATERMELON_WIDTH = 45;
+    public final static int WATERMELON_HEIGHT = 47;
+    public final static int WATERMELON_BASE_VELOCITY = 215;
 
     /** STONE CONSTS */
     public final static int STONE_DELAY_SPAWN = 3;
@@ -56,7 +64,7 @@ public abstract class Const
     public final static int STONE_UPPER_RANGE = 6;
     public final static int STONE_WIDTH = 55;
     public final static int STONE_HEIGHT = 80;
-    public final static int STONE_BASE_VELOCITY = 300;
+    public final static int STONE_BASE_VELOCITY = 310;
 
     /** DISTANCE BETWEEN INDICATOR AND LABEl */
     public final static int SPACE_BETWEEN_INDICATOR_AND_LABEL = 30;
@@ -90,12 +98,6 @@ public abstract class Const
     public static final int FRAME_WIDTH = 260;
     public static final int FRAME_HEIGHT = 240;
 
-
-    /** „BAD” TIMER CONSTS */
-    public static final double BAD_TIMER_RATIO = 2.3;
-
-    /** „GOOD” TIMER CONSTS */
-    public static final double GOOD_TIMER_RATIO = 2;
 
     /** TAP IMAGE */
 

@@ -44,7 +44,7 @@ public class StoneManager extends AbstractManager
             ClimberGame.HEIGHT,
             Const.STONE_WIDTH,
             Const.STONE_HEIGHT,
-            Const.STONE_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.BAD_TIMER_RATIO)
+            Const.STONE_BASE_VELOCITY + (int)(GameScreen.levelVelocity*1.5)
         );
         a.setName("bad");
         randomizeSpawnTime();

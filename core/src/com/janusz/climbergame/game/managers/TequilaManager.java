@@ -45,7 +45,7 @@ public class TequilaManager extends AbstractManager
             ClimberGame.HEIGHT,
             Const.TEQUILA_WIDTH,
             Const.TEQUILA_HEIGHT,
-            Const.TEQUILA_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.BAD_TIMER_RATIO)
+            Const.TEQUILA_BASE_VELOCITY + GameScreen.levelVelocity
         );
         t.setName("good");
         randomizeSpawnTime();

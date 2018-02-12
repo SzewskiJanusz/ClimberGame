@@ -43,7 +43,7 @@ public class AppleManager extends AbstractManager
                         ClimberGame.HEIGHT,
                         Const.APPLE_WIDTH,
                         Const.APPLE_HEIGHT,
-                        Const.APPLE_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.GOOD_TIMER_RATIO)
+                        Const.APPLE_BASE_VELOCITY + + GameScreen.levelVelocity
                 );
         a.setName("good");
         randomizeSpawnTime();

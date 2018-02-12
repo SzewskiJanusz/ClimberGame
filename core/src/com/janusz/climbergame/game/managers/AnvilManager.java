@@ -36,7 +36,7 @@ public class AnvilManager extends AbstractManager
             ClimberGame.HEIGHT,
             Const.ANVIL_WIDTH,
             Const.ANVIL_HEIGHT,
-            Const.ANVIL_BASE_VELOCITY + (int)(GameScreen.difficultyTimer * Const.BAD_TIMER_RATIO)
+            Const.ANVIL_BASE_VELOCITY + (int)(GameScreen.levelVelocity*1.5)
         );
         a.setName("bad");
         randomizeSpawnTime();
