@@ -67,6 +67,11 @@ public class PauseController
         pauseButton.toFront();
     }
 
+    public void dispose()
+    {
+        ins = null;
+    }
+
     /**
      * Listener for pause button
      */
