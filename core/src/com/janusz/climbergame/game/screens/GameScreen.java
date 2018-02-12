@@ -7,8 +7,11 @@ import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.entities.AbstractItem;
+import com.janusz.climbergame.game.entities.Watermelon;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
+import com.janusz.climbergame.game.environment.BouncingText;
+import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.managers.AnvilManager;
@@ -18,11 +21,13 @@ import com.janusz.climbergame.game.managers.CoffeeManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.managers.StoneManager;
 import com.janusz.climbergame.game.managers.TequilaManager;
+import com.janusz.climbergame.game.managers.WatermelonManager;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.pause.PauseController;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.game.texts.TapToStartLabel;
+import com.janusz.climbergame.shared.DefComponents;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +41,13 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     /* Flags */
     public static boolean gameOver;
     public static boolean onBeginning;
-    public static float difficultyTimer;
     public static boolean deathAnimation;
     public static double goodFreq;
     public static double badFreq;
     public static boolean paused;
     private boolean added;
 
-    /* Managers */
+    /* Managers (builders) */
     public BananaManager bananaMgr;
     public AnvilManager anvilMgr;
     public TequilaManager tequilaMgr;
@@ -52,6 +56,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public CoffeeManager coffeeMgr;
     public StoneManager stoneMgr;
     public AppleManager appleMgr;
+    public WatermelonManager waterMgr;
 
     /* Queue to avoid stacking items */
     private double queueTimer;
@@ -59,24 +64,36 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     /* All entities on stage */
     public static List<AbstractItem> entities;
 
+    /* FPS limiter variables */
     private long diff, start = System.currentTimeMillis();
 
-    // Konstruktor
+    /* Level selector stuff */
+    public static int levelVelocity;
+    private static float difficultyTimer;
+    public static int level;
+
+
+
+    // Constructor
     public GameScreen(ClimberGame game)
     {
         super(game);
     }
 
-    // W metodzie init inicjalizacja wszystkich menadżerów potrzebnych do gry
-    // oraz dodanie ich do sceny
+    /**
+     * Initialize all stuff that is needed for game start
+     */
     protected void init()
     {
+        level = 0;
         onBeginning = true;
         gameOver = false;
         paused = false;
         deathAnimation = false;
         goodFreq = 0;
         badFreq = 0;
+        difficultyTimer = 0;
+        levelVelocity = 0;
         QueueManager.instance().reset();
         entities = new ArrayList<AbstractItem>();
         entities.clear();
@@ -84,7 +101,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stage.addActor(TapImage.instance());
         ScoreManager.getInstance().ScoreLogic.setScore(0);
         Player.instance().reset();
-        difficultyTimer = 0;
         EntireLiana.get().reset();
         background = new JungleBackground();
         stage.addActor(background);
@@ -96,6 +112,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         coffeeMgr = new CoffeeManager();
         stoneMgr = new StoneManager();
         appleMgr = new AppleManager();
+        waterMgr = new WatermelonManager();
         stage.addActor(PauseController.instance().pauseButton);
         stage.addActor(PauseController.instance().pauseLabel);
         TapToStartLabel.instance().toFront();
@@ -127,7 +144,12 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         });
     }
 
-
+    /**
+     * Return if touch is on the left of player
+     * @param screenX - touch X
+     * @param playerOnScreenX - player X
+     * @return true - touched on left, false - touched on right
+     */
     private boolean isFingerOnLeft(float screenX, float playerOnScreenX)
     {
         return playerOnScreenX > screenX;
@@ -174,7 +196,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         updateEntities();
 
         checkIfGameOver();
-        difficultyTimer += delta;
+        difficultyUpdate(delta);
+
         if (queueTimer <= 0)
         {
             AbstractItem j;
@@ -186,6 +209,30 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             }
         }
         queueTimer -= delta;
+
+    }
+
+    private void difficultyUpdate(float delta)
+    {
+        if (difficultyTimer >= 45)
+        {
+            level++;
+            levelVelocity += 40;
+            difficultyTimer = 0;
+            stage.addActor(new BouncingText("LEVEL UP!",DefComponents.LABEL_STYLE, Effect.DEFAULT));
+            if (level == 2)
+            {
+                waterMgr.startTimer();
+            }
+            if (level == 4)
+            {
+                // start treasure timing
+            }
+        }
+        else
+        {
+            difficultyTimer += delta;
+        }
     }
 
     private void checkIfGameOver()
