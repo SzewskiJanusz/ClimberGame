@@ -17,6 +17,7 @@ import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.managers.AnvilManager;
 import com.janusz.climbergame.game.managers.AppleManager;
 import com.janusz.climbergame.game.managers.BananaManager;
+import com.janusz.climbergame.game.managers.CarrotManager;
 import com.janusz.climbergame.game.managers.CoffeeManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
 import com.janusz.climbergame.game.managers.StoneManager;
@@ -57,6 +58,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public StoneManager stoneMgr;
     public AppleManager appleMgr;
     public WatermelonManager waterMgr;
+    public CarrotManager carrotMgr;
 
     /* Queue to avoid stacking items */
     private double queueTimer;
@@ -113,6 +115,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stoneMgr = new StoneManager();
         appleMgr = new AppleManager();
         waterMgr = new WatermelonManager();
+        carrotMgr = new CarrotManager();
         stage.addActor(PauseController.instance().pauseButton);
         stage.addActor(PauseController.instance().pauseLabel);
         TapToStartLabel.instance().toFront();
@@ -220,14 +223,13 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             levelVelocity += 40;
             difficultyTimer = 0;
             stage.addActor(new BouncingText("LEVEL UP!",DefComponents.LABEL_STYLE, Effect.DEFAULT));
-            if (level == 2)
+
+            switch(level)
             {
-                waterMgr.startTimer();
+                case 2: waterMgr.startTimer(); break;
+                case 3: carrotMgr.startTimer(); break;
             }
-            if (level == 4)
-            {
-                // start treasure timing
-            }
+
         }
         else
         {
