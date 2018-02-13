@@ -110,4 +110,7 @@ public abstract class Const
     public static final int TAPLABEL_STARTING_X = 100;
     public static final int TAPLABEL_STARTING_Y = 350;
 
+    /** FRIES */
+    public static final float FAT_EFFECT_TIME = 6;
+
 }

@@ -34,6 +34,9 @@ public class BouncingText extends Label
             case BAD:
                 this.setColor(Color.RED);
                 break;
+            case GOLD:
+                this.setColor(Color.GOLD);
+                break;
             default:
                 break;
         }

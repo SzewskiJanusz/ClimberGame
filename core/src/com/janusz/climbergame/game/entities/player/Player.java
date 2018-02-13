@@ -30,6 +30,7 @@ public class Player extends Actor implements IPlayer
     public PlayerState playerState;
     public static boolean drunk;
     public static boolean caffeinated;
+    public static boolean fat;
 
     // Animation class
     public PlayerAnimation playerAnimation;
@@ -40,6 +41,7 @@ public class Player extends Actor implements IPlayer
     private float time;
     public float drunkTime;
     public float coffeeTime;
+    public float fatTime;
     private TextureRegion currentFrame;
     private Vector2 velocity;
 
@@ -65,6 +67,8 @@ public class Player extends Actor implements IPlayer
         velocity = new Vector2(6.5f, -4);
         place = 2;
         drunk = false;
+        fat = false;
+        fatTime = 0;
         drunkTime = 0;
         caffeinated = false;
         coffeeTime = 0;
@@ -104,6 +108,16 @@ public class Player extends Actor implements IPlayer
                 velocity.x = 6.5f;
             }
             coffeeTime += delta;
+        }
+
+        if (fat)
+        {
+            if (fatTime >= Const.FAT_EFFECT_TIME)
+            {
+                fatTime = 0;
+                fat = false;
+                velocity.x = 6.5f;
+            }
         }
         movePlayer(delta);
         toFront();
@@ -219,6 +233,13 @@ public class Player extends Actor implements IPlayer
         velocity.x = 10;
         coffeeTime = 0;
         caffeinated = true;
+    }
+
+    public void makePlayerFat()
+    {
+        velocity.x = 4f;
+        fatTime = 0;
+        fat = true;
     }
 
     public Rectangle getBadCollisionBounds()

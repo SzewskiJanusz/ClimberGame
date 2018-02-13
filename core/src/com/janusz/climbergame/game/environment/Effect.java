@@ -11,5 +11,5 @@ package com.janusz.climbergame.game.environment;
  */
 public enum Effect
 {
-    GOOD,DEFAULT,BAD
+    GOOD,DEFAULT, GOLD, BAD
 }

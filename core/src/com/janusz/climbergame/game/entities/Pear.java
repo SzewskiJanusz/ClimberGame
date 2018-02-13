@@ -8,12 +8,11 @@ import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
 /**
- * Created by Janusz on 2018-02-12.
+ * Created by Janusz on 2018-02-13.
  */
 
-public class Watermelon extends AbstractItem
+public class Pear extends AbstractItem
 {
-
     /**
      * Konstruktor. Inicjalizacja obiektu i bounds
      *
@@ -24,7 +23,7 @@ public class Watermelon extends AbstractItem
      * @param height     - wysokość
      * @param velocity   - prędkość
      */
-    public Watermelon(Texture text, int starting_x, int starting_y, int width, int height, int velocity)
+    public Pear(Texture text, int starting_x, int starting_y, int width, int height, int velocity)
     {
         super(text, starting_x, starting_y, width, height, velocity);
     }
@@ -40,6 +39,6 @@ public class Watermelon extends AbstractItem
     @Override
     protected void doMovement(float delta)
     {
-        this.rotateBy(170 * delta);
+        this.rotateBy(-160 * delta); // obracanie z każdą klatką
     }
 }
