@@ -53,4 +53,8 @@ public class IndicatorController
         coffeeIndicator.toFront();
     }
 
+    public void fatTrigger()
+    {
+
+    }
 }

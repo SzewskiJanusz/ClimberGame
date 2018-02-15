@@ -35,7 +35,7 @@ public class Fries extends AbstractItem
         Player.instance().makePlayerFat();
         GameScreen.stage.addActor(new BouncingText("FAT", DefComponents.LABEL_STYLE,
                 Effect.BAD));
-        IndicatorController.instance().addCoffeeIndicator();
+        IndicatorController.instance().fatTrigger();
     }
 
     @Override

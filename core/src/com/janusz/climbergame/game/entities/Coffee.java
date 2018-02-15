@@ -30,7 +30,7 @@ public class Coffee extends AbstractItem
     {
         Player.instance().coffeeBoost();
         GameScreen.stage.addActor(new BouncingText("ENERGIZED", DefComponents.LABEL_STYLE,
-                Effect.DEFAULT));
+                Effect.GOOD));
         IndicatorController.instance().addCoffeeIndicator();
     }
 }

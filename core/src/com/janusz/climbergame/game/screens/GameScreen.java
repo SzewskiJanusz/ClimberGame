@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.entities.AbstractItem;
+import com.janusz.climbergame.game.entities.Grapes;
 import com.janusz.climbergame.game.entities.Watermelon;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
@@ -19,9 +20,13 @@ import com.janusz.climbergame.game.managers.AppleManager;
 import com.janusz.climbergame.game.managers.BananaManager;
 import com.janusz.climbergame.game.managers.CarrotManager;
 import com.janusz.climbergame.game.managers.CoffeeManager;
+import com.janusz.climbergame.game.managers.FriesManager;
 import com.janusz.climbergame.game.managers.GameOverManager;
+import com.janusz.climbergame.game.managers.GrapesManager;
+import com.janusz.climbergame.game.managers.PearManager;
 import com.janusz.climbergame.game.managers.StoneManager;
 import com.janusz.climbergame.game.managers.TequilaManager;
+import com.janusz.climbergame.game.managers.TreasureManager;
 import com.janusz.climbergame.game.managers.WatermelonManager;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
@@ -59,6 +64,10 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public AppleManager appleMgr;
     public WatermelonManager waterMgr;
     public CarrotManager carrotMgr;
+    public PearManager pearMgr;
+    public TreasureManager treasureMgr;
+    public GrapesManager grapesMgr;
+    public FriesManager friesMgr;
 
     /* Queue to avoid stacking items */
     private double queueTimer;
@@ -116,6 +125,11 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         appleMgr = new AppleManager();
         waterMgr = new WatermelonManager();
         carrotMgr = new CarrotManager();
+        pearMgr = new PearManager();
+        treasureMgr = new TreasureManager();
+        grapesMgr = new GrapesManager();
+        friesMgr = new FriesManager();
+
         stage.addActor(PauseController.instance().pauseButton);
         stage.addActor(PauseController.instance().pauseLabel);
         TapToStartLabel.instance().toFront();
@@ -217,7 +231,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
     private void difficultyUpdate(float delta)
     {
-        if (difficultyTimer >= 45)
+        if (difficultyTimer >= 25)
         {
             level++;
             levelVelocity += 40;
@@ -226,10 +240,13 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
             switch(level)
             {
+                case 1: friesMgr.startTimer(); break;
                 case 2: waterMgr.startTimer(); break;
-                case 3: carrotMgr.startTimer(); break;
+                case 4: carrotMgr.startTimer(); break;
+                case 5: treasureMgr.startTimer(); break;
+                case 6: pearMgr.startTimer(); break;
+                case 8: grapesMgr.startTimer(); break;
             }
-
         }
         else
         {
@@ -243,6 +260,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         {
             added = false;
             Player.instance().playerState = PlayerState.DYING;
+
             Timer.schedule(new Timer.Task(){
                                @Override
                                public void run()
@@ -255,6 +273,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                                            stage.addActor(gameOverMgr.getTable());
                                            PauseController.instance().pauseButton.remove();
                                            ScoreManager.getInstance().ScoreLabel.remove();
+                                           Timer.instance().clear();
                                            added = true;
                                        }
 
@@ -264,6 +283,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                            }
                     , 1       //    (delay)
             );
+
         }
     }
 

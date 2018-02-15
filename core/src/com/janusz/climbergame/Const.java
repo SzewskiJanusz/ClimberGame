@@ -124,4 +124,36 @@ public abstract class Const
     /** FRIES */
     public static final float FAT_EFFECT_TIME = 6;
 
+    /** PEAR CONSTS */
+    public final static int PEAR_DELAY_SPAWN = 2;
+    public final static int PEAR_BOTTOM_RANGE = 3;
+    public final static int PEAR_UPPER_RANGE = 4;
+    public final static int PEAR_WIDTH = 54;
+    public final static int PEAR_HEIGHT = 36;
+    public final static int PEAR_BASE_VELOCITY = 210;
+
+    /** TREASURE CONSTS */
+    public final static int TREASURE_DELAY_SPAWN = 2;
+    public final static int TREASURE_BOTTOM_RANGE = 30;
+    public final static int TREASURE_UPPER_RANGE = 90;
+    public final static int TREASURE_WIDTH = 80;
+    public final static int TREASURE_HEIGHT = 78;
+    public final static int TREASURE_BASE_VELOCITY = 220;
+
+    /** GRAPES CONSTS */
+    public final static int GRAPES_DELAY_SPAWN = 2;
+    public final static int GRAPES_BOTTOM_RANGE = 5;
+    public final static int GRAPES_UPPER_RANGE = 7;
+    public final static int GRAPES_WIDTH = 30;
+    public final static int GRAPES_HEIGHT = 45;
+    public final static int GRAPES_BASE_VELOCITY = 210;
+
+    /** FRIES CONSTS */
+    public final static int FRIES_DELAY_SPAWN = 5;
+    public final static int FRIES_BOTTOM_RANGE = 6;
+    public final static int FRIES_UPPER_RANGE = 9;
+    public final static int FRIES_WIDTH = 40;
+    public final static int FRIES_HEIGHT = 60;
+    public final static int FRIES_BASE_VELOCITY = 210;
+
 }
