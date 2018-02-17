@@ -35,7 +35,7 @@ public class Fries extends AbstractItem
         Player.instance().makePlayerFat();
         GameScreen.stage.addActor(new BouncingText("FAT", DefComponents.LABEL_STYLE,
                 Effect.BAD));
-        IndicatorController.instance().fatTrigger();
+        IndicatorController.instance().addFatIndicator();
     }
 
     @Override
@@ -43,4 +43,7 @@ public class Fries extends AbstractItem
     {
         this.rotateBy(45 * delta);
     }
+
+
+
 }

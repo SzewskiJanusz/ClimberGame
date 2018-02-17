@@ -1,13 +1,8 @@
 package com.janusz.climbergame.game.indicators.graphics;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.janusz.climbergame.Const;
+import com.badlogic.gdx.Game;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.screens.GameScreen;
-import com.janusz.climbergame.shared.DefComponents;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Janusz on 2017-12-14.
@@ -18,6 +13,7 @@ public class IndicatorController
 {
     private DrunkIndicator drunkIndicator;
     private CoffeeIndicator coffeeIndicator;
+    private FatIndicator fatIndicator;
 
     public static IndicatorController indControl;
 
@@ -25,6 +21,7 @@ public class IndicatorController
     {
         drunkIndicator = new DrunkIndicator();
         coffeeIndicator = new CoffeeIndicator();
+        fatIndicator = new FatIndicator();
     }
 
     public static IndicatorController instance()
@@ -43,6 +40,9 @@ public class IndicatorController
 
     public void addCoffeeIndicator()
     {
+        Player.fat = false;
+        fatIndicator.remove();
+        fatIndicator.label.remove();
         GameScreen.stage.addActor(coffeeIndicator);
         GameScreen.stage.addActor(coffeeIndicator.label);
     }
@@ -51,10 +51,15 @@ public class IndicatorController
     {
         drunkIndicator.toFront();
         coffeeIndicator.toFront();
+        fatIndicator.toFront();
     }
 
-    public void fatTrigger()
+    public void addFatIndicator()
     {
-
+        Player.caffeinated = false;
+        coffeeIndicator.remove();
+        coffeeIndicator.label.remove();
+        GameScreen.stage.addActor(fatIndicator);
+        GameScreen.stage.addActor(fatIndicator.label);
     }
 }

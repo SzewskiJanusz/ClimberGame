@@ -118,6 +118,7 @@ public class Player extends Actor implements IPlayer
                 fat = false;
                 velocity.x = 6.5f;
             }
+            fatTime += delta;
         }
         movePlayer(delta);
         toFront();
@@ -240,6 +241,12 @@ public class Player extends Actor implements IPlayer
         velocity.x = 4f;
         fatTime = 0;
         fat = true;
+    }
+
+
+    public void normalizeVelocity()
+    {
+        velocity.x = 6.5f;
     }
 
     public Rectangle getBadCollisionBounds()
