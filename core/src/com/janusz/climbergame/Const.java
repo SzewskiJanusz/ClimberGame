@@ -156,4 +156,6 @@ public abstract class Const
     public final static int FRIES_HEIGHT = 60;
     public final static int FRIES_BASE_VELOCITY = 210;
 
+    public static final float FATINDICATOR_WIDTH = 75;
+    public static final float FATINDICATOR_HEIGHT = 100;
 }

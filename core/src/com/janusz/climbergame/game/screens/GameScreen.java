@@ -234,7 +234,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         if (difficultyTimer >= 25)
         {
             level++;
-            levelVelocity += 40;
+            levelVelocity += 20 + level;
             difficultyTimer = 0;
             stage.addActor(new BouncingText("LEVEL UP!",DefComponents.LABEL_STYLE, Effect.DEFAULT));
 

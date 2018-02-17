@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.Banana;
+import com.janusz.climbergame.game.entities.Treasure;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 
@@ -31,7 +32,7 @@ public class TreasureManager extends AbstractManager
     protected void createEntity()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Banana b = new Banana
+        Treasure b = new Treasure
                 (
                         texture,
                         x,

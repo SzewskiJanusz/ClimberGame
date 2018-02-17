@@ -12,7 +12,7 @@ import com.janusz.climbergame.game.entities.player.Player;
 public class BouncingText extends Label
 {
     // Time for when text is visible (sec)
-    private final float timeOfVisibility = 0.5f;
+    private final float timeOfVisibility = 0.7f;
     private float timeElapsed = 0;
 
     public BouncingText(CharSequence text, LabelStyle style, Effect effect)
@@ -33,9 +33,6 @@ public class BouncingText extends Label
                 break;
             case BAD:
                 this.setColor(Color.RED);
-                break;
-            case GOLD:
-                this.setColor(Color.GOLD);
                 break;
             default:
                 break;
