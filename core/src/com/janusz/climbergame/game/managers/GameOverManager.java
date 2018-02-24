@@ -42,7 +42,6 @@ public class GameOverManager
     private TextButton mainMenu;
     private TextButton uploadScore;
 
-    private TextButton.TextButtonStyle bs;
     private Table table;
     private ClimberGame game;
 

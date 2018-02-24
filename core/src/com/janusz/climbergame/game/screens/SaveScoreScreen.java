@@ -14,6 +14,8 @@ import com.janusz.climbergame.menu.screens.MenuScreen;
 import com.janusz.climbergame.menu.screens.OptionsScreen;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.shared.DefComponents;
+import com.janusz.climbergame.shared.Toast;
+import com.janusz.climbergame.shared.scoreclient.NetClientPost;
 import com.janusz.climbergame.shared.scoreclient.ServerConnection;
 
 /**
@@ -23,6 +25,7 @@ import com.janusz.climbergame.shared.scoreclient.ServerConnection;
 public class SaveScoreScreen extends AbstractScreen
 {
     private TextField tf;
+    private Toast toast = null;
 
     public SaveScoreScreen(ClimberGame game)
     {
@@ -66,10 +69,9 @@ public class SaveScoreScreen extends AbstractScreen
             {
                 if (tf.getText().length() > 0 && tf.getText().length() < 10)
                 {
-                    new ServerConnection().sendScoreToServer(tf.getText(),
-                            ScoreManager.getInstance().ScoreLogic.getScore());
-
-                    game.setScreen(new MenuScreen(game));
+                    NetClientPost ncp = new NetClientPost();
+                    ncp.addScoreToServer(String.valueOf(ScoreManager.getInstance().ScoreLogic.getScore()),
+                            tf.getText());
                 }
             }
         });

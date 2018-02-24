@@ -18,11 +18,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public abstract class DefComponents
 {
-    private static BitmapFont textFont;
+    public static BitmapFont textFont;
 
     public static Label.LabelStyle LABEL_STYLE;
     public static TextField.TextFieldStyle TEXTFIELD_STYLE;
     public static TextButton.TextButtonStyle TEXTBUTTON_STYLE;
+
 
     public static void prepareStyles()
     {
