@@ -1,10 +1,6 @@
 package com.janusz.climbergame.shared.scoreclient;
-import com.janusz.climbergame.shared.DefComponents;
-import com.janusz.climbergame.shared.Toast;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;

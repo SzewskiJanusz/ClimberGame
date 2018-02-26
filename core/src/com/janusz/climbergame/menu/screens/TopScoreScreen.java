@@ -1,21 +1,18 @@
 package com.janusz.climbergame.menu.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.BackToMenuButton;
+import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.shared.DefComponents;
-import com.janusz.climbergame.shared.scoreclient.ServerConnection;
+import com.janusz.climbergame.shared.scoreclient.NetClientGet;
+import com.janusz.climbergame.shared.scoreclient.Score;
+
 import java.util.List;
 
 
@@ -48,8 +45,8 @@ public class TopScoreScreen extends AbstractScreen
         Gdx.input.setInputProcessor(stage);
 
         fillTableWithHeaders();
-        ServerConnection sc = new ServerConnection();
-        List<String> scores = sc.getScoresFromServer();
+        NetClientGet ncg = new NetClientGet();
+        List<Score> scores = ncg.getScoresFromServer();
         fillTableWithScores(scores);
     }
 
@@ -61,15 +58,15 @@ public class TopScoreScreen extends AbstractScreen
         scoreTable.row();
     }
 
-    private void fillTableWithScores(List<String> scores)
+    private void fillTableWithScores(List<Score> scores)
     {
         for (int i = 0 ; i < scores.size() ; i++)
         {
             lblLp[i] = new Label(String.valueOf(i + 1), DefComponents.LABEL_STYLE);
             lblLp[i].setFontScale(1.2f);
-            lblPlayers[i] = new Label(scores.get(i).split(":")[0], DefComponents.LABEL_STYLE);
+            lblPlayers[i] = new Label(scores.get(i).getName(), DefComponents.LABEL_STYLE);
             lblPlayers[i].setFontScale(1.2f);
-            lblScores[i] = new Label(scores.get(i).split(":")[1], DefComponents.LABEL_STYLE);
+            lblScores[i] = new Label(String.valueOf(scores.get(i).getScore()), DefComponents.LABEL_STYLE);
             lblScores[i].setFontScale(1.2f);
             scoreTable.add(lblLp[i]).width(120);
             scoreTable.add(lblPlayers[i]).width(120);
