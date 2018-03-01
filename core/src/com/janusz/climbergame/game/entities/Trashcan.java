@@ -2,6 +2,7 @@ package com.janusz.climbergame.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.game.sound.GameSound;
 
 /**
  * Created by Janusz on 2018-02-13.
@@ -28,6 +29,7 @@ public class Trashcan extends AbstractItem
     public void triggerEffect()
     {
         GameScreen.deathAnimation = true;
+        GameSound.instance().playDeath();
     }
 
     @Override

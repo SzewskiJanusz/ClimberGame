@@ -31,6 +31,7 @@ import com.janusz.climbergame.game.managers.WatermelonManager;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.pause.PauseController;
+import com.janusz.climbergame.game.sound.GameSound;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.game.texts.TapToStartLabel;
 import com.janusz.climbergame.shared.DefComponents;
@@ -96,6 +97,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
      */
     protected void init()
     {
+        GameSound.instance().prepareSounds();
         level = 0;
         onBeginning = true;
         gameOver = false;
@@ -237,7 +239,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             levelVelocity += 20 + level;
             difficultyTimer = 0;
             stage.addActor(new BouncingText("LEVEL UP!",DefComponents.LABEL_STYLE, Effect.DEFAULT));
-
+            GameSound.instance().playLevelUp();
             switch(level)
             {
                 case 1: friesMgr.startTimer(); break;
@@ -293,6 +295,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         super.dispose();
         spriteBatch.dispose();
         stage.dispose();
+        GameSound.instance().dispose();
     }
 
     private void sleep(int fps) {

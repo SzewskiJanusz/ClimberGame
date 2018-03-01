@@ -2,6 +2,7 @@ package com.janusz.climbergame.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.game.sound.GameSound;
 
 /**
  * Created by Janusz on 2017-09-20.
@@ -19,6 +20,7 @@ public class Anvil extends AbstractItem
     public void triggerEffect()
     {
         GameScreen.deathAnimation = true;
+        GameSound.instance().playDeath();
     }
 
     protected void doMovement(float delta)

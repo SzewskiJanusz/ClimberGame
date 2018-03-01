@@ -5,6 +5,7 @@ import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.game.sound.GameSound;
 import com.janusz.climbergame.shared.DefComponents;
 
 /**
@@ -34,6 +35,7 @@ public class Pear extends AbstractItem
         ScoreManager.getInstance().ScoreLogic.addToScore(500);
         GameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
                 Effect.GOOD));
+        GameSound.instance().playGood();
     }
 
     @Override

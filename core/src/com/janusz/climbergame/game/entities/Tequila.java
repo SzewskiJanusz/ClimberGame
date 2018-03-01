@@ -6,6 +6,7 @@ import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.game.sound.GameSound;
 import com.janusz.climbergame.shared.DefComponents;
 
 /**
@@ -33,5 +34,6 @@ public class Tequila extends AbstractItem
                 Effect.BAD));
         Player.drunk = true;
         IndicatorController.instance().addDrunkIndicator();
+        GameSound.instance().playFatFries();
     }
 }
