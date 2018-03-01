@@ -3,6 +3,7 @@ package com.janusz.climbergame.menu.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
@@ -38,15 +39,13 @@ public class TopScoreScreen extends AbstractScreen
     private Label[] lblScores;
 
 
-    public TopScoreScreen(ClimberGame game)
+    public TopScoreScreen(ClimberGame game, List<Score> scores)
     {
         super(game);
         // Set input processor here because stage is initialized
         Gdx.input.setInputProcessor(stage);
 
         fillTableWithHeaders();
-        NetClientGet ncg = new NetClientGet();
-        List<Score> scores = ncg.getScoresFromServer();
         fillTableWithScores(scores);
     }
 
@@ -106,9 +105,11 @@ public class TopScoreScreen extends AbstractScreen
 
     private void initTable()
     {
+
         scoreTable = new Table();
         scoreTable.setFillParent(true);
-        stage.addActor(scoreTable);
+        ScrollPane scroll = new ScrollPane(scoreTable);
+        stage.addActor(scroll);
     }
 
     private void initTitle()

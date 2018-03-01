@@ -18,6 +18,12 @@ import com.janusz.climbergame.menu.buttons.TopScoresButton;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
+import com.janusz.climbergame.shared.Toast;
+import com.janusz.climbergame.shared.scoreclient.NetClientGet;
+import com.janusz.climbergame.shared.scoreclient.Score;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Janusz on 2017-09-27.
@@ -35,6 +41,9 @@ public class MenuScreen extends AbstractScreen
 
     private JungleBackground gameBackground;
 
+    private Toast toast;
+    private Toast.ToastFactory toastFactory;
+    private boolean displayToast;
 
     public MenuScreen(final ClimberGame game)
     {
@@ -88,7 +97,21 @@ public class MenuScreen extends AbstractScreen
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new TopScoreScreen(game));
+                NetClientGet ncg = new NetClientGet();
+                List<Score> scores;
+                try
+                {
+                    scores = ncg.getScoresFromServer();
+                    game.setScreen(new TopScoreScreen(game, scores));
+                }
+                catch(IOException ex)
+                {
+                    toastFactory = new Toast.ToastFactory.Builder()
+                            .font(DefComponents.textFont)
+                            .build();
+                    toast = toastFactory.create("Can't connect to server", Toast.Length.LONG);
+                    displayToast = true;
+                }
             }
         });
         stage.addActor(topScores);
@@ -132,6 +155,9 @@ public class MenuScreen extends AbstractScreen
         spriteBatch.begin();
         stage.draw();
 
+        if (displayToast){
+            toast.render(delta);
+        }
         spriteBatch.end();
     }
 

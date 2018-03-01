@@ -9,7 +9,7 @@ import java.net.URL;
 public class NetClientPost
 {
 
-    public boolean addScoreToServer(String score, String name)
+    public boolean addScoreToServer(String score, String name) throws IOException
     {
         try {
 
@@ -36,8 +36,6 @@ public class NetClientPost
             }
 
         } catch (MalformedURLException e) {
-            return false;
-        } catch (IOException e) {
             return false;
         }
     }

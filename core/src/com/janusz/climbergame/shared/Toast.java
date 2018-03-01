@@ -105,7 +105,7 @@ public class Toast {
      * @return activeness of the toast (true while being displayed, false otherwise)
      */
     public boolean render(float delta) {
-        timeToLive -= delta;
+        timeToLive -= delta/3.0;
 
         if (timeToLive < 0) {
             return false;

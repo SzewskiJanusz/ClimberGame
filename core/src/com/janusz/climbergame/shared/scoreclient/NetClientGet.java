@@ -5,6 +5,8 @@ package com.janusz.climbergame.shared.scoreclient;
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.janusz.climbergame.shared.DefComponents;
+import com.janusz.climbergame.shared.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,44 +19,38 @@ import java.util.List;
 
 public class NetClientGet
 {
-
-    public List<Score> getScoresFromServer()
+    public List<Score> getScoresFromServer() throws IOException
     {
         List<Score> objectList = new ArrayList<Score>();
-        try {
 
-            URL url = new URL("http://192.168.1.19:8080/highscores/ingame");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+        URL url = new URL("http://192.168.1.19:8080/highscores/ingame");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setConnectTimeout(5000);
 
-            if (conn.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP error code : "
-                        + conn.getResponseCode());
-            }
+        conn.setRequestProperty("Accept", "application/json");
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    (conn.getInputStream())));
-
-            String JSONoutput;
-
-            if ((JSONoutput = br.readLine()) != null)
-            {
-                objectList = getObjectsFromJSON(JSONoutput);
-            }
-
-            conn.disconnect();
-
-        } catch (MalformedURLException e) {
-
-            e.printStackTrace();
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
+        if (conn.getResponseCode() != 200) {
+            throw new RuntimeException("Failed : HTTP error code : "
+                    + conn.getResponseCode());
         }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(
+                (conn.getInputStream())));
+
+        String JSONoutput;
+
+        if ((JSONoutput = br.readLine()) != null)
+        {
+            objectList = getObjectsFromJSON(JSONoutput);
+        }
+
+        conn.disconnect();
+
         return objectList;
     }
+
+
 
     private List<Score> getObjectsFromJSON(String json) throws IOException
     {

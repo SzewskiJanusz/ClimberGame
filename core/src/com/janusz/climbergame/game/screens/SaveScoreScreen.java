@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.menu.screens.MenuScreen;
 import com.janusz.climbergame.menu.screens.OptionsScreen;
@@ -18,6 +19,8 @@ import com.janusz.climbergame.shared.Toast;
 import com.janusz.climbergame.shared.scoreclient.NetClientPost;
 import com.janusz.climbergame.shared.scoreclient.ServerConnection;
 
+import java.io.IOException;
+
 /**
  * Created by Janusz on 2017-12-07.
  */
@@ -26,6 +29,8 @@ public class SaveScoreScreen extends AbstractScreen
 {
     private TextField tf;
     private Toast toast = null;
+    private boolean displayToast = false;
+    private JungleBackground background;
 
     public SaveScoreScreen(ClimberGame game)
     {
@@ -39,6 +44,9 @@ public class SaveScoreScreen extends AbstractScreen
         initLabel();
         initTextfield();
         initButton();
+        background = new JungleBackground();
+        stage.addActor(background);
+        background.toBack();
     }
 
     private void initLabel()
@@ -61,7 +69,7 @@ public class SaveScoreScreen extends AbstractScreen
     private void initButton()
     {
         TextButton tb = new TextButton("OK",DefComponents.TEXTBUTTON_STYLE);
-        tb.setPosition(310,100);
+        tb.setPosition(360,100);
         tb.setSize(100,50);
         tb.addListener(new ClickListener(){
             @Override
@@ -70,13 +78,37 @@ public class SaveScoreScreen extends AbstractScreen
                 if (tf.getText().length() > 0 && tf.getText().length() < 10)
                 {
                     NetClientPost ncp = new NetClientPost();
-                    ncp.addScoreToServer(String.valueOf(ScoreManager.getInstance().ScoreLogic.getScore()),
-                            tf.getText());
+                    try
+                    {
+                        ncp.addScoreToServer(String.valueOf(ScoreManager.getInstance().ScoreLogic.getScore()),
+                                tf.getText());
+                    }catch(IOException e)
+                    {
+                        Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
+                                .font(DefComponents.textFont)
+                                .build();
+                        toast = toastFactory.create("Can't connect to server", Toast.Length.LONG);
+                        displayToast = true;
+                    }
+
                 }
             }
         });
 
+        TextButton cancel = new TextButton("MENU",DefComponents.TEXTBUTTON_STYLE);
+        cancel.setPosition(200,100);
+        cancel.setSize(100,50);
+        cancel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                stage.dispose();
+                game.setScreen(new MenuScreen(game));
+            }
+        });
+
         stage.addActor(tb);
+        stage.addActor(cancel);
     }
 
     @Override
@@ -84,5 +116,7 @@ public class SaveScoreScreen extends AbstractScreen
     {
         super.render(delta);
         stage.draw();
+        if (displayToast)
+            toast.render(delta);
     }
 }
