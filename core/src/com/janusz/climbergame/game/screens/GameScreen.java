@@ -7,33 +7,16 @@ import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.entities.AbstractItem;
-import com.janusz.climbergame.game.entities.Grapes;
-import com.janusz.climbergame.game.entities.Watermelon;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
-import com.janusz.climbergame.game.environment.BouncingText;
-import com.janusz.climbergame.game.environment.Effect;
-import com.janusz.climbergame.game.environment.EntireLiana;
+import com.janusz.climbergame.game.environment.*;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
-import com.janusz.climbergame.game.managers.AnvilManager;
-import com.janusz.climbergame.game.managers.AppleManager;
-import com.janusz.climbergame.game.managers.BananaManager;
-import com.janusz.climbergame.game.managers.CarrotManager;
-import com.janusz.climbergame.game.managers.CoffeeManager;
-import com.janusz.climbergame.game.managers.FriesManager;
-import com.janusz.climbergame.game.managers.GameOverManager;
-import com.janusz.climbergame.game.managers.GrapesManager;
-import com.janusz.climbergame.game.managers.PearManager;
-import com.janusz.climbergame.game.managers.StoneManager;
-import com.janusz.climbergame.game.managers.TequilaManager;
-import com.janusz.climbergame.game.managers.TreasureManager;
-import com.janusz.climbergame.game.managers.WatermelonManager;
+import com.janusz.climbergame.game.managers.*;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.pause.PauseController;
 import com.janusz.climbergame.game.sound.GameSound;
-import com.janusz.climbergame.game.texts.TapImage;
-import com.janusz.climbergame.game.texts.TapToStartLabel;
+import com.janusz.climbergame.game.texts.*;
 import com.janusz.climbergame.shared.DefComponents;
 
 import java.util.ArrayList;
@@ -98,7 +81,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     protected void init()
     {
         GameSound.instance().prepareSounds();
-        level = 0;
+        level = 1;
         onBeginning = true;
         gameOver = false;
         paused = false;
@@ -242,12 +225,12 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             GameSound.instance().playLevelUp();
             switch(level)
             {
-                case 1: friesMgr.startTimer(); break;
-                case 2: waterMgr.startTimer(); break;
-                case 4: carrotMgr.startTimer(); break;
-                case 5: treasureMgr.startTimer(); break;
-                case 6: pearMgr.startTimer(); break;
-                case 8: grapesMgr.startTimer(); break;
+                case 2: friesMgr.startTimer(); break;
+                case 3: waterMgr.startTimer(); break;
+                case 5: carrotMgr.startTimer(); break;
+                case 6: treasureMgr.startTimer(); break;
+                case 7: pearMgr.startTimer(); break;
+                case 9: grapesMgr.startTimer(); break;
             }
         }
         else
