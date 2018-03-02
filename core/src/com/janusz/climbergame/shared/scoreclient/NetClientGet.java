@@ -55,28 +55,26 @@ public class NetClientGet
     private List<Score> getObjectsFromJSON(String json) throws IOException
     {
         List<Score> list = new ArrayList<Score>();
-        boolean write = false;
         String onejsonstr = "";
+        boolean skipComma = false;
         ObjectMapper mapper = new ObjectMapper();
 
         for(int i = 1 ; json.charAt(i) != ']' ; i++)
         {
-            if (write)
+            if (skipComma)
+            {
+                skipComma = false;
+                continue;
+            }
+
+            onejsonstr += json.charAt(i);
+
+            if (json.charAt(i) == '}')
             {
                 Score s = mapper.readValue(onejsonstr, Score.class);
                 list.add(s);
                 onejsonstr = "";
-                write = false;
-            }
-            else
-            {
-                onejsonstr += json.charAt(i);
-            }
-
-
-            if (json.charAt(i) == '}')
-            {
-                write = true;
+                skipComma = true;
             }
         }
 
