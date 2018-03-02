@@ -77,20 +77,23 @@ public class TopScoreScreen extends AbstractScreen
     @Override
     protected void init()
     {
-        initTitle();
-        initBackButton();
+        initTitleAndAddToStage();
         initTable();
-
         initHeaderLabels();
         initDataLabels();
-
+        initScrollPaneAndAddToStage();
+        initBackButtonAndAddToStage();
     }
 
-    private void initDataLabels()
+    private void initTitleAndAddToStage()
     {
-        lblLp = new Label[10];
-        lblPlayers = new Label[10];
-        lblScores = new Label[10];
+        title = new Title();
+        stage.addActor(title);
+    }
+
+    private void initTable()
+    {
+        scoreTable = new Table();
     }
 
     private void initHeaderLabels()
@@ -103,22 +106,23 @@ public class TopScoreScreen extends AbstractScreen
         lpHeader.setFontScale(3);
     }
 
-    private void initTable()
+    private void initDataLabels()
     {
+        lblLp = new Label[300];
+        lblPlayers = new Label[300];
+        lblScores = new Label[300];
+    }
 
-        scoreTable = new Table();
-        scoreTable.setFillParent(true);
+    private void initScrollPaneAndAddToStage()
+    {
         ScrollPane scroll = new ScrollPane(scoreTable);
+        scroll.setSize(500,280);
+        scroll.setPosition(ClimberGame.WIDTH/5 - 30,ClimberGame.HEIGHT/5 );
+        scroll.setScrollingDisabled(true,false);
         stage.addActor(scroll);
     }
 
-    private void initTitle()
-    {
-        title = new Title();
-        stage.addActor(title);
-    }
-
-    private void initBackButton()
+    private void initBackButtonAndAddToStage()
     {
         btnBackToMenu = new BackToMenuButton("BACK TO MENU", DefComponents.TEXTBUTTON_STYLE, 30);
         btnBackToMenu.addListener(new ClickListener(){
@@ -137,6 +141,7 @@ public class TopScoreScreen extends AbstractScreen
         super.render(delta);
 
         spriteBatch.begin();
+        stage.act(delta);
         stage.draw();
 
         spriteBatch.end();
