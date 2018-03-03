@@ -40,7 +40,7 @@ public class GameSound
         fruitSound = Gdx.audio.newSound(Gdx.files.internal("getgood.wav"));
         friesSound = Gdx.audio.newSound(Gdx.files.internal("getfries.wav"));
         coffeeSound = Gdx.audio.newSound(Gdx.files.internal("getcoffee.wav"));
-        treasureSound = Gdx.audio.newSound(Gdx.files.internal("gettreasure.wav"));
+        treasureSound = Gdx.audio.newSound(Gdx.files.internal("gettreasure.mp3"));
         lvlUpSound = Gdx.audio.newSound(Gdx.files.internal("levelup.mp3"));
     }
 
