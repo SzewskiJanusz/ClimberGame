@@ -34,6 +34,7 @@ public class BeginningHandler extends InputAdapter
         screen.tequilaMgr.startTimer();
         screen.appleMgr.startTimer();
 
+        GameScreen.stage.addActor(screen.lvlLabel);
         TapToStartLabel.instance().remove();
         TapImage.instance().remove();
         GameScreen.stage.addActor(ScoreManager.getInstance().ScoreLabel);

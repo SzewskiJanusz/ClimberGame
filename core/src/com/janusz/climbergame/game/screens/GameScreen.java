@@ -70,6 +70,10 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private static float difficultyTimer;
     public static int level;
 
+    public LevelLabel lvlLabel;
+
+
+
 
 
     // Constructor
@@ -119,6 +123,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         friesMgr = new FriesManager();
         trashMgr = new TrashcanManager();
         satelliteMgr = new SatelliteManager();
+        lvlLabel = new LevelLabel(String.valueOf(GameScreen.level), DefComponents.LABEL_STYLE);
 
         stage.addActor(PauseController.instance().pauseButton);
         stage.addActor(PauseController.instance().pauseLabel);
@@ -224,6 +229,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         if (difficultyTimer >= 20 + level)
         {
             level++;
+            lvlLabel.setText(String.valueOf(GameScreen.level));
             levelVelocity += 20 + level;
             difficultyTimer = 0;
             stage.addActor(new BouncingText("LEVEL UP!",DefComponents.LABEL_STYLE, Effect.DEFAULT));
@@ -235,7 +241,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                 case 4: trashMgr.startTimer(); break;
                 case 5: carrotMgr.startTimer(); break;
                 case 6: treasureMgr.startTimer();
-                    satelliteMgr.startTimer(); break;
+                        satelliteMgr.startTimer(); break;
                 case 7: satelliteMgr.startTimer(); break;
                 case 8: pearMgr.startTimer(); break;
                 case 9: grapesMgr.startTimer(); break;
@@ -267,6 +273,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                                            PauseController.instance().pauseButton.remove();
                                            ScoreManager.getInstance().ScoreLabel.remove();
                                            Timer.instance().clear();
+                                           lvlLabel.remove();
                                            added = true;
                                        }
 
