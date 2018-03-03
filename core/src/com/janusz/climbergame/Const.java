@@ -121,6 +121,22 @@ public abstract class Const
     public static final int TAPLABEL_STARTING_X = 100;
     public static final int TAPLABEL_STARTING_Y = 350;
 
+    /** TRASHCAN CONSTS */
+    public final static int TRASHCAN_DELAY_SPAWN = 4;
+    public final static int TRASHCAN_BOTTOM_RANGE = 4;
+    public final static int TRASHCAN_UPPER_RANGE = 6;
+    public final static int TRASHCAN_WIDTH = 60;
+    public final static int TRASHCAN_HEIGHT = 63;
+    public final static int TRASHCAN_BASE_VELOCITY = 305;
+
+    /** SATELLITE CONSTS */
+    public final static int SATELLITE_DELAY_SPAWN = 4;
+    public final static int SATELLITE_BOTTOM_RANGE = 45;
+    public final static int SATELLITE_UPPER_RANGE = 85;
+    public final static int SATELLITE_WIDTH = 120;
+    public final static int SATELLITE_HEIGHT = 90;
+    public final static int SATELLITE_BASE_VELOCITY = 305;
+
     /** FRIES */
     public static final float FAT_EFFECT_TIME = 6;
 

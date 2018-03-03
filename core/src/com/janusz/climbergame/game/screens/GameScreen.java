@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.entities.AbstractItem;
+import com.janusz.climbergame.game.entities.Satellite;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
 import com.janusz.climbergame.game.environment.*;
@@ -52,6 +53,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public TreasureManager treasureMgr;
     public GrapesManager grapesMgr;
     public FriesManager friesMgr;
+    public TrashcanManager trashMgr;
+    public SatelliteManager satelliteMgr;
 
     /* Queue to avoid stacking items */
     private double queueTimer;
@@ -114,6 +117,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         treasureMgr = new TreasureManager();
         grapesMgr = new GrapesManager();
         friesMgr = new FriesManager();
+        trashMgr = new TrashcanManager();
+        satelliteMgr = new SatelliteManager();
 
         stage.addActor(PauseController.instance().pauseButton);
         stage.addActor(PauseController.instance().pauseLabel);
@@ -216,7 +221,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
     private void difficultyUpdate(float delta)
     {
-        if (difficultyTimer >= 25)
+        if (difficultyTimer >= 20 + level)
         {
             level++;
             levelVelocity += 20 + level;
@@ -227,9 +232,12 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             {
                 case 2: friesMgr.startTimer(); break;
                 case 3: waterMgr.startTimer(); break;
+                case 4: trashMgr.startTimer(); break;
                 case 5: carrotMgr.startTimer(); break;
-                case 6: treasureMgr.startTimer(); break;
-                case 7: pearMgr.startTimer(); break;
+                case 6: treasureMgr.startTimer();
+                    satelliteMgr.startTimer(); break;
+                case 7: satelliteMgr.startTimer(); break;
+                case 8: pearMgr.startTimer(); break;
                 case 9: grapesMgr.startTimer(); break;
             }
         }
@@ -288,7 +296,10 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             if (diff < targetDelay) {
                 try{
                     Thread.sleep(targetDelay - diff);
-                } catch (InterruptedException e) {}
+                } catch (InterruptedException e)
+                {
+                    //Do nothing
+                }
             }
             start = System.currentTimeMillis();
         }
