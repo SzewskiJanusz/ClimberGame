@@ -1,23 +1,19 @@
 package com.janusz.climbergame.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.menu.screens.MenuScreen;
-import com.janusz.climbergame.menu.screens.OptionsScreen;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.shared.DefComponents;
 import com.janusz.climbergame.shared.Toast;
 import com.janusz.climbergame.shared.scoreclient.NetClientPost;
-import com.janusz.climbergame.shared.scoreclient.ServerConnection;
 
 import java.io.IOException;
 

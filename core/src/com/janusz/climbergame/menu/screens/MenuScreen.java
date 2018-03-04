@@ -35,7 +35,7 @@ public class MenuScreen extends AbstractScreen
     private Title title;
 
     private StartGameButton startGame;
-    private OptionsButton options;
+    private OptionsButton about;
     private TopScoresButton topScores;
     private ExitButton exit;
 
@@ -119,15 +119,15 @@ public class MenuScreen extends AbstractScreen
 
     private void initOptions()
     {
-        options = new OptionsButton("OPTIONS", DefComponents.TEXTBUTTON_STYLE, 210);
-        options.addListener(new ClickListener(){
+        about = new OptionsButton("ABOUT", DefComponents.TEXTBUTTON_STYLE, 210);
+        about.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new OptionsScreen(game));
+                game.setScreen(new AboutScreen(game));
             }
         });
-        stage.addActor(options);
+        stage.addActor(about);
     }
 
     private void initStartGame()
