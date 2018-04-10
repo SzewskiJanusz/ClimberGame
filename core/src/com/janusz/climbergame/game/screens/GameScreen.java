@@ -1,5 +1,7 @@
 package com.janusz.climbergame.game.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -7,17 +9,34 @@ import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.entities.AbstractItem;
-import com.janusz.climbergame.game.entities.Satellite;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
-import com.janusz.climbergame.game.environment.*;
+import com.janusz.climbergame.game.environment.BouncingText;
+import com.janusz.climbergame.game.environment.Effect;
+import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
-import com.janusz.climbergame.game.managers.*;
+import com.janusz.climbergame.game.managers.AnvilManager;
+import com.janusz.climbergame.game.managers.AppleManager;
+import com.janusz.climbergame.game.managers.BananaManager;
+import com.janusz.climbergame.game.managers.CarrotManager;
+import com.janusz.climbergame.game.managers.CoffeeManager;
+import com.janusz.climbergame.game.managers.FriesManager;
+import com.janusz.climbergame.game.managers.GameOverManager;
+import com.janusz.climbergame.game.managers.GrapesManager;
+import com.janusz.climbergame.game.managers.PearManager;
+import com.janusz.climbergame.game.managers.SatelliteManager;
+import com.janusz.climbergame.game.managers.StoneManager;
+import com.janusz.climbergame.game.managers.TequilaManager;
+import com.janusz.climbergame.game.managers.TrashcanManager;
+import com.janusz.climbergame.game.managers.TreasureManager;
+import com.janusz.climbergame.game.managers.WatermelonManager;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.pause.PauseController;
 import com.janusz.climbergame.game.sound.GameSound;
-import com.janusz.climbergame.game.texts.*;
+import com.janusz.climbergame.game.texts.LevelLabel;
+import com.janusz.climbergame.game.texts.TapImage;
+import com.janusz.climbergame.game.texts.TapToStartLabel;
 import com.janusz.climbergame.shared.DefComponents;
 
 import java.util.ArrayList;
@@ -71,6 +90,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public static int level;
 
     public LevelLabel lvlLabel;
+    public static boolean pauseClicked;
 
 
 
@@ -134,6 +154,12 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
             {
+                if (pauseClicked)
+                {
+                    pauseClicked = false;
+                    return false;
+                }
+
                 if (Player.instance().playerState == PlayerState.CLIMBING_LIANA && !GameScreen.paused)
                 {
                     if (isFingerOnLeft(x, Player.instance().getX() + Player.instance().getWidth() / 2))
@@ -151,7 +177,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                             Player.instance().jumpLeft();
                     }
                 }
-              return true;
+
+                return true;
             }
         });
     }
@@ -199,6 +226,10 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 
     private void update(float delta)
     {
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK))
+        {
+            PauseController.instance().pauseGame();
+        }
         stage.act();
         ScoreManager.getInstance().update();
 
@@ -293,6 +324,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         super.dispose();
         spriteBatch.dispose();
         stage.dispose();
+        Player.instance().remove();
         GameSound.instance().dispose();
     }
 
