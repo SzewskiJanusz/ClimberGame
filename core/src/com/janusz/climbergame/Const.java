@@ -58,7 +58,7 @@ public abstract class Const
     public final static int SPACE_BETWEEN_INDICATOR_AND_LABEL = 30;
 
     /** DISTANCE BETWEEN INDICATORS */
-    public final static int SPACE_BETWEEN_INDICATORS = 70;
+    public final static int SPACE_BETWEEN_INDICATORS = 90;
 
     /** COFFEE INDICATOR CONSTS */
     public final static int COFFEEINDICATOR_X = 550;

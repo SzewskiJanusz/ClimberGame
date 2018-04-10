@@ -34,6 +34,7 @@ public class PauseController
         return ins;
     }
 
+
     public void showLabel()
     {
         pauseLabel.toFront();
@@ -44,6 +45,21 @@ public class PauseController
         pauseLabel.toBack();
     }
 
+    public void resumeGame()
+    {
+        GameScreen.paused = false;
+        Timer.instance().start();
+        pauseLabel.remove();
+        GameScreen.pauseClicked = true;
+    }
+
+    public void pauseGame()
+    {
+        GameScreen.paused = true;
+        Timer.instance().stop();
+        GameScreen.stage.addActor(pauseLabel);
+        pauseLabel.toFront();
+    }
 
     private PauseController()
     {
@@ -67,7 +83,7 @@ public class PauseController
         pauseButton.toFront();
     }
 
-    public void dispose()
+    public static void dispose()
     {
         ins = null;
     }
@@ -84,18 +100,15 @@ public class PauseController
             {
                 if (GameScreen.paused)
                 {
-                    GameScreen.paused = false;
-                    Timer.instance().start();
-                    pauseLabel.remove();
-                } else
+                    resumeGame();
+                }
+                else
                 {
-                    GameScreen.paused = true;
-                    Timer.instance().stop();
-                    GameScreen.stage.addActor(pauseLabel);
-                    pauseLabel.toFront();
+                    pauseGame();
                 }
             }
             return true;
         }
     }
+
 }
