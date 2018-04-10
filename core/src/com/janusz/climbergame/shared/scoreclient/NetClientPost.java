@@ -13,8 +13,7 @@ public class NetClientPost
     {
         try {
 
-            URL url = new URL("http://192.168.1.19:8080/highscores");
-
+            URL url = new URL("http://szewskijan.cal24.pl/create.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(5000);
             conn.setDoOutput(true);

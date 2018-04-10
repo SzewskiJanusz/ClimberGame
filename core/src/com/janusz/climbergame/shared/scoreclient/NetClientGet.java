@@ -23,7 +23,7 @@ public class NetClientGet
     {
         List<Score> objectList = new ArrayList<Score>();
 
-        URL url = new URL("http://192.168.1.19:8080/highscores/ingame");
+        URL url = new URL("http://szewskijan.cal24.pl/read.php");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setConnectTimeout(5000);
