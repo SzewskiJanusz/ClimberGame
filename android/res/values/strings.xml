@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ClimberGame</string>
-
+    <string name="app_name">Fast Climber</string>
+    <string name="app_id">com.janusz.climbergame</string>
 </resources>
