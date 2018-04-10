@@ -14,7 +14,6 @@ public class GameSound
     private Sound fruitSound;
     private Sound friesSound;
     private Sound coffeeSound;
-    private Sound treasureSound;
     private Sound lvlUpSound;
 
 
@@ -34,13 +33,13 @@ public class GameSound
     {
     }
 
+
     public void prepareSounds()
     {
         deathSound = Gdx.audio.newSound(Gdx.files.internal("death.wav"));
         fruitSound = Gdx.audio.newSound(Gdx.files.internal("getgood.wav"));
         friesSound = Gdx.audio.newSound(Gdx.files.internal("getfries.wav"));
         coffeeSound = Gdx.audio.newSound(Gdx.files.internal("getcoffee.wav"));
-        treasureSound = Gdx.audio.newSound(Gdx.files.internal("gettreasure.mp3"));
         lvlUpSound = Gdx.audio.newSound(Gdx.files.internal("levelup.mp3"));
     }
 
@@ -64,17 +63,13 @@ public class GameSound
         coffeeSound.play();
     }
 
-    public void playTreasure()
-    {
-        treasureSound.play();
-    }
 
     public void playLevelUp()
     {
         lvlUpSound.play();
     }
 
-    public void dispose(){
+    public static void dispose(){
         ins = null;
     }
 }
