@@ -43,4 +43,9 @@ public class QueueManager
     {
         spawnQueue.clear();
     }
+
+    public static void dispose()
+    {
+        ins = null;
+    }
 }

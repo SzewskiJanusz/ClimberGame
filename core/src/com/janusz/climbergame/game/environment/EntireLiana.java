@@ -153,4 +153,8 @@ public class EntireLiana
         return first_wholeLiana.size();
     }
 
+    public static void dispose()
+    {
+        el = null;
+    }
 }

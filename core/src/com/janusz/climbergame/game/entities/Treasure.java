@@ -35,7 +35,7 @@ public class Treasure extends AbstractItem
         ScoreManager.getInstance().ScoreLogic.addToScore(2000);
         GameScreen.stage.addActor(new BouncingText("+2000", DefComponents.LABEL_STYLE,
                 Effect.GOOD));
-        GameSound.instance().playTreasure();
+        GameSound.instance().playGood();
 
     }
 
