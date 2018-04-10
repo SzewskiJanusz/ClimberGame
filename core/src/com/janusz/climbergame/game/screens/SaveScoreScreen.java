@@ -27,6 +27,9 @@ public class SaveScoreScreen extends AbstractScreen
     private Toast toast = null;
     private boolean displayToast = false;
     private JungleBackground background;
+    private Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
+            .font(DefComponents.textFont)
+            .build();
 
     public SaveScoreScreen(ClimberGame game)
     {
@@ -64,7 +67,7 @@ public class SaveScoreScreen extends AbstractScreen
 
     private void initButton()
     {
-        TextButton tb = new TextButton("OK",DefComponents.TEXTBUTTON_STYLE);
+        final TextButton tb = new TextButton("OK",DefComponents.TEXTBUTTON_STYLE);
         tb.setPosition(360,100);
         tb.setSize(100,50);
         tb.addListener(new ClickListener(){
@@ -78,15 +81,19 @@ public class SaveScoreScreen extends AbstractScreen
                     {
                         ncp.addScoreToServer(String.valueOf(ScoreManager.getInstance().ScoreLogic.getScore()),
                                 tf.getText());
+                        toast = toastFactory.create("Score added", Toast.Length.LONG);
+                        displayToast = true;
+                        tb.setVisible(false);
                     }catch(IOException e)
                     {
-                        Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
-                                .font(DefComponents.textFont)
-                                .build();
                         toast = toastFactory.create("Can't connect to server", Toast.Length.LONG);
                         displayToast = true;
                     }
-
+                }
+                else
+                {
+                    toast = toastFactory.create("NICK MAX LENGTH IS 10 CHARACTERS ", Toast.Length.SHORT);
+                    displayToast = true;
                 }
             }
         });
