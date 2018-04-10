@@ -47,6 +47,7 @@ public class TopScoreScreen extends AbstractScreen
 
         fillTableWithHeaders();
         fillTableWithScores(scores);
+        game.adService.loadIntersitialAd();
     }
 
     private void fillTableWithHeaders()
@@ -129,6 +130,7 @@ public class TopScoreScreen extends AbstractScreen
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
+                game.adService.showInterstitial();
                 game.setScreen(new MenuScreen(game));
             }
         });
