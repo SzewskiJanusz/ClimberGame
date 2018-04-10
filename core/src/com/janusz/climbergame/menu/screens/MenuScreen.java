@@ -2,6 +2,7 @@ package com.janusz.climbergame.menu.screens;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
@@ -153,6 +154,13 @@ public class MenuScreen extends AbstractScreen
     public void render(float delta)
     {
         super.render(delta);
+
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK))
+        {
+            dispose();
+            Gdx.app.exit();
+            System.exit(0);
+        }
 
         spriteBatch.begin();
         stage.draw();

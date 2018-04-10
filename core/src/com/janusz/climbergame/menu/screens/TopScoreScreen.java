@@ -1,6 +1,7 @@
 package com.janusz.climbergame.menu.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -141,11 +142,24 @@ public class TopScoreScreen extends AbstractScreen
     public void render(float delta)
     {
         super.render(delta);
-
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK))
+        {
+            game.adService.showInterstitial();
+            game.setScreen(new MenuScreen(game));
+        }
         spriteBatch.begin();
         stage.act(delta);
         stage.draw();
 
         spriteBatch.end();
+    }
+
+    @Override
+    public void dispose()
+    {
+        super.dispose();
+        stage.dispose();
+        spriteBatch.dispose();
+        game.dispose();
     }
 }

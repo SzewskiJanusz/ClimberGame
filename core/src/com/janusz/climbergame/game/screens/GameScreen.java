@@ -322,10 +322,9 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public void dispose()
     {
         super.dispose();
-        spriteBatch.dispose();
         stage.dispose();
-        Player.instance().remove();
-        GameSound.instance().dispose();
+        spriteBatch.dispose();
+        game.dispose();
     }
 
     private void sleep(int fps) {

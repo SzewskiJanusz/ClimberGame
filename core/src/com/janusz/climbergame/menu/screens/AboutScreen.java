@@ -1,12 +1,14 @@
 package com.janusz.climbergame.menu.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.game.pause.PauseController;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
@@ -64,6 +66,10 @@ public class AboutScreen extends AbstractScreen
     public void render(float delta)
     {
         super.render(delta);
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK))
+        {
+            game.setScreen(new MenuScreen(game));
+        }
         stage.draw();
     }
 
@@ -89,4 +95,12 @@ public class AboutScreen extends AbstractScreen
         }
     }
 
+    @Override
+    public void dispose()
+    {
+        super.dispose();
+        stage.dispose();
+        spriteBatch.dispose();
+        game.dispose();
+    }
 }
