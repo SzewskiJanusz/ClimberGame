@@ -8,7 +8,11 @@ import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.BeginningHandler;
 import com.janusz.climbergame.game.background.JungleBackground;
 import com.janusz.climbergame.game.entities.player.Player;
+import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
+import com.janusz.climbergame.game.managers.queue.QueueManager;
+import com.janusz.climbergame.game.pause.PauseController;
+import com.janusz.climbergame.game.sound.GameSound;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.ExitButton;
@@ -75,16 +79,14 @@ public class MenuScreen extends AbstractScreen
 
     private void initExit()
     {
-        exit = new ExitButton("EXIT", DefComponents.TEXTBUTTON_STYLE, 10);
+        exit = new ExitButton("EXIT", DefComponents.TEXTBUTTON_STYLE, 40);
         exit.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                TapImage.ins = null;
-                Player.player = null;
-                IndicatorController.indControl = null;
                 dispose();
                 Gdx.app.exit();
+                System.exit(0);
             }
         });
         stage.addActor(exit);
@@ -92,7 +94,7 @@ public class MenuScreen extends AbstractScreen
 
     private void initTopScores()
     {
-        topScores = new TopScoresButton("TOP SCORES", DefComponents.TEXTBUTTON_STYLE, 110);
+        topScores = new TopScoresButton("TOP SCORES", DefComponents.TEXTBUTTON_STYLE, 130);
         topScores.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -119,7 +121,7 @@ public class MenuScreen extends AbstractScreen
 
     private void initOptions()
     {
-        about = new OptionsButton("ABOUT", DefComponents.TEXTBUTTON_STYLE, 210);
+        about = new OptionsButton("ABOUT", DefComponents.TEXTBUTTON_STYLE, 220);
         about.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -132,7 +134,7 @@ public class MenuScreen extends AbstractScreen
 
     private void initStartGame()
     {
-        startGame = new StartGameButton("START", DefComponents.TEXTBUTTON_STYLE, 310 );
+        startGame = new StartGameButton("START", DefComponents.TEXTBUTTON_STYLE, 320 );
         startGame.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -165,6 +167,13 @@ public class MenuScreen extends AbstractScreen
     public void dispose()
     {
         super.dispose();
+        TapImage.ins = null;
+        Player.player = null;
+        PauseController.dispose();
+        GameSound.dispose();
+        QueueManager.dispose();
+        IndicatorController.indControl = null;
+        EntireLiana.dispose();
         stage.dispose();
         spriteBatch.dispose();
     }
