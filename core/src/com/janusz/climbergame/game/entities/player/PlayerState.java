@@ -7,7 +7,6 @@ package com.janusz.climbergame.game.entities.player;
 public enum PlayerState
 {
     CLIMBING_LIANA,
-    CLIMBING_WALL,
     FLYING_LEFT,
     FLYING_RIGHT,
     DYING

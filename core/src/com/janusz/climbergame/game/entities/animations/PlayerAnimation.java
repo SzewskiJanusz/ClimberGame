@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.player.Player;
-import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
  * Created by Janusz on 2017-11-01.
@@ -26,6 +25,28 @@ public class PlayerAnimation
     public PlayerAnimation()
     {
         init();
+    }
+
+    /**
+     * Gets current frame based on time and state of player
+     * @param time -
+     * @return
+     */
+    public TextureRegion getActualFrame(float time)
+    {
+        switch (Player.instance().playerState)
+        {
+            case CLIMBING_LIANA: return animation.getKeyFrame(time, true);
+            case FLYING_LEFT: return flyingLeft;
+            case FLYING_RIGHT: return flyingRight;
+            case DYING: return dying;
+        }
+        return null;
+    }
+
+    public TextureRegion getStartingFrame()
+    {
+        return animation.getKeyFrame(0, true);
     }
 
     private void init()
@@ -59,27 +80,5 @@ public class PlayerAnimation
         flyingLeft = new TextureRegion(new Texture("Ljump.png"));
         flyingRight = new TextureRegion(new Texture("Rjump.png"));
         dying = new TextureRegion(new Texture("death.png"));
-    }
-
-    /**
-     * Gets current frame based on time and state of player
-     * @param time -
-     * @return
-     */
-    public TextureRegion getActualFrame(float time)
-    {
-        switch (Player.instance().playerState)
-        {
-            case CLIMBING_LIANA: return animation.getKeyFrame(time, true);
-            case FLYING_LEFT: return flyingLeft;
-            case FLYING_RIGHT: return flyingRight;
-            case DYING: return dying;
-        }
-        return null;
-    }
-
-    public TextureRegion getStartingFrame()
-    {
-        return animation.getKeyFrame(0, true);
     }
 }

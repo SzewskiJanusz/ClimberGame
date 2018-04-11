@@ -11,8 +11,6 @@ import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
-
-
 /**
  * Created by Janusz on 2017-12-06.
  */
@@ -25,6 +23,26 @@ public class AboutScreen extends AbstractScreen
         super(game);
         // Set input processor here because stage is initialized
         Gdx.input.setInputProcessor(stage);
+    }
+
+    @Override
+    public void render(float delta)
+    {
+        super.render(delta);
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK))
+        {
+            game.setScreen(new MenuScreen(game,1f));
+        }
+        stage.draw();
+    }
+
+    @Override
+    public void dispose()
+    {
+        super.dispose();
+        stage.dispose();
+        spriteBatch.dispose();
+        game.dispose();
     }
 
     @Override
@@ -63,17 +81,6 @@ public class AboutScreen extends AbstractScreen
         return tb;
     }
 
-    @Override
-    public void render(float delta)
-    {
-        super.render(delta);
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK))
-        {
-            game.setScreen(new MenuScreen(game,1f));
-        }
-        stage.draw();
-    }
-
     private class MenuBackButtonListener extends ClickListener
     {
         @Override
@@ -96,12 +103,5 @@ public class AboutScreen extends AbstractScreen
         }
     }
 
-    @Override
-    public void dispose()
-    {
-        super.dispose();
-        stage.dispose();
-        spriteBatch.dispose();
-        game.dispose();
-    }
+
 }
