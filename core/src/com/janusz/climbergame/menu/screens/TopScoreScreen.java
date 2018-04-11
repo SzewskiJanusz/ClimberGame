@@ -132,7 +132,7 @@ public class TopScoreScreen extends AbstractScreen
             public void clicked(InputEvent event, float x, float y)
             {
                 game.adService.showInterstitial();
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new MenuScreen(game,1f));
             }
         });
         stage.addActor(btnBackToMenu);
@@ -145,7 +145,7 @@ public class TopScoreScreen extends AbstractScreen
         if (Gdx.input.isKeyPressed(Input.Keys.BACK))
         {
             game.adService.showInterstitial();
-            game.setScreen(new MenuScreen(game));
+            game.setScreen(new MenuScreen(game,1f));
         }
         spriteBatch.begin();
         stage.act(delta);

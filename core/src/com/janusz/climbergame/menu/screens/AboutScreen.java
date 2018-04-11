@@ -8,9 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.game.pause.PauseController;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.shared.DefComponents;
+
+
 
 /**
  * Created by Janusz on 2017-12-06.
@@ -58,7 +59,7 @@ public class AboutScreen extends AbstractScreen
         TextButton tb = new TextButton("MENU", DefComponents.TEXTBUTTON_STYLE);
         tb.setPosition(260,50);
         tb.setWidth(200);
-        tb.addListener(new BackButtonListener());
+        tb.addListener(new MenuBackButtonListener());
         return tb;
     }
 
@@ -68,12 +69,12 @@ public class AboutScreen extends AbstractScreen
         super.render(delta);
         if (Gdx.input.isKeyPressed(Input.Keys.BACK))
         {
-            game.setScreen(new MenuScreen(game));
+            game.setScreen(new MenuScreen(game,1f));
         }
         stage.draw();
     }
 
-    private class BackButtonListener extends ClickListener
+    private class MenuBackButtonListener extends ClickListener
     {
         @Override
         public void clicked(InputEvent event, float x, float y)
