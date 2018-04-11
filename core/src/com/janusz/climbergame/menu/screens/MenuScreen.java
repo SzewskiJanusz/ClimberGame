@@ -49,6 +49,7 @@ public class MenuScreen extends AbstractScreen
     private Toast toast;
     private Toast.ToastFactory toastFactory;
     private boolean displayToast;
+    private float timeToDelayBackButton;
 
     public MenuScreen(final ClimberGame game)
     {
@@ -58,6 +59,18 @@ public class MenuScreen extends AbstractScreen
         gameBackground = new JungleBackground();
         stage.addActor(gameBackground);
         gameBackground.toBack();
+        timeToDelayBackButton = 0f;
+    }
+
+    public MenuScreen(final ClimberGame game, float delayTime)
+    {
+        super(game);
+        // Set input processor here because stage is initialized
+        Gdx.input.setInputProcessor(stage);
+        gameBackground = new JungleBackground();
+        stage.addActor(gameBackground);
+        gameBackground.toBack();
+        timeToDelayBackButton = delayTime;
     }
 
     @Override
@@ -157,9 +170,16 @@ public class MenuScreen extends AbstractScreen
 
         if (Gdx.input.isKeyPressed(Input.Keys.BACK))
         {
-            dispose();
-            Gdx.app.exit();
-            System.exit(0);
+            if (timeToDelayBackButton <= 0)
+            {
+                dispose();
+                Gdx.app.exit();
+                System.exit(0);
+            }
+        }
+        if (timeToDelayBackButton > 0)
+        {
+            timeToDelayBackButton -= delta;
         }
 
         spriteBatch.begin();
