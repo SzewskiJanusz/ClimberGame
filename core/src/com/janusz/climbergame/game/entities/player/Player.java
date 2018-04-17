@@ -240,12 +240,6 @@ public class Player extends Actor implements IPlayer
         fat = true;
     }
 
-
-    public void normalizeVelocity()
-    {
-        velocity.x = 6.5f;
-    }
-
     public Rectangle getBadCollisionBounds()
     {
         return badCollisionBounds;

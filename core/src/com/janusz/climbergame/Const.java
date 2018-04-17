@@ -119,7 +119,7 @@ public abstract class Const
 
     /** TAP LABEL */
     public static final int TAPLABEL_STARTING_X = 100;
-    public static final int TAPLABEL_STARTING_Y = 350;
+    public static final int TAPLABEL_STARTING_Y = 300;
 
     /** TRASHCAN CONSTS */
     public final static int TRASHCAN_DELAY_SPAWN = 4;
