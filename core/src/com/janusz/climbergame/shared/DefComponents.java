@@ -20,10 +20,12 @@ public abstract class DefComponents
 {
     public static BitmapFont textFont;
     public static BitmapFont textFontWhite;
+    public static BitmapFont textFieldFont;
     public static Label.LabelStyle LABEL_STYLE;
     public static Label.LabelStyle LABEL_STYLE_WHITE;
     public static TextField.TextFieldStyle TEXTFIELD_STYLE;
     public static TextButton.TextButtonStyle TEXTBUTTON_STYLE;
+    public static TextField.TextFieldStyle TEXTBUTTON_SCORE_STYLE;
 
 
     public static void prepareStyles()
@@ -32,6 +34,7 @@ public abstract class DefComponents
         LABEL_STYLE_WHITE = getWhiteDefaultLabelStyle();
         TEXTFIELD_STYLE = getDefaultTextfieldStyle();
         TEXTBUTTON_STYLE = getTextButtonStyle();
+        TEXTBUTTON_SCORE_STYLE = getScoreTextfieldStyle();
     }
 
     private static Label.LabelStyle getDefaultLabelStyle()
@@ -39,6 +42,7 @@ public abstract class DefComponents
         Label.LabelStyle ls = new Label.LabelStyle();
         ls.font = textFont;
         ls.fontColor = Color.WHITE;
+
         ls.font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear,
                 Texture.TextureFilter.Linear);
         return ls;
@@ -57,8 +61,15 @@ public abstract class DefComponents
     {
         TextField.TextFieldStyle tStyle = new TextField.TextFieldStyle();
         tStyle.font = textFont;
+        tStyle.fontColor = Color.BLUE;
+        return tStyle;
+    }
 
-        tStyle.fontColor = Color.WHITE;
+    private static TextField.TextFieldStyle getScoreTextfieldStyle()
+    {
+        TextField.TextFieldStyle tStyle = new TextField.TextFieldStyle();
+        tStyle.font = textFieldFont;
+        tStyle.fontColor = Color.BLUE;
         return tStyle;
     }
 
@@ -91,12 +102,20 @@ public abstract class DefComponents
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter =
                 new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 20;
+        parameter.size = 100;//20;
         parameter.color = new Color(169f/255,42f/255,54f/255,1f);
         textFont = generator.generateFont(parameter);
+        parameter.color = Color.BLACK;
+        textFieldFont = generator.generateFont(parameter);
         parameter.color = new Color(1,1,1,1f);
         textFontWhite = generator.generateFont(parameter);
         generator.dispose();
     }
 
+    public static void dispose()
+    {
+        textFieldFont.dispose();
+        textFont.dispose();
+        textFontWhite.dispose();
+    }
 }

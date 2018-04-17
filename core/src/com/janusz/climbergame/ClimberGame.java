@@ -61,7 +61,7 @@ public class ClimberGame extends Game implements AdService
 		QueueManager.dispose();
 		IndicatorController.indControl = null;
 		EntireLiana.dispose();
-
+		DefComponents.dispose();
 	}
 
 	@Override
