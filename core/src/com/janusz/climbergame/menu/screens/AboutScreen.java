@@ -52,22 +52,22 @@ public class AboutScreen extends AbstractScreen
         stage.addActor(backToMenu);
 
         LabelFactory lblFactory = new LabelFactory();
-        Label about = lblFactory.createLabel("ABOUT",250,400,4.5f);
+        Label about = lblFactory.createLabel("ABOUT",250,400,0.9f);
         stage.addActor(about);
 
-        Label title = lblFactory.createLabel("FAST CLIMBER",230,310,2.5f);
+        Label title = lblFactory.createLabel("FAST CLIMBER",230,310,0.5f);
         stage.addActor(title);
 
-        Label version = lblFactory.createLabel("VERSION 1.0",290,280,1.5f);
+        Label version = lblFactory.createLabel("VERSION 1.2",290,280,0.3f);
         stage.addActor(version);
 
-        Label designedIn = lblFactory.createLabel("DESIGNED IN POLAND",230,200,2f);
+        Label designedIn = lblFactory.createLabel("DESIGNED IN POLAND",230,200,0.4f);
         stage.addActor(designedIn);
 
-        Label contact = lblFactory.createLabel("CONTACT",290,150,1.5f);
+        Label contact = lblFactory.createLabel("CONTACT",290,150,0.3f);
         stage.addActor(contact);
 
-        Label email = lblFactory.createLabel("ALEX.JANUSZEWSKI@INTERIA.PL",235,120,1.3f);
+        Label email = lblFactory.createLabel("ALEX.JANUSZEWSKI@INTERIA.PL",235,120,0.25f);
         stage.addActor(email);
     }
 
@@ -77,6 +77,7 @@ public class AboutScreen extends AbstractScreen
         TextButton tb = new TextButton("MENU", DefComponents.TEXTBUTTON_STYLE);
         tb.setPosition(260,50);
         tb.setWidth(200);
+        tb.getLabel().setFontScale(0.6f, 0.4f);
         tb.addListener(new MenuBackButtonListener());
         return tb;
     }
