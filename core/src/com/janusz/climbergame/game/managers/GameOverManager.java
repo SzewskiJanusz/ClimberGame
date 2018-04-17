@@ -41,19 +41,19 @@ public class GameOverManager
 
         gameOverLabel = new Label("GAME OVER", DefComponents.LABEL_STYLE);
         gameOverLabel.setColor(Color.BLACK);
-        gameOverLabel.setFontScale(5f,5f);
+        gameOverLabel.setFontScale(1f,1f);
 
         yourFinalScoreTextLabel = new Label("SCORE ", DefComponents.LABEL_STYLE);
-        yourFinalScoreTextLabel.setFontScale(2.5f);
+        yourFinalScoreTextLabel.setFontScale(0.5f);
 
 
         yourFinalScoreLabel = new Label(
                 String.valueOf(ScoreManager.getInstance().ScoreLogic.getScore()) , DefComponents.LABEL_STYLE);
-        yourFinalScoreLabel.setFontScale(2.5f);
+        yourFinalScoreLabel.setFontScale(0.5f);
 
 
         yourBestScoreTextLabel = new Label("BEST ", DefComponents.LABEL_STYLE);
-        yourBestScoreTextLabel.setFontScale(2.5f);
+        yourBestScoreTextLabel.setFontScale(0.5f);
 
         String actualScoreText = ScoreManager.getInstance().ScoreLabel.getText().toString();
         int actualScore = Integer.parseInt(actualScoreText);
@@ -78,6 +78,7 @@ public class GameOverManager
             prefs.flush();
             textToShow = actualScoreText;
             newRecordText = new Label("NEW RECORD!", DefComponents.LABEL_STYLE);
+            newRecordText.setFontScale(0.2f);
         }
         else
         {
@@ -86,9 +87,10 @@ public class GameOverManager
 
 
         yourBestScoreLabel = new Label(textToShow, DefComponents.LABEL_STYLE);
-        yourBestScoreLabel.setFontScale(2.5f);
+        yourBestScoreLabel.setFontScale(0.5f);
 
         mainMenu = new TextButton("OK",DefComponents.TEXTBUTTON_STYLE);
+        mainMenu.getLabel().setFontScale(0.4f);
 
         mainMenu.addListener(new ClickListener(){
             @Override
@@ -101,7 +103,7 @@ public class GameOverManager
         });
 
         uploadScore = new TextButton("SCORE",DefComponents.TEXTBUTTON_STYLE);
-
+        uploadScore.getLabel().setFontScale(0.4f);
         uploadScore.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -113,7 +115,7 @@ public class GameOverManager
         });
 
         Label separator = new Label("", DefComponents.LABEL_STYLE);
-        separator.setFontScale(5f);
+        separator.setFontScale(1f);
 
 
         table.add(gameOverLabel).width(250).row();

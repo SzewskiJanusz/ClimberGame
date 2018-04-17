@@ -15,7 +15,7 @@ public class PauseLabel extends Label
     public PauseLabel(CharSequence text, LabelStyle style)
     {
         super(text, style);
-        this.setFontScale(4.5f,4.5f);
+        this.setFontScale(0.9f);
         this.setX(STARTING_X);
         this.setY(STARTING_Y);
     }

@@ -14,14 +14,14 @@ public class ScoreLabel extends Label
 {
 
     private final int STARTING_X = 550;
-    private final int STARTING_Y = ClimberGame.HEIGHT - 65;
+    private final int STARTING_Y = ClimberGame.HEIGHT - 85;
 
     private int points;
 
     public ScoreLabel(CharSequence text, LabelStyle style)
     {
         super(text, style);
-        this.setFontScale(3,4);
+        this.setFontScale(0.6f,0.8f);
         this.setX(STARTING_X);
         this.setY(STARTING_Y);
     }

@@ -64,11 +64,11 @@ public class TopScoreScreen extends AbstractScreen
         for (int i = 0 ; i < scores.size() ; i++)
         {
             lblLp[i] = new Label(String.valueOf(i + 1), DefComponents.LABEL_STYLE);
-            lblLp[i].setFontScale(1.2f);
+            lblLp[i].setFontScale(0.24f);
             lblPlayers[i] = new Label(scores.get(i).getName(), DefComponents.LABEL_STYLE);
-            lblPlayers[i].setFontScale(1.2f);
+            lblPlayers[i].setFontScale(0.24f);
             lblScores[i] = new Label(String.valueOf(scores.get(i).getScore()), DefComponents.LABEL_STYLE);
-            lblScores[i].setFontScale(1.2f);
+            lblScores[i].setFontScale(0.24f);
             scoreTable.add(lblLp[i]).width(120);
             scoreTable.add(lblPlayers[i]).width(120);
             scoreTable.add(lblScores[i]);
@@ -101,11 +101,11 @@ public class TopScoreScreen extends AbstractScreen
     private void initHeaderLabels()
     {
         playerHeader = new Label("Player", DefComponents.LABEL_STYLE);
-        playerHeader.setFontScale(3);
+        playerHeader.setFontScale(0.6f);
         scoreHeader = new Label("Score", DefComponents.LABEL_STYLE);
-        scoreHeader.setFontScale(3);
+        scoreHeader.setFontScale(0.6f);
         lpHeader = new Label("Lp.", DefComponents.LABEL_STYLE);
-        lpHeader.setFontScale(3);
+        lpHeader.setFontScale(0.6f);
     }
 
     private void initDataLabels()
@@ -132,7 +132,7 @@ public class TopScoreScreen extends AbstractScreen
             public void clicked(InputEvent event, float x, float y)
             {
                 game.adService.showInterstitial();
-                game.setScreen(new MenuScreen(game,1f));
+                game.setScreen(new MenuScreen(game,0.2f));
             }
         });
         stage.addActor(btnBackToMenu);
@@ -145,7 +145,7 @@ public class TopScoreScreen extends AbstractScreen
         if (Gdx.input.isKeyPressed(Input.Keys.BACK))
         {
             game.adService.showInterstitial();
-            game.setScreen(new MenuScreen(game,1f));
+            game.setScreen(new MenuScreen(game,0.2f));
         }
         spriteBatch.begin();
         stage.act(delta);

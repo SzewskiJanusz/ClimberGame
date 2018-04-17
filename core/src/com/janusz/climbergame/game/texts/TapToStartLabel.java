@@ -29,7 +29,7 @@ public class TapToStartLabel extends Label
     private TapToStartLabel(CharSequence text, Label.LabelStyle style)
     {
         super(text, style);
-        this.setFontScale(3,4);
+        this.setFontScale(0.6f);
         this.setX(Const.TAPLABEL_STARTING_X);
         this.setY(Const.TAPLABEL_STARTING_Y);
     }

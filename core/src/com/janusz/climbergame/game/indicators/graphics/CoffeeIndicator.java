@@ -25,7 +25,7 @@ public class CoffeeIndicator extends Image
         this.setPosition(Const.COFFEEINDICATOR_X, Const.COFFEEINDICATOR_Y);
 
         label = new Label("", DefComponents.LABEL_STYLE);
-        label.setFontScale(3.7f);
+        label.setFontScale(0.74f);
         label.setPosition(Const.COFFEEINDICATOR_X,
                 Const.COFFEEINDICATOR_Y - Const.SPACE_BETWEEN_INDICATOR_AND_LABEL);
     }

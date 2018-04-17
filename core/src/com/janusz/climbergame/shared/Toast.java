@@ -187,6 +187,7 @@ public class Toast {
             public Builder font(BitmapFont font) {
                 check();
                 factory.font = font;
+                factory.font.getData().setScale(0.2f);
                 return this;
             }
 

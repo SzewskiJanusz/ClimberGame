@@ -18,7 +18,7 @@ public class LevelLabel extends Label
     private void initLabel()
     {
         this.setColor(new Color(130,143,3,255));
-        this.setPosition(65, 320);
-        this.setFontScale(3.5f);
+        this.setPosition(70, 290);
+        this.setFontScale(0.7f);//3.5f
     }
 }
