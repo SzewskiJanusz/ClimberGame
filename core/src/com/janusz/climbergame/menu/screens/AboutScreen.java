@@ -48,6 +48,7 @@ public class AboutScreen extends AbstractScreen
     @Override
     protected void init()
     {
+
         TextButton backToMenu = initButton();
         stage.addActor(backToMenu);
 
@@ -55,19 +56,19 @@ public class AboutScreen extends AbstractScreen
         Label about = lblFactory.createLabel("ABOUT",250,400,0.9f);
         stage.addActor(about);
 
-        Label title = lblFactory.createLabel("FAST CLIMBER",230,310,0.5f);
+        Label title = lblFactory.createLabel("FAST CLIMBER",30,310,0.5f);
         stage.addActor(title);
 
-        Label version = lblFactory.createLabel("VERSION 1.2",290,280,0.3f);
+        Label version = lblFactory.createLabel("VERSION 1.2",90,280,0.3f);
         stage.addActor(version);
 
-        Label designedIn = lblFactory.createLabel("DESIGNED IN POLAND",230,200,0.4f);
+        Label designedIn = lblFactory.createLabel("DESIGNED IN POLAND",320,220,0.4f);
         stage.addActor(designedIn);
 
-        Label contact = lblFactory.createLabel("CONTACT",290,150,0.3f);
+        Label contact = lblFactory.createLabel("CONTACT",380,170,0.3f);
         stage.addActor(contact);
 
-        Label email = lblFactory.createLabel("ALEX.JANUSZEWSKI@INTERIA.PL",235,120,0.25f);
+        Label email = lblFactory.createLabel("ALEX.JANUSZEWSKI@INTERIA.PL",325,140,0.25f);
         stage.addActor(email);
     }
 
@@ -76,19 +77,18 @@ public class AboutScreen extends AbstractScreen
     {
         TextButton tb = new TextButton("MENU", DefComponents.TEXTBUTTON_STYLE);
         tb.setPosition(260,50);
-        tb.setWidth(200);
-        tb.getLabel().setFontScale(0.6f, 0.4f);
-        tb.addListener(new MenuBackButtonListener());
-        return tb;
-    }
-
-    private class MenuBackButtonListener extends ClickListener
-    {
-        @Override
-        public void clicked(InputEvent event, float x, float y)
+        tb.setSize(175,65);
+        tb.getLabel().setFontScale(0.6f);
+        tb.addListener(new ClickListener()
         {
-            game.setScreen(new MenuScreen(game));
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                game.setScreen(new MenuScreen(game));
+            }
         }
+        );
+        return tb;
     }
 
     private class LabelFactory
