@@ -34,8 +34,8 @@ android {
         applicationId "com.janusz.climbergame"
         minSdkVersion 14
         targetSdkVersion 20
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
     }
     buildTypes {
         release {
