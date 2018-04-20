@@ -25,7 +25,7 @@ public abstract class DefComponents
     public static Label.LabelStyle LABEL_STYLE_WHITE;
     public static TextField.TextFieldStyle TEXTFIELD_STYLE;
     public static TextButton.TextButtonStyle TEXTBUTTON_STYLE;
-    public static TextField.TextFieldStyle TEXTBUTTON_SCORE_STYLE;
+    public static TextField.TextFieldStyle TEXTFIELD_SCORE_STYLE;
 
 
     public static void prepareStyles()
@@ -34,7 +34,7 @@ public abstract class DefComponents
         LABEL_STYLE_WHITE = getWhiteDefaultLabelStyle();
         TEXTFIELD_STYLE = getDefaultTextfieldStyle();
         TEXTBUTTON_STYLE = getTextButtonStyle();
-        TEXTBUTTON_SCORE_STYLE = getScoreTextfieldStyle();
+        TEXTFIELD_SCORE_STYLE = getScoreTextfieldStyle();
     }
 
     private static Label.LabelStyle getDefaultLabelStyle()
@@ -69,7 +69,8 @@ public abstract class DefComponents
     {
         TextField.TextFieldStyle tStyle = new TextField.TextFieldStyle();
         tStyle.font = textFieldFont;
-        tStyle.fontColor = Color.BLUE;
+        tStyle.fontColor = Color.BLACK;
+        tStyle.font.getData().setScale(1f);
         return tStyle;
     }
 

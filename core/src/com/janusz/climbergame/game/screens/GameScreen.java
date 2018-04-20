@@ -248,7 +248,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             {
                 entities.add(j);
                 stage.addActor(j);
-                queueTimer = 0.5;
+                queueTimer = 0.45;
             }
         }
         queueTimer -= delta;
