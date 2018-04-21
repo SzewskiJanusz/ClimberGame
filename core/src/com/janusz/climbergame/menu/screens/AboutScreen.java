@@ -103,6 +103,4 @@ public class AboutScreen extends AbstractScreen
             return l;
         }
     }
-
-
 }
