@@ -51,5 +51,11 @@ public class FatIndicator extends Image
             }
         }
     }
+
+    public void dispose()
+    {
+        this.remove();
+        label.remove();
+    }
 }
 

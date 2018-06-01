@@ -52,4 +52,10 @@ public class DrunkIndicator extends Image
             }
         }
     }
+
+    public void dispose()
+    {
+        this.remove();
+        label.remove();
+    }
 }

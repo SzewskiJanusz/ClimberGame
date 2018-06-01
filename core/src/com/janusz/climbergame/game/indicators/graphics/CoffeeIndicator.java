@@ -51,4 +51,10 @@ public class CoffeeIndicator extends Image
             }
         }
     }
+
+    public void dispose()
+    {
+        this.remove();
+        label.remove();
+    }
 }

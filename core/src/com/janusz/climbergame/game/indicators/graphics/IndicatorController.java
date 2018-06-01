@@ -62,4 +62,11 @@ public class IndicatorController
         GameScreen.stage.addActor(fatIndicator);
         GameScreen.stage.addActor(fatIndicator.label);
     }
+
+    public void dispose()
+    {
+        drunkIndicator.dispose();
+        coffeeIndicator.dispose();
+        fatIndicator.dispose();
+    }
 }
