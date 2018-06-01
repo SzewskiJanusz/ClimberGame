@@ -4,6 +4,7 @@ package com.janusz.climbergame.menu.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.BeginningHandler;
@@ -13,13 +14,11 @@ import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.pause.PauseController;
+import com.janusz.climbergame.game.screens.ModeSelectScreen;
 import com.janusz.climbergame.game.sound.GameSound;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.menu.Title;
-import com.janusz.climbergame.menu.buttons.ExitButton;
-import com.janusz.climbergame.menu.buttons.OptionsButton;
-import com.janusz.climbergame.menu.buttons.StartGameButton;
-import com.janusz.climbergame.menu.buttons.TopScoresButton;
+import com.janusz.climbergame.menu.buttons.ButtonFactory;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
@@ -38,11 +37,6 @@ public class MenuScreen extends AbstractScreen
 {
 
     private Title title;
-
-    private StartGameButton startGame;
-    private OptionsButton about;
-    private TopScoresButton topScores;
-    private ExitButton exit;
 
     private JungleBackground gameBackground;
 
@@ -77,8 +71,6 @@ public class MenuScreen extends AbstractScreen
     protected void init()
     {
         initTitle();
-
-
         initStartGame();
         initOptions();
         initTopScores();
@@ -93,7 +85,7 @@ public class MenuScreen extends AbstractScreen
 
     private void initExit()
     {
-        exit = new ExitButton("EXIT", DefComponents.TEXTBUTTON_STYLE, 40);
+        TextButton exit = ButtonFactory.createButton("EXIT", DefComponents.TEXTBUTTON_STYLE, 40);
         exit.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -108,7 +100,7 @@ public class MenuScreen extends AbstractScreen
 
     private void initTopScores()
     {
-        topScores = new TopScoresButton("TOP SCORES", DefComponents.TEXTBUTTON_STYLE, 130);
+        TextButton topScores = ButtonFactory.createButton("TOP SCORES", DefComponents.TEXTBUTTON_STYLE, 130);
         topScores.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -135,7 +127,7 @@ public class MenuScreen extends AbstractScreen
 
     private void initOptions()
     {
-        about = new OptionsButton("ABOUT", DefComponents.TEXTBUTTON_STYLE, 220);
+        TextButton about = ButtonFactory.createButton("ABOUT", DefComponents.TEXTBUTTON_STYLE, 220);
         about.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -148,14 +140,15 @@ public class MenuScreen extends AbstractScreen
 
     private void initStartGame()
     {
-        startGame = new StartGameButton("START", DefComponents.TEXTBUTTON_STYLE, 320 );
+        TextButton startGame = ButtonFactory.createButton("START", DefComponents.TEXTBUTTON_STYLE, 320);
         startGame.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                GameScreen gs = new GameScreen(game);
-                Gdx.input.setInputProcessor(new BeginningHandler(gs));
-                game.setScreen(gs);
+//                GameScreen gs = new GameScreen(game);
+                ModeSelectScreen select = new ModeSelectScreen(game);
+               // Gdx.input.setInputProcessor(new BeginningHandler(gs));
+                game.setScreen(select);
             }
         });
         stage.addActor(startGame);
