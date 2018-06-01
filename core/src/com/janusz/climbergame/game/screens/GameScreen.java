@@ -15,26 +15,12 @@ import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
-import com.janusz.climbergame.game.managers.AnvilManager;
-import com.janusz.climbergame.game.managers.AppleManager;
-import com.janusz.climbergame.game.managers.BananaManager;
-import com.janusz.climbergame.game.managers.CarrotManager;
-import com.janusz.climbergame.game.managers.CoffeeManager;
-import com.janusz.climbergame.game.managers.FriesManager;
-import com.janusz.climbergame.game.managers.GameOverManager;
-import com.janusz.climbergame.game.managers.GrapesManager;
-import com.janusz.climbergame.game.managers.PearManager;
-import com.janusz.climbergame.game.managers.SatelliteManager;
-import com.janusz.climbergame.game.managers.StoneManager;
-import com.janusz.climbergame.game.managers.TequilaManager;
-import com.janusz.climbergame.game.managers.TrashcanManager;
-import com.janusz.climbergame.game.managers.TreasureManager;
-import com.janusz.climbergame.game.managers.WatermelonManager;
+import com.janusz.climbergame.game.managers.*;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.pause.PauseController;
 import com.janusz.climbergame.game.sound.GameSound;
-import com.janusz.climbergame.game.texts.LevelLabel;
+import com.janusz.climbergame.game.texts.LevelTexts;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.game.texts.TapToStartLabel;
 import com.janusz.climbergame.shared.DefComponents;
@@ -89,12 +75,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     private static float difficultyTimer;
     public static int level;
 
-    public LevelLabel lvlLabel;
+    public LevelTexts lvlTexts;
     public static boolean pauseClicked;
-
-
-
-
 
     // Constructor
     public GameScreen(ClimberGame game)
@@ -143,7 +125,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         friesMgr = new FriesManager();
         trashMgr = new TrashcanManager();
         satelliteMgr = new SatelliteManager();
-        lvlLabel = new LevelLabel(String.valueOf(GameScreen.level), DefComponents.LABEL_STYLE);
+        lvlTexts = new LevelTexts(String.valueOf(GameScreen.level), DefComponents.LABEL_STYLE);
 
         stage.addActor(PauseController.instance().pauseButton);
         stage.addActor(PauseController.instance().pauseLabel);
@@ -260,7 +242,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         if (difficultyTimer >= 20 + level)
         {
             level++;
-            lvlLabel.setText(String.valueOf(GameScreen.level));
+            lvlTexts.levelNumber.setText(String.valueOf(GameScreen.level));
             levelVelocity += 20 + level;
             difficultyTimer = 0;
             stage.addActor(new BouncingText("LEVEL UP!",DefComponents.LABEL_STYLE, Effect.DEFAULT));
@@ -304,7 +286,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                                            PauseController.instance().pauseButton.remove();
                                            ScoreManager.getInstance().ScoreLabel.remove();
                                            Timer.instance().clear();
-                                           lvlLabel.remove();
+                                           lvlTexts.remove();
                                            added = true;
                                        }
 

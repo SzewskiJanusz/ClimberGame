@@ -4,14 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
-import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Apple;
-import com.janusz.climbergame.game.environment.BouncingText;
-import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
-import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
-import com.janusz.climbergame.shared.DefComponents;
 
 /**
  * Created by Janusz on 2018-02-07.
