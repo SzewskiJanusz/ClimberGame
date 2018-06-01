@@ -7,7 +7,7 @@ import com.janusz.climbergame.game.environment.EntireLiana;
  * Created by Janusz on 2018-02-03.
  */
 
-abstract class AbstractManager
+public abstract class AbstractManager
 {
     // Time after spawn occurs
     protected float entitySpawnTime;
@@ -50,6 +50,20 @@ abstract class AbstractManager
         }
     }
 
+    public void startTimer(int del)
+    {
+        Timer.schedule(new Timer.Task(){
+                           @Override
+                           public void run()
+                           {
+                               createEntity();
+                           }
+                       }
+                , del      //    (delay)
+                , entitySpawnTime
+        );
+    }
+
     public void startTimer()
     {
         Timer.schedule(new Timer.Task(){
@@ -59,7 +73,7 @@ abstract class AbstractManager
                                createEntity();
                            }
                        }
-                , delay       //    (delay)
+                , delay      //    (delay)
                 , entitySpawnTime
         );
     }
