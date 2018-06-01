@@ -6,13 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.menu.Title;
-import com.janusz.climbergame.menu.buttons.BackToMenuButton;
+import com.janusz.climbergame.menu.buttons.ButtonFactory;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.shared.DefComponents;
-import com.janusz.climbergame.shared.scoreclient.NetClientGet;
 import com.janusz.climbergame.shared.scoreclient.Score;
 
 import java.util.List;
@@ -26,8 +26,6 @@ public class TopScoreScreen extends AbstractScreen
 {
 
     private Title title;
-
-    private BackToMenuButton btnBackToMenu;
 
     private Table scoreTable;
 
@@ -126,7 +124,7 @@ public class TopScoreScreen extends AbstractScreen
 
     private void initBackButtonAndAddToStage()
     {
-        btnBackToMenu = new BackToMenuButton("BACK TO MENU", DefComponents.TEXTBUTTON_STYLE, 30);
+        TextButton btnBackToMenu = ButtonFactory.createButton("BACK TO MENU", DefComponents.TEXTBUTTON_STYLE, 30);
         btnBackToMenu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
