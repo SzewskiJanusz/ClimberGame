@@ -8,7 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.game.BeginningHandler;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.screens.SaveScoreScreen;
@@ -25,6 +27,7 @@ public class GameOverManager
     private Label yourFinalScoreLabel;
     private TextButton mainMenu;
     private TextButton uploadScore;
+    private TextButton tryAgain;
 
     private Table table;
     private ClimberGame game;
@@ -38,13 +41,16 @@ public class GameOverManager
     private void createGameOverLabels()
     {
         initTable();
+        table.debug();
+        table.setFillParent(true);
 
         gameOverLabel = new Label("GAME OVER", DefComponents.LABEL_STYLE);
         gameOverLabel.setColor(Color.BLACK);
-        gameOverLabel.setFontScale(1f,1f);
+        gameOverLabel.setFontScale(1.5f,1.5f);
+        gameOverLabel.setAlignment(Align.top);
 
         yourFinalScoreTextLabel = new Label("SCORE ", DefComponents.LABEL_STYLE);
-        yourFinalScoreTextLabel.setFontScale(0.5f);
+        yourFinalScoreTextLabel.setFontScale(0.8f);
 
 
         yourFinalScoreLabel = new Label(
@@ -53,7 +59,7 @@ public class GameOverManager
 
 
         yourBestScoreTextLabel = new Label("BEST ", DefComponents.LABEL_STYLE);
-        yourBestScoreTextLabel.setFontScale(0.5f);
+        yourBestScoreTextLabel.setFontScale(0.8f);
 
         String actualScoreText = ScoreManager.getInstance().ScoreLabel.getText().toString();
         int actualScore = Integer.parseInt(actualScoreText);
@@ -89,7 +95,7 @@ public class GameOverManager
         yourBestScoreLabel = new Label(textToShow, DefComponents.LABEL_STYLE);
         yourBestScoreLabel.setFontScale(0.5f);
 
-        mainMenu = new TextButton("OK",DefComponents.TEXTBUTTON_STYLE);
+        mainMenu = new TextButton("MENU",DefComponents.TEXTBUTTON_STYLE);
         mainMenu.getLabel().setFontScale(0.4f);
 
         mainMenu.addListener(new ClickListener(){
@@ -114,11 +120,37 @@ public class GameOverManager
             }
         });
 
+        tryAgain = new TextButton("AGAIN", DefComponents.TEXTBUTTON_STYLE);
+        tryAgain.getLabel().setFontScale(0.4f);
+        tryAgain.addListener(new ClickListener(){
+        @Override
+        public void clicked(InputEvent event, float x, float y)
+        {
+            GameScreen.stage.dispose();
+            GameScreen gs = new GameScreen(game);
+            Gdx.input.setInputProcessor(new BeginningHandler(gs));
+            game.setScreen(new GameScreen(game));
+        }
+    });
+
         Label separator = new Label("", DefComponents.LABEL_STYLE);
-        separator.setFontScale(1f);
+        separator.setFontScale(0.2f);
 
-
-        table.add(gameOverLabel).width(250).row();
+        table.add(gameOverLabel).width(ClimberGame.WIDTH).colspan(3).row();
+        table.add(yourFinalScoreTextLabel);
+        table.add(new Label("", DefComponents.LABEL_STYLE));
+        table.add(yourBestScoreTextLabel).row();
+        table.add(yourFinalScoreLabel);
+        table.add(new Label("", DefComponents.LABEL_STYLE));
+        table.add(yourBestScoreLabel).row();
+        if (newRecordText == null)
+            table.add(separator).row();
+        else
+            table.add(newRecordText).row();
+        table.add(mainMenu).fill().pad(5);
+        table.add(uploadScore).fill().pad(5);
+        table.add(tryAgain).fill().pad(5);
+        /*
         table.add(yourFinalScoreTextLabel).width(250);
         table.add(yourBestScoreTextLabel).width(50).padLeft(70).row();
         table.add(yourFinalScoreLabel).width(150).padLeft(30);
@@ -129,7 +161,7 @@ public class GameOverManager
             table.add(newRecordText).width(50).row();
         table.add(mainMenu).width(150);
         table.add(uploadScore).width(150);
-        table.add(new Label("", DefComponents.LABEL_STYLE)).width(150);
+        table.add(new Label("", DefComponents.LABEL_STYLE)).width(150);*/
 
     }
 
@@ -137,7 +169,7 @@ public class GameOverManager
     {
         table = new Table();
         table.setFillParent(true);
-        table.setY(50);
+        table.setY(0);
         GameScreen.stage.addActor(table);
     }
 
