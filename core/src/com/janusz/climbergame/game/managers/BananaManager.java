@@ -32,21 +32,27 @@ public class BananaManager extends AbstractManager
     }
 
     @Override
-    protected void createEntity()
+    public void createEntityAndAddToQueue()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Banana b = new Banana
-        (
-            texture,
-            x,
-            ClimberGame.HEIGHT,
-            Const.BANANA_WIDTH,
-            Const.BANANA_HEIGHT,
-            Const.BANANA_BASE_VELOCITY + GameScreen.levelVelocity
-        );
+        Banana b = build(x);
         b.setName("good");
         randomizeSpawnTime();
         QueueManager.instance().addToQueue(b);
+    }
+
+    @Override
+    public Banana build(int x)
+    {
+        return new Banana
+                (
+                        texture,
+                        x,
+                        ClimberGame.HEIGHT,
+                        Const.BANANA_WIDTH,
+                        Const.BANANA_HEIGHT,
+                        Const.BANANA_BASE_VELOCITY + GameScreen.levelVelocity
+                );
     }
 
 

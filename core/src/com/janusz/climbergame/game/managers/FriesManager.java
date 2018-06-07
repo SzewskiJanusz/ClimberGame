@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
+import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Coffee;
 import com.janusz.climbergame.game.entities.Fries;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
@@ -29,10 +30,19 @@ public class FriesManager extends AbstractManager
     }
 
     @Override
-    protected void createEntity()
+    public void createEntityAndAddToQueue()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Fries c = new Fries
+        Fries c = build(x);
+        c.setName("good");
+        randomizeSpawnTime();
+        QueueManager.instance().addToQueue(c);
+    }
+
+    @Override
+    public Fries build(int x)
+    {
+        return new Fries
                 (
                         texture,
                         x,
@@ -41,8 +51,5 @@ public class FriesManager extends AbstractManager
                         Const.FRIES_HEIGHT,
                         Const.FRIES_BASE_VELOCITY + GameScreen.levelVelocity
                 );
-        c.setName("good");
-        randomizeSpawnTime();
-        QueueManager.instance().addToQueue(c);
     }
 }

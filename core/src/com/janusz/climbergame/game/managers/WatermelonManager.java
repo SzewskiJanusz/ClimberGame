@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
+import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Watermelon;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.screens.GameScreen;
@@ -29,10 +30,19 @@ public class WatermelonManager extends AbstractManager
     }
 
     @Override
-    protected void createEntity()
+    public void createEntityAndAddToQueue()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Watermelon w = new Watermelon
+        Watermelon w = build(x);
+        w.setName("good");
+        randomizeSpawnTime();
+        QueueManager.instance().addToQueue(w);
+    }
+
+    @Override
+    public Watermelon build(int x)
+    {
+        return new Watermelon
                 (
                         texture,
                         x,
@@ -41,8 +51,5 @@ public class WatermelonManager extends AbstractManager
                         Const.WATERMELON_HEIGHT,
                         Const.WATERMELON_BASE_VELOCITY + + GameScreen.levelVelocity
                 );
-        w.setName("good");
-        randomizeSpawnTime();
-        QueueManager.instance().addToQueue(w);
     }
 }

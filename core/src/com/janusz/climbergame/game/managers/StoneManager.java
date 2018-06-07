@@ -34,20 +34,26 @@ public class StoneManager extends AbstractManager
     }
 
     @Override
-    protected void createEntity()
+    public void createEntityAndAddToQueue()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Stone a = new Stone
-        (
-            texture,
-            x,
-            ClimberGame.HEIGHT,
-            Const.STONE_WIDTH,
-            Const.STONE_HEIGHT,
-            Const.STONE_BASE_VELOCITY + (int)(GameScreen.levelVelocity*1.5)
-        );
+        Stone a = build(x);
         a.setName("bad");
         randomizeSpawnTime();
         QueueManager.instance().addToQueue(a);
+    }
+
+    @Override
+    public Stone build(int x)
+    {
+        return new Stone
+                (
+                        texture,
+                        x,
+                        ClimberGame.HEIGHT,
+                        Const.STONE_WIDTH,
+                        Const.STONE_HEIGHT,
+                        Const.STONE_BASE_VELOCITY + (int)(GameScreen.levelVelocity*1.5)
+                );
     }
 }

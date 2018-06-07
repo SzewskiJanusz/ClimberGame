@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
+import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Apple;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.screens.GameScreen;
@@ -28,10 +29,19 @@ public class AppleManager extends AbstractManager
     }
 
     @Override
-    protected void createEntity()
+    public void createEntityAndAddToQueue()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Apple a = new Apple
+        Apple a = build(x);
+        a.setName("good");
+        randomizeSpawnTime();
+        QueueManager.instance().addToQueue(a);
+    }
+
+    @Override
+    public Apple build(int x)
+    {
+        return new Apple
                 (
                         texture,
                         x,
@@ -40,9 +50,6 @@ public class AppleManager extends AbstractManager
                         Const.APPLE_HEIGHT,
                         Const.APPLE_BASE_VELOCITY + + GameScreen.levelVelocity
                 );
-        a.setName("good");
-        randomizeSpawnTime();
-        QueueManager.instance().addToQueue(a);
     }
 
 

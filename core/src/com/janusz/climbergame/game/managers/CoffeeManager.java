@@ -34,21 +34,27 @@ public class CoffeeManager extends AbstractManager
     }
 
     @Override
-    protected void createEntity()
+    public void createEntityAndAddToQueue()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Coffee c = new Coffee
-        (
-                texture,
-                x,
-                ClimberGame.HEIGHT,
-                Const.COFFEE_WIDTH,
-                Const.COFFEE_HEIGHT,
-                Const.COFFEE_BASE_VELOCITY + GameScreen.levelVelocity
-        );
+        Coffee c = build(x);
         c.setName("good");
         randomizeSpawnTime();
         QueueManager.instance().addToQueue(c);
+    }
+
+    @Override
+    public Coffee build(int x)
+    {
+        return new Coffee
+                (
+                        texture,
+                        x,
+                        ClimberGame.HEIGHT,
+                        Const.COFFEE_WIDTH,
+                        Const.COFFEE_HEIGHT,
+                        Const.COFFEE_BASE_VELOCITY + GameScreen.levelVelocity
+                );
     }
 
 

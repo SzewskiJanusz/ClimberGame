@@ -26,20 +26,26 @@ public class AnvilManager extends AbstractManager
     }
 
     @Override
-    protected void createEntity()
+    public void createEntityAndAddToQueue()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Anvil a = new Anvil
-        (
-            texture,
-            x,
-            ClimberGame.HEIGHT,
-            Const.ANVIL_WIDTH,
-            Const.ANVIL_HEIGHT,
-            Const.ANVIL_BASE_VELOCITY + (int)(GameScreen.levelVelocity*1.5)
-        );
+        Anvil a = build(x);
         a.setName("bad");
         randomizeSpawnTime();
         QueueManager.instance().addToQueue(a);
+    }
+
+    @Override
+    public Anvil build(int x)
+    {
+        return new Anvil
+            (
+                    texture,
+                    x,
+                    ClimberGame.HEIGHT,
+                    Const.ANVIL_WIDTH,
+                    Const.ANVIL_HEIGHT,
+                    Const.ANVIL_BASE_VELOCITY + (int)(GameScreen.levelVelocity*1.5)
+            );
     }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
+import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.Banana;
 import com.janusz.climbergame.game.entities.Pear;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
@@ -29,10 +30,19 @@ public class PearManager extends AbstractManager
     }
 
     @Override
-    protected void createEntity()
+    public void createEntityAndAddToQueue()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Pear b = new Pear
+        Pear b = build(x);
+        b.setName("good");
+        randomizeSpawnTime();
+        QueueManager.instance().addToQueue(b);
+    }
+
+    @Override
+    public Pear build(int x)
+    {
+        return new Pear
                 (
                         texture,
                         x,
@@ -41,8 +51,5 @@ public class PearManager extends AbstractManager
                         Const.PEAR_HEIGHT,
                         Const.PEAR_BASE_VELOCITY + GameScreen.levelVelocity
                 );
-        b.setName("good");
-        randomizeSpawnTime();
-        QueueManager.instance().addToQueue(b);
     }
 }

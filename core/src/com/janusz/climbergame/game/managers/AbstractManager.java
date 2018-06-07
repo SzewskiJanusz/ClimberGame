@@ -1,6 +1,7 @@
 package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.utils.Timer;
+import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.environment.EntireLiana;
 
 /**
@@ -22,7 +23,9 @@ public abstract class AbstractManager
     /**
      * Tworzy ustalony obiekt
      */
-    protected abstract void createEntity();
+    public abstract void createEntityAndAddToQueue();
+
+    public abstract AbstractItem build(int x);
 
     /**
      * Initialize List and timer
@@ -56,7 +59,7 @@ public abstract class AbstractManager
                            @Override
                            public void run()
                            {
-                               createEntity();
+                               createEntityAndAddToQueue();
                            }
                        }
                 , del      //    (delay)
@@ -70,7 +73,7 @@ public abstract class AbstractManager
                            @Override
                            public void run()
                            {
-                               createEntity();
+                               createEntityAndAddToQueue();
                            }
                        }
                 , delay      //    (delay)

@@ -35,21 +35,27 @@ public class TequilaManager extends AbstractManager
     }
 
     @Override
-    protected void createEntity()
+    public void createEntityAndAddToQueue()
     {
         int x = selectPlace(MathUtils.random(2,4));
-        Tequila t = new Tequila
-        (
-            texture,
-            x,
-            ClimberGame.HEIGHT,
-            Const.TEQUILA_WIDTH,
-            Const.TEQUILA_HEIGHT,
-            Const.TEQUILA_BASE_VELOCITY + GameScreen.levelVelocity
-        );
+        Tequila t = build(x);
         t.setName("good");
         randomizeSpawnTime();
         QueueManager.instance().addToQueue(t);
+    }
+
+    @Override
+    public Tequila build(int x)
+    {
+        return new Tequila
+                (
+                        texture,
+                        x,
+                        ClimberGame.HEIGHT,
+                        Const.TEQUILA_WIDTH,
+                        Const.TEQUILA_HEIGHT,
+                        Const.TEQUILA_BASE_VELOCITY + GameScreen.levelVelocity
+                );
     }
 
 
