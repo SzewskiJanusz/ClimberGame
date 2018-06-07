@@ -285,6 +285,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
                                            stage.addActor(gameOverMgr.getTable());
                                            PauseController.instance().pauseButton.remove();
                                            ScoreManager.getInstance().ScoreLabel.remove();
+                                           IndicatorController.instance().dispose();
                                            Timer.instance().clear();
                                            lvlTexts.remove();
                                            added = true;
