@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.screens;
+package com.janusz.climbergame.menu.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -6,7 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.BeginningHandler;
+import com.janusz.climbergame.game.GameMode;
 import com.janusz.climbergame.game.background.JungleBackground;
+import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.ButtonFactory;
 import com.janusz.climbergame.menu.screens.MenuScreen;
@@ -63,7 +65,7 @@ public class ModeSelectScreen extends AbstractScreen
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                GameScreen gs = new GameScreen(game);
+                GameScreen gs = new GameScreen(game, GameMode.NORMAL);
                 Gdx.input.setInputProcessor(new BeginningHandler(gs));
                 game.setScreen(gs);
             }
@@ -79,7 +81,7 @@ public class ModeSelectScreen extends AbstractScreen
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-//                GameScreen gs = new GameScreen(game);
+//                GameScreen gs = new GameScreen(game, GameMode.HARDCORE);
 //                Gdx.input.setInputProcessor(new BeginningHandler(gs));
 //                game.setScreen(gs);
             }
