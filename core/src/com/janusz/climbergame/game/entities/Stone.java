@@ -1,28 +1,22 @@
 package com.janusz.climbergame.game.entities;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
+import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.Const;
+import com.janusz.climbergame.EntityTextures;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
 
-/**
- * Created by Janusz on 2017-12-14.
- */
-
 public class Stone extends AbstractItem
 {
-    /**
-     * Konstruktor. Inicjalizacja obiektu i bounds
-     *
-     * @param text       - textura użyta w obiekcie
-     * @param starting_x - początkowy X
-     * @param starting_y - początkowy Y
-     * @param width      - szerokość
-     * @param height     - wysokość
-     * @param velocity   - prędkość
-     */
-    public Stone(Texture text, int starting_x, int starting_y, int width, int height, int velocity)
+    public Stone(int starting_x, int velocity)
     {
-        super(text, starting_x, starting_y, width, height, velocity);
+        super(EntityTextures.get().stone, starting_x, velocity);
+        this.setName("bad");
+        bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
+                Const.STONE_WIDTH, Const.STONE_HEIGHT);
+        this.setSize(Const.STONE_WIDTH, Const.STONE_HEIGHT);
+        this.setOrigin(getWidth() / 2, getHeight() / 2);
     }
 
     @Override

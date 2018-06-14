@@ -1,6 +1,9 @@
 package com.janusz.climbergame.game.entities;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
+import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.Const;
+import com.janusz.climbergame.EntityTextures;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
@@ -9,16 +12,16 @@ import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
 import com.janusz.climbergame.shared.DefComponents;
 
-/**
- * Created by Janusz on 2017-11-29.
- */
-
 public class Tequila extends AbstractItem
 {
-
-    public Tequila(Texture text, int starting_x, int starting_y, int width, int height, int velocity)
+    public Tequila(int starting_x, int velocity)
     {
-        super(text, starting_x, starting_y, width, height, velocity);
+        super(EntityTextures.get().tequila, starting_x, velocity);
+        this.setName("good");
+        bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
+                Const.TEQUILA_WIDTH, Const.TEQUILA_HEIGHT);
+        this.setSize(Const.TEQUILA_WIDTH, Const.TEQUILA_HEIGHT);
+        this.setOrigin(getWidth() / 2, getHeight() / 2);
     }
 
     @Override

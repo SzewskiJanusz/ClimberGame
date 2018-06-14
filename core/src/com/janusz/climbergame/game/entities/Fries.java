@@ -1,6 +1,9 @@
 package com.janusz.climbergame.game.entities;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
+import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.Const;
+import com.janusz.climbergame.EntityTextures;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
@@ -9,25 +12,20 @@ import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
 import com.janusz.climbergame.shared.DefComponents;
 
-/**
- * Created by Janusz on 2018-02-13.
- */
 
 public class Fries extends AbstractItem
 {
-    /**
-     * Konstruktor. Inicjalizacja obiektu i bounds
-     *
-     * @param text       - textura użyta w obiekcie
-     * @param starting_x - początkowy X
-     * @param starting_y - początkowy Y
-     * @param width      - szerokość
-     * @param height     - wysokość
-     * @param velocity   - prędkość
-     */
-    public Fries(Texture text, int starting_x, int starting_y, int width, int height, int velocity)
+    private final int width = 80;
+    private final int height = 55;
+
+    public Fries(int starting_x, int velocity)
     {
-        super(text, starting_x, starting_y, width, height, velocity);
+        super(EntityTextures.get().fries, starting_x, velocity);
+        this.setName("good");
+        bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
+                Const.FRIES_WIDTH, Const.FRIES_HEIGHT);
+        this.setSize(Const.FRIES_WIDTH, Const.FRIES_HEIGHT);
+        this.setOrigin(getWidth() / 2, getHeight() / 2);
     }
 
     @Override

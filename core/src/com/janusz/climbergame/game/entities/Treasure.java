@@ -1,6 +1,9 @@
 package com.janusz.climbergame.game.entities;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
+import com.janusz.climbergame.ClimberGame;
+import com.janusz.climbergame.Const;
+import com.janusz.climbergame.EntityTextures;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
@@ -8,25 +11,16 @@ import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
 import com.janusz.climbergame.shared.DefComponents;
 
-/**
- * Created by Janusz on 2018-02-13.
- */
-
 public class Treasure extends AbstractItem
 {
-    /**
-     * Konstruktor. Inicjalizacja obiektu i bounds
-     *
-     * @param text       - textura użyta w obiekcie
-     * @param starting_x - początkowy X
-     * @param starting_y - początkowy Y
-     * @param width      - szerokość
-     * @param height     - wysokość
-     * @param velocity   - prędkość
-     */
-    public Treasure(Texture text, int starting_x, int starting_y, int width, int height, int velocity)
+    public Treasure(int starting_x, int velocity)
     {
-        super(text, starting_x, starting_y, width, height, velocity);
+        super(EntityTextures.get().treasure, starting_x, velocity);
+        this.setName("good");
+        bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
+                Const.TREASURE_WIDTH, Const.TREASURE_HEIGHT);
+        this.setSize(Const.TREASURE_WIDTH, Const.TREASURE_HEIGHT);
+        this.setOrigin(getWidth() / 2, getHeight() / 2);
     }
 
     @Override

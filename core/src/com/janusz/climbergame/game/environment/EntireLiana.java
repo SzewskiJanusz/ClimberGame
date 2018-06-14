@@ -55,9 +55,9 @@ public class EntireLiana
     {
         for (int i = 0 ; i < 5 ; i++)
         {
-            LianaTile a = new LianaTile(first_liana_x, LianaTile.HEIGHT * i);
-            LianaTile b = new LianaTile(second_liana_x, LianaTile.HEIGHT * i);
-            LianaTile c = new LianaTile(third_liana_x, LianaTile.HEIGHT * i);
+            LianaTile a = new LianaTile(first_liana_x, Const.LIANATILE_HEIGHT * i);
+            LianaTile b = new LianaTile(second_liana_x, Const.LIANATILE_HEIGHT * i);
+            LianaTile c = new LianaTile(third_liana_x, Const.LIANATILE_HEIGHT * i);
 
             first_wholeLiana.add(a);
             second_wholeLiana.add(b);
@@ -106,7 +106,7 @@ public class EntireLiana
     {
         int lastTile = first_wholeLiana.size() - 1;
 
-        if (first_wholeLiana.get(lastTile).getY() + LianaTile.HEIGHT <= LianaTile.STARTING_Y )
+        if (first_wholeLiana.get(lastTile).getY() + Const.LIANATILE_HEIGHT <= LianaTile.STARTING_Y )
         {
             createLianaTile();
         }
@@ -114,7 +114,7 @@ public class EntireLiana
 
     private void checkIfNeedDisposeLastTile()
     {
-        if (first_wholeLiana.get(0).getY() + LianaTile.HEIGHT <= 0)
+        if (first_wholeLiana.get(0).getY() + Const.LIANATILE_HEIGHT <= 0)
         {
             disposeLastLianaTile();
         }
