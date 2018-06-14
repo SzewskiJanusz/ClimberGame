@@ -127,9 +127,9 @@ public class GameOverManager
         public void clicked(InputEvent event, float x, float y)
         {
             GameScreen.stage.dispose();
-            GameScreen gs = new GameScreen(game);
-            Gdx.input.setInputProcessor(new BeginningHandler(gs));
-            game.setScreen(new GameScreen(game));
+        //    GameScreen gs = new GameScreen(game);
+        //    Gdx.input.setInputProcessor(new BeginningHandler(gs));
+        //    game.setScreen(new GameScreen(game));
         }
     });
 

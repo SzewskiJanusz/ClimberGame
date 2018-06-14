@@ -16,8 +16,6 @@ import com.janusz.climbergame.game.screens.GameScreen;
 
 public class GrapesManager extends AbstractManager
 {
-    private final Texture texture = new Texture("grapes.png");
-
     public GrapesManager()
     {
         super(Const.GRAPES_DELAY_SPAWN);
@@ -28,27 +26,12 @@ public class GrapesManager extends AbstractManager
     {
         entitySpawnTime = MathUtils.random(Const.GRAPES_BOTTOM_RANGE,Const.GRAPES_UPPER_RANGE);
     }
-
-    @Override
-    public void createEntityAndAddToQueue()
-    {
-        int x = selectPlace(MathUtils.random(2,4));
-        Grapes b = build(x);
-        b.setName("good");
-        randomizeSpawnTime();
-        QueueManager.instance().addToQueue(b);
-    }
-
     @Override
     public Grapes build(int x)
     {
         return new Grapes
                 (
-                        texture,
                         x,
-                        ClimberGame.HEIGHT,
-                        Const.GRAPES_WIDTH,
-                        Const.GRAPES_HEIGHT,
                         Const.GRAPES_BASE_VELOCITY + GameScreen.levelVelocity
                 );
     }

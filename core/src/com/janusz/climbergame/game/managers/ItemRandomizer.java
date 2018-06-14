@@ -2,6 +2,7 @@ package com.janusz.climbergame.game.managers;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.game.entities.AbstractItem;
+import com.janusz.climbergame.game.environment.EntireLiana;
 
 public class ItemRandomizer
 {
@@ -9,7 +10,7 @@ public class ItemRandomizer
 
     public ItemRandomizer()
     {
-        direction = MathUtils.random(1,3);
+        direction = MathUtils.random(2,4);
     }
 
     public ItemRandomizer(int dir)
@@ -20,14 +21,15 @@ public class ItemRandomizer
     public AbstractItem randomGoodItem()
     {
         int nmb = MathUtils.random(1,6);
+        int x = selectPlace(direction);
         switch(nmb)
         {
-            case 1: return new BananaManager().build(direction);
-            case 2: return new AppleManager().build(direction);
-            case 3: return new CarrotManager().build(direction);
-            case 4: return new GrapesManager().build(direction);
-            case 5: return new PearManager().build(direction);
-            case 6: return new CoffeeManager().build(direction);
+            case 1: return new BananaManager().build(x);
+            case 2: return new AppleManager().build(x);
+            case 3: return new CarrotManager().build(x);
+            case 4: return new GrapesManager().build(x);
+            case 5: return new PearManager().build(x);
+            case 6: return new CoffeeManager().build(x);
         }
         return null;
     }
@@ -42,5 +44,16 @@ public class ItemRandomizer
             case 3: return new TrashcanManager().build(direction);
         }
         return null;
+    }
+
+    private int selectPlace(int place)
+    {
+        switch (place)
+        {
+            case 2: return EntireLiana.first_liana_x;
+            case 3: return EntireLiana.second_liana_x;
+            case 4: return EntireLiana.third_liana_x;
+            default: return 0;
+        }
     }
 }
