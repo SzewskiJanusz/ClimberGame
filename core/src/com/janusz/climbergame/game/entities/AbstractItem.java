@@ -38,19 +38,13 @@ public abstract class AbstractItem extends Image
      * Konstruktor. Inicjalizacja obiektu i bounds
      * @param text - textura użyta w obiekcie
      * @param starting_x - początkowy X
-     * @param starting_y - początkowy Y
-     * @param width - szerokość
-     * @param height - wysokość
      * @param velocity - prędkość
      */
-    public AbstractItem(Texture text,int starting_x, int starting_y, int width, int height,int velocity)
+    public AbstractItem(Texture text, int starting_x, int velocity)
     {
         super(text);
         this.velocity = velocity;
-        this.setPosition(starting_x, starting_y);
-        setSize(width,height);
-        setOrigin(getWidth() / 2, getHeight() / 2);
-        bounds = new Rectangle(starting_x, starting_y, width, height);
+        this.setPosition(starting_x, ClimberGame.HEIGHT);
     }
 
     /**
@@ -104,4 +98,5 @@ public abstract class AbstractItem extends Image
     {
         return bounds;
     }
+
 }
