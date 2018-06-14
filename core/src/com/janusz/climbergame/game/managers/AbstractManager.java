@@ -1,12 +1,10 @@
 package com.janusz.climbergame.game.managers;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.environment.EntireLiana;
-
-/**
- * Created by Janusz on 2018-02-03.
- */
+import com.janusz.climbergame.game.managers.queue.QueueManager;
 
 public abstract class AbstractManager
 {
@@ -15,15 +13,11 @@ public abstract class AbstractManager
     // Spawn delay
     private int delay ;
 
+
     /**
      * Losuje liczbę entitySpawnTime
      */
     protected abstract void randomizeSpawnTime();
-
-    /**
-     * Tworzy ustalony obiekt
-     */
-    public abstract void createEntityAndAddToQueue();
 
     public abstract AbstractItem build(int x);
 
@@ -42,7 +36,7 @@ public abstract class AbstractManager
      * @param place - miejsce (od 0 do 3)
      * @return
      */
-    protected int selectPlace(int place)
+    private int selectPlace(int place)
     {
         switch (place)
         {
@@ -79,5 +73,13 @@ public abstract class AbstractManager
                 , delay      //    (delay)
                 , entitySpawnTime
         );
+    }
+
+    private void createEntityAndAddToQueue()
+    {
+        int x = selectPlace(MathUtils.random(2,4));
+        AbstractItem ai = build(x);
+        randomizeSpawnTime();
+        QueueManager.instance().addToQueue(ai);
     }
 }
