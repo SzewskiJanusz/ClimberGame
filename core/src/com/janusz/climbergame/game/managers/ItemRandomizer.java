@@ -37,11 +37,12 @@ public class ItemRandomizer
     public AbstractItem randomBadItem()
     {
         int nmb = MathUtils.random(1,3);
+        int x = selectPlace(direction);
         switch(nmb)
         {
-            case 1: return new AnvilManager().build(direction);
-            case 2: return new StoneManager().build(direction);
-            case 3: return new TrashcanManager().build(direction);
+            case 1: return new AnvilManager().build(x);
+            case 2: return new StoneManager().build(x);
+            case 3: return new TrashcanManager().build(x);
         }
         return null;
     }
