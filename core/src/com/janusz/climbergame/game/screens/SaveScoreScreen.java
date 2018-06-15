@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.game.background.JungleBackground;
+import com.janusz.climbergame.game.background.GameBackground;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.menu.screens.MenuScreen;
 import com.janusz.climbergame.shared.AbstractScreen;
@@ -75,7 +75,7 @@ public class SaveScoreScreen extends AbstractScreen
 
     private void initBackground()
     {
-        JungleBackground background = new JungleBackground();
+        GameBackground background = new GameBackground();
         stage.addActor(background);
         background.toBack();
     }
