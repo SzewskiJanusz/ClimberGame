@@ -7,11 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.BeginningHandler;
 import com.janusz.climbergame.game.GameMode;
-import com.janusz.climbergame.game.background.JungleBackground;
+import com.janusz.climbergame.game.background.GameBackground;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.ButtonFactory;
-import com.janusz.climbergame.menu.screens.MenuScreen;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
@@ -22,7 +21,7 @@ import com.janusz.climbergame.shared.DefComponents;
 public class ModeSelectScreen extends AbstractScreen
 {
     private Title title;
-    private JungleBackground gameBackground;
+    private GameBackground gameBackground;
 
     public ModeSelectScreen(ClimberGame game)
     {
@@ -40,7 +39,7 @@ public class ModeSelectScreen extends AbstractScreen
 
     private void initBackground()
     {
-        gameBackground = new JungleBackground();
+        gameBackground = new GameBackground();
         stage.addActor(gameBackground);
     }
 

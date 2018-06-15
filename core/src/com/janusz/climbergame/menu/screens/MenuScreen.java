@@ -7,20 +7,17 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.game.BeginningHandler;
-import com.janusz.climbergame.game.background.JungleBackground;
+import com.janusz.climbergame.game.background.GameBackground;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.pause.PauseController;
-import com.janusz.climbergame.game.screens.ModeSelectScreen;
 import com.janusz.climbergame.game.sound.GameSound;
 import com.janusz.climbergame.game.texts.TapImage;
 import com.janusz.climbergame.menu.Title;
 import com.janusz.climbergame.menu.buttons.ButtonFactory;
 import com.janusz.climbergame.shared.AbstractScreen;
-import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
 import com.janusz.climbergame.shared.Toast;
 import com.janusz.climbergame.shared.scoreclient.NetClientGet;
@@ -38,7 +35,7 @@ public class MenuScreen extends AbstractScreen
 
     private Title title;
 
-    private JungleBackground gameBackground;
+    private GameBackground gameBackground;
 
     private Toast toast;
     private Toast.ToastFactory toastFactory;
@@ -50,7 +47,7 @@ public class MenuScreen extends AbstractScreen
         super(game);
         // Set input processor here because stage is initialized
         Gdx.input.setInputProcessor(stage);
-        gameBackground = new JungleBackground();
+        gameBackground = new GameBackground();
         stage.addActor(gameBackground);
         gameBackground.toBack();
         timeToDelayBackButton = 0f;
@@ -61,7 +58,7 @@ public class MenuScreen extends AbstractScreen
         super(game);
         // Set input processor here because stage is initialized
         Gdx.input.setInputProcessor(stage);
-        gameBackground = new JungleBackground();
+        gameBackground = new GameBackground();
         stage.addActor(gameBackground);
         gameBackground.toBack();
         timeToDelayBackButton = delayTime;
