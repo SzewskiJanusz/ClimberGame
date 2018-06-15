@@ -9,10 +9,10 @@ import com.janusz.climbergame.ClimberGame;
  * Created by Janusz on 2017-10-11.
  */
 
-public class JungleBackground extends Image
+public class GameBackground extends Image
 {
 
-    public JungleBackground()
+    public GameBackground()
     {
         super(new Texture("gameBackground.png"));
         this.setPosition(0, 0);
