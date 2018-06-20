@@ -3,11 +3,9 @@ package com.janusz.climbergame.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.game.background.JungleBackground;
+import com.janusz.climbergame.game.background.GameBackground;
 import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
@@ -28,7 +26,6 @@ import com.janusz.climbergame.shared.DefComponents;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Main game screen
  */
@@ -48,7 +45,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public AnvilManager anvilMgr;
     public TequilaManager tequilaMgr;
     private GameOverManager gameOverMgr;
-    private JungleBackground background;
+    private GameBackground background;
     public CoffeeManager coffeeMgr;
     public StoneManager stoneMgr;
     public AppleManager appleMgr;
@@ -107,12 +104,11 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         ScoreManager.getInstance().ScoreLogic.setScore(0);
         Player.instance().reset();
         EntireLiana.get().reset();
-        background = new JungleBackground();
+        background = new GameBackground();
         stage.addActor(background);
         bananaMgr = new BananaManager();
         anvilMgr = new AnvilManager();
         gameOverMgr = new GameOverManager(game);
-        background = new JungleBackground();
         tequilaMgr = new TequilaManager();
         coffeeMgr = new CoffeeManager();
         stoneMgr = new StoneManager();
@@ -132,48 +128,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         TapToStartLabel.instance().toFront();
         TapImage.instance().toFront();
         PauseController.instance().hideLabel();
-        stage.addListener(new InputListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
-            {
-                if (pauseClicked)
-                {
-                    pauseClicked = false;
-                    return false;
-                }
-
-                if (Player.instance().playerState == PlayerState.CLIMBING_LIANA && !GameScreen.paused)
-                {
-                    if (isFingerOnLeft(x, Player.instance().getX() + Player.instance().getWidth() / 2))
-                    {
-                        if (!Player.drunk)
-                            Player.instance().jumpLeft();
-                        else
-                            Player.instance().jumpRight();
-                    }
-                    else
-                    {
-                        if (!Player.drunk)
-                            Player.instance().jumpRight();
-                        else
-                            Player.instance().jumpLeft();
-                    }
-                }
-
-                return true;
-            }
-        });
-    }
-
-    /**
-     * Return if touch is on the left of player
-     * @param screenX - touch X
-     * @param playerOnScreenX - player X
-     * @return true - touched on left, false - touched on right
-     */
-    private boolean isFingerOnLeft(float screenX, float playerOnScreenX)
-    {
-        return playerOnScreenX > screenX;
+        stage.addListener(new Player.MovingListener());
     }
 
     @Override

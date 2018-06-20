@@ -6,9 +6,12 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.animations.PlayerAnimation;
 import com.janusz.climbergame.game.environment.EntireLiana;
+import com.janusz.climbergame.game.screens.GameScreen;
 
 /**
  * Player class.
@@ -243,5 +246,43 @@ public class Player extends Actor implements IPlayer
     public Rectangle getBadCollisionBounds()
     {
         return badCollisionBounds;
+    }
+
+    public static class MovingListener extends InputListener
+    {
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+        {
+            if (GameScreen.pauseClicked)
+            {
+                GameScreen.pauseClicked = false;
+                return false;
+            }
+
+            if (Player.instance().playerState == PlayerState.CLIMBING_LIANA && !GameScreen.paused)
+            {
+                if (isFingerOnLeft(x, Player.instance().getX() + Player.instance().getWidth() / 2))
+                {
+                    if (!Player.drunk)
+                        Player.instance().jumpLeft();
+                    else
+                        Player.instance().jumpRight();
+                }
+                else
+                {
+                    if (!Player.drunk)
+                        Player.instance().jumpRight();
+                    else
+                        Player.instance().jumpLeft();
+                }
+            }
+
+            return true;
+        }
+
+        private boolean isFingerOnLeft(float screenX, float playerOnScreenX)
+        {
+            return playerOnScreenX > screenX;
+        }
     }
 }

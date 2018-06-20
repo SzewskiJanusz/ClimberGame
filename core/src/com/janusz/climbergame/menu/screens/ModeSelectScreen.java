@@ -64,7 +64,7 @@ public class ModeSelectScreen extends AbstractScreen
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                GameScreen gs = new GameScreen(game, GameMode.NORMAL);
+                GameScreen gs = new GameScreen(game);
                 Gdx.input.setInputProcessor(new BeginningHandler(gs));
                 game.setScreen(gs);
             }
