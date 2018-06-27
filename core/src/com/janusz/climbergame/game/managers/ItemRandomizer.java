@@ -7,10 +7,16 @@ import com.janusz.climbergame.game.environment.EntireLiana;
 public class ItemRandomizer
 {
     private int direction;
+    private boolean noDirection;
 
     public ItemRandomizer()
     {
         direction = MathUtils.random(2,4);
+    }
+
+    public ItemRandomizer(boolean noDirection)
+    {
+        this.noDirection = noDirection;
     }
 
     public ItemRandomizer(int dir)
@@ -21,6 +27,9 @@ public class ItemRandomizer
     public AbstractItem randomGoodItem()
     {
         int nmb = MathUtils.random(1,6);
+        if (noDirection)
+            direction = MathUtils.random(2,4);
+
         int x = selectPlace(direction);
         switch(nmb)
         {
@@ -37,6 +46,10 @@ public class ItemRandomizer
     public AbstractItem randomBadItem()
     {
         int nmb = MathUtils.random(1,3);
+
+        if (noDirection)
+            direction = MathUtils.random(2,4);
+
         int x = selectPlace(direction);
         switch(nmb)
         {
