@@ -48,4 +48,20 @@ public class WaveSpawner
             }
         },0,1, goodwaves + badwaves);
     }
+
+    public void spawnNonOrderedMixedWaves(final int lvl, final int items)
+    {
+        spawner = Timer.schedule(new Timer.Task()
+        {
+            @Override
+            public void run()
+            {
+                ItemWave wave = new ItemWave();
+                wave.addMixedItemsDifferentDirections(items);
+                List<AbstractItem> items = wave.getWave();
+                for(AbstractItem ai : items)
+                    QueueManager.instance().addToQueue(ai);
+            }
+        },0,1, items);
+    }
 }
