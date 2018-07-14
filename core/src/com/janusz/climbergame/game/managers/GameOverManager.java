@@ -150,19 +150,6 @@ public class GameOverManager
         table.add(mainMenu).fill().pad(5);
         table.add(uploadScore).fill().pad(5);
         table.add(tryAgain).fill().pad(5);
-        /*
-        table.add(yourFinalScoreTextLabel).width(250);
-        table.add(yourBestScoreTextLabel).width(50).padLeft(70).row();
-        table.add(yourFinalScoreLabel).width(150).padLeft(30);
-        table.add(yourBestScoreLabel).width(100).padLeft(70).row();
-        if (newRecordText == null)
-            table.add(separator).row();
-        else
-            table.add(newRecordText).width(50).row();
-        table.add(mainMenu).width(150);
-        table.add(uploadScore).width(150);
-        table.add(new Label("", DefComponents.LABEL_STYLE)).width(150);*/
-
     }
 
     private void initTable()
