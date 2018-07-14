@@ -35,8 +35,8 @@ public abstract class Const
     public final static int CARROT_DELAY_SPAWN = 2;
     public final static int CARROT_BOTTOM_RANGE = 3;
     public final static int CARROT_UPPER_RANGE = 7;
-    public final static int CARROT_WIDTH = 35;
-    public final static int CARROT_HEIGHT = 46;
+    public final static int CARROT_WIDTH = 50;
+    public final static int CARROT_HEIGHT = 55;
     public final static int CARROT_BASE_VELOCITY = 210;
 
     /** COFFEE CONSTS */
