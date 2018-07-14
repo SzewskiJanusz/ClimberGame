@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.GameBackground;
+import com.janusz.climbergame.game.bosses.WaveSpawner;
 import com.janusz.climbergame.game.entities.AbstractItem;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.entities.player.PlayerState;
@@ -45,7 +46,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public AnvilManager anvilMgr;
     public TequilaManager tequilaMgr;
     private GameOverManager gameOverMgr;
-    private GameBackground background;
+    public GameBackground background;
     public CoffeeManager coffeeMgr;
     public StoneManager stoneMgr;
     public AppleManager appleMgr;
@@ -75,6 +76,8 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
     public LevelTexts lvlTexts;
     public static boolean pauseClicked;
 
+    public WaveSpawner waveSpawner;
+
     // Constructor
     public GameScreen(ClimberGame game)
     {
@@ -86,6 +89,10 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
      */
     protected void init()
     {
+        EntireLiana.get().reset();
+        background = new GameBackground();
+        stage.addActor(background);
+        waveSpawner = new WaveSpawner();
         GameSound.instance().prepareSounds();
         level = 1;
         onBeginning = true;
@@ -103,9 +110,6 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         stage.addActor(TapImage.instance());
         ScoreManager.getInstance().ScoreLogic.setScore(0);
         Player.instance().reset();
-        EntireLiana.get().reset();
-        background = new GameBackground();
-        stage.addActor(background);
         bananaMgr = new BananaManager();
         anvilMgr = new AnvilManager();
         gameOverMgr = new GameOverManager(game);
@@ -185,6 +189,7 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             {
                 entities.add(j);
                 stage.addActor(j);
+                j.toFront();
                 queueTimer = 0.45;
             }
         }
@@ -204,15 +209,32 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
             GameSound.instance().playLevelUp();
             switch(level)
             {
-                case 2: friesMgr.startTimer(); break;
-                case 3: waterMgr.startTimer(); break;
-                case 4: trashMgr.startTimer(); break;
-                case 5: carrotMgr.startTimer(); break;
+                case 2: friesMgr.startTimer();
+                    waveSpawner.spawnNonOrderedMixedWaves(2, 10);
+                    break;
+                case 3: waterMgr.startTimer();
+                    waveSpawner.spawnWaves(3, 3, 2);
+                    break;
+                case 4: trashMgr.startTimer();
+                    waveSpawner.spawnWaves(4,6);
+                    break;
+                case 5: carrotMgr.startTimer();
+                    waveSpawner.spawnWaves(5, 5, 3);
+                    break;
                 case 6: treasureMgr.startTimer();
-                        satelliteMgr.startTimer(); break;
-                case 7: satelliteMgr.startTimer(); break;
-                case 8: pearMgr.startTimer(); break;
-                case 9: grapesMgr.startTimer(); break;
+                        satelliteMgr.startTimer();
+                        waveSpawner.spawnWaves(6, 1, 5);
+                    break;
+                case 7: satelliteMgr.startTimer();
+                    waveSpawner.spawnWaves(7, 10);
+                    break;
+                case 8: pearMgr.startTimer();
+                    waveSpawner.spawnWaves(8, 5, 5);
+                    break;
+                case 9: grapesMgr.startTimer();
+                    waveSpawner.spawnWaves(9, 10, 10);
+                    break;
+                default: waveSpawner.spawnWaves(level, 15);
             }
         }
         else
@@ -303,19 +325,10 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
      */
     private boolean checkCollision(AbstractItem a)
     {
-        if (a.getName().equals("good"))
-        {
-            return Player.instance().playerState == PlayerState.CLIMBING_LIANA &&
-                    Intersector.overlaps(a.getBounds(),
-                            Player.instance().getBounds());
-        }
-        else
-        {
-            return Player.instance().playerState == PlayerState.CLIMBING_LIANA &&
-                    Intersector.overlaps(
-                    a.getBounds(),
-                    Player.instance().getBadCollisionBounds());
-        }
+        return Player.instance().playerState == PlayerState.CLIMBING_LIANA &&
+                Intersector.overlaps(a.getBounds(),
+                        a.getName().equals("good") ? Player.instance().getBounds() :
+                                Player.instance().getBadCollisionBounds());
     }
 }
 
