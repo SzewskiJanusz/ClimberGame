@@ -21,7 +21,6 @@ public class AboutScreen extends AbstractScreen
     public AboutScreen(ClimberGame game)
     {
         super(game);
-        // Set input processor here because stage is initialized
         Gdx.input.setInputProcessor(stage);
     }
 

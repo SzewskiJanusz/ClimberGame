@@ -3,20 +3,16 @@ package com.janusz.climbergame.menu.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.janusz.climbergame.shared.factories.ButtonFactory;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.game.background.GameBackground;
-import com.janusz.climbergame.game.entities.player.Player;
-import com.janusz.climbergame.game.environment.EntireLiana;
-import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
-import com.janusz.climbergame.game.managers.queue.QueueManager;
-import com.janusz.climbergame.game.pause.PauseController;
+import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
-import com.janusz.climbergame.game.texts.TapImage;
-import com.janusz.climbergame.menu.Title;
-import com.janusz.climbergame.menu.buttons.ButtonFactory;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.shared.DefComponents;
 import com.janusz.climbergame.shared.Toast;
@@ -26,17 +22,8 @@ import com.janusz.climbergame.shared.scoreclient.Score;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by Janusz on 2017-09-27.
- */
-
 public class MenuScreen extends AbstractScreen
 {
-
-    private Title title;
-
-    private GameBackground gameBackground;
-
     private Toast toast;
     private Toast.ToastFactory toastFactory;
     private boolean displayToast;
@@ -45,44 +32,46 @@ public class MenuScreen extends AbstractScreen
     public MenuScreen(final ClimberGame game)
     {
         super(game);
-        // Set input processor here because stage is initialized
         Gdx.input.setInputProcessor(stage);
-        gameBackground = new GameBackground();
-        stage.addActor(gameBackground);
-        gameBackground.toBack();
         timeToDelayBackButton = 0f;
     }
 
     public MenuScreen(final ClimberGame game, float delayTime)
     {
         super(game);
-        // Set input processor here because stage is initialized
         Gdx.input.setInputProcessor(stage);
-        gameBackground = new GameBackground();
-        stage.addActor(gameBackground);
-        gameBackground.toBack();
         timeToDelayBackButton = delayTime;
     }
 
     @Override
     protected void init()
     {
+        initGameBackground();
         initTitle();
         initStartGame();
-        initOptions();
+        initAbout();
         initTopScores();
         initExit();
     }
 
+    private void initGameBackground()
+    {
+        GameBackground gameBackground = new GameBackground();
+        gameBackground.toBack();
+        stage.addActor(gameBackground);
+    }
+
     private void initTitle()
     {
-        title = new Title();
+        Image title = new Image(new Texture("title.png"));
+        title.setPosition(365 , 420 ,1);
+        title.setSize(520,110);
         stage.addActor(title);
     }
 
     private void initExit()
     {
-        TextButton exit = ButtonFactory.createButton("EXIT", DefComponents.TEXTBUTTON_STYLE, 40);
+        TextButton exit = ButtonFactory.createButton("EXIT", 40);
         exit.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -97,7 +86,7 @@ public class MenuScreen extends AbstractScreen
 
     private void initTopScores()
     {
-        TextButton topScores = ButtonFactory.createButton("TOP SCORES", DefComponents.TEXTBUTTON_STYLE, 130);
+        TextButton topScores = ButtonFactory.createButton("TOP SCORES", 130);
         topScores.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -122,9 +111,9 @@ public class MenuScreen extends AbstractScreen
         stage.addActor(topScores);
     }
 
-    private void initOptions()
+    private void initAbout()
     {
-        TextButton about = ButtonFactory.createButton("ABOUT", DefComponents.TEXTBUTTON_STYLE, 220);
+        TextButton about = ButtonFactory.createButton("ABOUT", 220);
         about.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -137,21 +126,17 @@ public class MenuScreen extends AbstractScreen
 
     private void initStartGame()
     {
-        TextButton startGame = ButtonFactory.createButton("START", DefComponents.TEXTBUTTON_STYLE, 320);
+        TextButton startGame = ButtonFactory.createButton("START", 320);
         startGame.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-//                GameScreen gs = new GameScreen(game);
-                ModeSelectScreen select = new ModeSelectScreen(game);
-               // Gdx.input.setInputProcessor(new BeginningHandler(gs));
-                game.setScreen(select);
+                GameScreen gs = new GameScreen(game);
+                game.setScreen(gs);
             }
         });
         stage.addActor(startGame);
     }
-
-
 
     @Override
     public void render(float delta)
@@ -185,13 +170,7 @@ public class MenuScreen extends AbstractScreen
     public void dispose()
     {
         super.dispose();
-        TapImage.ins = null;
-        Player.player = null;
-        PauseController.dispose();
         GameSound.dispose();
-        QueueManager.dispose();
-        IndicatorController.indControl = null;
-        EntireLiana.dispose();
         stage.dispose();
         spriteBatch.dispose();
     }

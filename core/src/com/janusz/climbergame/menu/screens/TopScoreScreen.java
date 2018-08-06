@@ -2,15 +2,16 @@ package com.janusz.climbergame.menu.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.janusz.climbergame.shared.factories.ButtonFactory;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.menu.Title;
-import com.janusz.climbergame.menu.buttons.ButtonFactory;
 import com.janusz.climbergame.shared.AbstractScreen;
 import com.janusz.climbergame.shared.DefComponents;
 import com.janusz.climbergame.shared.scoreclient.Score;
@@ -24,19 +25,13 @@ import java.util.List;
 
 public class TopScoreScreen extends AbstractScreen
 {
-
-    private Title title;
-
     private Table scoreTable;
-
     private Label playerHeader;
     private Label scoreHeader;
     private Label lpHeader;
-
     private Label[] lblLp;
     private Label[] lblPlayers;
     private Label[] lblScores;
-
 
     public TopScoreScreen(ClimberGame game, List<Score> scores)
     {
@@ -87,7 +82,9 @@ public class TopScoreScreen extends AbstractScreen
 
     private void initTitleAndAddToStage()
     {
-        title = new Title();
+        Image title = new Image(new Texture("title.png"));
+        title.setPosition(365 , 420 ,1);
+        title.setSize(520,110);
         stage.addActor(title);
     }
 
@@ -124,7 +121,7 @@ public class TopScoreScreen extends AbstractScreen
 
     private void initBackButtonAndAddToStage()
     {
-        TextButton btnBackToMenu = ButtonFactory.createButton("BACK TO MENU", DefComponents.TEXTBUTTON_STYLE, 30);
+        TextButton btnBackToMenu = ButtonFactory.createButton("BACK TO MENU", 30);
         btnBackToMenu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
