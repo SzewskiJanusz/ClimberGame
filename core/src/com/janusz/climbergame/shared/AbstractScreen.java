@@ -13,14 +13,11 @@ import com.janusz.climbergame.ClimberGame;
  * Abstract screen holding methods for screens used in this project
  */
 
-public abstract class AbstractScreen implements Screen {
-
+public abstract class AbstractScreen implements Screen
+{
+    public Stage stage;
+    public SpriteBatch spriteBatch;
     protected ClimberGame game;
-
-    public static Stage stage;
-
-    protected SpriteBatch spriteBatch;
-
     private OrthographicCamera camera;
 
     /**
