@@ -32,10 +32,12 @@ public class SaveScoreScreen extends AbstractScreen
     private Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
             .font(DefComponents.textFont)
             .build();
+    private int actualScore;
 
-    public SaveScoreScreen(ClimberGame game)
+    public SaveScoreScreen(ClimberGame game, int actScore)
     {
         super(game);
+        actualScore = actScore;
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -101,7 +103,7 @@ public class SaveScoreScreen extends AbstractScreen
                 NetClientPost ncp = new NetClientPost();
                 try
                 {
-                    String score = String.valueOf(ScoreManager.getInstance().ScoreLogic.getScore());
+                    String score = String.valueOf(actualScore);
                     String name = nickInput.getText();
                     ncp.addScoreToServer(score, name);
                     toastOutput = "SCORE ADDED";

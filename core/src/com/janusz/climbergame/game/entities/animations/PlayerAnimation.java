@@ -18,12 +18,14 @@ public class PlayerAnimation
     private TextureRegion flyingLeft;
     private TextureRegion flyingRight;
     private TextureRegion dying;
+    private Player player;
 
     private int singleFrameWidth = Const.FRAME_WIDTH;
     private int singleFrameHeight = Const.FRAME_HEIGHT;
 
-    public PlayerAnimation()
+    public PlayerAnimation(Player player)
     {
+        this.player = player;
         init();
     }
 
@@ -34,7 +36,7 @@ public class PlayerAnimation
      */
     public TextureRegion getActualFrame(float time)
     {
-        switch (Player.instance().playerState)
+        switch (player.playerState)
         {
             case CLIMBING_LIANA: return animation.getKeyFrame(time, true);
             case FLYING_LEFT: return flyingLeft;

@@ -15,13 +15,13 @@ public class BouncingText extends Label
     private final float timeOfVisibility = 0.7f;
     private float timeElapsed = 0;
 
-    public BouncingText(CharSequence text, LabelStyle style, Effect effect)
+    public BouncingText(CharSequence text, LabelStyle style, Effect effect, Vector2 coords)
     {
         super(text, style);
 
         setFontScale(0.4f);
-        this.setX(Player.instance().getX());
-        this.setY(Player.instance().getY());
+        this.setX(coords.x);
+        this.setY(coords.y);
 
         switch(effect)
         {
