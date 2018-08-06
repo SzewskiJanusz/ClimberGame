@@ -4,18 +4,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.EntityTextures;
-import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
-
-/**
- * Created by Janusz on 2017-09-20.
- */
+import com.janusz.climbergame.game.states.PlayGameState;
 
 public class Anvil extends AbstractItem
 {
-    public Anvil(int starting_x, int velocity)
+    public Anvil(PlayGameState gs, int starting_x, int velocity)
     {
-        super(EntityTextures.get().anvil, starting_x, velocity);
+        super(gs, EntityTextures.get().anvil, starting_x, velocity);
         this.setName("bad");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
                 Const.ANVIL_WIDTH, Const.ANVIL_HEIGHT);
@@ -26,7 +22,7 @@ public class Anvil extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        GameScreen.deathAnimation = true;
+        playGameState.deathAnimation = true;
         GameSound.instance().playDeath();
     }
 
@@ -34,5 +30,4 @@ public class Anvil extends AbstractItem
     {
         this.rotateBy(20 * delta);
     }
-
 }

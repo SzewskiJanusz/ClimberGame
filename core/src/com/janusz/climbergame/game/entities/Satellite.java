@@ -6,6 +6,7 @@ import com.janusz.climbergame.Const;
 import com.janusz.climbergame.EntityTextures;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
+import com.janusz.climbergame.game.states.PlayGameState;
 
 /**
  * Created by Janusz on 2018-02-13.
@@ -13,9 +14,9 @@ import com.janusz.climbergame.game.sound.GameSound;
 
 public class Satellite extends AbstractItem
 {
-    public Satellite(int starting_x, int velocity)
+    public Satellite(PlayGameState gs, int starting_x, int velocity)
     {
-        super(EntityTextures.get().satelite, starting_x, velocity);
+        super(gs, EntityTextures.get().satelite, starting_x, velocity);
         this.setName("good");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
                 Const.SATELLITE_WIDTH, Const.SATELLITE_HEIGHT);
@@ -26,7 +27,7 @@ public class Satellite extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        GameScreen.deathAnimation = true;
+        playGameState.deathAnimation = true;
         GameSound.instance().playDeath();
     }
 

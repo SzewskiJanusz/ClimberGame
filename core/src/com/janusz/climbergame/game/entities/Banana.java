@@ -9,6 +9,7 @@ import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
+import com.janusz.climbergame.game.states.PlayGameState;
 import com.janusz.climbergame.shared.DefComponents;
 
 /**
@@ -18,9 +19,9 @@ import com.janusz.climbergame.shared.DefComponents;
  */
 public class Banana extends AbstractItem
 {
-    public Banana(int starting_x, int velocity)
+    public Banana(PlayGameState gs, int starting_x, int velocity)
     {
-        super(EntityTextures.get().banana, starting_x, velocity);
+        super(gs, EntityTextures.get().banana, starting_x, velocity);
         this.setName("good");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
                 Const.BANANA_WIDTH, Const.BANANA_HEIGHT);
@@ -37,9 +38,9 @@ public class Banana extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        ScoreManager.getInstance().ScoreLogic.addToScore(500);
-        GameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
-                Effect.GOOD));
+        playGameState.scoreMgr.ScoreLogic.addToScore(500);
+        playGameState.gameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
+                Effect.GOOD, playGameState.player.getCoords()));
         GameSound.instance().playGood();
     }
 }

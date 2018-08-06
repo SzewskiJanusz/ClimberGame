@@ -9,13 +9,14 @@ import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
+import com.janusz.climbergame.game.states.PlayGameState;
 import com.janusz.climbergame.shared.DefComponents;
 
 public class Pear extends AbstractItem
 {
-    public Pear(int starting_x, int velocity)
+    public Pear(PlayGameState gs, int starting_x, int velocity)
     {
-        super(EntityTextures.get().pear, starting_x, velocity);
+        super(gs, EntityTextures.get().pear, starting_x, velocity);
         this.setName("good");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
                 Const.PEAR_WIDTH, Const.PEAR_HEIGHT);
@@ -26,9 +27,9 @@ public class Pear extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        ScoreManager.getInstance().ScoreLogic.addToScore(500);
-        GameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
-                Effect.GOOD));
+        playGameState.scoreMgr.ScoreLogic.addToScore(500);
+        playGameState.gameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
+                Effect.GOOD, playGameState.player.getCoords()));
         GameSound.instance().playGood();
     }
 

@@ -4,19 +4,18 @@ import com.badlogic.gdx.math.Rectangle;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.EntityTextures;
-import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
-import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
+import com.janusz.climbergame.game.states.PlayGameState;
 import com.janusz.climbergame.shared.DefComponents;
 
 public class Coffee extends AbstractItem
 {
-    public Coffee(int starting_x, int velocity)
+    public Coffee(PlayGameState gs, int starting_x, int velocity)
     {
-        super(EntityTextures.get().coffee, starting_x, velocity);
+        super(gs, EntityTextures.get().coffee, starting_x, velocity);
         this.setName("good");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
                 Const.COFFEE_WIDTH, Const.COFFEE_HEIGHT);
@@ -33,10 +32,10 @@ public class Coffee extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        Player.instance().coffeeBoost();
-        GameScreen.stage.addActor(new BouncingText("ENERGIZED", DefComponents.LABEL_STYLE,
-                Effect.GOOD));
-        IndicatorController.instance().addCoffeeIndicator();
+        playGameState.player.coffeeBoost();
+        playGameState.gameScreen.stage.addActor(new BouncingText("ENERGIZED", DefComponents.LABEL_STYLE,
+                Effect.GOOD, playGameState.player.getCoords()));
+        playGameState.hud.indicatorControl.addCoffeeIndicator();
         GameSound.instance().playCoffeeBoost();
     }
 }

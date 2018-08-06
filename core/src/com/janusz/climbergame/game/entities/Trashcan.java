@@ -6,12 +6,13 @@ import com.janusz.climbergame.Const;
 import com.janusz.climbergame.EntityTextures;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
+import com.janusz.climbergame.game.states.PlayGameState;
 
 public class Trashcan extends AbstractItem
 {
-    public Trashcan(int starting_x, int velocity)
+    public Trashcan(PlayGameState gs, int starting_x, int velocity)
     {
-        super(EntityTextures.get().trashcan, starting_x, velocity);
+        super(gs, EntityTextures.get().trashcan, starting_x, velocity);
         this.setName("bad");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
                 Const.TRASHCAN_WIDTH, Const.TRASHCAN_HEIGHT);
@@ -22,7 +23,7 @@ public class Trashcan extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        GameScreen.deathAnimation = true;
+        playGameState.deathAnimation = true;
         GameSound.instance().playDeath();
     }
 

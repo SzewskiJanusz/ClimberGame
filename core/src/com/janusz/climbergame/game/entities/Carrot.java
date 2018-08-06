@@ -9,6 +9,7 @@ import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
+import com.janusz.climbergame.game.states.PlayGameState;
 import com.janusz.climbergame.shared.DefComponents;
 
 /**
@@ -17,9 +18,9 @@ import com.janusz.climbergame.shared.DefComponents;
 
 public class Carrot extends AbstractItem
 {
-    public Carrot(int starting_x, int velocity)
+    public Carrot(PlayGameState gs, int starting_x, int velocity)
     {
-        super(EntityTextures.get().carrot, starting_x, velocity);
+        super(gs, EntityTextures.get().carrot, starting_x, velocity);
         this.setName("good");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
                 Const.CARROT_WIDTH, Const.CARROT_HEIGHT);
@@ -30,9 +31,9 @@ public class Carrot extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        ScoreManager.getInstance().ScoreLogic.addToScore(500);
-        GameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
-                Effect.GOOD));
+        playGameState.scoreMgr.ScoreLogic.addToScore(500);
+        playGameState.gameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
+                Effect.GOOD, playGameState.player.getCoords()));
         GameSound.instance().playGood();
     }
 

@@ -7,16 +7,16 @@ import com.janusz.climbergame.EntityTextures;
 import com.janusz.climbergame.game.entities.player.Player;
 import com.janusz.climbergame.game.environment.BouncingText;
 import com.janusz.climbergame.game.environment.Effect;
-import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
+import com.janusz.climbergame.game.states.PlayGameState;
 import com.janusz.climbergame.shared.DefComponents;
 
 public class Tequila extends AbstractItem
 {
-    public Tequila(int starting_x, int velocity)
+    public Tequila(PlayGameState gs, int starting_x, int velocity)
     {
-        super(EntityTextures.get().tequila, starting_x, velocity);
+        super(gs, EntityTextures.get().tequila, starting_x, velocity);
         this.setName("good");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
                 Const.TEQUILA_WIDTH, Const.TEQUILA_HEIGHT);
@@ -33,10 +33,10 @@ public class Tequila extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        GameScreen.stage.addActor(new BouncingText("DRUNK", DefComponents.LABEL_STYLE,
-                Effect.BAD));
-        Player.drunk = true;
-        IndicatorController.instance().addDrunkIndicator();
+        playGameState.gameScreen.stage.addActor(new BouncingText("DRUNK", DefComponents.LABEL_STYLE,
+                Effect.BAD, playGameState.player.getCoords()));
+        playGameState.player.makePlayerDrunk();
+        playGameState.hud.indicatorControl.addDrunkIndicator();
         GameSound.instance().playFatFries();
     }
 }

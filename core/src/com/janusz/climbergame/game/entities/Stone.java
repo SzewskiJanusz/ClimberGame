@@ -6,12 +6,13 @@ import com.janusz.climbergame.Const;
 import com.janusz.climbergame.EntityTextures;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
+import com.janusz.climbergame.game.states.PlayGameState;
 
 public class Stone extends AbstractItem
 {
-    public Stone(int starting_x, int velocity)
+    public Stone(PlayGameState gs, int starting_x, int velocity)
     {
-        super(EntityTextures.get().stone, starting_x, velocity);
+        super(gs, EntityTextures.get().stone, starting_x, velocity);
         this.setName("bad");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
                 Const.STONE_WIDTH, Const.STONE_HEIGHT);
@@ -28,7 +29,7 @@ public class Stone extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        GameScreen.deathAnimation = true;
+        playGameState.deathAnimation = true;
         GameSound.instance().playDeath();
     }
 }

@@ -9,17 +9,14 @@ import com.janusz.climbergame.game.environment.Effect;
 import com.janusz.climbergame.game.managers.score.ScoreManager;
 import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.game.sound.GameSound;
+import com.janusz.climbergame.game.states.PlayGameState;
 import com.janusz.climbergame.shared.DefComponents;
-
-/**
- * Created by Janusz on 2018-02-07.
- */
 
 public class Apple extends AbstractItem
 {
-    public Apple(int starting_x, int velocity)
+    public Apple(PlayGameState gs, int starting_x, int velocity)
     {
-        super(EntityTextures.get().apple, starting_x, velocity);
+        super(gs, EntityTextures.get().apple, starting_x, velocity);
         this.setName("good");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
                 Const.APPLE_WIDTH, Const.APPLE_HEIGHT);
@@ -36,9 +33,9 @@ public class Apple extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        ScoreManager.getInstance().ScoreLogic.addToScore(500);
-        GameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
-                Effect.GOOD));
+        playGameState.scoreMgr.ScoreLogic.addToScore(500);
+        playGameState.gameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
+                Effect.GOOD, playGameState.player.getCoords()));
         GameSound.instance().playGood();
     }
 }
