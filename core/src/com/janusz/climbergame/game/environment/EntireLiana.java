@@ -13,7 +13,6 @@ import java.util.List;
 
 public class EntireLiana
 {
-
     public static final int first_liana_x = Const.LIANAMANAGER_FIRST_X;
     public static final int second_liana_x = Const.LIANAMANAGER_SECOND_X;
     public static final int third_liana_x = Const.LIANAMANAGER_THIRD_X;
@@ -23,26 +22,11 @@ public class EntireLiana
     private List<LianaTile> second_wholeLiana;
     private List<LianaTile> third_wholeLiana;
 
-    private static EntireLiana el;
+    private GameScreen gameScreen;
 
-    // Singleton
-    public static EntireLiana get()
+    public EntireLiana(GameScreen gs)
     {
-        if (el == null)
-        {
-            el = new EntireLiana();
-        }
-        return el;
-    }
-
-    public void reset()
-    {
-        el = null;
-    }
-
-
-    private EntireLiana()
-    {
+        gameScreen = gs;
         first_wholeLiana = new ArrayList<LianaTile>();
         second_wholeLiana = new ArrayList<LianaTile>();
         third_wholeLiana = new ArrayList<LianaTile>();
@@ -58,14 +42,16 @@ public class EntireLiana
             LianaTile a = new LianaTile(first_liana_x, Const.LIANATILE_HEIGHT * i);
             LianaTile b = new LianaTile(second_liana_x, Const.LIANATILE_HEIGHT * i);
             LianaTile c = new LianaTile(third_liana_x, Const.LIANATILE_HEIGHT * i);
-
+            a.toFront();
+            b.toFront();
+            c.toFront();
             first_wholeLiana.add(a);
             second_wholeLiana.add(b);
             third_wholeLiana.add(c);
 
-            GameScreen.stage.addActor(first_wholeLiana.get(i));
-            GameScreen.stage.addActor(second_wholeLiana.get(i));
-            GameScreen.stage.addActor(third_wholeLiana.get(i));
+            gameScreen.stage.addActor(a);
+            gameScreen.stage.addActor(b);
+            gameScreen.stage.addActor(c);
         }
     }
 
@@ -73,15 +59,15 @@ public class EntireLiana
     {
         LianaTile l = new LianaTile(first_liana_x);
         first_wholeLiana.add(l);
-        GameScreen.stage.addActor(l);
+        gameScreen.stage.addActor(l);
 
         LianaTile l1 = new LianaTile(second_liana_x);
         second_wholeLiana.add(l1);
-        GameScreen.stage.addActor(l1);
+        gameScreen.stage.addActor(l1);
 
         LianaTile l2 = new LianaTile(third_liana_x);
         third_wholeLiana.add(l2);
-        GameScreen.stage.addActor(l2);
+        gameScreen.stage.addActor(l2);
     }
 
 
@@ -153,8 +139,4 @@ public class EntireLiana
         return first_wholeLiana.size();
     }
 
-    public static void dispose()
-    {
-        el = null;
-    }
 }
