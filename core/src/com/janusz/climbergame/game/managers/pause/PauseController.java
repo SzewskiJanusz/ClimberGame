@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.pause;
+package com.janusz.climbergame.game.managers.pause;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Timer;
-import com.janusz.climbergame.game.screens.GameScreen;
 import com.janusz.climbergame.shared.DefComponents;
 
 
@@ -21,18 +20,9 @@ public class PauseController
 {
     public PauseButton pauseButton;
     public PauseLabel pauseLabel;
-
-    private static PauseController ins;
-
-    public static PauseController instance()
-    {
-        if (ins == null)
-        {
-            ins = new PauseController();
-        }
-
-        return ins;
-    }
+    private com.janusz.climbergame.game.states.PlayGameState playGameState;
+    private boolean paused;
+    public boolean pauseClicked;
 
 
     public void showLabel()
@@ -45,32 +35,39 @@ public class PauseController
         pauseLabel.toBack();
     }
 
+    public boolean isGamePaused()
+    {
+        return paused;
+    }
+
+    public PauseController(com.janusz.climbergame.game.states.PlayGameState playGameState)
+    {
+        this.pauseClicked = false;
+        this.playGameState = playGameState;
+        createButton();
+        createLabel();
+    }
+
     public void resumeGame()
     {
-        GameScreen.paused = false;
+        paused = false;
         Timer.instance().start();
-        pauseLabel.remove();
-        GameScreen.pauseClicked = true;
+        pauseLabel.setVisible(false);
     }
 
     public void pauseGame()
     {
-        GameScreen.paused = true;
+        paused = true;
         Timer.instance().stop();
-        GameScreen.stage.addActor(pauseLabel);
+        pauseLabel.setVisible(true);
         pauseLabel.toFront();
-    }
-
-    private PauseController()
-    {
-        createButton();
-        createLabel();
     }
 
     private void createLabel()
     {
         String text = "PAUSED";
         pauseLabel = new PauseLabel(text, DefComponents.LABEL_STYLE);
+        pauseLabel.setVisible(false);
     }
 
     private void createButton()
@@ -81,11 +78,7 @@ public class PauseController
         pauseButton = new PauseButton(pauseTexRegionDrawable);
         pauseButton.addListener(new PauseListener());
         pauseButton.toFront();
-    }
-
-    public static void dispose()
-    {
-        ins = null;
+        pauseButton.setVisible(false);
     }
 
     /**
@@ -98,7 +91,7 @@ public class PauseController
         {
             if (event.getListenerActor().equals(pauseButton) )
             {
-                if (GameScreen.paused)
+                if (paused)
                 {
                     resumeGame();
                 }

@@ -1,8 +1,7 @@
 package com.janusz.climbergame.game.indicators.graphics;
 
-import com.badlogic.gdx.Game;
 import com.janusz.climbergame.game.entities.player.Player;
-import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.game.states.PlayGameState;
 
 /**
  * Created by Janusz on 2017-12-14.
@@ -14,28 +13,21 @@ public class IndicatorController
     private DrunkIndicator drunkIndicator;
     private CoffeeIndicator coffeeIndicator;
     private FatIndicator fatIndicator;
+    private PlayGameState playGameState;
 
-    public static IndicatorController indControl;
 
-    private IndicatorController()
+    public IndicatorController(PlayGameState pgs)
     {
-        drunkIndicator = new DrunkIndicator();
-        coffeeIndicator = new CoffeeIndicator();
-        fatIndicator = new FatIndicator();
-    }
-
-    public static IndicatorController instance()
-    {
-        if (indControl == null)
-            indControl = new IndicatorController();
-
-        return indControl;
+        drunkIndicator = new DrunkIndicator(pgs.player);
+        coffeeIndicator = new CoffeeIndicator(pgs.player);
+        fatIndicator = new FatIndicator(pgs.player);
+        playGameState = pgs;
     }
 
     public void addDrunkIndicator()
     {
-        GameScreen.stage.addActor(drunkIndicator);
-        GameScreen.stage.addActor(drunkIndicator.label);
+        playGameState.gameScreen.stage.addActor(drunkIndicator);
+        playGameState.gameScreen.stage.addActor(drunkIndicator.label);
     }
 
     public void addCoffeeIndicator()
@@ -43,8 +35,8 @@ public class IndicatorController
         Player.fat = false;
         fatIndicator.remove();
         fatIndicator.label.remove();
-        GameScreen.stage.addActor(coffeeIndicator);
-        GameScreen.stage.addActor(coffeeIndicator.label);
+        playGameState.gameScreen.stage.addActor(coffeeIndicator);
+        playGameState.gameScreen.stage.addActor(coffeeIndicator.label);
     }
 
     public void update()
@@ -59,8 +51,8 @@ public class IndicatorController
         Player.caffeinated = false;
         coffeeIndicator.remove();
         coffeeIndicator.label.remove();
-        GameScreen.stage.addActor(fatIndicator);
-        GameScreen.stage.addActor(fatIndicator.label);
+        playGameState.gameScreen.stage.addActor(fatIndicator);
+        playGameState.gameScreen.stage.addActor(fatIndicator.label);
     }
 
     public void dispose()

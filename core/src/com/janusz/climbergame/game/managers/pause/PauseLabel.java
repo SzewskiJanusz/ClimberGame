@@ -1,4 +1,4 @@
-package com.janusz.climbergame.game.pause;
+package com.janusz.climbergame.game.managers.pause;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
