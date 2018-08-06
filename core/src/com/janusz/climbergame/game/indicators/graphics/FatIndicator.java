@@ -17,8 +17,8 @@ import java.math.RoundingMode;
 public class FatIndicator extends Image
 {
     Label label;
-
-    public FatIndicator()
+    Player player;
+    public FatIndicator(Player player)
     {
         super(new Texture("fatindicator.png"));
         this.setSize(Const.FATINDICATOR_WIDTH,Const.FATINDICATOR_HEIGHT);
@@ -28,6 +28,7 @@ public class FatIndicator extends Image
         label.setFontScale(0.74f);
         label.setPosition(Const.COFFEEINDICATOR_X,
                 Const.COFFEEINDICATOR_Y - Const.SPACE_BETWEEN_INDICATOR_AND_LABEL);
+        this.player = player;
     }
 
     @Override
@@ -39,12 +40,12 @@ public class FatIndicator extends Image
         {
             double displayedTime = BigDecimal.valueOf
                     (
-                            Const.FAT_EFFECT_TIME - Player.instance().fatTime)
+                            Const.FAT_EFFECT_TIME - player.fatTime)
                     .setScale(1, RoundingMode.HALF_UP
                     )
                     .doubleValue();
             label.setText(String.valueOf(displayedTime));
-            if (Player.instance().fatTime >= Const.FAT_EFFECT_TIME)
+            if (player.fatTime >= Const.FAT_EFFECT_TIME)
             {
                 this.remove();
                 label.remove();

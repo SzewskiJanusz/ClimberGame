@@ -17,8 +17,8 @@ import java.math.RoundingMode;
 public class CoffeeIndicator extends Image
 {
     Label label;
-
-    public CoffeeIndicator()
+    Player player;
+    public CoffeeIndicator(Player player)
     {
         super(new Texture("coffeeindicator.png"));
         this.setSize(Const.COFFEEINDICATOR_WIDTH,Const.COFFEEINDICATOR_HEIGHT);
@@ -28,6 +28,7 @@ public class CoffeeIndicator extends Image
         label.setFontScale(0.74f);
         label.setPosition(Const.COFFEEINDICATOR_X,
                 Const.COFFEEINDICATOR_Y - Const.SPACE_BETWEEN_INDICATOR_AND_LABEL);
+        this.player = player;
     }
 
     @Override
@@ -39,12 +40,12 @@ public class CoffeeIndicator extends Image
         {
             double displayedTime = BigDecimal.valueOf
                     (
-                            Const.COFFEE_EFFECT_TIME - Player.instance().coffeeTime)
+                            Const.COFFEE_EFFECT_TIME - player.coffeeTime)
                     .setScale(1, RoundingMode.HALF_UP
                     )
                     .doubleValue();
             label.setText(String.valueOf(displayedTime));
-            if (Player.instance().coffeeTime >= Const.COFFEE_EFFECT_TIME)
+            if (player.coffeeTime >= Const.COFFEE_EFFECT_TIME)
             {
                 this.remove();
                 label.remove();

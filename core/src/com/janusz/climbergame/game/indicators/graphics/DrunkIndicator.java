@@ -18,8 +18,9 @@ import java.math.RoundingMode;
 public class DrunkIndicator extends Image
 {
     Label label;
-    
-    public DrunkIndicator()
+    private Player player;
+
+    public DrunkIndicator(Player player)
     {
         super(new Texture("drop.png"));
         this.setSize(Const.DRUNKINDICATOR_WIDTH,Const.DRUNKINDICATOR_HEIGHT);
@@ -29,6 +30,7 @@ public class DrunkIndicator extends Image
         label.setFontScale(0.74f);
         label.setPosition(Const.DRUNKINDICATOR_X,
                 Const.DRUNKINDICATOR_Y - Const.SPACE_BETWEEN_INDICATOR_AND_LABEL);
+        this.player = player;
     }
 
     @Override
@@ -40,12 +42,12 @@ public class DrunkIndicator extends Image
         {
             double displayedTime = BigDecimal.valueOf
                     (
-                            Const.TEQUILA_EFFECT_TIME - Player.instance().drunkTime)
+                            Const.TEQUILA_EFFECT_TIME - player.drunkTime)
                     .setScale(1, RoundingMode.HALF_UP
                     )
                     .doubleValue();
             label.setText(String.valueOf(displayedTime));
-            if (Player.instance().drunkTime >= Const.TEQUILA_EFFECT_TIME)
+            if (player.drunkTime >= Const.TEQUILA_EFFECT_TIME)
             {
                 this.remove();
                 label.remove();
