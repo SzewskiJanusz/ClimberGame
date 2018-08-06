@@ -1,281 +1,34 @@
 package com.janusz.climbergame.game.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.utils.Timer;
 import com.janusz.climbergame.ClimberGame;
-import com.janusz.climbergame.game.background.GameBackground;
-import com.janusz.climbergame.game.bosses.WaveSpawner;
-import com.janusz.climbergame.game.entities.AbstractItem;
-import com.janusz.climbergame.game.entities.player.Player;
-import com.janusz.climbergame.game.entities.player.PlayerState;
-import com.janusz.climbergame.game.environment.BouncingText;
-import com.janusz.climbergame.game.environment.Effect;
-import com.janusz.climbergame.game.environment.EntireLiana;
-import com.janusz.climbergame.game.indicators.graphics.IndicatorController;
-import com.janusz.climbergame.game.managers.*;
-import com.janusz.climbergame.game.managers.queue.QueueManager;
-import com.janusz.climbergame.game.managers.score.ScoreManager;
-import com.janusz.climbergame.game.pause.PauseController;
-import com.janusz.climbergame.game.sound.GameSound;
-import com.janusz.climbergame.game.texts.LevelTexts;
-import com.janusz.climbergame.game.texts.TapImage;
-import com.janusz.climbergame.game.texts.TapToStartLabel;
-import com.janusz.climbergame.shared.DefComponents;
+import com.janusz.climbergame.game.states.BeginningState;
+import com.janusz.climbergame.game.states.GameState;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Main game screen
- */
 public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
 {
-    /* Flags */
-    public static boolean gameOver;
-    public static boolean onBeginning;
-    public static boolean deathAnimation;
-    public static double goodFreq;
-    public static double badFreq;
-    public static boolean paused;
-    private boolean added;
+    private GameState gameState;
+    private long start = System.currentTimeMillis();
+    private final int FPS = 60;
 
-    /* Managers (builders) */
-    public BananaManager bananaMgr;
-    public AnvilManager anvilMgr;
-    public TequilaManager tequilaMgr;
-    private GameOverManager gameOverMgr;
-    public GameBackground background;
-    public CoffeeManager coffeeMgr;
-    public StoneManager stoneMgr;
-    public AppleManager appleMgr;
-    public WatermelonManager waterMgr;
-    public CarrotManager carrotMgr;
-    public PearManager pearMgr;
-    public TreasureManager treasureMgr;
-    public GrapesManager grapesMgr;
-    public FriesManager friesMgr;
-    public TrashcanManager trashMgr;
-    public SatelliteManager satelliteMgr;
-
-    /* Queue to avoid stacking items */
-    private double queueTimer;
-
-    /* All entities on stage */
-    public static List<AbstractItem> entities;
-
-    /* FPS limiter variables */
-    private long diff, start = System.currentTimeMillis();
-
-    /* Level selector stuff */
-    public static int levelVelocity;
-    private static float difficultyTimer;
-    public static int level;
-
-    public LevelTexts lvlTexts;
-    public static boolean pauseClicked;
-
-    public WaveSpawner waveSpawner;
-
-    // Constructor
     public GameScreen(ClimberGame game)
     {
         super(game);
     }
 
-    /**
-     * Initialize all stuff that is needed for game start
-     */
-    protected void init()
-    {
-        EntireLiana.get().reset();
-        background = new GameBackground();
-        stage.addActor(background);
-        waveSpawner = new WaveSpawner();
-        GameSound.instance().prepareSounds();
-        level = 1;
-        onBeginning = true;
-        gameOver = false;
-        paused = false;
-        deathAnimation = false;
-        goodFreq = 0;
-        badFreq = 0;
-        difficultyTimer = 0;
-        levelVelocity = 0;
-        QueueManager.instance().reset();
-        entities = new ArrayList<AbstractItem>();
-        entities.clear();
-        stage.addActor(TapToStartLabel.instance());
-        stage.addActor(TapImage.instance());
-        ScoreManager.getInstance().ScoreLogic.setScore(0);
-        Player.instance().reset();
-        bananaMgr = new BananaManager();
-        anvilMgr = new AnvilManager();
-        gameOverMgr = new GameOverManager(game);
-        tequilaMgr = new TequilaManager();
-        coffeeMgr = new CoffeeManager();
-        stoneMgr = new StoneManager();
-        appleMgr = new AppleManager();
-        waterMgr = new WatermelonManager();
-        carrotMgr = new CarrotManager();
-        pearMgr = new PearManager();
-        treasureMgr = new TreasureManager();
-        grapesMgr = new GrapesManager();
-        friesMgr = new FriesManager();
-        trashMgr = new TrashcanManager();
-        satelliteMgr = new SatelliteManager();
-        lvlTexts = new LevelTexts(String.valueOf(GameScreen.level), DefComponents.LABEL_STYLE);
-
-        stage.addActor(PauseController.instance().pauseButton);
-        stage.addActor(PauseController.instance().pauseLabel);
-        TapToStartLabel.instance().toFront();
-        TapImage.instance().toFront();
-        PauseController.instance().hideLabel();
-        stage.addListener(new Player.MovingListener());
-    }
-
     @Override
     public void render(float delta)
     {
-        if (!gameOver)
-        {
-            if (!paused)
-            {
-
-                super.render(delta);
-
-                if (!onBeginning)
-                {
-                    update(delta);
-                }
-                else
-                {
-                    EntireLiana.get().moveAllLianasDown(delta);
-                    TapImage.instance().toFront();
-                    TapToStartLabel.instance().toFront();
-                }
-            }
-        }
-
+        super.render(delta);
+        gameState.tick(delta);
         spriteBatch.begin();
         stage.draw();
         spriteBatch.end();
-
-        sleep(60);
+        sleep(FPS);
     }
 
-    private void update(float delta)
+    public void setState(GameState gs)
     {
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK))
-        {
-            PauseController.instance().pauseGame();
-        }
-        stage.act();
-        ScoreManager.getInstance().update();
-
-        EntireLiana.get().moveAllLianasDown(delta);
-        IndicatorController.instance().update();
-
-        updateEntities();
-
-        checkIfGameOver();
-        difficultyUpdate(delta);
-
-        if (queueTimer <= 0)
-        {
-            AbstractItem j;
-            if ((j = QueueManager.instance().getFirst()) != null)
-            {
-                entities.add(j);
-                stage.addActor(j);
-                j.toFront();
-                queueTimer = 0.45;
-            }
-        }
-        queueTimer -= delta;
-
-    }
-
-    private void difficultyUpdate(float delta)
-    {
-        if (difficultyTimer >= 20 + level)
-        {
-            level++;
-            lvlTexts.levelNumber.setText(String.valueOf(GameScreen.level));
-            levelVelocity += 20 + level;
-            difficultyTimer = 0;
-            stage.addActor(new BouncingText("LEVEL UP!",DefComponents.LABEL_STYLE, Effect.DEFAULT));
-            GameSound.instance().playLevelUp();
-            switch(level)
-            {
-                case 2: friesMgr.startTimer();
-                    waveSpawner.spawnNonOrderedMixedWaves(2, 10);
-                    break;
-                case 3: waterMgr.startTimer();
-                    waveSpawner.spawnWaves(3, 3, 2);
-                    break;
-                case 4: trashMgr.startTimer();
-                    waveSpawner.spawnWaves(4,6);
-                    break;
-                case 5: carrotMgr.startTimer();
-                    waveSpawner.spawnWaves(5, 5, 3);
-                    break;
-                case 6: treasureMgr.startTimer();
-                        satelliteMgr.startTimer();
-                        waveSpawner.spawnWaves(6, 1, 5);
-                    break;
-                case 7: satelliteMgr.startTimer();
-                    waveSpawner.spawnWaves(7, 10);
-                    break;
-                case 8: pearMgr.startTimer();
-                    waveSpawner.spawnWaves(8, 5, 5);
-                    break;
-                case 9: grapesMgr.startTimer();
-                    waveSpawner.spawnWaves(9, 10, 10);
-                    break;
-                default: waveSpawner.spawnWaves(level, 15);
-            }
-        }
-        else
-        {
-            difficultyTimer += delta;
-        }
-    }
-
-    private void checkIfGameOver()
-    {
-        if (deathAnimation)
-        {
-            added = false;
-            Player.instance().playerState = PlayerState.DYING;
-
-            Timer.schedule(new Timer.Task(){
-                               @Override
-                               public void run()
-                               {
-                                   if (deathAnimation)
-                                   {
-                                       gameOver = true;
-                                       if (!added)
-                                       {
-                                           stage.addActor(gameOverMgr.getTable());
-                                           PauseController.instance().pauseButton.remove();
-                                           ScoreManager.getInstance().ScoreLabel.remove();
-                                           IndicatorController.instance().dispose();
-                                           Timer.instance().clear();
-                                           lvlTexts.remove();
-                                           added = true;
-                                       }
-
-                                       Player.instance().remove();
-                                   }
-                               }
-                           }
-                    , 1       //    (delay)
-            );
-
-        }
+        this.gameState = gs;
     }
 
     @Override
@@ -284,51 +37,28 @@ public class GameScreen extends com.janusz.climbergame.shared.AbstractScreen
         super.dispose();
         stage.dispose();
         spriteBatch.dispose();
-        game.dispose();
     }
 
-    private void sleep(int fps) {
-        if(fps>0){
-            diff = System.currentTimeMillis() - start;
-            long targetDelay = 1000/fps;
-            if (diff < targetDelay) {
-                try{
-                    Thread.sleep(targetDelay - diff);
-                } catch (InterruptedException e)
-                {
-                    //Do nothing
-                }
-            }
-            start = System.currentTimeMillis();
-        }
-    }
-
-    private void updateEntities()
+    protected void init()
     {
+        this.setState(new BeginningState(this, game));
+    }
 
-        for (int i = 0 ; i < entities.size() ; i++)
-        {
-            if (checkCollision(entities.get(i)))
+    private void sleep(int fps)
+    {
+        long diff = System.currentTimeMillis() - start;
+        long targetDelay = 1000/fps;
+        if (diff < targetDelay) {
+            try
             {
-                entities.get(i).triggerEffect();
-                entities.get(i).remove();
-                entities.remove(i);
-                break;
+                Thread.sleep(targetDelay - diff);
+            }
+            catch (InterruptedException e)
+            {
+                //Do nothing
             }
         }
-    }
-
-    /**
-     * Check collision with player
-     * @param a - entity on stage to check with player
-     * @return if collision happened
-     */
-    private boolean checkCollision(AbstractItem a)
-    {
-        return Player.instance().playerState == PlayerState.CLIMBING_LIANA &&
-                Intersector.overlaps(a.getBounds(),
-                        a.getName().equals("good") ? Player.instance().getBounds() :
-                                Player.instance().getBadCollisionBounds());
+        start = System.currentTimeMillis();
     }
 }
 
