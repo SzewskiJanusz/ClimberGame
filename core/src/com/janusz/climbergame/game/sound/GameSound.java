@@ -31,10 +31,11 @@ public class GameSound
 
     private GameSound()
     {
+        prepareSounds();
     }
 
 
-    public void prepareSounds()
+    private void prepareSounds()
     {
         deathSound = Gdx.audio.newSound(Gdx.files.internal("death.wav"));
         fruitSound = Gdx.audio.newSound(Gdx.files.internal("getgood.wav"));
