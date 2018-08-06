@@ -6,12 +6,11 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.animations.PlayerAnimation;
 import com.janusz.climbergame.game.environment.EntireLiana;
 import com.janusz.climbergame.game.screens.GameScreen;
+import com.janusz.climbergame.game.states.PlayGameState;
 
 /**
  * Player class.
@@ -31,6 +30,7 @@ public class Player extends Actor implements IPlayer
     public static boolean drunk;
     public static boolean caffeinated;
     public static boolean fat;
+    private PlayGameState playGameState;
 
     // Animation class
     public PlayerAnimation playerAnimation;
@@ -45,17 +45,15 @@ public class Player extends Actor implements IPlayer
     private TextureRegion currentFrame;
     private Vector2 velocity;
 
-    public static Player player;
-
-
-    private Player()
+    public Player(PlayGameState gs)
     {
-        playerAnimation = new PlayerAnimation();
+        playerAnimation = new PlayerAnimation(this);
         playerState = PlayerState.CLIMBING_LIANA;
         this.setSize(WIDTH,HEIGHT);
         bounds = new Rectangle(STARTING_X, STARTING_Y, WIDTH, HEIGHT);
         badCollisionBounds = new Rectangle(STARTING_X, STARTING_Y + HEIGHT/2, WIDTH, HEIGHT/2);
         currentFrame = playerAnimation.getStartingFrame();
+        this.playGameState = gs;
         reset();
     }
 
@@ -75,12 +73,9 @@ public class Player extends Actor implements IPlayer
         playerState = PlayerState.CLIMBING_LIANA;
     }
 
-    public static Player instance()
+    public Vector2 getCoords()
     {
-        if (player == null)
-            player = new Player();
-
-        return player;
+        return new Vector2(getX(), getY());
     }
 
     @Override
@@ -198,17 +193,17 @@ public class Player extends Actor implements IPlayer
 
     public boolean catchLiana()
     {
-        int lianaSize = EntireLiana.get().getSize();
+        int lianaSize = playGameState.allLianas.getSize();
         // Check only 3 last liana tiles
         for (int i = lianaSize - 3 ; i < lianaSize ; i++)
         {
             switch(place)
             {
-                case 1: return Intersector.overlaps(EntireLiana.get().
+                case 1: return Intersector.overlaps(playGameState.allLianas.
                         getLianaTileFromFirst(i).getBounds(),bounds);
-                case 2: return Intersector.overlaps(EntireLiana.get().
+                case 2: return Intersector.overlaps(playGameState.allLianas.
                         getLianaTileFromSecond(i).getBounds(),bounds);
-                case 3: return Intersector.overlaps(EntireLiana.get().
+                case 3: return Intersector.overlaps(playGameState.allLianas.
                         getLianaTileFromThird(i).getBounds(),bounds);
                 default: return false;
             }
@@ -225,7 +220,7 @@ public class Player extends Actor implements IPlayer
             case 3: setX(EntireLiana.third_liana_x - 16); break;
             default: throw new IllegalArgumentException("Error in player place. (" + place +")");
         }
-        setY(Player.STARTING_Y);
+        setY(STARTING_Y);
         velocity.y = -4;
     }
 
@@ -243,46 +238,15 @@ public class Player extends Actor implements IPlayer
         fat = true;
     }
 
+    public void makePlayerDrunk()
+    {
+        drunkTime = 0;
+        drunk = true;
+    }
+
     public Rectangle getBadCollisionBounds()
     {
         return badCollisionBounds;
     }
 
-    public static class MovingListener extends InputListener
-    {
-        @Override
-        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
-        {
-            if (GameScreen.pauseClicked)
-            {
-                GameScreen.pauseClicked = false;
-                return false;
-            }
-
-            if (Player.instance().playerState == PlayerState.CLIMBING_LIANA && !GameScreen.paused)
-            {
-                if (isFingerOnLeft(x, Player.instance().getX() + Player.instance().getWidth() / 2))
-                {
-                    if (!Player.drunk)
-                        Player.instance().jumpLeft();
-                    else
-                        Player.instance().jumpRight();
-                }
-                else
-                {
-                    if (!Player.drunk)
-                        Player.instance().jumpRight();
-                    else
-                        Player.instance().jumpLeft();
-                }
-            }
-
-            return true;
-        }
-
-        private boolean isFingerOnLeft(float screenX, float playerOnScreenX)
-        {
-            return playerOnScreenX > screenX;
-        }
-    }
 }
