@@ -23,7 +23,7 @@ public class Grapes extends AbstractItem
         super(gs, EntityTextures.get().grapes, starting_x, velocity);
         this.setName("good");
         bounds = new Rectangle(starting_x, ClimberGame.HEIGHT,
-                Const.FRIES_WIDTH, Const.FRIES_HEIGHT);
+                Const.GRAPES_WIDTH, Const.GRAPES_HEIGHT);
         this.setSize(Const.FRIES_WIDTH, Const.FRIES_HEIGHT);
         this.setOrigin(getWidth() / 2, getHeight() / 2);
     }
