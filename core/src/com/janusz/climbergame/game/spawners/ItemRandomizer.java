@@ -32,7 +32,7 @@ public class ItemRandomizer
 
     public AbstractItem getRandomGoodItem()
     {
-        int nmb = MathUtils.random(1,6);
+        int nmb = MathUtils.random(1,7);
         int direction = MathUtils.random(2,4);
         int x = selectPlace(direction);
         switch(nmb)
@@ -43,6 +43,10 @@ public class ItemRandomizer
             case 4: return new Grapes(playGameState, x, playGameState.difficultyControl.levelVelocity);
             case 5: return new Pear(playGameState, x, playGameState.difficultyControl.levelVelocity);
             case 6: return new Watermelon(playGameState, x, playGameState.difficultyControl.levelVelocity);
+            case 7:
+                if (MathUtils.random(0,2) == 0)
+                    return new Treasure(playGameState, x, 75 + playGameState.difficultyControl.levelVelocity);
+                else return new Banana(playGameState, x, playGameState.difficultyControl.levelVelocity);
             default: throw new IllegalArgumentException("Randomized number: "+nmb);
         }
     }
@@ -86,7 +90,7 @@ public class ItemRandomizer
             case 2: return new Stone(playGameState, x, playGameState.difficultyControl.levelVelocity);
             case 3: return new Trashcan(playGameState, x, playGameState.difficultyControl.levelVelocity);
             case 4:
-                if (MathUtils.random(0,10) == 0)
+                if (MathUtils.random(0,4) == 0)
                     return new Satellite(playGameState, x, 250 + playGameState.difficultyControl.levelVelocity);
                 else return new Stone(playGameState, x, playGameState.difficultyControl.levelVelocity);
             default: throw new IllegalArgumentException("Randomized number: "+nmb);
