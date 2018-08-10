@@ -41,7 +41,7 @@ public class GameOverState implements GameState
 
     }
 
-    private void init()
+    public void init()
     {
         Table gameOverSummary = initTable();
         int actualScore = playGameState.scoreMgr.ScoreLogic.getScore();

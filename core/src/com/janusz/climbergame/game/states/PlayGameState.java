@@ -41,7 +41,7 @@ public class PlayGameState implements GameState
         init();
     }
 
-    private void init()
+    public void init()
     {
         Gdx.input.setInputProcessor(gameScreen.stage);
         GameSound.instance();

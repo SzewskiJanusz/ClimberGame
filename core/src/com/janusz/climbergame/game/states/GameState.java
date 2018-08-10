@@ -4,5 +4,5 @@ public interface GameState
 {
     void tick(float delta);
     void update(float delta);
-
+    void init();
 }

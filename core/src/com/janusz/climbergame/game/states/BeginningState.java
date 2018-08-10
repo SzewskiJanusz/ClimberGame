@@ -24,10 +24,15 @@ public class BeginningState implements GameState
     {
         this.gameScreen = gs;
         this.game = game;
+        init();
+        allLianas = new EntireLiana(gs);
+    }
+
+    public void init()
+    {
         gb = new GameBackground();
         gb.toBack();
         gameScreen.stage.addActor(gb);
-        allLianas = new EntireLiana(gs);
         Label tapToStart = initStartingLabel();
         gameScreen.stage.addActor(tapToStart);
         Image handImg = initHandImage();
