@@ -90,7 +90,7 @@ public class ItemSpawner
                 playGameState.entities.add(j);
                 playGameState.gameScreen.stage.addActor(j);
                 j.toFront();
-                playGameState.queueTimer = 0.7;
+                playGameState.queueTimer = 0.45;
             }
         }
     }
