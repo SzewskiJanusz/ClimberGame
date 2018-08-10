@@ -26,19 +26,13 @@ public class MovingListener extends InputListener
 
         if (player.playerState == PlayerState.CLIMBING_LIANA && !pauseController.isGamePaused())
         {
-            if (isFingerOnLeft(x, player.getX() + player.getWidth() / 2))
+            if (isFingerOnLeft(x, player.getX() + player.getWidth() / 2) ^ Player.drunk)
             {
-                if (!Player.drunk)
-                    player.jumpLeft();
-                else
-                    player.jumpRight();
+                player.jumpLeft();
             }
             else
             {
-                if (!Player.drunk)
-                    player.jumpRight();
-                else
-                    player.jumpLeft();
+                player.jumpRight();
             }
         }
 
