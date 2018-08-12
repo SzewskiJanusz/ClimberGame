@@ -99,6 +99,7 @@ public class PauseController
                 {
                     pauseGame();
                 }
+                pauseClicked = true;
             }
             return true;
         }

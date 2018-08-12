@@ -21,10 +21,8 @@ public class MovingListener extends InputListener
         if (pauseController.pauseClicked)
         {
             pauseController.pauseClicked = false;
-            return false;
         }
-
-        if (player.playerState == PlayerState.CLIMBING_LIANA && !pauseController.isGamePaused())
+        else if (player.playerState == PlayerState.CLIMBING_LIANA && !pauseController.isGamePaused())
         {
             if (isFingerOnLeft(x, player.getX() + player.getWidth() / 2) ^ Player.drunk)
             {
@@ -35,7 +33,6 @@ public class MovingListener extends InputListener
                 player.jumpRight();
             }
         }
-
         return true;
     }
 
