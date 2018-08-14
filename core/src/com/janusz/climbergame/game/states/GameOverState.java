@@ -46,7 +46,7 @@ public class GameOverState implements GameState
         Table gameOverSummary = initTable();
         int actualScore = playGameState.scoreMgr.ScoreLogic.getScore();
         Preferences prefs = Gdx.app.getPreferences("My Preferences");
-        int bestScore = getBestScore(prefs);
+        int bestScore = prefs.getInteger("highscore");
         String scoreToShowInSummary;
         Label newRecordText;
         if (actualScore > bestScore)
@@ -79,15 +79,8 @@ public class GameOverState implements GameState
 
     private void putNewHighscoreInDB(Preferences prefs, int actualScore)
     {
-        prefs = Gdx.app.getPreferences("My Preferences");
         prefs.putInteger("highscore", actualScore);
         prefs.flush();
-    }
-
-    private int getBestScore(Preferences prefs)
-    {
-        prefs = Gdx.app.getPreferences("My Preferences");
-        return prefs.getInteger("highscore");
     }
 
     private TextButton createAndGetTryAgainButton()

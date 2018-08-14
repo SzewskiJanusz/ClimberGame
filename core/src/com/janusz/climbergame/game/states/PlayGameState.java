@@ -29,7 +29,7 @@ public class PlayGameState implements GameState
     public List<AbstractItem> entities;
     public boolean deathAnimation;
     public double queueTimer;
-    public com.janusz.climbergame.game.managers.DifficultyController difficultyControl;
+    public DifficultyController difficultyControl;
     public ScoreManager scoreMgr;
     private ClimberGame game;
 
