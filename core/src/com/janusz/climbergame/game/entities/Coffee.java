@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.entities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
@@ -21,12 +22,13 @@ public class Coffee extends AbstractItem
                 Const.COFFEE_WIDTH, Const.COFFEE_HEIGHT);
         this.setSize(Const.COFFEE_WIDTH, Const.COFFEE_HEIGHT);
         this.setOrigin(getWidth() / 2, getHeight() / 2);
+        rotation = MathUtils.random(10,90);
     }
 
     @Override
     protected void doMovement(float delta)
     {
-        this.rotateBy(55 * delta);
+        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
     }
 
     @Override

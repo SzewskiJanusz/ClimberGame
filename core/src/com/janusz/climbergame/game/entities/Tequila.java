@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.entities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
@@ -22,12 +23,13 @@ public class Tequila extends AbstractItem
                 Const.TEQUILA_WIDTH, Const.TEQUILA_HEIGHT);
         this.setSize(Const.TEQUILA_WIDTH, Const.TEQUILA_HEIGHT);
         this.setOrigin(getWidth() / 2, getHeight() / 2);
+        rotation = MathUtils.random(15,50);
     }
 
     @Override
     protected void doMovement(float delta)
     {
-        this.rotateBy(20 * delta);
+        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
     }
 
     @Override

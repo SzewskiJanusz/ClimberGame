@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.entities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
@@ -22,6 +23,7 @@ public class Treasure extends AbstractItem
                 Const.TREASURE_WIDTH, Const.TREASURE_HEIGHT);
         this.setSize(Const.TREASURE_WIDTH, Const.TREASURE_HEIGHT);
         this.setOrigin(getWidth() / 2, getHeight() / 2);
+        rotation = MathUtils.random(15,35);
     }
 
     @Override
@@ -37,6 +39,6 @@ public class Treasure extends AbstractItem
     @Override
     protected void doMovement(float delta)
     {
-        this.rotateBy(15 * delta); // obracanie z każdą klatką
+        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
     }
 }

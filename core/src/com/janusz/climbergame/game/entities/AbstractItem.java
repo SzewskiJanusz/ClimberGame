@@ -1,6 +1,7 @@
 package com.janusz.climbergame.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.ClimberGame;
@@ -15,6 +16,8 @@ public abstract class AbstractItem extends Image
     protected Rectangle bounds;
     protected int velocity;
     protected PlayGameState playGameState;
+    protected int rotation;
+    protected int direction;
 
     public abstract void triggerEffect();
 
@@ -26,6 +29,7 @@ public abstract class AbstractItem extends Image
         this.playGameState = pgs;
         this.velocity = 230 + velocity;
         this.setPosition(starting_x, ClimberGame.HEIGHT);
+        direction = MathUtils.randomSign();
     }
 
     @Override

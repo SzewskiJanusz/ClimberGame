@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.entities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
@@ -12,6 +13,8 @@ import com.janusz.climbergame.game.sound.GameSound;
 import com.janusz.climbergame.game.states.PlayGameState;
 import com.janusz.climbergame.shared.DefComponents;
 
+import java.util.Random;
+
 public class Apple extends AbstractItem
 {
     public Apple(PlayGameState gs, int starting_x, int velocity)
@@ -22,12 +25,13 @@ public class Apple extends AbstractItem
                 Const.APPLE_WIDTH, Const.APPLE_HEIGHT);
         this.setSize(Const.APPLE_WIDTH, Const.APPLE_HEIGHT);
         this.setOrigin(getWidth() / 2, getHeight() / 2);
+        rotation = MathUtils.random(30,300);
     }
 
     @Override
     protected void doMovement(float delta)
     {
-        this.rotateBy(160 * delta); // obracanie z każdą klatką
+        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
     }
 
     @Override

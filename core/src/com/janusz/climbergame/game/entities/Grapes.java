@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.entities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
@@ -26,6 +27,7 @@ public class Grapes extends AbstractItem
                 Const.GRAPES_WIDTH, Const.GRAPES_HEIGHT);
         this.setSize(Const.FRIES_WIDTH, Const.FRIES_HEIGHT);
         this.setOrigin(getWidth() / 2, getHeight() / 2);
+        rotation = MathUtils.random(10,250);
     }
 
     @Override
@@ -40,6 +42,6 @@ public class Grapes extends AbstractItem
     @Override
     protected void doMovement(float delta)
     {
-        this.rotateBy(-120 * delta); // obracanie z każdą klatką
+        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
     }
 }
