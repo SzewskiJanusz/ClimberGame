@@ -25,6 +25,7 @@ public class Player extends Actor implements IPlayer
     public static final int STARTING_Y = 50;
 
     public int place;
+    public int previousPlace;
     // PlayerState ENUM. Used for determine actual activity of player
     public PlayerState playerState;
     public static boolean drunk;
@@ -150,6 +151,7 @@ public class Player extends Actor implements IPlayer
         if (place > 1)
         {
             playerState = PlayerState.FLYING_LEFT;
+            previousPlace = place;
             place--;
         }
     }
@@ -158,8 +160,9 @@ public class Player extends Actor implements IPlayer
     {
         if (place < 3)
         {
-            place++;
             playerState = PlayerState.FLYING_RIGHT;
+            previousPlace = place;
+            place++;
         }
     }
 
@@ -222,6 +225,7 @@ public class Player extends Actor implements IPlayer
         }
         setY(STARTING_Y);
         velocity.y = -4;
+        playGameState.allLianas.shake(place, previousPlace);
     }
 
     public void coffeeBoost()

@@ -139,4 +139,16 @@ public class EntireLiana
         return first_wholeLiana.size();
     }
 
+    public void shake(int place, int previous)
+    {
+        for (int i = 0 ; i < first_wholeLiana.size() ; i++)
+        {
+            switch(place)
+            {
+                case 1: first_wholeLiana.get(i).shakeAfterJump(i, place - previous); break;
+                case 2: second_wholeLiana.get(i).shakeAfterJump(i, place - previous); break;
+                case 3: third_wholeLiana.get(i).shakeAfterJump(i, place - previous); break;
+            }
+        }
+    }
 }

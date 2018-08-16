@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.janusz.climbergame.ClimberGame;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.EntityTextures;
+import com.janusz.climbergame.game.environment.EntireLiana;
 
 public class LianaTile extends Image
 {
@@ -12,10 +13,19 @@ public class LianaTile extends Image
     private int velocity;
     // Obszar kolizji
     protected Rectangle bounds;
+    private boolean shaking;
+    private final float biggerShakeTimer = 0.2f;
+    private final float smallerShakeTimer = 0.45f;
+    private final float returnShakeTimer = 0.5f;
+    private float shakeTimer;
+    private int powerOfShake;
+    private int originalX;
+    private int shakingDirection;
 
     public LianaTile(int starting_x)
     {
         super(EntityTextures.get().lianatile);
+        this.originalX = starting_x;
         this.velocity = Const.LIANATILE_VELOCITY;
         this.setPosition(starting_x, STARTING_Y);
         setSize(Const.LIANATILE_WIDTH ,Const.LIANATILE_HEIGHT);
@@ -46,6 +56,45 @@ public class LianaTile extends Image
     public Rectangle getBounds()
     {
         return bounds;
+    }
+
+    @Override
+    public void act(float delta)
+    {
+        super.act(delta);
+        if (shaking)
+        {
+            if (shakeTimer <= biggerShakeTimer)
+            {
+                this.rotateBy(5*powerOfShake*delta*shakingDirection);
+                this.moveBy(shakingDirection*(5 - powerOfShake), 0);
+            }
+            else if (shakeTimer <= smallerShakeTimer)
+            {
+                this.rotateBy(-7*powerOfShake*delta*shakingDirection);
+                this.moveBy(-(5 - powerOfShake)*shakingDirection, 0);
+            }
+            else if (shakeTimer <= returnShakeTimer)
+            {
+                this.rotateBy(2*powerOfShake*delta*shakingDirection);
+                this.moveBy((5 - powerOfShake)*shakingDirection, 0);
+            }
+            else
+            {
+                shaking = false;
+                shakeTimer = 0;
+                this.setX(originalX);
+                this.setRotation(0);
+            }
+            shakeTimer += delta;
+        }
+    }
+
+    public void shakeAfterJump(int i, int direction)
+    {
+        shaking = true;
+        powerOfShake = i;
+        shakingDirection = direction;
     }
 }
 
