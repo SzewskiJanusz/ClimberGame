@@ -44,7 +44,7 @@ public abstract class Const
     public final static int STONE_HEIGHT = 80;
     /** LIANATILE ENTITY CONSTS */
     public final static int LIANATILE_WIDTH = 50;
-    public final static int LIANATILE_HEIGHT = 120;
+    public final static int LIANATILE_HEIGHT = 47;
     public final static int LIANATILE_VELOCITY = 250;
     /** LIANAMANAGER CONSTS */
     public static final int LIANAMANAGER_FIRST_X = 150;

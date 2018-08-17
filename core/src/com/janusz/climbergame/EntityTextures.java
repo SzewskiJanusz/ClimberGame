@@ -18,7 +18,8 @@ public class EntityTextures
     public Texture fries = new Texture("fries.png");
     public Texture grapes = new Texture("grapes.png");
     public Texture pear = new Texture("pear.png");
-    public Texture lianatile = new Texture("liana.png");
+    public Texture lianatile1 = new Texture("lianapart1.png");
+    public Texture lianatile2 = new Texture("lianapart2.png");
     public Texture satelite = new Texture("satellite.png");
     public Texture stone = new Texture("stone.png");
     public Texture tequila = new Texture("tequila.png");
@@ -48,7 +49,7 @@ public class EntityTextures
         fries.dispose();
         grapes.dispose();
         pear.dispose();
-        lianatile.dispose();
+        lianatile1.dispose();
         satelite.dispose();
         stone.dispose();
         tequila.dispose();
