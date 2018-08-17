@@ -1,5 +1,6 @@
 package com.janusz.climbergame.game.environment;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.janusz.climbergame.Const;
 import com.janusz.climbergame.game.entities.LianaTile;
 import com.janusz.climbergame.game.screens.GameScreen;
@@ -23,6 +24,7 @@ public class EntireLiana
     private List<LianaTile> third_wholeLiana;
 
     private GameScreen gameScreen;
+    public static int lianaAmount;
 
     public EntireLiana(GameScreen gs)
     {
@@ -33,15 +35,16 @@ public class EntireLiana
 
         createStartingLianas();
         createLianaTile();
+        lianaAmount = first_wholeLiana.size();
     }
 
     private void createStartingLianas()
     {
         for (int i = 0 ; i < 5 ; i++)
         {
-            LianaTile a = new LianaTile(first_liana_x, Const.LIANATILE_HEIGHT * i);
-            LianaTile b = new LianaTile(second_liana_x, Const.LIANATILE_HEIGHT * i);
-            LianaTile c = new LianaTile(third_liana_x, Const.LIANATILE_HEIGHT * i);
+            LianaTile a = new LianaTile(first_liana_x, Const.LIANATILE_HEIGHT * i, MathUtils.random(0,1));
+            LianaTile b = new LianaTile(second_liana_x, Const.LIANATILE_HEIGHT * i, MathUtils.random(0,1));
+            LianaTile c = new LianaTile(third_liana_x, Const.LIANATILE_HEIGHT * i, MathUtils.random(0,1));
             a.toFront();
             b.toFront();
             c.toFront();
@@ -57,15 +60,15 @@ public class EntireLiana
 
     private void createLianaTile()
     {
-        LianaTile l = new LianaTile(first_liana_x);
+        LianaTile l = new LianaTile(first_liana_x, MathUtils.random(0,1));
         first_wholeLiana.add(l);
         gameScreen.stage.addActor(l);
 
-        LianaTile l1 = new LianaTile(second_liana_x);
+        LianaTile l1 = new LianaTile(second_liana_x, MathUtils.random(0,1));
         second_wholeLiana.add(l1);
         gameScreen.stage.addActor(l1);
 
-        LianaTile l2 = new LianaTile(third_liana_x);
+        LianaTile l2 = new LianaTile(third_liana_x, MathUtils.random(0,1));
         third_wholeLiana.add(l2);
         gameScreen.stage.addActor(l2);
     }
