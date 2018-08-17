@@ -198,7 +198,7 @@ public class Player extends Actor implements IPlayer
     {
         int lianaSize = playGameState.allLianas.getSize();
         // Check only 3 last liana tiles
-        for (int i = lianaSize - 3 ; i < lianaSize ; i++)
+        for (int i = 3; i < lianaSize ; i++)
         {
             switch(place)
             {
