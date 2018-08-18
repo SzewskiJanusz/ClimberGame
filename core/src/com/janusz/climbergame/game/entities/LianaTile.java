@@ -13,9 +13,9 @@ public class LianaTile extends Image
     // Obszar kolizji
     protected Rectangle bounds;
     private boolean shaking;
-    private final float biggerShakeTimer = 0.1f;
-    private final float smallerShakeTimer = 0.25f;
-    private final float returnShakeTimer = 0.3f;
+    private final float biggerShakeTimer = 0.05f;
+    private final float smallerShakeTimer = 0.15f;
+    private final float returnShakeTimer = 0.2f;
     private float shakeTimer;
     private int powerOfShake;
     private int originalX;
