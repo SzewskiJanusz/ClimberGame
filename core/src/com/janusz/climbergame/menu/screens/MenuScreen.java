@@ -118,7 +118,7 @@ public class MenuScreen extends AbstractScreen
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new AboutScreen(game));
+                game.setScreen(new InstructionScreen(game));
             }
         });
         stage.addActor(about);

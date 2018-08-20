@@ -20,18 +20,20 @@ public abstract class DefComponents
 {
     public static BitmapFont textFont;
     public static BitmapFont textFontWhite;
+    public static BitmapFont textFontOrange;
     public static BitmapFont textFieldFont;
     public static Label.LabelStyle LABEL_STYLE;
     public static Label.LabelStyle LABEL_STYLE_WHITE;
+    public static Label.LabelStyle LABEL_STYLE_ORANGE;
     public static TextField.TextFieldStyle TEXTFIELD_STYLE;
     public static TextButton.TextButtonStyle TEXTBUTTON_STYLE;
     public static TextField.TextFieldStyle TEXTFIELD_SCORE_STYLE;
-
 
     public static void prepareStyles()
     {
         LABEL_STYLE = getDefaultLabelStyle();
         LABEL_STYLE_WHITE = getWhiteDefaultLabelStyle();
+        LABEL_STYLE_ORANGE = getGoldLabelStyle();
         TEXTFIELD_STYLE = getDefaultTextfieldStyle();
         TEXTBUTTON_STYLE = getTextButtonStyle();
         TEXTFIELD_SCORE_STYLE = getScoreTextfieldStyle();
@@ -52,6 +54,15 @@ public abstract class DefComponents
     {
         Label.LabelStyle ls = new Label.LabelStyle();
         ls.font = textFontWhite;
+        ls.font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear,
+                Texture.TextureFilter.Linear);
+        return ls;
+    }
+
+    private static Label.LabelStyle getGoldLabelStyle()
+    {
+        Label.LabelStyle ls = new Label.LabelStyle();
+        ls.font = textFontOrange;
         ls.font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear,
                 Texture.TextureFilter.Linear);
         return ls;
@@ -110,6 +121,8 @@ public abstract class DefComponents
         textFieldFont = generator.generateFont(parameter);
         parameter.color = new Color(1,1,1,1f);
         textFontWhite = generator.generateFont(parameter);
+        parameter.color = new Color(1,142f/255,0f/255,1f);
+        textFontOrange = generator.generateFont(parameter);
         generator.dispose();
     }
 
