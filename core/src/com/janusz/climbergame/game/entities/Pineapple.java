@@ -28,8 +28,9 @@ public class Pineapple extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        playGameState.scoreMgr.ScoreLogic.addToScore(500);
-        playGameState.gameScreen.stage.addActor(new BouncingText("+500", DefComponents.LABEL_STYLE,
+        int score = 400 + playGameState.difficultyControl.level * 100;
+        playGameState.scoreMgr.ScoreLogic.addToScore(score);
+        playGameState.gameScreen.stage.addActor(new BouncingText("+"+score, DefComponents.LABEL_STYLE,
                 Effect.GOOD, playGameState.player.getCoords()));
         GameSound.instance().playGood();
     }

@@ -29,8 +29,9 @@ public class Treasure extends AbstractItem
     @Override
     public void triggerEffect()
     {
-        playGameState.scoreMgr.ScoreLogic.addToScore(2000);
-        playGameState.gameScreen.stage.addActor(new BouncingText("+2000", DefComponents.LABEL_STYLE,
+        int score = 2000 + playGameState.difficultyControl.level * 400;
+        playGameState.scoreMgr.ScoreLogic.addToScore(score);
+        playGameState.gameScreen.stage.addActor(new BouncingText("+"+score, DefComponents.LABEL_STYLE,
                 Effect.GOOD, playGameState.player.getCoords()));
         GameSound.instance().playGood();
 
