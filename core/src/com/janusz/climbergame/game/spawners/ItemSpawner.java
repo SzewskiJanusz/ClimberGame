@@ -41,8 +41,8 @@ public class ItemSpawner
                                @Override
                                public void run()
                                {
-                                   int roll = MathUtils.random(0,2);
-                                   if (roll == 0 || roll == 1)
+                                   int roll = MathUtils.random(0,3);
+                                   if (roll == 0 || roll == 1 || roll == 2)
                                         addRandomItemToQueue();
 
                                    if (timerCounter % 4 == 0)
@@ -54,7 +54,7 @@ public class ItemSpawner
                                }
                            }
                     , 2      //    delay in sec
-                    , 1     // frequency in sec
+                    , 1    // frequency in sec
             );
     }
 
