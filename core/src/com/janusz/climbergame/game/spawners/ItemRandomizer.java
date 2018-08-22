@@ -107,8 +107,8 @@ public class ItemRandomizer
             case 2: return new Stone(playGameState, x, playGameState.difficultyControl.levelVelocity);
             case 3: return new Trashcan(playGameState, x, playGameState.difficultyControl.levelVelocity);
             case 4:
-                if (MathUtils.random(0,4) == 0)
-                    return new Satellite(playGameState, x, 250 + playGameState.difficultyControl.levelVelocity);
+                if (MathUtils.random(0,5) == 0)
+                    return new Satellite(playGameState, x, 150 + playGameState.difficultyControl.levelVelocity);
                 else return new Stone(playGameState, x, playGameState.difficultyControl.levelVelocity);
             default: throw new IllegalArgumentException("Randomized number: "+nmb);
         }
