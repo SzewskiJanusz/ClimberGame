@@ -83,4 +83,16 @@ public abstract class Const
     public final static int FRIES_HEIGHT = 60;
     public static final float FATINDICATOR_WIDTH = 75;
     public static final float FATINDICATOR_HEIGHT = 100;
+    public static final int PINEAPPLE_WIDTH = 45;
+    public static final int PINEAPPLE_HEIGHT = 63;
+    public static final int MANGO_WIDTH = 35;
+    public static final int MANGO_HEIGHT = 65;
+    public static final int PEACH_WIDTH = 40;
+    public static final int PEACH_HEIGHT = 40;
+    public static final int POMEGRANATE_WIDTH = 42;
+    public static final int POMEGRANATE_HEIGHT = 50;
+    public static final int HAMBURGER_WIDTH = 46;
+    public static final int HAMBURGER_HEIGHT = 40;
+    public static final int HOTDOG_WIDTH = 53;
+    public static final int HOTDOG_HEIGHT = 35;
 }

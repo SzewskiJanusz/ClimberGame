@@ -26,6 +26,12 @@ public class EntityTextures
     public Texture trashcan = new Texture("trashcan.png");
     public Texture treasure = new Texture("treasure.png");
     public Texture watermelon = new Texture("watermelon.png");
+    public Texture pineapple = new Texture("pineapple.png");
+    public Texture peach = new Texture("peach.png");
+    public Texture mango = new Texture("mango.png");
+    public Texture hotdog = new Texture("hotdog.png");
+    public Texture hamburger = new Texture("hamburger.png");
+    public Texture pomegranate = new Texture("pomegranate.png");
     ////
 
 
@@ -56,5 +62,11 @@ public class EntityTextures
         trashcan.dispose();
         treasure.dispose();
         watermelon.dispose();
+        pineapple.dispose();
+        peach.dispose();
+        mango.dispose();
+        hotdog.dispose();
+        hamburger.dispose();
+        pomegranate.dispose();
     }
 }

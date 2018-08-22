@@ -2,9 +2,7 @@ package com.janusz.climbergame.game.spawners;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Timer;
-import com.janusz.climbergame.game.spawners.ItemWave;
 import com.janusz.climbergame.game.entities.AbstractItem;
-import com.janusz.climbergame.game.spawners.ItemRandomizer;
 import com.janusz.climbergame.game.managers.queue.QueueManager;
 import com.janusz.climbergame.game.states.PlayGameState;
 
@@ -66,7 +64,7 @@ public class ItemSpawner
         if (rnd == 1)
             queue.addToQueue(itemRandomizer.getCoffeeWithRandomDirection());
         if (rnd == 2)
-            queue.addToQueue(itemRandomizer.getFriesWithRandomDirection());
+            queue.addToQueue(itemRandomizer.getFatItemWithRandomDirection());
         else
             queue.addToQueue(itemRandomizer.getTequilaWithRandomDirection());
     }

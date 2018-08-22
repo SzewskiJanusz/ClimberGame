@@ -17,10 +17,10 @@ import com.janusz.climbergame.shared.factories.ButtonFactory;
 
 public class InstructionScreen extends AbstractScreen
 {
-    private GameBackground gameBackground;
     public InstructionScreen(ClimberGame game)
     {
         super(game);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class InstructionScreen extends AbstractScreen
     @Override
     protected void init()
     {
-        gameBackground = new GameBackground();
+        GameBackground gameBackground = new GameBackground();
         stage.addActor(gameBackground);
         Label howToPlay = initTitle();
         Label[] instructions = new Label[5];
@@ -55,22 +55,9 @@ public class InstructionScreen extends AbstractScreen
         }
         TextButton backToMenu = initBackButton();
         TextButton about = initAboutButton();
-
-
         stage.addActor(howToPlay);
         stage.addActor(backToMenu);
         stage.addActor(about);
-
-        Gdx.input.setInputProcessor(stage);
-
-    }
-
-    private Table initTable()
-    {
-        Table table = new Table();
-     //   table.setFillParent(true);
-        table.setY(0);
-        return table;
     }
 
     private Label initTitle()
@@ -79,8 +66,7 @@ public class InstructionScreen extends AbstractScreen
         title.setColor(Color.YELLOW);
         title.setFontScale(0.9f,0.9f);
         title.setAlignment(Align.top);
-        title.setX(100);
-        title.setY(ClimberGame.HEIGHT - 100);
+        title.setPosition(100, ClimberGame.HEIGHT - 100);
         return title;
     }
 
@@ -89,8 +75,7 @@ public class InstructionScreen extends AbstractScreen
         Label instruction = new Label(s, DefComponents.LABEL_STYLE);
         instruction.setColor(Color.RED);
         instruction.setFontScale(0.2f, 0.2f);
-        instruction.setY(ClimberGame.HEIGHT - 200 - i*40);
-        instruction.setX(140);
+        instruction.setPosition(140, ClimberGame.HEIGHT - 200 - i*40);
         return instruction;
     }
 
