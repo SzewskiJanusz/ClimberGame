@@ -8,7 +8,7 @@ android {
         }
     }
     buildToolsVersion '25.0.2'
-    compileSdkVersion 20
+    compileSdkVersion 26
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -33,9 +33,9 @@ android {
     defaultConfig {
         applicationId "com.janusz.climbergame"
         minSdkVersion 14
-        targetSdkVersion 20
-        versionCode 3
-        versionName "1.2"
+        targetSdkVersion 26
+        versionCode 4
+        versionName "2.0"
     }
     buildTypes {
         release {

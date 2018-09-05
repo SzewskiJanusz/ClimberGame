@@ -113,7 +113,7 @@ public class MenuScreen extends AbstractScreen
 
     private void initAbout()
     {
-        TextButton about = ButtonFactory.createButton("ABOUT", 220);
+        TextButton about = ButtonFactory.createButton("HOW TO PLAY", 220);
         about.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)

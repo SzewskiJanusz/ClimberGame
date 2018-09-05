@@ -20,6 +20,7 @@ public class EntityTextures
     public Texture pear = new Texture("pear.png");
     public Texture lianatile1 = new Texture("lianapart1.png");
     public Texture lianatile2 = new Texture("lianapart2.png");
+    public Texture lianatile3 = new Texture("lianapart3.png");
     public Texture satelite = new Texture("satellite.png");
     public Texture stone = new Texture("stone.png");
     public Texture tequila = new Texture("tequila.png");
@@ -56,6 +57,8 @@ public class EntityTextures
         grapes.dispose();
         pear.dispose();
         lianatile1.dispose();
+        lianatile2.dispose();
+        lianatile3.dispose();
         satelite.dispose();
         stone.dispose();
         tequila.dispose();

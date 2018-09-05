@@ -60,15 +60,15 @@ public class EntireLiana
 
     private void createLianaTile()
     {
-        LianaTile l = new LianaTile(first_liana_x, MathUtils.random(0,1));
+        LianaTile l = new LianaTile(first_liana_x, MathUtils.random(0,2));
         first_wholeLiana.add(l);
         gameScreen.stage.addActor(l);
 
-        LianaTile l1 = new LianaTile(second_liana_x, MathUtils.random(0,1));
+        LianaTile l1 = new LianaTile(second_liana_x, MathUtils.random(0,2));
         second_wholeLiana.add(l1);
         gameScreen.stage.addActor(l1);
 
-        LianaTile l2 = new LianaTile(third_liana_x, MathUtils.random(0,1));
+        LianaTile l2 = new LianaTile(third_liana_x, MathUtils.random(0,2));
         third_wholeLiana.add(l2);
         gameScreen.stage.addActor(l2);
     }

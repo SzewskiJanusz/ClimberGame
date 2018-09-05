@@ -45,8 +45,10 @@ public class GameOverState implements GameState
     {
         Table gameOverSummary = initTable();
         int actualScore = playGameState.scoreMgr.ScoreLogic.getScore();
-        Preferences prefs = Gdx.app.getPreferences("My Preferences");
-        int bestScore = prefs.getInteger("highscore");
+        Preferences prefs = Gdx.app.getPreferences("My Preferences2");
+        int bestScore = 0;
+        if (prefs.contains("highscore"))
+             bestScore = prefs.getInteger("highscore");
         String scoreToShowInSummary;
         Label newRecordText;
         if (actualScore > bestScore)

@@ -58,7 +58,7 @@ public class AboutScreen extends AbstractScreen
         Label title = lblFactory.createLabel("FAST CLIMBER",30,310,0.5f);
         stage.addActor(title);
 
-        Label version = lblFactory.createLabel("VERSION 1.2",90,280,0.3f);
+        Label version = lblFactory.createLabel("VERSION 2.0",90,280,0.3f);
         stage.addActor(version);
 
         Label designedIn = lblFactory.createLabel("DESIGNED IN POLAND",320,220,0.4f);

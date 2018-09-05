@@ -23,7 +23,9 @@ public class LianaTile extends Image
 
     public LianaTile(int starting_x, int lianatype)
     {
-        super(lianatype == 0 ? EntityTextures.get().lianatile1 : EntityTextures.get().lianatile2);
+        super(lianatype == 0 ? EntityTextures.get().lianatile1 :
+                        EntityTextures.get ().lianatile2
+        );
         this.originalX = starting_x;
         this.velocity = Const.LIANATILE_VELOCITY;
         this.setPosition(starting_x, STARTING_Y);
