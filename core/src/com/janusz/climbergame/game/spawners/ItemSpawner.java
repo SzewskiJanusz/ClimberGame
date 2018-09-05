@@ -45,7 +45,7 @@ public class ItemSpawner
                                    if (roll == 0 || roll == 1 || roll == 2)
                                         addRandomItemToQueue();
 
-                                   if (timerCounter % 4 == 0)
+                                   if (timerCounter % 4 == 0|| roll == 4)
                                    {
                                        addEffectItemToQueue();
                                    }
@@ -54,7 +54,7 @@ public class ItemSpawner
                                }
                            }
                     , 2      //    delay in sec
-                    , 1    // frequency in sec
+                    , 0.9f    // frequency in sec
             );
     }
 

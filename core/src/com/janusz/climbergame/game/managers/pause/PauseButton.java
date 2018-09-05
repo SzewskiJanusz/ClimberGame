@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 public class PauseButton extends ImageButton
 {
-
     private final int STARTING_X = 60;
     private final int STARTING_Y = 375;
     private final int WIDTH = 75;
