@@ -27,12 +27,6 @@ public class Tequila extends AbstractItem
     }
 
     @Override
-    protected void doMovement(float delta)
-    {
-        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
-    }
-
-    @Override
     public void triggerEffect()
     {
         playGameState.gameScreen.stage.addActor(new BouncingText("DRUNK", DefComponents.LABEL_STYLE,

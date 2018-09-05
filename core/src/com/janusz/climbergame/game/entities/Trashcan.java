@@ -28,10 +28,4 @@ public class Trashcan extends AbstractItem
         playGameState.deathAnimation = true;
         GameSound.instance().playDeath();
     }
-
-    @Override
-    protected void doMovement(float delta)
-    {
-        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
-    }
 }

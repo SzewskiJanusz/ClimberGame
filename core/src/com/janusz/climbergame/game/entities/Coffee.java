@@ -26,12 +26,6 @@ public class Coffee extends AbstractItem
     }
 
     @Override
-    protected void doMovement(float delta)
-    {
-        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
-    }
-
-    @Override
     public void triggerEffect()
     {
         playGameState.player.coffeeBoost();

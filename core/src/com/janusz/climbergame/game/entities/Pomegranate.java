@@ -34,10 +34,4 @@ public class Pomegranate extends AbstractItem
                 Effect.GOOD, playGameState.player.getCoords()));
         GameSound.instance().playGood();
     }
-
-    @Override
-    protected void doMovement(float delta)
-    {
-        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
-    }
 }

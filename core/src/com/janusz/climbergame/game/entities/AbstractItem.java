@@ -21,7 +21,10 @@ public abstract class AbstractItem extends Image
 
     public abstract void triggerEffect();
 
-    protected abstract void doMovement(float delta);
+    protected void doMovement(float delta)
+    {
+        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
+    }
 
     public AbstractItem(PlayGameState pgs, Texture text, int starting_x, int velocity)
     {

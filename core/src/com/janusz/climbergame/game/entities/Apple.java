@@ -29,12 +29,6 @@ public class Apple extends AbstractItem
     }
 
     @Override
-    protected void doMovement(float delta)
-    {
-        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
-    }
-
-    @Override
     public void triggerEffect()
     {
         int score = 400 + playGameState.difficultyControl.level * 100;

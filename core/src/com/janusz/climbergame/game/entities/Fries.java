@@ -38,13 +38,4 @@ public class Fries extends AbstractItem
         playGameState.hud.indicatorControl.addFatIndicator();
         GameSound.instance().playFatFries();
     }
-
-    @Override
-    protected void doMovement(float delta)
-    {
-        this.rotateBy(direction * rotation * delta); // obracanie z każdą klatką
-    }
-
-
-
 }
