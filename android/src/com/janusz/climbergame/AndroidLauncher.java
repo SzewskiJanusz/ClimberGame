@@ -31,7 +31,8 @@ public class AndroidLauncher extends AndroidApplication implements AdService{
 		config.useAccelerometer = false;
 		config.useCompass = false;
 
-        MobileAds.initialize(this, "ca-app-pub-9491149384478370~6013353900");
+		MobileAds.initialize(this, "ca-app-pub-9491149384478370~6013353900");
+       // MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
 
 		RelativeLayout layout = new RelativeLayout(this);
 
@@ -39,7 +40,9 @@ public class AndroidLauncher extends AndroidApplication implements AdService{
 		AdView adView = new AdView(this);
 		adView.setAdSize(AdSize.SMART_BANNER);
 		adView.setVisibility(View.VISIBLE);
-		adView.setAdUnitId("ca-app-pub-9491149384478370/7797564085");
+		//adView.setAdUnitId("ca-app-pub-9491149384478370/7797564085");
+		adView.setAdUnitId("ca-app-pub-9491149384478370/5857630178");
+		//adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
 		AdRequest adRequest = new AdRequest.Builder().build();
 		adView.loadAd(adRequest);
 
@@ -56,8 +59,9 @@ public class AndroidLauncher extends AndroidApplication implements AdService{
 		layout.addView(adView, adParams);
 		setContentView(layout);
         mInterstitialAd = new InterstitialAd(this);
-		//ca-app-pub-9491149384478370/7828142227
+		// REAL -> ca-app-pub-9491149384478370/7828142227
         mInterstitialAd.setAdUnitId("ca-app-pub-9491149384478370/7828142227");
+        //mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 	}
 
     @Override
